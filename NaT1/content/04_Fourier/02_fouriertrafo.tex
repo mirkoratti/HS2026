@@ -1,0 +1,131 @@
+\subsection{Fourier Transformation S. 23}
+Die Fourier Transformation erweitert die spektrale Analyse auf \textbf{deterministische Energiesignale}. Herleitung siehe Skript.
+
+Damit die Fourier Transformierte existiert muss die Funktion $x(t)$ absolut integrierbar ($\int_{-\infty}^{\infty} |x(t)| dt \leq \infty$) sein, sowie deren Fourier Transformierte $X(\omega)$ (sonst kann man sie nicht mehr zurück transformieren). Ist $f(t)$ eine Linearkombination von absolut integrierbaren Funktionen wie $x(t)$ und die resultierenden $F(\omega)$ von Funktionen wie $X(\omega)$ , dann ist $f(t)$ ebenfalls transformierbar (Linearität).
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{X X}
+		\begin{minipage}{\linewidth}
+			Fouriertransformierte
+			\begin{equation*}
+				X(\omega) = \int_{-\infty}^{\infty} x(t) \cdot e^{-j\omega t}dt
+			\end{equation*}
+		\end{minipage}
+		&
+		\begin{minipage}{\linewidth}
+			Rücktransformierte
+			\begin{equation*}
+				x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} X(\omega) \cdot e^{-j\omega t}d\omega
+			\end{equation*}
+	\end{minipage}
+	\end{tabularx}
+\end{table}
+
+\subsubsection{Wichtige Korrespondenzpaare}
+\begin{minipage}{4cm}
+	Impulsfunktion
+	\begin{empheq}[box={\fboxsep=6pt\fbox}]{align*}
+		\delta(t) \;\; &\Laplace \;\; 1(\omega) \\
+		1(t) \;\; &\Laplace \;\; 2\pi\delta(\omega)
+	\end{empheq}
+\end{minipage}
+\begin{minipage}{8cm}
+	Sinus und Cosinus
+	\boxedeq{%
+		cos(\omega_0t) \;\; &\Laplace \;\; \pi \cdot (\delta(\omega - \omega_0)+\delta(\omega + \omega_0)) \\
+		sin(\omega_0t) \;\; &\Laplace -j\pi \cdot (\delta(\omega - \omega_0)+\delta(\omega + \omega_0))
+	}
+\end{minipage}
+
+
+\begin{minipage}{8cm}
+	Periodische Signale
+	\boxedeq{%
+	\sum_{n=-\infty}^{\infty}	c_n \cdot e^{jn\omega_0t} \;\; \Laplace \;\; 2\pi \sum_{n=-\infty}^{\infty} c_n \delta(\omega - n\omega_0)
+	}
+\end{minipage}
+
+\begin{minipage}{15cm}
+	Spektrum Einton Winkelmodulation
+	\boxedeq{%
+	\sum_{n=-\infty}^{\infty} c_n \cdot cos((\omega_c + n\omega_m) \cdot t) \;\; \Laplace \;\;
+	\sum_{n=-\infty}^{\infty}c_n\pi(\delta(\omega - (\omega_c+n\omega_m))+\delta(\omega+(\omega_c+n\omega_m)))
+	}
+\end{minipage}
+
+Für weitere Korrespondenzpaare siehe Skript Seite 28 und \textbf{Seite 253 ff}.
+
+\subsubsection{Eigenschaften der Fourier Transformation S.24}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|p{2.5cm}|p{6cm}|p{8.5cm}|}
+	\hline
+	\multicolumn{2}{|l}{Linearität} & $\alpha\cdot f(t) + \beta\cdot g(t) \; \laplace \; \alpha\cdot F(\omega) +\beta\cdot G(\omega) \qquad (\alpha, \beta \in \mathbb{C})$  \\ 
+	\hline
+	\multicolumn{2}{|l}{Zeitumkehrung (Spiegelung an der Y-Achse)} & $f(-t) \; \laplace \; F(-\omega)$ \\
+	\hline
+	\multicolumn{2}{|l}{"Ahnlichkeit / (Zeitskalierung)}             &      		$\begin{aligned}f(\alpha t) \; &\laplace \; \frac{1}{|\alpha|}F \left (\frac{\omega}{\alpha} \right)
+		\quad\alpha \in\mathbb{R}\setminus \{0\}\\
+		F(\alpha\omega) \; &\Laplace \; f\left(\frac{t}{\alpha}\right)\end{aligned}$\\ 
+	\hline
+	\multicolumn{2}{|l}{Vertauschungssatz (Dualität)}              & 
+	\begin{math}
+		\begin{aligned}
+			f(t) \; &\laplace \; F(\omega)\nonumber \\ 
+			F(t) \; &\laplace \; 2\pi \cdot f(-\omega)
+		\end{aligned}
+	\end{math}\\ 
+	\hline
+	\hline
+	\multirow{2}{*}{Verschiebung} & Zeitbereich & $f(t\pm t_0) \; \laplace \; F(\omega)e^{\pm j\omega t_0}$ \\ 
+	\cline{2-3} 
+	& Frequenzbereich (Modulationstheorem) & $f(t)e^{\pm j\omega_0 t} \; \laplace \; F(\omega\mp\omega_0)$ \\ 
+	\hline
+	\hline
+	\multirow{2}{*}{Faltung} & Zeitbereich & $f(t) \ast g(t) = \int\limits_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau \; \laplace \;
+	F(\omega) \cdot G(\omega)$ \\ 
+	\cline{2-3} 
+	& Frequenzbereich & $f(t) \cdot g(t) \; \laplace \; \frac{1}{2\pi}F(\omega) \ast G(\omega)$ \\ 
+	\hline
+	\hline
+	\multirow{2}{*}{Ableitung} & Zeitbereich & $\frac{\partial^n f(t)}{\partial t^n} \; \laplace \; (j\omega)^n F(\omega) \qquad (n \in \mathbb{N}_0)$ \\ 
+	\cline{2-3} 
+	& Frequenzbereich &  $t^n f(t) \; \laplace \; j^n \frac{\partial F(\omega)}{\partial \omega^n}$\\ 
+	\hline
+	\hline
+	\multicolumn{2}{|l}{Integration im Zeitbereich} & $\int\limits_{-\infty}^{t}f(\tau)d\tau \; \laplace \;
+	\frac{F(\omega)}{j\omega}+F(0)\pi\delta(\omega)$\\ 
+	\hline
+	\hline
+	\multicolumn{2}{|l}{Modulation} & 
+	\begin{math}
+		\begin{aligned}
+			\cos(\alpha t) \cdot f(t)  \; &\laplace \;  \frac{1}{2}\cdot
+			\left[F(\omega-\alpha) + F(\omega+\alpha)\right]\\
+			\sin(\alpha t) \cdot f(t) \; &\laplace \; \frac{1}{2j}\cdot \left[F(\omega-\alpha) - F(\omega+\alpha)\right]
+		\end{aligned}
+	\end{math}	\\ 
+	\hline
+	\hline
+	\multirow{2}{*}{Theorem} & Parseval's & 			 			$\int\limits_{-\infty}^{\infty}f(t)g^{\ast}(t)dt = \frac{1}{2\pi}
+	\int\limits_{-\infty}^{\infty}F(\omega)G^{\ast}(\omega)d\omega$\\ 
+	\cline{2-3} 
+	& Bessel's & $\int\limits_{-\infty}^{\infty}|f(t)|^2 dt = \frac{1}{2\pi}
+	\int\limits_{-\infty}^{\infty}|F(\omega)|^2 d\omega$ \\ 
+	\hline
+	\hline
+	\multicolumn{2}{|l}{Anfangswerte} & 
+	\begin{math}
+		\begin{aligned}
+			f(0)&=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}F(\omega)d\omega
+			\hspace*{1cm}\\
+			F(0)&=\int\limits_{-\infty}^{\infty}f(t)dt
+		\end{aligned}
+	\end{math} \\
+	\hline
+	\hline
+	\multicolumn{2}{|l}{\begin{minipage}{.5\linewidth}unendlich lange Folge von $\delta$-Impulsen (im Zeit und Frequenzbereich)\end{minipage}} 
+	& $\sum\limits_{n=-\infty}^{\infty} \delta(t-n\cdot t_0) \; \laplace \;
+	\sum\limits_{n=-\infty}^{\infty} \frac{2\pi}{t_0}\cdot\delta\left(\omega-n\cdot
+	\frac{2\pi}{t_0}\right)$ \\ 
+	\hline
+\end{tabular}
+\renewcommand{\arraystretch}{\arraystretchOriginal}

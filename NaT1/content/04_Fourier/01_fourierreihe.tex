@@ -1,0 +1,68 @@
+\subsection{Fourierreihe S.20}
+Fourierreihe funktioniert nur mit \textbf{periodischen} Signalen.
+\begin{table}[H]
+	\includegraphics{content/04_fourier/fourierreihe.pdf}
+\end{table}
+Im Skript werden die Fourierkoeffizienten mit $a_n = u_n$ und $b_n = v_n$ bezeichnet! Grund dafür ist die überaus Spannende (und von anderer Literatur abweichende) Bezeichnung des komplexen Koeffizienten (Im Skript: $c_n = a + jb$) Der Zusammenhang in \textbf{Formel 3.12} im Skript S. 22 ist unbedingt zu beachten!
+
+\subsubsection{Koeffizienten berechnen}
+$a_0$, $c_0$, $A_0$ sind \textit{Konstanten}, $\omega_1$ ist die
+\textit{Grundkreisfrequenz}, $a_n$ und $b_n$ sind die \textit{reellen
+	Koeffizienten}, $c_n$ ist der \textit{komplexe Koeffizient}, $A_n$ ist die
+\textit{Amplitude} und $\varphi_n$ ist die \textit{Phase}.\\
+\begin{center}
+\efbox[linecolor=red, leftline=true, rightline=true, topline=true, bottomline=true]{
+	\begin{tabular}{p{8cm}p{8cm}}
+		$a_n = c_n + \bar{c_n} = 2\Re(c_n) = A_n \cos(\varphi_n)$ &
+		$b_n = j(c_n + \bar{c_n}) = -2\Im(c_n) = -A_n \sin(\varphi_n)$ \\
+		$c_n = \frac{a_n-jb_n}{2} = \frac{A_n}{2} e^{j\varphi_n} = \frac{\pi}{T}F(j n \omega)$ &
+		$c_{-n} = \overline{c_n} = \frac{a_n+jb_n}{2} = \frac{A_n}{2} e^{-j\varphi_n}$ \\
+		$A_n = 2|c_n| = \sqrt{a_n^2+b_n^2}$ & $\varphi_n =  \arg(c_n)$ oder unten $\downarrow$\\
+\end{tabular}}	
+\end{center}
+\textbf{Berechnung von $\varphi_n$ aus $a_n$ und $b_n$}\\
+\begin{tabular}{p{4cm}p{4cm}p{3cm}p{3.5cm}}
+	$a_n> 0:$ & $\varphi_n = -\arctan(\frac{b_n}{a_n})$ &
+	$a_n<0:$ &	$\varphi_n = -\arctan(\frac{b_n}{a_n}) + \pi$\\
+	$a_n = 0 \wedge b_n > 0:$ &	$\varphi_n = -\frac{\pi}{2}$ &
+	$a_n = 0 \wedge b_n < 0:$ &	$\varphi_n = \frac{\pi}{2}$\\
+	$a_n = 0 \wedge b_n = 0:$ &	$\varphi_n = \text{nicht definiert}$
+\end{tabular}
+
+\subsection{Symmetrie}
+Siehe auch Skript Seite 22\\
+\begin{tabular}{|p{4.3cm}|p{4.3cm}||p{4.4cm}|p{4.4cm}|}
+	\hline
+	\textbf{gerade Funktion} & \textbf{ungerade Funktion} &
+	\textbf{Halbperiode 1} & \textbf{Halbperiode 2}\\
+	\hline
+	\includegraphics[width=3cm,trim=0 0 0 -5]{content/04_fourier/gerade_funktion.png}&
+	\includegraphics[width=3cm]{content/04_fourier/ungerade_funktion.png}&
+	\includegraphics[width=3cm]{content/04_fourier/halbperiode_1.png}&   
+	\includegraphics[width=3cm]{content/04_fourier/halbperiode_2.png}\\
+	\hline
+	Achsen-symmetrisch & Punkt-symmetrisch & & \\			
+	$f(-t)=f(t)$ & $f(-t)=-f(t)$ & $f(t)=f(t+\pi)$ & $f(t)=-f(t+\pi)$\\
+	\hline
+	$b_n=0$ & $a_n=0$ & $a_{2n+1}=0$ & $a_{2n}=0$\\
+	$a_n = \frac{4}{T} \int\limits_0^{\frac{T}{2}} f(t) \cdot \cos(k \omega_1
+	t) dt$ &
+	$b_n =  \frac{4}{T} \int\limits_0^{\frac{T}{2}} f(t) \cdot
+	\sin(n \omega_1 t) dt$ &
+	$b_{2n+1}=0$ & $b_{2n}=0$\\
+	\hline
+\end{tabular}
+
+\subsection{Rechtecksignale S.256}
+\boxedeq{\begin{split} A_n=\frac{2}{T}\int\limits_{-t_1/2}^{t_1/2}A\cos\left(\frac{2\pi n}{T}t\right)dt= \frac{2A}{\pi n}\sin\left(\frac{\pi t_1}{T}n\right) \end{split}}
+
+Für Verhältnisse $\frac{T}{ggT(t_1,T)}=n\in\mathbb{N}$ verschwinden die
+$n.$ Harmonische und deren Vielfache. (ggT = grösster gemeinsamer Teiler, für sehr wenig schlaue: Taschenrechner \textbf{ggT = gcd} ;-))\\
+Formel Skript S. 256; $\tau = \frac{t_{1}}{T}$, $t_1$ ist die Einschaltzeit\\
+\includegraphics[width=19cm]{content/04_fourier/fourierreihe-rechteck.png}
+
+\subsection{Satz von Parseval S. 23}
+Die mittlere Leistung kann auch aus den komplexen Fourierkoeffizienten berechnet werden.
+\begin{equation*}
+	\overline{P_x} = \frac{1}{T} \int_{T}|x(t)|^2 dt = \sum_{n=-\infty}^{\infty} |c_k|^2 = \sum_{n=-\infty}^{\infty} |\frac{a_n-jb_n}{2}|^2
+\end{equation*}

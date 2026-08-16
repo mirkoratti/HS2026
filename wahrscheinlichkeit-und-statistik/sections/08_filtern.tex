@@ -1,0 +1,40 @@
+\section{Filtern}
+
+'Filtern' bedeutet, einen \textbf{optimalen Schätzer} zu finden
+
+
+\subsection{Optimale Schätzung}
+
+$X_1$ und $X_2$ sind  unabhängige Messungen von $\mu$ mit Messfehler $\var(X_i) = \sigma_i^2 $ 
+
+
+\subsubsection{Ansatz}
+
+Linearkombination 
+$$ \boxed{ X = t \, X_1 + (1-t) \, X_2} $$
+so wählen, dass $\var(X)$ minimal wird \\
+\textrightarrow\ $X$ entspricht dem 'gewichteten Mittelwert' der Messungen
+
+
+\subsubsection{Parameter}
+
+\begin{minipage}{0.48\columnwidth}
+    $$ \boxed{ t = \frac{\sigma_2^2}{\sigma_1^2 + \sigma_2^2} }$$
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\columnwidth}
+    $$ \boxed{ 1-t  = \frac{\sigma_1^2}{\sigma_1^2 + \sigma_2^2} }$$
+\end{minipage}
+
+
+\subsubsection{Lösung}
+
+\begin{minipage}{0.6\columnwidth}
+    $$ \boxed{ X = \underbrace{ \frac{\sigma_2^2}{\sigma_1^2 + \sigma_2^2} }_{\substack{t}}  \, X_1 +  
+    \underbrace{ \frac{\sigma_1^2}{\sigma_1^2 + \sigma_2^2} }_{\substack{(1-t)}} \, X_2 } $$
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\columnwidth}
+    $$ \boxed{ \var(X) = \frac{\sigma_1^2 \, \sigma_2^2}{\sigma_1^2 + \sigma_2^2} } $$
+\end{minipage}
+

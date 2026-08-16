@@ -1,0 +1,236 @@
+\section{Anhang}
+
+
+\subsection{Substitution bei Integralen}
+% Von Zusammenfassung Analysis 2a
+
+\begin{tabular}{ll}
+    $\int \limits_0^{\sqrt{\pi}} x^3 \cdot \cos(x^2) \, \diff x$    & \cbl{Substitution: $a = x^2$ } \crd{ \textbf{auch auf Grenzen anwenden!}}                                                 \\
+                                                                    & \cbl{$\diff a = 2 \, x \cdot \, \diff x$ \textrightarrow\ $\diff x = \frac{\diff a}{2x} = \frac{\diff a}{2 \sqrt{a}}$}
+\end{tabular}
+
+$\int \limits_{\crd{0}}^{\crd{\pi}} a \, \sqrt{a} \cdot \cos(a) \frac{\diff a}{2 \sqrt{a}} 
+    = \int \limits_{\crd{0}}^{\crd{\pi}} a \, \sqrt{a} \cdot \cos(a) \, \frac{1}{2} \frac{1}{\sqrt{a}} \, \diff a
+    = \frac{1}{2} \int \limits_{\crd{0}}^{\crd{\pi}} a \cdot \cos(a) \, \diff a = \ldots $
+		
+
+\subsection{Wichtige Integrale}
+
+\begin{minipage}{0.48\columnwidth}
+    $$ \frac{1}{T} \int\limits_{-T/2}^{T/2} \sin^2(\omega \, t) \,\diff t = \frac{1}{2} $$
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\columnwidth}
+    $$ \frac{1}{T} \int\limits_{-T/2}^{T/2} \cos^2(\omega \, t) \, \diff t = \frac{1}{2} $$
+\end{minipage}
+
+
+\subsection{Trigonometrie}
+
+
+% von Integraltransformationen Zusammenfassung	 
+% \includegraphics[width=\columnwidth]{images/trigo.png} 
+
+\begingroup
+\renewcommand{\arraystretch}{2}
+\setlength{\tabcolsep}{0mm}
+\scalebox{0.33}{
+\Huge
+\begin{tabularx}{3\columnwidth}{rp{1mm}V{3}*{17}{C}}
+    \rowcolor{subsectioncolor!30}$\bm{\alpha}$\phantom{${}^{\circ}$} && $0$ & $\dfrac{\pi}{6\mathstrut}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ & $\dfrac{2\pi}{3}$ & $\dfrac{3\pi}{4}$ & $\dfrac{5\pi}{6}$ & $\pi$ & $\dfrac{7\pi}{6}$ & $\dfrac{5\pi}{4}$ & $\dfrac{4\pi}{3}$ & $\dfrac{3\pi}{2}$ & $\dfrac{5\pi}{3}$ & $\dfrac{7\pi}{4}$ & $\dfrac{11\pi}{6}$ & $2\pi$ \\\hline
+    \rowcolor{subsectioncolor!30}$\bm{\alpha^\circ}$ && \phantom{${}^\circ$}$0^\circ$ & $30^\circ$ & $45^\circ$ & $60^\circ$ & $90^\circ$ & $120^\circ$ & $135^\circ$ & $150^\circ$ & $180^\circ$ & $210^\circ$ & $225^\circ$ & $240^\circ$ & $270^\circ$ & $300^\circ$ & $315^\circ$ & $330^\circ$ & $360^\circ$ \\\hline
+    $\bm{\sin(\alpha)}$ && $0$ & $\dfrac{1}{2\mathstrut}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ & $1$ & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ & $0$ & $-\dfrac{1}{2}$ & $-\dfrac{\sqrt{2}}{2}$ & $-\dfrac{\sqrt{3}}{2}$ & $-1$ & $-\dfrac{\sqrt{3}}{2}$ & $-\dfrac{\sqrt{2}}{2}$ & $-\dfrac{1}{2}$ & $0$ \\\hline
+    $\bm{\cos(\alpha)}$ && $1$ & $\dfrac{\sqrt{3}}{2\mathstrut}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ & $0$ & $-\dfrac{1}{2}$ & $-\dfrac{\sqrt{2}}{2}$ & $-\dfrac{\sqrt{3}}{2}$ & $-1$ & $-\dfrac{\sqrt{3}}{2}$ & $-\dfrac{\sqrt{2}}{2}$ & $-\dfrac{1}{2}$ & $0$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ & $1$ \\\hline
+    $\bm{\tan(\alpha)}$ && $0$ & $\dfrac{\sqrt{3}}{3\mathstrut}$ & $1$ & $\sqrt{3}$ & $\pm\infty$ & $-\sqrt{3}$ & $-1$ & $-\dfrac{\sqrt{3}}{3}$ & $0$ & $\dfrac{\sqrt{3}}{3}$ & $1$ & $\sqrt{3}$ & $\pm\infty$ & $-\sqrt{3}$ & $-1$ & $-\dfrac{\sqrt{3}}{3}$ & $0$ \\\hline
+    $\bm{\cot(\alpha)}$ && $\pm\infty$ & $\sqrt{3}$ & $1$ & $\dfrac{\sqrt{3}}{3\mathstrut}$ & $0$ & $-\dfrac{\sqrt{3}}{3}$ & $-1$ & $-\sqrt{3}$ & $\pm\infty$ & $\sqrt{3}$ & $1$ & $\dfrac{\sqrt{3}}{3}$ & $0$ & $-\dfrac{\sqrt{3}}{3}$ & $-1$ & $-\sqrt{3}$ & $\pm\infty$ \\
+\end{tabularx}}
+\endgroup
+
+
+\subsubsection{Komplexe Darstellung}
+
+\begin{minipage}{0.48\columnwidth}
+    $$ \sin(x) = \frac{e^{\jimg x} - e^{-\jimg x}}{2 \jimg} $$ 
+\end{minipage}	
+\hfill
+\begin{minipage}{0.48\columnwidth}
+    $$ \cos(x) = \frac{e^{\jimg x} + e^{- \jimg x}}{2} $$ 
+\end{minipage}		
+
+
+\subsubsection{Beziehungen zwischen $\sin(x)$ und $\cos(x)$}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ll}
+    $\sin(-a) = -\sin(a)$                                           & $\cos(-a) = \cos(a)$                                              \\
+    $\sin(\pi - a) = \sin(a)$                                       & $\cos(\pi -a) = - \cos(a)$                                        \\		
+    $\sin(\pi + a) = -\sin(a)$                                      & $\cos(\pi + a) = - \cos(a)$                                       \\	
+    $\sin(\frac{\pi}{2} - a) = \sin(\frac{\pi}{2} + a) = \cos(a)$   & $\cos(\frac{\pi}{2} - a) = - \cos(\frac{\pi}{2} + a) = \sin(a)$
+\end{tabular}
+
+
+\subsubsection{Additionstheoreme}
+
+\begin{tabular}{l}
+    $\sin(a \pm b) = \sin(a) \cdot \cos(b) \pm \cos(a) \cdot \sin(b)$           \\
+    $\cos(a \pm b) = \cos(a) \cdot \cos(b) \mp \sin(a) \cdot \sin(b) $          \\
+    $\tan(a \pm b) = \frac{\tan(a) \pm \tan(b)}{1 \mp \tan(a) \cdot \tan(b)}$
+\end{tabular}
+
+
+\subsubsection{Produkte}
+
+\begin{tabular}{l}
+    $\sin(a) \cdot \sin(b) = \frac{1}{2} \big( \cos(a-b) - \cos(a+b) \big) $    \\
+    $\cos(a) \cdot \cos(b) = \frac{1}{2} \big( \cos(a-b) + \cos(a+b) \big) $    \\	
+    $\sin(a) \cdot \cos(b) = \frac{1}{2} \big( \sin(a-b) + \sin(a+b) \big) $ 
+\end{tabular}
+
+
+\subsubsection{Summen und Differenzen}
+
+\begin{tabular}{l}
+    $\sin(a) + \sin(b) = 2 \cdot \sin \big( \frac{a+b}{2} \big) \cdot \cos \big( \frac{a-b}{2} \big)$   \\
+    $\sin(a) - \sin(b) = 2 \cdot \sin \big( \frac{a-b}{2} \big) \cdot \cos \big( \frac{a+b}{2} \big)$   \\
+    $\cos(a) + \cos(b) = 2 \cdot \cos \big( \frac{a+b}{2} \big) \cdot \cos \big( \frac{a-b}{2} \big)$   \\
+    $\cos(a) - \cos(b) = -2 \cdot \sin \big( \frac{a+b}{2} \big) \cdot \sin \big( \frac{a-b}{2} \big)$  \\
+    $\tan(a) \pm \tan(b) = \frac{\sin(a \pm b)}{\cos(a) \cdot \cos(b)}$ 
+\end{tabular}
+
+
+\subsubsection{Winkelvielfache und Halbwinkel}
+
+\begin{tabular}{ll}
+    $\sin(2a) = 2 \, \sin(a) \cdot \cos(a)$                                 & $\sin(3a) = 3 \, \sin(a) -4 \, \sin^3(a)$                                 \\
+    $\sin(4a) = 8 \, \cos^3(a) \cdot \sin(a) - 4 \, \cos(a) \cdot \sin(a)$  & $\sin \big( \frac{a}{2} \big) = \sqrt{\frac{1}{2}(1-\cos(a))}$            \\
+    \\
+    $\cos(2a) = \cos^2(a) - \sin^2(a)$                                      & $\cos(3a) = 4 \, \cos^3(a) -3 \, \cos(a)$                                 \\
+    $\cos(4a) = 8 \, \cos^4(a) - 8 \, \cos^2(a) + 1$                        & $\cos \big( \frac{a}{2} \big) = \sqrt{\frac{1}{2}(1+\cos(a))}$
+\end{tabular}
+
+
+\subsubsection{Potenzen}
+
+\begin{tabular}{ll}
+    $\sin^2(a) = \frac{1}{2}(1-\cos(2a))$                   & $\cos^2(a) = \frac{1}{2}(1+\cos(2a))$                 \\	
+    $\sin^3(a) = \frac{1}{4}(3\, \sin(a) - \sin(3a))$       & $\cos^3(a) = \frac{1}{4}(\cos(3a) + 3 \, \cos(a))$    \\	
+    $\sin^4(a) = \frac{1}{8}(\cos(4a) -4 \, \cos(2a) +3)$   & $\cos^4(a) = \frac{1}{8}(\cos(4a) +4 \, \cos(2a) +3)$ 	
+\end{tabular}
+
+
+\subsection{Zusammenhang Harmonische -- Oberwellen}
+
+\begin{center}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Kreisfrequenz}  & \textbf{Harmonische}      & \textbf{Oberwellen}   \\
+        \midrule
+        $\omega_0$              & 1. Harmonische            & Grundwelle            \\
+        \midrule
+        $2 \cdot \omega_0$      & 2. Harmonische            & 1. Oberwelle          \\
+        \midrule
+        $3 \cdot \omega_0$      & 3. Harmonische            & 2. Oberwelle          \\
+        \midrule
+        \vdots                  & \vdots                    & \vdots                \\
+        \midrule
+        $n \cdot \omega_0$      & $n$. Harmonische          & $(n-1)$. Oberwelle    \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+
+\subsection{Fourier-Transformation: Wichtige Korrespondenzpaare}
+
+\begin{center}
+    \begin{tabular}{l c l}
+        \toprule
+        \textbf{Zeitbereich}    &               & \textbf{Frequenzbereich}                                                  \\
+        \midrule
+        Rechteck                & $\laplace$    & $\mathrm{sinc}(a \, \omega)$ \textrightarrow\ Support von $-a \ldots a$   \\
+        \midrule
+        Dirac-Rechen            & $\laplace$    & Dirac-Rechen mit grösserem Abstand                                        \\
+        \midrule
+        $\delta(t)$             & $\laplace$    & $1$                                                                       \\
+        \midrule
+        $\cos(\omega_0 \, t)$   & $\laplace$    & $\pi(\delta( \omega + \omega_0) + \delta ( \omega - \omega_0))$           \\
+        \midrule
+        $ \sin(\omega_0 \, t)$  & $\laplace$    & $\jimg \pi(\delta( \omega + \omega_0) - \delta ( \omega - \omega_0))$     \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+
+\subsection{Laplace-Transformation: Wichtige Korrespondenzpaare}
+
+% Gemäss Modul Integraltransformationen
+\vspace{-0.2cm}
+$$ u(t) = \text{Einheitssprung} $$
+
+\begin{center}
+    \begin{tabular}{l c l}
+        \toprule
+        \textbf{Zeitbereich}            &               & \textbf{Frequenzbereich}          \\
+        \midrule
+        $u(t)$                          & $\laplace$    & $ \frac{1}{s}$                    \\
+        \midrule        
+        $u(t) \cdot t^n $               & $\laplace$    & $\frac{n!}{s^{n+1}}$              \\
+        \midrule
+        $u(t) \cdot e^{a \,t} $         & $\laplace$    & $\frac{1}{s-a}$                   \\
+        \midrule
+        $u(t) \cdot \cos(\omega \, t) $ & $\laplace$    & $\frac{s}{s^2 + \omega^2}$        \\
+        \midrule
+        $u(t) \cdot \sin(\omega \, t )$ & $\laplace$    & $\frac{\omega}{s^2 + \omega^2}$   \\
+        \midrule
+        $\delta(t)$                     & $\laplace$    & $1(s)$                            \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+
+\subsection{Zusammenstellung einiger Dichtefunktionen}
+\label{Zusammenstellung einiger Dichtefunktionen}
+
+\includegraphics[width=\columnwidth]{images/zusammenstellung_dichtefunktionen.png}
+
+
+\subsection{Zusammenstellung einiger Signale und ihrer Funktionen}
+
+\includegraphics[width=\columnwidth]{images/signale_funktionen}
+
+
+\subsection{Beispiele -- Amplitudendichten}
+\label{Beispiele - Amplitudendichte}
+
+\subsubsection{Sinus}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/PDF/sinussignal.pdf} 
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/PDF/sinussignal_amplitudendichte.pdf} 
+\end{minipage}
+
+
+\subsubsection{Dreieck}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/PDF/dreiecksignal.pdf} 
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/PDF/dreiecksignal_amplitudendichte.pdf} 
+\end{minipage}
+
+
+\subsubsection{Rechteck}
+\label{Rechteck} 
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/PDF/rechtecksignal.pdf} 
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/PDF/rechtecksignal_amplitudendichte.pdf} 
+\end{minipage}
+
