@@ -1,0 +1,88 @@
+\section{Schnittstellen \& Peripherie}
+
+\subsection[uC-Peripherie]{$\mu$C-Peripherie}
+\begin{itemize}
+    \item Ankopplung über Systembus des $\mu$C's.
+    \item Hardwaremässige Umsetzung.
+    \item Control-, Daten- \& Statusregister.
+    \item Ein- bzw. Ausgabe über I/O-Ports.
+\end{itemize}
+
+\subsection{Schieberegister}
+\textbf{Parallel In Serial Out (PISO):}
+Einfache Verkettung von Flip-Flops. Zusätzliche Multiplexer nötig.
+
+\textbf{Serial In Parallel Out (SIPO):}
+Einfache Verkettung von Flip-Flops.
+
+\vspace{0.5em}
+\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Diagramme zu PISO / SIPO / Peripherie Blockschaltbild]}\vspace{10pt}}}
+\vspace{0.5em}
+
+
+\subsection[Taktgeber in einem uP-System]{Taktgeber in einem $\mu$P-System}
+Wichtigkeit, den Taktgeber richtig zu wählen:
+\begin{itemize}
+    \item Für Synchronität, Genauigkeit (Präzision), Strom/Effizienz.
+    \item Clock soll so gewählt sein, dass alle zeitkritischen Anforderungen in der definierten Zeit abgearbeitet werden können.
+    \item Performance vs. Leistungsverbrauch.
+\end{itemize}
+
+\subsection{Direct Memory Access (DMA)}
+\begin{itemize}
+    \item Daten werden nicht mittels Load/Store über CPU transferiert, sondern direkt über den DMA.
+    \item Daten werden nicht bearbeitet oder verändert, sie werden als ganze Pakete transferiert.
+    \item Erst am Ende bzw. nach der Hälfte eines Datenpaket-Transfers wird ein Interrupt generiert.
+    \item Interrupt Stacking \& Fetching wird reduziert.
+\end{itemize}
+
+\textbf{Anwendungsbeispiele:}
+\begin{itemize}
+    \item \textit{High Performance:} Datentransfer \& Verarbeitung erfolgt in grossen Paketen. CPU kann Daten verarbeiten während der DMA transferiert.
+    \item \textit{Ultra Low Power:} Datentransfer \& -Verarbeitung erfolgt in grossen Paketen. CPU ist im Standby Modus während der DMA transferiert.
+\end{itemize}
+
+
+\subsection{UART}
+\begin{itemize}
+    \item Besitzt keinen Clk. (asynchrone Übertragung).
+    \item Ausschliesslich Punkt-zu-Punkt Verbindung (Tx, Rx).
+    \item Full-Duplex Betrieb uneingeschränkt möglich.
+    \item Diverse Treiber (RS-232, RS-422, RS-485) für längere Distanzen.
+    \item Stromsparend (Push-Pull-Ausgänge).
+\end{itemize}
+\textbf{Synchronisation:} Mittels des Start-Bits, welches bei jedem Symbol zu Beginn übertragen wird.\\
+\textbf{UART vs. RS-232:}
+UART: Logik-Pegel $1=\text{High}$, $0=\text{Low}$. \\
+RS-232: Schnittstellen-Pegel $1=-3V \dots -12V$, $0=+3V \dots +12V$.
+
+\subsection{SPI}
+Synchrone Schnittstelle mit minimalen Spezifikationen.
+\begin{itemize}
+    \item Durch Synchronität höhere Übertragungsraten als mit UART möglich.
+    \item Eingeschränkter Full-Duplex Betrieb oder Half-Duplex.
+    \item Leitungen: CS, SCLK, MOSI, MISO.
+    \item Mehrere Slaves am gleichen Interface. Nur kurze Distanzen möglich.
+    \item Stromsparend (Push-Pull-Ausgänge).
+\end{itemize}
+
+\textbf{SPI: SW Data-Ready bei Subs}
+\begin{itemize}
+    \item Problematik: Sub kann dem Main kein "Data Ready" senden, Main muss aktiv ein Status-Register abfragen.
+    \item Vorteil: Keine zusätzlichen Leitungen.
+    \item Nachteile: Ständige Abfrage des Status-Registers, erhöhter Datentransfer, kein effizienter Standby-Betrieb möglich.
+\end{itemize}
+
+\textbf{SPI: HW Data-Ready bei Subs}
+HW-Abfrage: Zusätzliche Interrupt-Leitungen und Data-Ready-Leitung.
+\begin{itemize}
+    \item Vorteile: Keine überflüssiger Datentransfer, effizienter Standby-Betrieb möglich.
+    \item Nachteil: Zusätzliche Leitungen zu SPI-Schnittstelle.
+\end{itemize}
+
+\subsection{I2C}
+Synchrone Schnittstelle mit höheren Spezifikationen.
+\begin{itemize}
+    \item Half-Duplex Bus Topologie.
+    \item Nicht stromsparend (Open-Drain-Ausgänge mit Widerstand).
+\end{itemize}

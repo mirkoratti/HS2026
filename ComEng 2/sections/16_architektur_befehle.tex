@@ -1,0 +1,51 @@
+\section{Architektur \& Befehle}
+
+\subsection{ISA Thumb-2 Befehlssatz}
+\begin{itemize}
+    \item Verarbeitet 32 und 16 Bit Befehle, Code-Density, Performance, mehr Befehle möglich.
+    \item Flexibler 2. Operand $<$op2$>$
+    \item Erweiterte Addressing-Modes
+    \item Erweiterte Grundoperationen (z.B. OR NOT, für jeden 16Bit-Befehl neu auch einen 32Bit-Befehl)
+    \item Bit-Field Processing
+    \item Compare \& Branch Zero, Conditional Execution (IT-Instruction)
+    \item Saturation (32Bit)
+    \item Multiply \& Accumulate (32Bit MAC)
+\end{itemize}
+
+\subsubsection{Single Instruction Multiple Data (SIMD)}
+
+\begin{itemize}
+    \item ganze Arrays von Daten werden übergeben.
+    \item Saturation (8/16Bit)
+    \item Multiply \& Add/Sub oder Accumulate (8/16Bit)
+    \item Add \& Sub (8/16Bit)
+    \item Add/Sub \& Saturation
+\end{itemize}
+
+\subsubsection{Load/Store-Architektur (RISC)}
+Sign Extender, Barrel-Shifter (Erlaubt Shift-Operationen auf R).
+
+\subsubsection{Multiply \& Accumulate (MAC)}
+Erlaubt Rechenoperationen mit 3 Werten.
+
+\subsection{Adressing Modes}
+\begin{ctabular}{@{}ll@{}}
+\toprule
+\textbf{Mode} & \textbf{Beispiel} \\
+\midrule
+Direkt & \texttt{R1} oder \texttt{\#100} \\
+Liste & \texttt{(R1-R3, R5, LR)} \\
+Indirekt & \texttt{[R0]} \\
+Indirekt Offset & \texttt{[R0, \#4]} \\
+Indirekt Index & \texttt{[R0, R1]} \\
+Indirekt Pre-Index & \texttt{[R0, \#2]!} \\
+Indirekt Post-Index & \texttt{[R0], \#-8} \\
+Indirekt Shifted Index & \texttt{[R0, R1, LSL \#1]} \\
+PC-relative & \texttt{label1} oder \texttt{[PC, \#4]} \\
+SP-relativ & \texttt{[SP, \#4]} \\
+\bottomrule
+\end{ctabular}
+
+\vspace{0.5em}
+\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Architektur Diagramm (MAC, RO-R15, Data Bus, Address Bus)]}\vspace{10pt}}}
+\vspace{0.5em}

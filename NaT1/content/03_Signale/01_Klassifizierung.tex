@@ -1,52 +1,85 @@
 \subsection{Klassifizierung von Signalen S.7}
 \begin{table}[H]
-	\begin{tabularx}{\textwidth}{|X|X|}
-		\hline
-		\begin{minipage}{\linewidth}Energiesignal $E=\int_{-\infty}^{\infty}|x(t)|^2 dt < \infty$ \end{minipage}
-		\includegraphics{content/03_Signale/energiesignal.pdf}
-		& 
-		\begin{minipage}{\linewidth}Leistungssignal $ P=\lim\limits_{T->\infty} \frac{1}{T} \int_{-T/2}^{T/2}|x(t)|^2 dt < \infty$\end{minipage}
-		\includegraphics{content/03_Signale/leistungssignal.pdf}
-		\\
-		\hline
-		\\
-		\begin{minipage}{\linewidth}aperiodisches Signal $x(t) \neq x(t+n \cdot T)$\end{minipage}
-		\includegraphics{content/03_Signale/aperiodischessignal.pdf}
-		& 
-		\begin{minipage}{\linewidth}periodisches Signal$x(t) = x(t+n \cdot T)$\end{minipage}
-		\includegraphics{content/03_Signale/periodischessignal.pdf}
-		\\
-		\hline
-		\\
-		\begin{minipage}{\linewidth} deterministisches Signal \\ $x(t) = f(t)$ Verlauf ist bekannt \end{minipage}
-		\includegraphics{content/03_Signale/deterministischessignal.pdf}
-		&
-		\begin{minipage}{\linewidth}{stochastisches Signal: Signalverlauf ist unbekannt bzw. zufällig}\end{minipage}
-		\includegraphics{content/03_Signale/stochastischessignal.pdf}
-		\\
-		\hline
-		\\
-		\begin{minipage}{\linewidth} zeitkontinuierliches Signal $x(t)$ ist immer definiert \end{minipage}
-		\includegraphics{content/03_Signale/zeitkontinuierlichessignal.pdf}
-		&
-		\begin{minipage}{\linewidth}zeitdiskretes Signal $x(t)$ ist nur an diskreten Punkten definiert\end{minipage}
-		\includegraphics{content/03_Signale/zeitdiskretessignal.pdf}
-		\\
-		\hline
-		\\
-		\begin{minipage}{\linewidth}amplitudenkontinuierliches Signal\end{minipage}
-		\includegraphics{content/03_Signale/amplitudenkontinuierlichessignal.pdf}
-		&\begin{minipage}{\linewidth} quantisiertes Signal \end{minipage}
-		\includegraphics{content/03_Signale/quantisiertessignal.pdf}
-		\\
-		\hline
-		\\
-		\begin{minipage}{\linewidth} Zeit- und Amplitudenkontinuierliches Signal (Analog) \end{minipage}
-		\includegraphics{content/03_Signale/zeitamplitudenkontinuierlichessignal.pdf}
-		& \begin{minipage}{\linewidth} Zeitdiskret und Quantisiert \end{minipage}
-		\includegraphics{content/03_Signale/zeitdiskretquantisiert.pdf}
-		\\
-		\hline
-	\end{tabularx}
+\centering
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{Energiesignal}\\[2pt]
+$\displaystyle E=\int_{-\infty}^{\infty}|x(t)|^2\,dt < \infty$\\[2pt]
+Endliche Energie\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/energiesignal.pdf}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{Leistungssignal}\\[2pt]
+$\displaystyle P=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2\,dt < \infty$\\[2pt]
+Unendliche Energie\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/leistungssignal.pdf}
+\end{minipage}
+\\ \hline
+
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{aperiodisches Signal}\\[2pt]
+$x(t) \neq x(t+n\cdot T)$\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/aperiodischessignal.pdf}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{periodisches Signal}\\[2pt]
+$x(t) = x(t+n\cdot T)$\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/periodischessignal.pdf}
+\end{minipage}
+\\ \hline
+
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{deterministisches Signal}\\[2pt]
+$x(t)=f(t)$, Verlauf ist bekannt\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/deterministischessignal.pdf}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{stochastisches Signal}\\[2pt]
+Signalverlauf ist unbekannt bzw. zufällig\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/stochastischessignal.pdf}
+\end{minipage}
+\\ \hline
+
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{zeitkontinuierliches Signal}\\[2pt]
+$x(t)$ ist immer definiert\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/zeitkontinuierlichessignal.pdf}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{zeitdiskretes Signal}\\[2pt]
+$x(t)$ ist nur an diskreten Punkten definiert\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/zeitdiskretessignal.pdf}
+\end{minipage}
+\\ \hline
+
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{amplitudenkontinuierliches Signal}\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/amplitudenkontinuierlichessignal.pdf}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{quantisiertes Signal}\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/quantisiertessignal.pdf}
+\end{minipage}
+\\ \hline
+
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{Zeit- und amplitudenkontinuierlich (Analog)}\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/zeitamplitudenkontinuierlichessignal.pdf}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}\centering
+\textbf{Zeitdiskret und quantisiert (Digital)}\\[4pt]
+\includegraphics[width=0.65\linewidth]{content/03_Signale/zeitdiskretquantisiert.pdf}
+\end{minipage}
+\\ \hline
+\end{tabularx}
 \end{table}
 \newpage

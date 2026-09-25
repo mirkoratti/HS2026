@@ -20,7 +20,8 @@
 	\myul{\textbf{Ereignis}} \\
 	Teilmenge von $\Omega$ \\
 	\crd{$A$} eingetreten \textlrarrow\ Versuchsausgang $\omega \in \crd{A}$ \\
-	\cbl{$B$} nicht eingetr. \textlrarrow\ Versuchsausgang $\omega \notin \cbl{B}$ 
+	\cbl{$B$} nicht eingetr. \textlrarrow\ Versuchsausgang $\omega \notin \cbl{B}$\\
+	con $n$ esiti elementari ($\omega) \rightarrow$ \# di Eventi $= 2^n$
 \end{minipage}
 
 
@@ -88,7 +89,7 @@ $$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Ver
 	\item Wertebereich: $0 \leq P(A) \leq 1$ 
 	\item Sicheres Ereignis: $P(\Omega) = 1$ 
 	\item Disjunkte Vereinigung (keine Schnittmengen zwischen Ereignissen)\\
-	$P(A_1) \cup P(A_2) \cup ... \cup P(A_n) =  P(A_1) + P(A_2) + ... + P(A_n)$ 
+	$P(A_1 \cup A_2\cup ... \cup A_n \cup \dots) =  P(A_1) + P(A_2) + ... + P(A_n) + \dots$ 
 \end{itemize}
 
 
@@ -98,7 +99,7 @@ $$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Ver
 	\item Unmögliches Ereignis: $P(\emptyset) = 0$ 
 	\item Komplementärereignis: $P(\overline{A}) = 1 - P(A)$
 	\item Differenz: $P(A \setminus B) = P(A) - P(A \cap B)$
-	\item Vereinigung: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+	\item Vereinigung: $P(A \cup B) = P(A) + P(B) \, \cor{- P(A \cap B)}$
 \end{itemize}
 
 
@@ -137,8 +138,6 @@ Die Bedingte Wahrscheinlichkeit ist die Wahrscheinlichkeit für \crd{$A$}, wenn 
 $A$ und $B$ heissen \textbf{unabhängig}, wenn
 $$ \boxed{ P(A \cap B) = P(A) \cdot P(B) } $$
 
-\vspace{0.2cm}
-
 \begin{minipage}[t]{0.48\columnwidth}
 	\begin{center}
 		\myul{\textbf{Unabhängig}}
@@ -167,7 +166,6 @@ $$ \boxed{ P(A \cap B) = P(A) \cdot P(B) } $$
 Es gibt einen Zusammenhang zwischen den Wahrscheinlichkeiten, je nachdem welches Ereignis zuerst eintreten muss
 
 $$ P(A \, | \, B) \cdot P(B) = P(A \cap B) = P(B \, | \, A) \cdot P(A) $$
-\vspace{0.2cm}
 
 \begin{minipage}{0.48\columnwidth}
 	$$ \boxed{ P(A \, | \, B) = P(B \,| \, A) \frac{P(A)}{P(B)} } $$

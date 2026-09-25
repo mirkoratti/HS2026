@@ -8,9 +8,9 @@ $$ y(t) = f( u(t), \, x(t) ) $$
 \subsubsection{Prozesse mit / ohne Ausgleich}
 
 \begin{tabular}{ll}
-ohne Ausgleich: & Sprungantwort wächst grenzenlos an                    \\
+ohne Ausgleich: & Sprungantwort wächst grenzenlos an ($\to \infty$)                    \\
 mit Ausgleich:  & Sprungantwort strebt gegen endlichen Wert             \\
-				& \textrightarrow\ \textbf{Gegenkopplung} am Ausgang 
+				& \textrightarrow\ \textbf{Gegenkopplung} am Ausgang {\small(oder reibung, energieverlust, \dots)} 
 \end{tabular}
 
 
@@ -67,11 +67,13 @@ Ein Energiespeicher \textrightarrow\ System schwingt \textbf{nicht}
 \subsubsection{Modellierung einer $\text{PT}_1$ Regelstrecke}
 
 \begin{enumerate}
-    \item Ausmessen der Sprungantwort $u(t) = A \cdot \varepsilon(t)$ \\
+    \item Ausmessen der \hyperref[u(t)]{Sprungantwort} $u(t) = A \cdot \varepsilon(t)$ \\
         \textrightarrow\ Die Sprungantwort entspricht dem Diagramm
-    \item  Parameter $K$ berechnen: $K = \frac{y_\infty}{A}$
-    \item Parameter $T$ bestimmen: Tangente am Anfang durch Punkt $P$ \\
-        oder: Zeit bis $y(T) = 0.63 \cdot K \, A$ erreicht ist \textrightarrow\ $T$ ablesen
+    \item  Parameter $K$ berechnen: $K = \dfrac{y_\infty - y_0}{A} = \dfrac{\Delta y}{A}$ \\
+        \textit{(falls $u$ und $y$ nicht bei $0$ starten: $A = u_\infty - u_0$ und $\Delta y = y_\infty - y_0$ verwenden)}
+    \item Parameter $T$ bestimmen: Tangente am Anfang durch Punkt $P = (t_0 + T_t,\, y_0)$ \\
+    oder: Zeit bis $y(t) = y_0 + 0.63 \cdot \Delta y$ erreicht ist, \textbf{gemessen ab $t_0 + T_t$} \textrightarrow\ $T$ ablesen \\
+    \textit{(Antwort mit Verzögerung $T_t$: $T = t_{63\%} - t_0 - T_t$)}
 \end{enumerate}
 
 

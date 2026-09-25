@@ -12,7 +12,21 @@
 $\int \limits_{\crd{0}}^{\crd{\pi}} a \, \sqrt{a} \cdot \cos(a) \frac{\diff a}{2 \sqrt{a}} 
     = \int \limits_{\crd{0}}^{\crd{\pi}} a \, \sqrt{a} \cdot \cos(a) \, \frac{1}{2} \frac{1}{\sqrt{a}} \, \diff a
     = \frac{1}{2} \int \limits_{\crd{0}}^{\crd{\pi}} a \cdot \cos(a) \, \diff a = \ldots $
-		
+
+
+\subsubsection{Partielle Integration (Produktregel)}
+\vspace{-1em}
+
+\[\int_{a}^{b} f'\cdot g \, \diff x = \left[ f\cdot g \right]_{a}^{b} - \int_{a}^{b} f\cdot g' \, \diff x
+\quad \text{oder} \quad
+\int_{a}^{b} f\cdot g' \, \diff x = \left[ f\cdot g \right]_{a}^{b} - \int_{a}^{b} f' \cdot g \, \diff x
+\]
+
+Partielle Integration darf mehrfach angewendet werden. \\
+\textbf{PI sollte wenn möglich vermieden werden! Produkte in Summen umschreiben!}\vspace{1em}
+
+\textbf{LIATE} - Priorität für $g$ - funzione da derivare (non $\dots'$ nella forma base):
+
 
 \subsection{Wichtige Integrale}
 
@@ -58,63 +72,64 @@ $\int \limits_{\crd{0}}^{\crd{\pi}} a \, \sqrt{a} \cdot \cos(a) \frac{\diff a}{2
 \end{minipage}		
 
 
-\subsubsection{Beziehungen zwischen $\sin(x)$ und $\cos(x)$}
+\subsubsection{Beziehungen zwischen $\bm{\sin(x)}$ und $\bm{\cos(x)}$}\label{chap:trigo-beziehungen}
 
-\renewcommand{\arraystretch}{1.3}
+\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{ll}
-    $\sin(-a) = -\sin(a)$                                           & $\cos(-a) = \cos(a)$                                              \\
-    $\sin(\pi - a) = \sin(a)$                                       & $\cos(\pi -a) = - \cos(a)$                                        \\		
-    $\sin(\pi + a) = -\sin(a)$                                      & $\cos(\pi + a) = - \cos(a)$                                       \\	
-    $\sin(\frac{\pi}{2} - a) = \sin(\frac{\pi}{2} + a) = \cos(a)$   & $\cos(\frac{\pi}{2} - a) = - \cos(\frac{\pi}{2} + a) = \sin(a)$
+    $\sin(-a) = -\sin(a)$                                                               & $\cos(-a) = \cos(a)$          \\
+    $\sin(\pi - a) = \sin(a)$                                                           & $\cos(\pi -a) = - \cos(a)$    \\		
+    $\sin(\pi + a) = -\sin(a)$                                                          & $\cos(\pi + a) = - \cos(a)$   \\	
+    $\sin \Big( \frac{\pi}{2} - a \Big) = \sin \Big( \frac{\pi}{2} + a \Big) = \cos(a)$ & $\cos \Big( \frac{\pi}{2} - a \Big) = - \cos \Big( \frac{\pi}{2} + a \Big) = \sin(a)$\\
+    $\sin \Big( a - \frac{\pi}{2} \Big) = -\cos(a)$                                     & $\cos \Big( a - \frac{\pi}{2} \Big) = \sin(a)$ \\
+    $\tan(-\alpha) = -\tan(\alpha)$ & \cor{$\arctan$ restituisce solo angoli $\in [-\pi, \pi]$!}
 \end{tabular}
 
 
 \subsubsection{Additionstheoreme}
 
-\begin{tabular}{l}
-    $\sin(a \pm b) = \sin(a) \cdot \cos(b) \pm \cos(a) \cdot \sin(b)$           \\
-    $\cos(a \pm b) = \cos(a) \cdot \cos(b) \mp \sin(a) \cdot \sin(b) $          \\
-    $\tan(a \pm b) = \frac{\tan(a) \pm \tan(b)}{1 \mp \tan(a) \cdot \tan(b)}$
+\begin{tabular}{ll}
+    $\sin(a \pm b) = \sin(a) \cdot \cos(b) \pm \cos(a) \cdot \sin(b)$   & $\tan(a \pm b) = \frac{\tan(a) \pm \tan(b)}{1 \mp \tan(a) \cdot \tan(b)}$        \\
+    $\cos(a \pm b) = \cos(a) \cdot \cos(b) \mp \sin(a) \cdot \sin(b) $  & 
+\end{tabular}
+
+
+\subsubsection{Summen und Differenzen}
+
+\begin{tabular}{ll}
+    $\sin(a) + \sin(b) = 2 \cdot \sin \Big( \frac{a+b}{2} \Big) \cdot \cos \Big( \frac{a-b}{2} \Big)$   \\
+    $\sin(a) - \sin(b) = 2 \cdot \sin \Big( \frac{a-b}{2} \Big) \cdot \cos \Big( \frac{a+b}{2} \Big)$   \\
+    $\cos(a) + \cos(b) = 2 \cdot \cos \Big( \frac{a+b}{2} \Big) \cdot \cos \Big( \frac{a-b}{2} \Big)$   \\
+    $\cos(a) - \cos(b) = -2 \cdot \sin \Big( \frac{a+b}{2} \Big) \cdot \sin \Big( \frac{a-b}{2} \Big)$  \\
+    $\tan(a) \pm \tan(b) = \frac{\sin(a \pm b)}{\cos(a) \cdot \cos(b)}$ 
 \end{tabular}
 
 
 \subsubsection{Produkte}
 
 \begin{tabular}{l}
-    $\sin(a) \cdot \sin(b) = \frac{1}{2} \big( \cos(a-b) - \cos(a+b) \big) $    \\
-    $\cos(a) \cdot \cos(b) = \frac{1}{2} \big( \cos(a-b) + \cos(a+b) \big) $    \\	
-    $\sin(a) \cdot \cos(b) = \frac{1}{2} \big( \sin(a-b) + \sin(a+b) \big) $ 
-\end{tabular}
-
-
-\subsubsection{Summen und Differenzen}
-
-\begin{tabular}{l}
-    $\sin(a) + \sin(b) = 2 \cdot \sin \big( \frac{a+b}{2} \big) \cdot \cos \big( \frac{a-b}{2} \big)$   \\
-    $\sin(a) - \sin(b) = 2 \cdot \sin \big( \frac{a-b}{2} \big) \cdot \cos \big( \frac{a+b}{2} \big)$   \\
-    $\cos(a) + \cos(b) = 2 \cdot \cos \big( \frac{a+b}{2} \big) \cdot \cos \big( \frac{a-b}{2} \big)$   \\
-    $\cos(a) - \cos(b) = -2 \cdot \sin \big( \frac{a+b}{2} \big) \cdot \sin \big( \frac{a-b}{2} \big)$  \\
-    $\tan(a) \pm \tan(b) = \frac{\sin(a \pm b)}{\cos(a) \cdot \cos(b)}$ 
+    $\sin(a) \cdot \sin(b) = \frac{1}{2} \big( \cos(a-b) - \cos(a+b) \big) $ \\
+    $\cos(a) \cdot \cos(b) = \frac{1}{2} \big( \cos(a-b) + \cos(a+b) \big) $ \\	
+    $\sin(a) \cdot \cos(b) = \frac{1}{2} \big( \sin(a-b) + \sin(a+b) \big) $ \\
+    $\cos(a) \cdot \sin(b) = \frac{1}{2} \left( \sin(b - a) + \sin(b + a) \right)$
 \end{tabular}
 
 
 \subsubsection{Winkelvielfache und Halbwinkel}
 
 \begin{tabular}{ll}
-    $\sin(2a) = 2 \, \sin(a) \cdot \cos(a)$                                 & $\sin(3a) = 3 \, \sin(a) -4 \, \sin^3(a)$                                 \\
-    $\sin(4a) = 8 \, \cos^3(a) \cdot \sin(a) - 4 \, \cos(a) \cdot \sin(a)$  & $\sin \big( \frac{a}{2} \big) = \sqrt{\frac{1}{2}(1-\cos(a))}$            \\
-    \\
-    $\cos(2a) = \cos^2(a) - \sin^2(a)$                                      & $\cos(3a) = 4 \, \cos^3(a) -3 \, \cos(a)$                                 \\
-    $\cos(4a) = 8 \, \cos^4(a) - 8 \, \cos^2(a) + 1$                        & $\cos \big( \frac{a}{2} \big) = \sqrt{\frac{1}{2}(1+\cos(a))}$
+    $\sin(2a) = 2 \, \sin(a) \cdot \cos(a)$                                 & $\cos(2a) = \cos^2(a) - \sin^2(a)$ \\
+    $\sin(3a) = 3 \, \sin(a) -4 \, \sin^3(a)$                               & $\cos(3a) = 4 \, \cos^3(a) -3 \, \cos(a)$\\ \medskip
+    $\sin(4a) = 8 \, \cos^3(a) \sin(a) - 4 \, \cos(a) \sin(a)$              & $\cos(4a) = 8 \, \cos^4(a) - 8 \, \cos^2(a) + 1$\\
+    $\sin \Big( \frac{a}{2} \Big) = \sqrt{\frac{1}{2} \big(1-\cos(a) \big)}$& $\cos \Big( \frac{a}{2} \Big) = \sqrt{\frac{1}{2} \big(1+\cos(a) \big)}$
 \end{tabular}
 
 
 \subsubsection{Potenzen}
 
 \begin{tabular}{ll}
-    $\sin^2(a) = \frac{1}{2}(1-\cos(2a))$                   & $\cos^2(a) = \frac{1}{2}(1+\cos(2a))$                 \\	
-    $\sin^3(a) = \frac{1}{4}(3\, \sin(a) - \sin(3a))$       & $\cos^3(a) = \frac{1}{4}(\cos(3a) + 3 \, \cos(a))$    \\	
-    $\sin^4(a) = \frac{1}{8}(\cos(4a) -4 \, \cos(2a) +3)$   & $\cos^4(a) = \frac{1}{8}(\cos(4a) +4 \, \cos(2a) +3)$ 	
+    $\sin^2(a) = \frac{1}{2} \big(1-\cos(2a) \big)$                   & $\cos^2(a) = \frac{1}{2} \big(1+\cos(2a) \big)$                     \\	
+    $\sin^3(a) = \frac{1}{4} \big(3\, \sin(a) - \sin(3a) \big)$       & $\cos^3(a) = \frac{1}{4} \big(\cos(3a) + 3 \, \cos(a) \big)$        \\	
+    $\sin^4(a) = \frac{1}{8} \big(\cos(4a) -4 \, \cos(2a) +3 \big)$   & $\cos^4(a) = \frac{1}{8} \big(\cos(4a) + 4 \, \cos(2a) +3 \big)$
 \end{tabular}
 
 
@@ -195,8 +210,86 @@ $$ u(t) = \text{Einheitssprung} $$
 
 \subsection{Zusammenstellung einiger Signale und ihrer Funktionen}
 
-\includegraphics[width=\columnwidth]{images/signale_funktionen}
-
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|l||c|c|c|}
+        \hline
+        \multirow{2}{*}{\huge \textbf{Signal / Funktion}} & \multicolumn{2}{c|}{Endliche Signalleistung $0 < P_n < \infty, (W_n = \infty)$} & Endliche Signalenergie $W_n < \infty$ \\
+        \cline{2-4}
+        & periodisch ($\omega_0 = 2\pi/T_0$) & stochastisch (stationär) & abklingend, zeitbegrenzt \\
+        \hline\hline
+        
+        Autokorrelationsfunktion (AKF) & 
+        $\displaystyle \varphi(\tau) = \frac{1}{T_0} \int\limits_{-T_0/2}^{T_0/2} f(t)f(t+\tau)dt$ & 
+        $\displaystyle \varphi(\tau) = \lim_{T\to\infty} \frac{1}{T} \int\limits_{-T/2}^{T/2} f(t)f(t+\tau)dt$ & 
+        $\displaystyle \varphi(\tau) = \int\limits_{-\infty}^{\infty} f(t)f(t+\tau)dt$ \\
+        \hline
+        
+        Fourier-Transformation der AKF & 
+        $\displaystyle P_n = \frac{1}{T_0} \int\limits_{-T_0/2}^{T_0/2} \varphi(\tau)e^{-jn\omega_0\tau}d\tau$ & 
+        $\displaystyle \Phi(j\omega) = \int\limits_{-\infty}^{\infty} \varphi(\tau)e^{-j\omega\tau}d\tau$ & 
+        $\displaystyle E(j\omega) = \int\limits_{-\infty}^{\infty} \varphi(\tau)e^{-j\omega\tau}d\tau$ \\
+        \hline
+        
+        Rücktransformation der AKF & 
+        $\displaystyle \varphi(\tau) = \sum_{n=-\infty}^{\infty} P_n e^{jn\omega_0\tau}$ & 
+        $\displaystyle \varphi(\tau) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} \Phi(j\omega)e^{j\omega\tau}d\omega$ & 
+        $\displaystyle \varphi(\tau) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} E(j\omega)e^{j\omega\tau}d\omega$ \\
+        \hline
+        
+        Amplitudenspektrum & 
+        $\displaystyle c_n = \frac{1}{T_0} \int\limits_{-T_0/2}^{T_0/2} f(t)e^{-jn\omega_0 t}dt$ & 
+        -- & 
+        -- \\
+        \hline
+        
+        Amplitudendichtespektrum & 
+        -- & 
+        -- & 
+        $\displaystyle F(j\omega) = \int\limits_{-\infty}^{\infty} f(t)e^{-j\omega t}dt$ \\
+        \hline
+        
+        Leistungsspektrum & 
+        $\displaystyle P_n = |c_n|^2$ & 
+        -- & 
+        -- \\
+        \hline
+        
+        Leistungsdichtespektrum & 
+        -- & 
+        $\displaystyle \Phi(j\omega) = E \left\{ \lim_{T \to \infty} \frac{1}{T} \left| \int\limits_{-T/2}^{T/2} f(t)e^{-j\omega t}dt \right|^2 \right\}$ & 
+        -- \\
+        \hline
+        
+        Energiedichtespektrum & 
+        -- & 
+        -- & 
+        $\displaystyle E(j\omega) = |F(j\omega)|^2$ \\
+        \hline
+        
+        Energie & 
+        -- & 
+        -- & 
+        $\displaystyle W = \varphi(0) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} E(j\omega)d\omega$ \\
+        \hline
+        
+        Leistung & 
+        $\displaystyle P = \varphi(0) = \sum_{n=-\infty}^{\infty} P_n$ & 
+        $\displaystyle P = \varphi(0) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} \Phi(j\omega)d\omega$ & 
+        -- \\
+        \hline
+        
+        Fourier-Reihe & 
+        $\displaystyle f(t) = \sum_{n=-\infty}^{\infty} c_n e^{jn\omega_0 t}$ & 
+        -- & 
+        -- \\
+        \hline
+        
+        Fourier-Integral & 
+        -- & 
+        -- & 
+        $\displaystyle f(t) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} F(j\omega)e^{j\omega t}d\omega$ \\
+        \hline
+    \end{tabular}}
 
 \subsection{Beispiele -- Amplitudendichten}
 \label{Beispiele - Amplitudendichte}

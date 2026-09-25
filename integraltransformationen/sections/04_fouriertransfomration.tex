@@ -12,27 +12,27 @@ Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbe
 
 \subsection{Komplexe trigonometrische Funktionen} 
 
-\begin{tabular}{lll}
+\begin{ctabular}{lll}
     $\sin(\omega t) = \frac{\e^{\jimg\omega t} - \e^{-\jimg \omega t}}{2\jimg}$ &
     $\cos(\omega t) = \frac{\e^{\jimg \omega t} + \e^{-\jimg \omega t}}{2}$ & 
     $\tan(\omega t) = \frac{\sin(\omega t)}{\cos(\omega t)}$
-\end{tabular}
+\end{ctabular}
 
 
 \subsection{Frequenzgang (Frequenzerhaltung)}
 
 Der Frequenzgang $H(\omega)$ bestimmt die Änderung von Amplitude und Phase des Eingangssignals.
 
-\textbf{Amplitudengang:} $ A(\omega) = \left|H(\omega)\right| = \sqrt{H(\omega) \cdot \overline{H(\omega)}} = \sqrt{\Re(H(\omega))^2 + \Im(H(\omega))^2}$
+\textbf{Amplitudengang:}\vspace{-1em}
+\[A(\omega) = \left|H(\omega)\right| = \sqrt{H(\omega) \cdot \overline{H(\omega)}} = \sqrt{\Re(H(\omega))^2 + \Im(H(\omega))^2}\]
 
-\vspace{0.2cm}
 
 \textbf{Phasengang:} $\Phi(\omega) = \arg(H(\omega)) = \begin{cases}
 \arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right)  & \text{für} \; \Im(H(\omega)) \geq 0 \\
 -\arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right) & \text{für} \; \Im(H(\omega)) < 0
 \end{cases}$
 
-\vspace{0.2cm}
+\smallbreak
 
 \begin{tabular}{ll}
     Amplitudengang: & achsensymmetrisch (gerade)    \\

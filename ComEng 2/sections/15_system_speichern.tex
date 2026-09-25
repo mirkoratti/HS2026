@@ -1,0 +1,40 @@
+\section{System \& Speicher}
+
+\subsection[Bestandteile]{Bestandteile $\mu$C}
+
+\textbf{Hauptbestandteile}
+
+\begin{itemize}
+    \item CPU ($\mu$P), Speicher (ROM, RAM), Systemkomponenten (Clock).
+    \item Peripherie-Elemente (GPIO, ADC, DAC, Timer, SPI, I2C, \dots)
+\end{itemize}
+
+\medbreak
+
+\textbf{Grundelemente}
+
+\begin{itemize}
+    \item Stromquelle, POR, Taktgeber \& Boot-Code (init of internal system)
+\end{itemize}
+
+\subsection{Vorteile des Cortex-M4 NVIC}
+\begin{itemize}
+    \item Kein Software-Overhead für Stacking und Sprünge.
+    \item Parallele Verarbeitung von Code und Daten (Harvard).
+    \item Sehr geringe Jitter-Zeiten bei der Ausführung.
+    \item Nur 12 Cycles für Ein- und Austritt der ESR bzw. ISR.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\framebox{\parbox{0.95\columnwidth}{\centering \vspace{5pt}\textit{[Placeholder: Bild Vector-Tabelle / IRQ ISR Handler / Background/Foreground Programm]}\vspace{5pt}}}
+\vspace{0.5em}
+
+\subsection{Infos über den D-Code Systembus}
+\begin{itemize}
+    \item Datenzugriff für ROM (Flash schreiben).
+    \item Debug-Infos aus dem ROM (Code) auslesen.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\framebox{\parbox{0.95\linewidth}{\centering \vspace{5pt}\textit{[Placeholder: Speichertabelle (LA 1-28 Werte)]}\vspace{5pt}}}
+\vspace{0.5em}

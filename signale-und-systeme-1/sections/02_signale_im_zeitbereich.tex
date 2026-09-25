@@ -19,24 +19,24 @@ Der lineare Mittelwert des \textbf{reellen Signals $\bm{x(t)}$} ist definiert al
 \begin{minipage}[t]{0.48\columnwidth}
     \begin{center}
         $$ \boxed{ X_0 = \lim\limits_{T \to \infty} \frac{1}{T} \int\limits_{-T/2}^{T/2} x(t) \, \diff t } $$
-        Klasse 2b
+        Klasse 2b ($T$: fensterlänge, no periodo)
     \end{center}
 \end{minipage}
 
 
 \subsection[Quadratischer Mittelwert]{Quadratischer Mittelwert $\bm{X^2}$}{6}
 
-Der quadratische Mittelwert von \textbf{reellen, periodischen Leistungssignalen} (Klasse 2a) ist ein \textbf{Mass für die Leistung}
+Der quadratische Mittelwert von \textbf{\color{red}reellen, periodischen Leistungssignalen} (Klasse 2a) ist ein \textbf{Mass für die Leistung}
 und ist definiert als:
 
-$$ \boxed{ X^2 = \frac{1}{T} \int\limits_{-T/2}^{T/2} x^2(t) \, \diff t } $$
+$$ \boxed{P_n = X^2 = \frac{1}{T} \int\limits_{-T/2}^{T/2} x^2(t) \, \diff t } $$
 
-Es gilt stets: $X^2 \geq 0$
+Es gilt stets: $X^2 \geq 0$ \qquad \qquad ({\small Per Energiesignal $X^2=0$})
 
 
 \subsection[Effektivwert (RMS)]{Effektivwert $\bm{X_{\rm eff}}$ (RMS)}
 
-$$ \boxed{ X_{\rm eff} = \sqrt{X^2} } $$
+$$ \boxed{ X_{\rm eff} = \sqrt{X^2} = \sqrt{P_n}} $$
 
 Es gilt: $X_{\rm eff} > X_m$
 
@@ -116,9 +116,15 @@ $$ \boxed{ X^2  = \Var(x) + X_0^2 = \vert X \vert^2 = \Var(\vert x \vert) + \ver
 
 \subsection{Autokorrelationsfunktion (AKF)}{8-11}
 
-Die AKF ist ein Mass für die innere Kohärenz (Ähnlichkeit)eines Signals. Sie ist eine Erweiterung des quadratischen Mittelwerts.
-($\varphi_{xx}(0) = X^2$)
+L'autocorrelazione misura la somiglianza di un segnale $f(t)$ con una sua copia traslata nel tempo di un ritardo $\tau$. A differenza della convoluzione, \textbf{la funzione non viene specchiata}.
 
+\medskip
+
+\begin{enumerate}
+    \item \textbf{Duplicare} Prendere $f(t)$ di periodo $T$ e disegnane una copia estesa su $2$ periodi per facilitare il calcolo ai bordi.
+    \item \textbf{Far scorrere} Muovere la funzione mobile da SX verso DX (sfasamento $\tau$) sopra quella originale
+    \item \textbf{l'area media:} Per ogni istante $\tau$, calcolare l'area di sovrapposizione $A(\tau)$ su un singolo periodo $T$ e \textbf{dividi per il periodo $T$}:
+\end{enumerate}
 
 \subsubsection{AKF für reelle, periodische Leistungssignale (Klasse 2a)}
 

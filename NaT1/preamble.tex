@@ -1,0 +1,191 @@
+% ============================================================
+%  HEADER / PREAMBLE — NaT1_PAB
+%  Compile with: pdflatex (2-3 passes, for TOC/refs/bookmarks)
+% ============================================================
+\documentclass[11pt,twoside,a4paper]{article}
+
+% ============================================================
+% DOCUMENT GEOMETRY
+% ============================================================
+\usepackage[a4paper,left=1cm,right=1cm,top=1.6cm,bottom=1.6cm,twoside,headheight=15pt]{geometry}
+
+% ============================================================
+% ENCODING & LANGUAGE
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}   % new German orthography ("neue deutsche Rechtschreibung")
+
+% ============================================================
+% MATH PACKAGES & FONTS
+% ------------------------------------------------------------
+% IMPORTANT LOAD ORDER: amsmath/amssymb and any package that
+% defines math operators/symbols (trfsigns, trsym) MUST be
+% loaded BEFORE newtxmath. newtxmath redefines many low-level
+% math commands and will throw "already defined" errors if it
+% is loaded first (classic conflicts: \Bbbk, \openbox, \laplace).
+% ============================================================
+\usepackage{amsmath}          % core math environments/commands
+\usepackage{amssymb}          % extra math symbols
+\usepackage{trfsigns, trsym}  % Laplace/Fourier transform symbols
+
+% trfsigns and newtxmath both try to define \laplace without
+% checking if it already exists -> free the name so newtxmath
+% can redefine it without a fatal "already defined" error.
+\makeatletter
+\let\laplace\relax
+\makeatother
+
+\usepackage{libertine}             % elegant serif font (Linux Libertine clone)
+\usepackage[libertine]{newtxmath}  % math fonts matched to Libertine
+\usepackage{tgheros}               % modern sans-serif (TeX Gyre Heros)
+
+% ============================================================
+% GRAPHICS, TABLES & LAYOUT HELPERS
+% ============================================================
+\usepackage{graphicx}     % include images
+\usepackage{makecell}     % helper for building tables
+\usepackage{bigints}      % large integral signs
+\usepackage{fancyhdr}     % custom headers and footers
+\usepackage{pgf}
+\usepackage{tabularx}     % flexible-width table columns
+\usepackage{multirow}     % merge table cells across rows
+\usepackage{efbox}        % nice colored boxes
+\usepackage{pdflscape}    % landscape pages that rotate in PDF viewers
+\usepackage{rotating}     % rotate arbitrary content
+\usepackage{multicol}     % multi-column layouts
+\usepackage{tikz}         % vector graphics / diagrams
+\usepackage{pdfpages}     % include external PDF pages
+\usepackage{float}        % better control over figure/table placement
+
+% ------------------------------------------------------------
+% SI units (siunitx)
+% ------------------------------------------------------------
+\usepackage{siunitx}
+\sisetup{
+	range-phrase = --,   % separator for value ranges, e.g. 1--5
+	range-units  = single
+}
+
+% ============================================================
+% COLOR PALETTE (template style)
+% ============================================================
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{1B3A6B}   % deep blue
+\definecolor{accent}{HTML}{2FA4A9}    % teal
+\definecolor{accent2}{HTML}{E8813A}   % warm orange
+\definecolor{lightgray}{HTML}{F4F5F7}
+\definecolor{darkgray}{HTML}{333333}
+
+% ============================================================
+% HYPERLINKS & PDF METADATA
+% ============================================================
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+	pdfauthor  = {\authorinfo},
+	pdftitle   = {\titleinfo},
+	colorlinks = true,
+	linkcolor  = primary,
+	urlcolor   = accent,
+	citecolor  = accent2
+}
+\author{\authorinfo}
+\title{\titleinfo}
+
+% ============================================================
+% HEADER & FOOTER (fancyhdr)
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}                              % clear all header/footer fields
+\renewcommand{\headrulewidth}{0.6pt}    % rule under the header
+\renewcommand{\footrulewidth}{0pt}      % no rule above the footer
+
+\fancyhead[C]{\small\color{darkgray}\nouppercase\leftmark}  % current section name
+
+\fancyfoot[C]{\small\thepage}
+\fancyfoot[L]{\footnotesize\color{darkgray}{\authorinfo}}
+\fancyfoot[R]{\footnotesize\color{darkgray}\subjectinfo}
+
+% ============================================================
+% PARAGRAPH STYLE
+% ============================================================
+% Disable paragraph indentation (international style, most
+% lecturers write this way too).
+\setlength{\parindent}{0pt}
+
+% ============================================================
+% CUSTOM MATH OPERATORS
+% ============================================================
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+%\DeclareMathOperator{\e}{e}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\PolyGrad}{PolyGrad}
+
+% Macro for the upright 'd' used in integrals/differential equations
+\newcommand*{\diff}{\mathop{}\!\mathrm{d}}
+
+% ============================================================
+% BOXED EQUATIONS
+% ============================================================
+\usepackage{empheq}
+\newcommand{\boxedeq}[1]{\begin{empheq}[box={\fboxsep=6pt\fbox}]{align*}#1\end{empheq}}
+
+% ============================================================
+% TABLE SETTINGS
+% ============================================================
+% Default row height/stretch factor for tables
+\newcommand{\arraystretchOriginal}{1}
+\renewcommand{\arraystretch}{\arraystretchOriginal}
+
+% Centered column type for tabularx (usage: Y instead of X)
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% ============================================================
+% SECTION TITLES (template style: colored titles + rule under \section)
+% ============================================================
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}  % number headings down to \paragraph
+\setcounter{tocdepth}{2}     % but only list sections/subsections (x.x) in the TOC
+
+\titleformat{\section}
+	{\normalfont\Large\bfseries\color{primary}}
+	{\thesection}{0.6em}{}[{\color{accent}\titlerule[1.2pt]}]
+\titleformat{\subsection}
+	{\normalfont\large\bfseries\color{accent}}
+	{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}
+	{\normalfont\bfseries\color{darkgray}}
+	{\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}
+	{\normalfont\normalsize\bfseries\color{accent2}}
+	{\theparagraph}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.4em}{0.8em}
+%\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% Reduce the vertical space LaTeX normally inserts before
+% subsections/subsubsections, for a more compact layout.
+%\let\OriginalSection=\section
+%\renewcommand{\section}[1]{\OriginalSection{#1}\vspace{-0.0em}}
+
+\let\OriginalSubSection=\subsection
+\renewcommand{\subsection}[1]{\OriginalSubSection{#1}\vspace*{-0.8em}}
+
+\let\OriginalSubSubSection=\subsubsection
+\renewcommand{\subsubsection}[1]{\OriginalSubSubSection{#1}\vspace*{-0.8em}}
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+% Redefine \tableofcontents to just dump the .toc file, without
+% printing an extra "Contents" heading or starting a new page
+% (useful when the TOC title/placement is handled manually
+% elsewhere in the document).
+\makeatletter
+\renewcommand\tableofcontents{%
+	\@starttoc{toc}%
+}
+\makeatother

@@ -1,0 +1,6 @@
+Fragen Slide
+- differenze fra M0 e M4
+- importanza standardisierung ARM-Cortex
+
+
+- bus systeme

@@ -22,17 +22,24 @@ Signale lassen sich vielfach klassieren, beispielsweise folgendermassen:
 
 
 \subsection{Energie- und Leistungssignale}{3}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{@{}c l c c l@{}} % Sostituito ctabular con tabular
+    \toprule
+    \textbf{Klasse} & \textbf{Typ} & $\boldsymbol{W_n}$ & $\boldsymbol{P_n}$ & \textbf{Beispiel} \\
+    \midrule
+    1  & Energiesignal & $0 < W_n < \infty$ & $0$ & Impuls, Rechteckpuls \\
+    2a & Leistungsig., periodisch  & $\infty$ & $0 < P_n < \infty$ & Sinus-, Dreiecksignal \\
+    2b & Leistungssig., aperiodisch & $\infty$ & $0 < P_n < \infty$ & Rauschen \\
+    \bottomrule
+\end{tabular} % Sostituito ctabular con tabular
+}
 
 \begin{center}
     \includegraphics[width=0.85\columnwidth]{images/klassierung_signale_2.jpg}
 \end{center}
 
-Signale der Klasse 2 sind näherungsweise zeitlich begrenzte Signale  $(W_n = \infty)$ 
-
-\vspace{0.2cm}
 Alle beschränkten Signale endlicher Dauer, die auf einem endlichen Zeitintervall von Null verschieden sind, 
 sind stets Energiesignale und gehören zur Klasse 1.
-
 
 \subsubsection{Normierte Signalenergie $\bm{W_n}$ / Normierte Signalleistung $\bm{P_n}$}
 

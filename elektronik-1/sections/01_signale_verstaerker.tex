@@ -19,8 +19,8 @@ Eingangssignale eines \textbf{linearen Netzwerks} dürfen separat betrachtet wer
 
 \textbf{ \textrightarrow\ Superpositionsprinzip funktioniert nicht in der Sättigung!}
 
-
 \section{Grundlagen}
+
 
 \subsection{Kleinsignal-Ersatzschaltung (!)}
 \label{kleinsignal-ersatzschlatung}
@@ -29,14 +29,21 @@ Eingangssignale eines \textbf{linearen Netzwerks} dürfen separat betrachtet wer
 Zweigen der Schaltung.
 
 \vspace{0.1cm}
+\begin{minipage}{0.75\columnwidth}
+    \begin{itemize}
+        \item DC-Spannungsquellen durch Kurzschlüsse ersetzen
+        \item DC-Stromquellen entfernen (Unterbrüche)
+        \item Nichtlineare Bauteile mit Kleinsignal-Ersatzschlatung ersetzen
+        \item Koppel- und Bypass-Kondensatoren kurzschliessen
+        \item Spulen entfernen
+    \end{itemize}
+\end{minipage}
+\begin{minipage}{0.2\columnwidth}
+    \[\boxed{r = \frac{\diff V}{\diff I} \approx \frac{\Delta V}{\Delta I}}\]
+    % \[\boxed{X_c = \dfrac{1}{2 \pi f C}}\]
 
-\begin{itemize}
-    \item DC-Spannungsquellen durch Kurzschlüsse ersetzen
-    \item DC-Stromquellen entfernen (Unterbrüche)
-    \item Nichtlineare Bauteile mit Kleinsignal-Ersatzschlatung ersetzen
-    \item Koppel- und Bypass-Kondensatoren kurzschliessen
-    \item Spulen entfernen
-\end{itemize}
+    % \[\boxed{X_l = 2 \pi f L}\]
+\end{minipage}
 
 
 \subsection{Schaltungsanalyse - Vorgehen (!)}
@@ -62,7 +69,7 @@ Zweigen der Schaltung.
     \begin{tabular}{c c c}
         \myul{\textbf{Dezibel}}                                                                                             &               & \myul{\textbf{Faktor}}                                \\
         $A_{\deci \bel}  = 20 \log \Biggl( \Bigl|\underbrace{\frac{V_{\rm out}}{V_{\rm in}}}_{\substack{A}} \Bigr| \Biggr)$ & \textlrarrow\ & $A  = 10^{\frac{A_{\deci \bel}}{20 \, \deci \bel}}$   \\
-        $A_{\rm total} = A_{\deci \bel 1} + A_{\deci \bel 2}$                                                               &               & $A_{\rm total} = A_1 \cdot A_2$                       
+        $A_{\rm total} = A_{\deci \bel 1} + A_{\deci \bel 2}$                                                               &               & $A_{\rm total} = A_1 \cdot A_2$  (Serie-Verstärkern)                     
     \end{tabular}
     \renewcommand{\arraystretch}{1}
 \end{center}

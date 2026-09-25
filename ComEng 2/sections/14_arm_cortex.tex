@@ -1,0 +1,51 @@
+\section{Arm Cortex-M4 \& Timer}
+
+\subsection{Watchdog Window-Watchdog-Timer (WWDT)}
+\begin{itemize}
+    \item Zur Überwachung der Code-Ausführung. Erzeugt im Fehlerfall einen Reset.
+    \item Dieser Timer muss jeweils vor Ablauf der Timeout-Zeit zurückgesetzt werden.
+    \item Ansonsten wird eine definierte Aktion ausgeführt (z.B. Reset).
+\end{itemize}
+
+\subsection{Spezialtimer STM32G4}
+\begin{itemize}
+    \item HRTIM (high resolution)
+    \item LPTIM (low power)
+    \item RTC
+    \item WWDG (eigenen Code überwachen)
+\end{itemize}
+
+\subsection{M4 vs M0}
+\begin{itemize}
+    \item \textbf{M4:} schnellere Taktung als M0
+    \item \textbf{M0:} Low Power / Low Cost (alte Technologie)
+    \item \textbf{M4:} High Performance / neuere Technologie
+\end{itemize}
+
+\subsubsection{Cortex-M4 Prozessor}
+\begin{itemize}
+    \item 3-stufige Pipeline für Thumb-2 Instruktionssatz
+    \item Erweiterte Busstruktur mit Harvard-Architektur (I-Code, D-Code, System-Bus \& PPB)
+    \item NVIC, SYSTICK \& leistungsfähige debug Units
+    \item Memory Protection Unit (MPU)
+    \item Floating Point Unit (FPU)
+\end{itemize}
+
+\subsubsection{Vorteile Cortex-M4 gegenüber Cortex-M0}
+\begin{itemize}
+    \item Floating Point Unit, erweiterte Debug-Unit
+    \item Harvard-Architektur
+    \item Bit-Banding, SIMD-Befehle, erweiterter Befehlssatz, DSP-Funktionen.
+    \item Schnellere Ausführung von Code, unterstützt Thumb-2.
+    \item ALU und Barrel Shifter und Multiply \& Accumulate Unit (MAC)
+\end{itemize}
+
+\subsection{Wichtigkeit Standardisierung von ARM-Cortex}
+\begin{itemize}
+    \item Verwendung des gleichen Cores durch verschiedene Chip-Hersteller.
+    \item Es gibt eine Abwärtskompatibilität innerhalb der Familien.
+\end{itemize}
+
+
+
+

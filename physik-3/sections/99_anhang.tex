@@ -36,6 +36,10 @@
 \end{tabularx}}
 \endgroup
 
+\[\sin(\alpha) = \frac{\rm C. Opposto}{\rm Ipotenusa} \qquad 
+\cos(\alpha) = \frac{\rm C. Adiacente}{\rm Ipotenusa} \qquad 
+\tan(\alpha) = \frac{\rm C. Opposto}{\rm C. adiacente}\]
+
 
 \subsubsection{Beziehungen zwischen $\bm{\sin(x)}$ und $\bm{\cos(x)$}}
 
@@ -97,3 +101,23 @@ $\sin(a) \cdot \cos(b) = \frac{1}{2} \big( \sin(a-b) + \sin(a+b) \big) $
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
+\subsection{Fehlerfortpflanzung}
+
+Data una grandezza calcolata da più variabili misurate, es.\ $f = f(c,\lambda) = \dfrac{c}{\lambda}$, sia $c$ che $\lambda$ portano un errore ($\Delta c$, $\Delta\lambda$) che si propaga sul risultato $\Delta f$.
+
+\textbf{Contributi singoli:}
+\[
+\frac{\partial f}{\partial \lambda} = -\frac{c}{\lambda^2}
+\quad\Rightarrow\quad
+\Delta f_\lambda = \frac{\partial f}{\partial \lambda}\,\Delta\lambda = -\frac{c}{\lambda^2}\,\Delta\lambda
+\]
+\[
+\frac{\partial f}{\partial c} = \frac{1}{\lambda}
+\quad\Rightarrow\quad
+\Delta f_c = \frac{\partial f}{\partial c}\,\Delta c = \frac{1}{\lambda}\,\Delta c
+\]
+
+In generale, per $f = f(x_1, x_2, \dots, x_n)$:
+\[
+\Delta f = \sqrt{\sum_{i=1}^n \left(\frac{\partial f}{\partial x_i}\right)^2 \Delta x_i^2}
+\]

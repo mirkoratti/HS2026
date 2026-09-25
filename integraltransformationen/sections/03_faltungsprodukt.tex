@@ -26,10 +26,11 @@ $x = x(t)$ das Ausgangssignal $y = y(t)$ zu berechnen.
 \subsection{Bestimmung des Faltungsprodukts}
 
 \example{Grafische Bestimmung des Faltungsprodukts}
-
-Die Funktion $g(t - \tau)$ (entspricht der an der $y$-Achse gespiegelten Funktion $g(t)$) wird über die Funktion $f(t)$ geschoben. 
-Das \textbf{Produkt} der Funktionswerte \textbf{zu jedem Zeitpunkt} $t$ ergibt das Faltungsprodukt.
-
+\begin{enumerate}
+    \item \textbf{Specchia:} Ribalta la funzione mobile ($g$) sull'asse verticale.
+    \item \textbf{Fai scorrere:} Muovila da sinistra verso destra di un tempo $t$.
+    \item \textbf{Calcola l'area:} Moltiplica le altezze delle due figure dove si sovrappongono e calcolane l'area. Il valore di quest'area è il risultato della convoluzione in quel preciso istante $t$.
+\end{enumerate}
 
 \begin{minipage}{0.45\columnwidth}
     \input{tikz/faltungsprodukt_berechnung_1.tex}
@@ -42,10 +43,7 @@ Das \textbf{Produkt} der Funktionswerte \textbf{zu jedem Zeitpunkt} $t$ ergibt d
 
 \example{Rechnerische bestimmung des Faltungsprodukts}
 
-\textbf{WICHTIG: Immer die einfacher definierte Funktion als $\bm{g(t - \tau)}$ wählen!} \\
-(\textrightarrow\ kommutativ)
-
-\vspace{0.2cm}
+\textbf{WICHTIG: Immer die einfacher definierte Funktion als $\bm{g(t - \tau)}$ wählen!}
 
 \begin{minipage}[t]{0.45\columnwidth}
     $f(t) = \begin{cases}
@@ -96,12 +94,12 @@ Das \textbf{Produkt} der Funktionswerte \textbf{zu jedem Zeitpunkt} $t$ ergibt d
 
     \item \textbf{Faltungsprodukt abschnittweise berechnen}
 
-    \renewcommand{\arraystretch}{2.5}
-        \begin{tabular}{ll}
-            $0 \leq t < 1$  & $(f * g)(t) = \int\limits_0^t 2 \cdot 3 \, \diff \tau$         \\
-            $1 \leq t < 4$  & $(f * g)(t) = \int\limits_{t-1}^t 2 \cdot 3 \, \diff \tau$     \\
-            $4 \leq t < 5$  & $(f * g)(t) = \int\limits_{t-1}^4 2 \cdot 3 \, \diff \tau$     \\
-            sonst           & $(f * g)(t) = 0$
+    \renewcommand{\arraystretch}{2.3}
+        \begin{tabular}{lll}
+            \fullcircle{D9F3FD}{1} & $0 \leq t < 1$  & $(f * g)(t) = \int\limits_0^t 2 \cdot 3 \, \diff \tau$         \\
+            \fullcircle{E2D6EC}{2}& $1 \leq t < 4$  & $(f * g)(t) = \int\limits_{t-1}^t 2 \cdot 3 \, \diff \tau$     \\
+            \fullcircle{FDE7D5}{3}& $4 \leq t < 5$  & $(f * g)(t) = \int\limits_{t-1}^4 2 \cdot 3 \, \diff \tau$     \\
+            & sonst & $(f * g)(t) = 0$
         \end{tabular}
     \renewcommand{\arraystretch}{1}
 \end{enumerate}

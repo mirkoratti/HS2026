@@ -1,0 +1,46 @@
+\section{Floating Point Unit (FPU)}
+\begin{itemize}
+    \item Program Control \& Status Register (FPCSR)
+    \item Grundoperationen: Mathematische Befehle, Datentransferbefehle, Konvertierungsbefehle, Compare-Befehl
+\end{itemize}
+
+\smallbreak
+\textbf{Register FPU}
+
+\begin{itemize}
+    \item 32 Single Precision Register (S0-S31)
+    \item 16 Double Precision Shadow Register (D0-D15)
+\end{itemize}
+
+\subsection{IEEE 754: Addition / Subtraktion}
+Nötige Schritte:
+\begin{enumerate}
+    \item Beide Werte müssen normalisiert sein.
+    \item Exponenten auf grösseren Wert anpassen.
+    \item Mantissen addieren bzw. subtrahieren.
+    \item Resultat wenn nötig normalisieren.
+    \item Umwandlung in IEEE 754 Format.
+\end{enumerate}
+Beispiel: $0.74 + 0.09 = 0.83$ \\
+\textit{Runden:} Ergebnis auf nächstliegende Zahl runden (round to nearest). \\
+\textit{Problematik:} Bei extremer Anpassung der Exponenten wird der Rundungsfehler immer massiver.
+
+\vspace{0.5em}
+\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Ausführliche Binär-Berechnung (Addition $0.74+0.09$)]}\vspace{10pt}}}
+\vspace{0.5em}
+
+\subsection{IEEE 754: Multiplikation / Division}
+Nötige Schritte:
+\begin{enumerate}
+    \item Überprüfung auf Werte mit 0.0f
+    \item Exponenten addieren bzw. subtrahieren
+    \item Mantissen multiplizieren bzw. dividieren und Vorzeichen anpassen
+    \item Resultat wenn nötig normalisieren
+    \item Umwandlung in IEEE 754 Format
+\end{enumerate}
+Beispiel: $6.625 \cdot (-0.5) = -3.3125$ \\
+\textit{Runden:} Ebenfalls "round to nearest".
+
+\vspace{0.5em}
+\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Ausführliche Binär-Berechnung (Multiplikation $6.625 \cdot -0.5$)]}\vspace{10pt}}}
+\vspace{0.5em}

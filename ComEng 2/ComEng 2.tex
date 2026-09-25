@@ -1,0 +1,45 @@
+% ========================================= TEMPLATE INFO ========================================
+%
+% Author:       P4ntomime
+% Version:      1.0.1
+% Last updated: 2026-01-24
+% Brief:        A LaTeX template for summaries. See README.md for more information.
+% 
+% ================================================================================================
+\documentclass[8pt, a4paper, twoside]{extarticle}
+% Font size:    8pt
+% Paper size:   A4
+% style:        twoside (needed, so odd and even pages have different margins)
+% orientation:  portrait. (use 'landscape' for landscape orientation)
+
+
+% ========================================= DOCUMENT INFO =========================================
+\def\title{ComEng 2 - Ergänzung}      % title
+\def\shorttitle{ComEng 2}             % short title (displayed as PDF title)
+\def\dozent{Prof. Lars Kamm}        % lecturer
+\def\semester{HS 2026}              % semester
+\def\author{Mirko Ratti}            % author(s)
+% \def\contributors{Contributors}   % contributor(s) (optional -> comment out if none)
+\def\repo{https://github.com/mirkoratti/HS2026} % repository link
+\def\version{1.0.\today}            % version
+\def\pagelimit{3}                   % page limit -> causes pages after limit to be red
+\def\titleoption{normal}            % options: ultra compact, compact, normal
+\def\enableToC{true}                % enable/disable table of contents
+
+% ================================= PACKAGES, SETUP AND COMMANDS ==================================
+\input{preamble.tex}
+
+
+% =========================================== DOCUMENT ============================================
+\begin{document}
+    \setcounter{page}{20}
+    \setcounter{section}{13}
+    \begin{layout}
+        \input{sections/14_arm_cortex.tex}
+        \input{sections/15_system_speichern.tex}
+        \input{sections/16_architektur_befehle.tex}
+        \input{sections/17_fpu.tex}
+        \input{sections/18_schnittstellen_pheripherie.tex}
+        \input{sections/99_anhang.tex}
+    \end{layout}
+\end{document}
