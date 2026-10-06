@@ -3,15 +3,18 @@
 \subsection{Vorgehen Modellierung von Regelstrecken}
 
 \begin{enumerate}
-    \item Einzelne Komponenten des Systems identifizieren
-    \item Jede Systemkomponente als Grundglied modellieren
-    \item DGL für System aufstellen (\textbf{Kräftegleichgewicht!}) \\
-        \textrightarrow\ Schritt für Schritt Komponenten ineinander einsetzen \\
-        \textrightarrow\ \cbl{Die interessante Grösse $y(t)$ muss ohne Vorfaktor sein!} 
-    \item Aus DGL Schaltung aus Grundgliedern zeichnen \\
-        \textrightarrow\ \textbf{Umformen nach höchster Ableitung}
-        \textrightarrow\ Auf Output-Seite beginnen \\
-        \textrightarrow\ Es braucht so viele I-Glieder wie Ordnung der DGL
+  \item Identificare i singoli componenti del sistema
+  \item Modellare ogni componente come elemento base (\textit{Grundglied})
+  \item Scrivere la DGL del sistema tramite un bilancio (forze, portata, energia/calore, \dots)
+  \begin{itemize}
+    \item Sostituire passo per passo i componenti uno nell'altro
+    \item In forma normale PT1/PT2 \cbl{la grandezza di interesse $y(t)$ deve comparire senza coefficiente}
+  \end{itemize}
+  \item Dalla DGL disegnare lo schema a blocchi con gli elementi base
+  \begin{itemize}
+    \item Isolare derivata più alta, disegnare integratori, disegnare P-Glied e connettere ($+ / -$)
+    \item Servono tanti integratori (\textit{I-Glieder}) quanto è l'ordine della DGL
+  \end{itemize}
 \end{enumerate}
 
 
@@ -95,8 +98,8 @@ DGL in $\text{PT}_1 \text{-Form}$:  & $T \cdot \Delta \dot{y}(t) + \cor{\Delta y
 \subsection{Vorgehen Blockdiagramm zu DGL}
 
 \begin{itemize}
-   \item  Anzahl Integratoren entspricht Ordnung der DGL
-   \item \cbl{\textbf{Bilanz vor erstem Integrator ziehen!}}
-   \item DGL umformen gemäss $\text{PT}_1$- bzw. $\text{PT}_2$-Glied
+  \item Il numero di integratori corrisponde all'ordine della DGL
+  \item Partire dal nodo sommatore prima del primo integratore ($\ddot{y} = \dots$)
+  \item Etichettare le uscite degli integratori con $y, \dot{y}, \ddot{y}, \dots$ partendo dal lato dell'uscita
+  \item Se la struttura lo permette, riscrivere la DGL nella forma dell'elemento PT1 o PT2 ($y$ senza vorfaktor)
 \end{itemize}
-

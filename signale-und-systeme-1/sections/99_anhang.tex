@@ -1,7 +1,10 @@
 \section{Anhang}
 
 
-\subsection{Substitution bei Integralen}
+% ==================================== 1. MATHEMATISCHE GRUNDLAGEN ====================================
+\subsection{Integration}
+
+\subsubsection{Substitution}
 % Von Zusammenfassung Analysis 2a
 
 \begin{tabular}{ll}
@@ -14,21 +17,42 @@ $\int \limits_{\crd{0}}^{\crd{\pi}} a \, \sqrt{a} \cdot \cos(a) \frac{\diff a}{2
     = \frac{1}{2} \int \limits_{\crd{0}}^{\crd{\pi}} a \cdot \cos(a) \, \diff a = \ldots $
 
 
+
 \subsubsection{Partielle Integration (Produktregel)}
 \vspace{-1em}
 
 \[\int_{a}^{b} f'\cdot g \, \diff x = \left[ f\cdot g \right]_{a}^{b} - \int_{a}^{b} f\cdot g' \, \diff x
-\quad \text{oder} \quad
+\qquad
 \int_{a}^{b} f\cdot g' \, \diff x = \left[ f\cdot g \right]_{a}^{b} - \int_{a}^{b} f' \cdot g \, \diff x
 \]
 
 Partielle Integration darf mehrfach angewendet werden. \\
 \textbf{PI sollte wenn möglich vermieden werden! Produkte in Summen umschreiben!}\vspace{1em}
 
-\textbf{LIATE} - Priorität für $g$ - funzione da derivare (non $\dots'$ nella forma base):
+\textbf{LIATE} -- Priorität für $g$ (die Funktion, die abgeleitet wird; \textbf{nicht} $f'$):
+\textbf{L}ogarithmus $>$ \textbf{I}nverse Trigonometrische $>$ \textbf{A}lgebraische (Polynome) $>$ \textbf{T}rigonometrische $>$ \textbf{E}xponentialfunktion
 
 
-\subsection{Wichtige Integrale}
+\subsubsection{Ableitungen und Stammfunktionen}
+
+{\renewcommand{\arraystretch}{2}
+\begin{ctabular}{| c | c | c | c |}
+    \hline
+    $\bm{f'(t)}$                                                & $\bm{f(t)}$                           & $\bm{F(t) = \int f \,\diff t}$ &               \\
+    \hline
+    $n \cdot \cos(n t)$                                      & $\sin(n t)$                        & $- \frac{\cos(n t)}{n}$    & $(n \neq 0)$  \\
+    \hline     
+    $- n \cdot \sin(n t)$                                    & $\cos(n t)$                        & $ \frac{\sin(n t)}{n}$     & $(n \neq 0)$  \\
+    \hline
+    \cbl{$ - \jimg \omega \e^{- \jimg \omega t}$}   & \cbl{$\e^{- \jimg \, \omega \, t}$}   & \cbl{$\frac{\e^{- \jimg \, \omega \, t}}{- \jimg \, \omega} = \frac{\jimg}{\omega} \e^{-\jimg \, \omega \, t}$} & \cbl{ $(n \neq 0)$ } \\
+    \hline
+\end{ctabular}
+}
+
+
+\subsubsection{Orthogonalität und Mittelwerte}
+
+\textbf{Mittelwerte über eine Periode}
 
 \begin{minipage}{0.48\columnwidth}
     $$ \frac{1}{T} \int\limits_{-T/2}^{T/2} \sin^2(\omega \, t) \,\diff t = \frac{1}{2} $$
@@ -38,12 +62,32 @@ Partielle Integration darf mehrfach angewendet werden. \\
     $$ \frac{1}{T} \int\limits_{-T/2}^{T/2} \cos^2(\omega \, t) \, \diff t = \frac{1}{2} $$
 \end{minipage}
 
+\textbf{Orthogonalität} \quad (Periode $T = 2\pi$, $\omega_0 = 1$)
 
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}l c c@{}}
+\toprule
+$\displaystyle\int_{T}\dots\,\diff t$ \quad ($n,m\in\mathbb{N}^+$) & $n\neq m$ & $n=m$ \\
+\midrule
+$\sin(nt+\varphi)$,\; $\cos(nt+\varphi)$ & \multicolumn{2}{c}{$0$} \\
+$\sin(nt)\cos(mt)$ & $0$ & $0$ \\
+$\sin(nt)\sin(mt)$ & $0$ & $\pi$ \\
+$\cos(nt)\cos(mt)$ & $0$ & $\pi$ \\
+\midrule
+$\sin(nt+\varphi)\cos(mt+\psi)$ & $0$ & $\pi\sin(\varphi-\psi)$ \\
+$\sin(nt+\varphi)\sin(mt+\psi)$ & $0$ & $\pi\cos(\varphi-\psi)$ \\
+$\cos(nt+\varphi)\cos(mt+\psi)$ & $0$ & $\pi\cos(\varphi-\psi)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+% ========================================== 2. TRIGONOMETRIE ==========================================
 \subsection{Trigonometrie}
+% von Integraltransformationen Zusammenfassung
 
-
-% von Integraltransformationen Zusammenfassung	 
-% \includegraphics[width=\columnwidth]{images/trigo.png} 
+\subsubsection{Wertetabelle}
 
 \begingroup
 \renewcommand{\arraystretch}{2}
@@ -69,20 +113,25 @@ Partielle Integration darf mehrfach angewendet werden. \\
 \hfill
 \begin{minipage}{0.48\columnwidth}
     $$ \cos(x) = \frac{e^{\jimg x} + e^{- \jimg x}}{2} $$ 
-\end{minipage}		
+\end{minipage}
+
+\vspace{0.5em}
+Euler: $e^{\jimg x} = \cos(x) + \jimg \sin(x)$ \hfill
+$a \cos(\omega t) + b \sin(\omega t) = A \cos(\omega t - \varphi)$ mit $A = \sqrt{a^2 + b^2}$, $\varphi = \operatorname{atan2}(b, a)$
 
 
 \subsubsection{Beziehungen zwischen $\bm{\sin(x)}$ und $\bm{\cos(x)}$}\label{chap:trigo-beziehungen}
 
-\renewcommand{\arraystretch}{1.2}
+{\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{ll}
     $\sin(-a) = -\sin(a)$                                                               & $\cos(-a) = \cos(a)$          \\
     $\sin(\pi - a) = \sin(a)$                                                           & $\cos(\pi -a) = - \cos(a)$    \\		
     $\sin(\pi + a) = -\sin(a)$                                                          & $\cos(\pi + a) = - \cos(a)$   \\	
     $\sin \Big( \frac{\pi}{2} - a \Big) = \sin \Big( \frac{\pi}{2} + a \Big) = \cos(a)$ & $\cos \Big( \frac{\pi}{2} - a \Big) = - \cos \Big( \frac{\pi}{2} + a \Big) = \sin(a)$\\
     $\sin \Big( a - \frac{\pi}{2} \Big) = -\cos(a)$                                     & $\cos \Big( a - \frac{\pi}{2} \Big) = \sin(a)$ \\
-    $\tan(-\alpha) = -\tan(\alpha)$ & \cor{$\arctan$ restituisce solo angoli $\in [-\pi, \pi]$!}
+    $\tan(-\alpha) = -\tan(\alpha)$ & \cor{$\arctan$ liefert nur Winkel $\in (-\tfrac{\pi}{2}, \tfrac{\pi}{2})$!}
 \end{tabular}
+}
 
 
 \subsubsection{Additionstheoreme}
@@ -133,7 +182,53 @@ Partielle Integration darf mehrfach angewendet werden. \\
 \end{tabular}
 
 
-\subsection{Zusammenhang Harmonische -- Oberwellen}
+% ================================= 3. TRANSFORMATIONEN (KORRESPONDENZEN) =================================
+\subsection{Korrespondenzpaare}
+
+\subsubsection{Fourier-Transformation}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabular}{l c l}
+        \toprule
+        \textbf{Zeitbereich}                                  &            & \textbf{Frequenzbereich}                                                                  \\
+        \midrule
+        $\delta(t)$                                           & $\laplace$ & $1$                                                                                       \\
+        Rechteck ($1$ für $|t| \le a$, sonst $0$)             & $\laplace$ & $2a \cdot \mathrm{sinc}(a\,\omega)$                                                       \\
+        Dirac-Kamm $\sum_{n \in \mathbb{Z}} \delta(t - nT)$   & $\laplace$ & $\frac{2\pi}{T} \sum_{k \in \mathbb{Z}} \delta\!\left(\omega - k\,\frac{2\pi}{T}\right)$ \\
+        \addlinespace
+        $\cos(\omega_0\, t)$                                  & $\laplace$ & $\pi\bigl(\delta(\omega + \omega_0) + \delta(\omega - \omega_0)\bigr)$                    \\
+        $\sin(\omega_0\, t)$                                  & $\laplace$ & $\jimg\pi\bigl(\delta(\omega + \omega_0) - \delta(\omega - \omega_0)\bigr)$               \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\subsubsection{Laplace-Transformation}
+% Gemäss Modul Integraltransformationen
+\vspace{-0.2cm}
+$$ u(t) = \text{Einheitssprung} $$
+
+\begin{center}
+    \begin{tabular}{l c l}
+        \toprule
+        \textbf{Zeitbereich}            &               & \textbf{Frequenzbereich}          \\
+        \midrule
+        $u(t)$                          & $\laplace$    & $ \frac{1}{s}$                    \\
+        \midrule        
+        $u(t) \cdot t^n $               & $\laplace$    & $\frac{n!}{s^{n+1}}$              \\
+        \midrule
+        $u(t) \cdot e^{a \,t} $         & $\laplace$    & $\frac{1}{s-a}$                   \\
+        \midrule
+        $u(t) \cdot \cos(\omega \, t) $ & $\laplace$    & $\frac{s}{s^2 + \omega^2}$        \\
+        \midrule
+        $u(t) \cdot \sin(\omega \, t )$ & $\laplace$    & $\frac{\omega}{s^2 + \omega^2}$   \\
+        \midrule
+        $\delta(t)$                     & $\laplace$    & $1$                            \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+
+\subsection{Begriffe: Harmonische und Oberwellen}
 
 \begin{center}
     \begin{tabular}{lll}
@@ -154,54 +249,7 @@ Partielle Integration darf mehrfach angewendet werden. \\
 \end{center}
 
 
-\subsection{Fourier-Transformation: Wichtige Korrespondenzpaare}
-
-\begin{center}
-    \begin{tabular}{l c l}
-        \toprule
-        \textbf{Zeitbereich}    &               & \textbf{Frequenzbereich}                                                  \\
-        \midrule
-        Rechteck                & $\laplace$    & $\mathrm{sinc}(a \, \omega)$ \textrightarrow\ Support von $-a \ldots a$   \\
-        \midrule
-        Dirac-Rechen            & $\laplace$    & Dirac-Rechen mit grösserem Abstand                                        \\
-        \midrule
-        $\delta(t)$             & $\laplace$    & $1$                                                                       \\
-        \midrule
-        $\cos(\omega_0 \, t)$   & $\laplace$    & $\pi(\delta( \omega + \omega_0) + \delta ( \omega - \omega_0))$           \\
-        \midrule
-        $ \sin(\omega_0 \, t)$  & $\laplace$    & $\jimg \pi(\delta( \omega + \omega_0) - \delta ( \omega - \omega_0))$     \\
-        \bottomrule
-    \end{tabular}
-\end{center}
-
-
-\subsection{Laplace-Transformation: Wichtige Korrespondenzpaare}
-
-% Gemäss Modul Integraltransformationen
-\vspace{-0.2cm}
-$$ u(t) = \text{Einheitssprung} $$
-
-\begin{center}
-    \begin{tabular}{l c l}
-        \toprule
-        \textbf{Zeitbereich}            &               & \textbf{Frequenzbereich}          \\
-        \midrule
-        $u(t)$                          & $\laplace$    & $ \frac{1}{s}$                    \\
-        \midrule        
-        $u(t) \cdot t^n $               & $\laplace$    & $\frac{n!}{s^{n+1}}$              \\
-        \midrule
-        $u(t) \cdot e^{a \,t} $         & $\laplace$    & $\frac{1}{s-a}$                   \\
-        \midrule
-        $u(t) \cdot \cos(\omega \, t) $ & $\laplace$    & $\frac{s}{s^2 + \omega^2}$        \\
-        \midrule
-        $u(t) \cdot \sin(\omega \, t )$ & $\laplace$    & $\frac{\omega}{s^2 + \omega^2}$   \\
-        \midrule
-        $\delta(t)$                     & $\laplace$    & $1(s)$                            \\
-        \bottomrule
-    \end{tabular}
-\end{center}
-
-
+% ============================ 4. SIGNALE, SPEKTREN UND DICHTEFUNKTIONEN ============================
 \subsection{Zusammenstellung einiger Dichtefunktionen}
 \label{Zusammenstellung einiger Dichtefunktionen}
 
@@ -209,6 +257,7 @@ $$ u(t) = \text{Einheitssprung} $$
 
 
 \subsection{Zusammenstellung einiger Signale und ihrer Funktionen}
+\label{Zusammenstellung Signale}
 
 \resizebox{\columnwidth}{!}{
 \begin{tabular}{|l||c|c|c|}
@@ -289,7 +338,8 @@ $$ u(t) = \text{Einheitssprung} $$
         -- & 
         $\displaystyle f(t) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} F(j\omega)e^{j\omega t}d\omega$ \\
         \hline
-    \end{tabular}}
+\end{tabular}}
+
 
 \subsection{Beispiele -- Amplitudendichten}
 \label{Beispiele - Amplitudendichte}
@@ -306,6 +356,7 @@ $$ u(t) = \text{Einheitssprung} $$
 
 
 \subsubsection{Dreieck}
+\label{Dreieck}
 
 \begin{minipage}[c]{0.48\columnwidth}
     \includegraphics[width=\columnwidth]{images/PDF/dreiecksignal.pdf} 
@@ -326,4 +377,3 @@ $$ u(t) = \text{Einheitssprung} $$
 \begin{minipage}[c]{0.48\columnwidth}
     \includegraphics[width=\columnwidth]{images/PDF/rechtecksignal_amplitudendichte.pdf} 
 \end{minipage}
-

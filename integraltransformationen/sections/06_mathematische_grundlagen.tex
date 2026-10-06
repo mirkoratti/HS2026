@@ -98,23 +98,23 @@ $$\crd{\e^z} = \e^{z_1 + jz_2} = \e^{z_1} \cdot \e^{j z_2} = \e^{z_1} \cdot \cjs
 Die koplexwertige Exponentialfunktion ist $2 \pi \jimg$-periodisch auf der $y$-Achse) 
     
 
+\subsubsection{Partielle Integration (Produktregel)}
+\vspace{-1em}
 
-\subsection{Partielle Integration}
+\[\int_{a}^{b} f'\cdot g \, \diff x = \left[ f\cdot g \right]_{a}^{b} - \int_{a}^{b} f\cdot g' \, \diff x
+\qquad
+\int_{a}^{b} f\cdot g' \, \diff x = \left[ f\cdot g \right]_{a}^{b} - \int_{a}^{b} f' \cdot g \, \diff x
+\]
 
-\vspace{-0.2cm}
-\begin{minipage}[c]{0.48\columnwidth}
-    $$ \int f' \cdot g \diff x = f \cdot g - \int f \cdot g' \diff x $$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    $$ \int f \cdot g' \diff x  = f \cdot g - \int f' \cdot g \diff x $$
-\end{minipage}
+Partielle Integration darf mehrfach angewendet werden. \\
+\textbf{PI sollte wenn möglich vermieden werden! Produkte in Summen umschreiben!}\vspace{1em}
 
+\textbf{LIATE} - Priorität für $g$ - funzione da derivare (non $\dots'$ nella forma base):
 
 \subsection{Wichtige Ableitungen / Integrale}
 
 \renewcommand{\arraystretch}{2}
-\begin{tabular}{| c | c | c | c |}
+\begin{ctabular}{| c | c | c | c |}
     \hline
     $\bm{f'(t)}$                                                & $\bm{f(t)}$                           & $\bm{F(t)}$                   &               \\
     \hline
@@ -124,7 +124,7 @@ Die koplexwertige Exponentialfunktion ist $2 \pi \jimg$-periodisch auf der $y$-A
     \hline
     \cbl{$ - \jimg \omega \e^{- \jimg \omega t}$}   & \cbl{$\e^{- \jimg \, \omega \, t}$}   & \cbl{$\frac{\e^{- \jimg \, \omega \, t}}{- \jimg \, \omega} = \frac{\jimg}{\omega} \e^{-\jimg \, \omega \, t}$} & \cbl{ $(n \neq 0)$ } \\
     \hline
-\end{tabular}
+\end{ctabular}
 \renewcommand{\arraystretch}{1}
 
 
@@ -191,3 +191,20 @@ Liefert Summe aus ganzrationaler Funktion und echt gebrochener Funktion.
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
+\subsection[Frequenzgang H(w) aus DGL bestimmen]{Frequenzgang $H(\omega)$ aus DGL bestimmen}
+Ansatz: $x(t)=\mathrm{e}^{\mathrm{j}\omega t}$, \; $y(t)=H(\omega)\,\mathrm{e}^{\mathrm{j}\omega t}$
+in die DGL einsetzen. Ogni derivata dà un fattore $\mathrm{j}\omega$:
+\[
+y^{(k)}(t) = (\mathrm{j}\omega)^k\, H(\omega)\,\mathrm{e}^{\mathrm{j}\omega t}
+\]
+$\mathrm{e}^{\mathrm{j}\omega t}$ si semplifica (può essere diviso pk $\neq 0$) \quad $\Rightarrow$ \quad risolvere per $H(\omega)$.
+
+\smallbreak
+
+\textbf{Beispiel:} \; $\ddot y + \dot y + y = x$
+\[
+\big((\mathrm{j}\omega)^2 + \mathrm{j}\omega + 1\big)\,H(\omega) = 1
+\;\;\Rightarrow\;\;
+H(\omega) = \frac{1}{1-\omega^2+\mathrm{j}\omega}
+\]
+\textbf{Hinweis:} equivale a $H(\omega)=G(s)\big|_{s=\mathrm{j}\omega}$ (vedi 5.6).

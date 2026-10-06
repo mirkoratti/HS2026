@@ -1,7 +1,36 @@
 \subsection{Fourierreihe S.20}
+
 Fourierreihe funktioniert nur mit \textbf{periodischen} Signalen.
+
 \begin{table}[H]
-	\includegraphics{content/04_fourier/fourierreihe.pdf}
+	\setcellgapes{6pt}
+	\begin{tabularx}{\textwidth}{|Y|Y|Y|}
+		\hline
+		\gape{\textbf{Trigonometrische Form}} &
+		\gape{\textbf{Harmonische Form}} &
+		\gape{\textbf{Komplexe Form}} \\
+		\hline
+		\gape{$\displaystyle x(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}a_{n}\cos(n\omega_{0}t)+b_{n}\sin(n\omega_{0}t)$} &
+		\gape{$\displaystyle x(t)=c_{0}+\sum_{n=1}^{\infty}c_{n}\cos(n\omega_{0}t-\varphi_{n})$} &
+		\gape{$\displaystyle x(t)=\sum_{n=-\infty}^{\infty}c_{n}e^{jn\omega_{0}t}$} \\
+		\hline
+		\gape{$\displaystyle \omega_{0}=\frac{2\pi}{T}$} &
+		\gape{$\displaystyle \omega_{0}=\frac{2\pi}{T}$} &
+		\gape{$\displaystyle \omega_{0}=\frac{2\pi}{T}$} \\
+		\hline
+		\gape{$\displaystyle a_{0}=\frac{2}{T}\cdot\int_{0}^{T}x(t)\diff t$} &
+		\gape{$\displaystyle c_{0}=\frac{a_{0}}{2}$} &
+		\gape{$\displaystyle c_{n}=\frac{1}{T}\cdot\int_{0}^{T}x(t)\cdot e^{-jn\omega_{0}t}\diff t$} \\
+		\hline
+		\gape{$\displaystyle a_{n}=\frac{2}{T}\cdot\int_{0}^{T}x(t)\cdot\cos(n\omega_{0}t)\diff t$} &
+		\gape{$\displaystyle c_{n}=\sqrt{a_{n}^{2}+b_{n}^{2}}$} &
+		\gape{$\displaystyle c_{n}=\frac{a_{n}-jb_{n}}{2}$} \\
+		\hline
+		\gape{$\displaystyle b_{n}=\frac{2}{T}\cdot\int_{0}^{T}x(t)\cdot\sin(n\omega_{0}t)\diff t$} &
+		\gape{$\displaystyle \varphi_{n}=\arctan\left(\frac{b_{n}}{a_{n}}\right)$} &
+		\gape{$\displaystyle c_{-n}=\frac{a_{n}+jb_{n}}{2}$} \\
+		\hline
+	\end{tabularx}
 \end{table}
 Im Skript werden die Fourierkoeffizienten mit $a_n = u_n$ und $b_n = v_n$ bezeichnet! Grund dafür ist die überaus Spannende (und von anderer Literatur abweichende) Bezeichnung des komplexen Koeffizienten (Im Skript: $c_n = a + jb$) Der Zusammenhang in \textbf{Formel 3.12} im Skript S. 22 ist unbedingt zu beachten!
 
@@ -28,6 +57,17 @@ $a_0$, $c_0$, $A_0$ sind \textit{Konstanten}, $\omega_1$ ist die
 	$a_n = 0 \wedge b_n < 0:$ &	$\varphi_n = \frac{\pi}{2}$\\
 	$a_n = 0 \wedge b_n = 0:$ &	$\varphi_n = \text{nicht definiert}$
 \end{tabular}
+
+\subsubsection{Zweiseitiges Amplituden-/Phasendiagramm}
+Zwei Diagramme für Betrag $|c_k|$ und Winkel $\arg(c_k)$ in jedem Punkt $k\omega_0$, $k\in\mathbb{Z}$.
+as einseitige Amplitudendiagramm ($A_n$, nur $n\geq 0$) wird auf beide Seiten aufgeteilt!
+
+$$\arg(c_k) = \operatorname{sgn}(k)\cdot\varphi_{|k|}$$
+
+\begin{minipage}[t]{0.49\linewidth}
+\centering
+	\input{content/04_Fourier/_amplituden_diagramm.tex}
+\end{minipage}
 
 \subsection{Symmetrie}
 Siehe auch Skript Seite 22\\

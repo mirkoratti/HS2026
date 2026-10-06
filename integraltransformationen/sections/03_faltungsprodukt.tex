@@ -62,7 +62,7 @@ $x = x(t)$ das Ausgangssignal $y = y(t)$ zu berechnen.
 \vspace{0.2cm}
 
 \begin{enumerate}
-    \setlength{\itemsep}{5pt} % adjust space between items
+    \setlength{\itemsep}{4pt} % adjust space between items
 
     \item \textbf{Variablentransformation}
     
@@ -95,12 +95,16 @@ $x = x(t)$ das Ausgangssignal $y = y(t)$ zu berechnen.
     \item \textbf{Faltungsprodukt abschnittweise berechnen}
 
     \renewcommand{\arraystretch}{2.3}
+    \begin{minipage}[b]{0.7\columnwidth}
         \begin{tabular}{lll}
             \fullcircle{D9F3FD}{1} & $0 \leq t < 1$  & $(f * g)(t) = \int\limits_0^t 2 \cdot 3 \, \diff \tau$         \\
             \fullcircle{E2D6EC}{2}& $1 \leq t < 4$  & $(f * g)(t) = \int\limits_{t-1}^t 2 \cdot 3 \, \diff \tau$     \\
             \fullcircle{FDE7D5}{3}& $4 \leq t < 5$  & $(f * g)(t) = \int\limits_{t-1}^4 2 \cdot 3 \, \diff \tau$     \\
-            & sonst & $(f * g)(t) = 0$
         \end{tabular}
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.25\columnwidth}
+        sonst  $(f * g)(t) = 0$
+    \end{minipage}
     \renewcommand{\arraystretch}{1}
 \end{enumerate}
 

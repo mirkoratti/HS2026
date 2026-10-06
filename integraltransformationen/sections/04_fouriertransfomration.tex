@@ -1,7 +1,7 @@
 \section{Fouriertransformation}
 
 Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbereich über. Die Rücktransfomration 
-(inverse Fouriertransformation) macht dies wieder rückgängig.
+(inverse Fouriertransformation) macht dies wieder rückgängig.\vspace{-1em}
 
 \begin{center}
     \includegraphics[width=0.7\columnwidth]{images/zeitbereich_frequenzbereich.png}
@@ -10,24 +10,24 @@ Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbe
 \vspace{-0.2cm}
 
 
-\subsection{Komplexe trigonometrische Funktionen} 
-
-\begin{ctabular}{lll}
-    $\sin(\omega t) = \frac{\e^{\jimg\omega t} - \e^{-\jimg \omega t}}{2\jimg}$ &
-    $\cos(\omega t) = \frac{\e^{\jimg \omega t} + \e^{-\jimg \omega t}}{2}$ & 
-    $\tan(\omega t) = \frac{\sin(\omega t)}{\cos(\omega t)}$
-\end{ctabular}
+\subsection{Komplexe trigonometrische Funktionen} \vspace{-1em}
+\[\sin(\omega t) = \frac{\e^{\jimg\omega t} - \e^{-\jimg \omega t}}{2\jimg} \quad
+\cos(\omega t) = \frac{\e^{\jimg \omega t} + \e^{-\jimg \omega t}}{2} \quad 
+\tan(\omega t) = \frac{\sin(\omega t)}{\cos(\omega t)}\]
 
 
 \subsection{Frequenzgang (Frequenzerhaltung)}
+$\mathrm{e}^{\mathrm{j}\omega t}$ è autofunzione dei sistemi LTI: esce con la \textbf{stessa} $\omega$,
+moltiplicata per $H(\omega)=A(\omega)\,\mathrm{e}^{\mathrm{j}\Phi(\omega)}  = y_\omega(0) \in \mathbb{C}$
+\qquad Per sistemi reali: $H(-\omega)=\overline{H(\omega)}$.
+\smallbreak
 
-Der Frequenzgang $H(\omega)$ bestimmt die Änderung von Amplitude und Phase des Eingangssignals.
-
-\textbf{Amplitudengang:}\vspace{-1em}
+\textbf{Amplitudengang:} {\small(Modifica l'ampiezza del segnale d'ingresso)}
 \[A(\omega) = \left|H(\omega)\right| = \sqrt{H(\omega) \cdot \overline{H(\omega)}} = \sqrt{\Re(H(\omega))^2 + \Im(H(\omega))^2}\]
 
+\textbf{Phasengang:} {\small (Introduce uno sfasamento nel segnale d'ingresso)}
 
-\textbf{Phasengang:} $\Phi(\omega) = \arg(H(\omega)) = \begin{cases}
+$\Phi(\omega) = \arg(H(\omega)) = \begin{cases}
 \arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right)  & \text{für} \; \Im(H(\omega)) \geq 0 \\
 -\arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right) & \text{für} \; \Im(H(\omega)) < 0
 \end{cases}$
@@ -38,7 +38,6 @@ Der Frequenzgang $H(\omega)$ bestimmt die Änderung von Amplitude und Phase des 
     Amplitudengang: & achsensymmetrisch (gerade)    \\
     Phasengang:     & punktsymmetrisch (ungerade)
 \end{tabular}
-
 
 \subsection{Systemantwort berechnen}
 
@@ -54,8 +53,10 @@ $$\cbl{x(t) = \sin(2t)} \qquad H(2) = \frac{-3-2\jimg}{13} \qquad H(-2) = \frac{
 
 \begin{align*}
     y(t)    &= \mathcal{L} \Big\{ \frac{1}{2 \jimg}  \left( \e^{\jimg 2t} - \e^{- \jimg 2t} \right) \Big\} = \frac{1}{2 \jimg} \left(H(2) \cdot \e^{\jimg 2t} - H(-2) \cdot \e^{-\jimg 2t} \right) \\
-            &= \frac{1}{2\jimg} \left( \frac{-3-2\jimg}{13} \cdot \e^{\jimg2t} - \frac{-3+2\jimg}{13} \cdot \e^{-\jimg2t} \right) \\
-            &= -\frac{3}{13} \underbrace{ \frac{1}{2\jimg} \left( \e^{\jimg2t} - \e^{-\jimg2t} \right)}_{\substack{\sin(2t)}} + \frac{-2 \jimg}{13}  \frac{1}{ \jimg} \underbrace{ \frac{1}{2} \left( \e^{\jimg2t} + \e^{-\jimg2t} \right)}_{\substack{\cos(2t)}}
+            &= \frac{1}{2\jimg} \left( \frac{\cvt{-3}\cor{-2\jimg}}{\cvt{1}\cor{3}} \cdot \e^{\jimg2t} 
+            - \frac{\cvt{-3}\cor{+2\jimg}}{\cvt{1}\cor{3}} \cdot \e^{-\jimg2t} \right) \\
+            &= \cvt{\frac{-3}{13}} \underbrace{ \frac{1}{2\jimg} \left( \e^{\jimg2t} - \e^{-\jimg2t} \right)}_{\substack{\sin(2t)}} 
+            + \cor{\frac{-2 \jimg}{13}}  \frac{1}{\jimg} \underbrace{\frac{1}{2} \left( \e^{\jimg2t} + \e^{-\jimg2t} \right)}_{\substack{\cos(2t)}}
 \end{align*}
 
 \begin{itemize}
@@ -63,6 +64,11 @@ $$\cbl{x(t) = \sin(2t)} \qquad H(2) = \frac{-3-2\jimg}{13} \qquad H(-2) = \frac{
         \textbf{Hinweis:} Wenn $x(t)$ und $y(t)$ bekannt sind, $H(\omega)$ allerdings nur mit Parametern gegeben ist, dann wird mit Ansatz
         $y(t) = H(\omega) \cdot x(t)$ mit Parametern gerechnet
     \item Mit Koeffizientenvergleich fehlende Parameter bestimmen
+    \item Eingangssignal mit \textbf{\color{red}Produkten/Potenzen}
+    zuerst mit Trigo-Formeln in \textbf{Summe} umformen,
+    dann jede Frequenz einzeln mit $H(\omega)$ behandeln (Linearität) \\
+    $\sin(t)\cos(3t) = \frac{1}{2}\big(\sin(4t) - \sin(2t)\big)
+    \;\Rightarrow\; H(4)$ und $H(2)$
 \end{itemize}
 
 
@@ -72,9 +78,9 @@ Wenn eine Funktion $f(t)$ im Zeitbereich absolut integrierbar ist, d.h. $\int \l
 dann funktioniert die Umwandlung:
 
 \renewcommand{\arraystretch}{2.5}
-\begin{tabular}{ll}
-    Fouriertransformierte:  & $F(\omega) = \int \limits_{-\infty}^{\infty} f(t) \, \e^{- \jimg \omega t} \, \diff t$                    \\
-    Rücktransformation:     & $f(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} F(\omega) \, \e^{\jimg \omega t} \, \diff \omega$
+\begin{tabular}{lll}
+    Fouriertransformierte:  & $F(\omega) = \int \limits_{-\infty}^{\infty} f(t) \, \e^{- \jimg \omega t} \, \diff t$ & (\crd{Spezialfall $\omega = 0$!})                   \\
+    Rücktransformation:     & $f(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} F(\omega) \, \e^{\jimg \omega t} \, \diff \omega$ &
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 

@@ -105,7 +105,7 @@ Der Wert des Ausgangssignals $y(t_0)$ hängt auch von \textbf{zukünftigen} Eing
 \subsubsection{Lineare Systeme}
 
 Bei einem linearen System gilt das \textbf{Superpositionsprinzip} 
-$$ \boxed{   \{a \cdot x_1(t) + b \cdot x_2(t) \} = a \cdot f \{ x_1(t)   \} + b \cdot f \{ x_2(t) \} } $$
+$$ \boxed{   f\{a \cdot x_1(t) + b \cdot x_2(t) \} = a \cdot f \{ x_1(t)   \} + b \cdot f \{ x_2(t) \} } $$
 
 \textbf{\textrightarrow\ Alle Systeme, die nur als $\bm{R}$, $\bm{L}$ und $\bm{C}$ bestehen, sind linear.} 
 
@@ -113,13 +113,13 @@ $$ \boxed{   \{a \cdot x_1(t) + b \cdot x_2(t) \} = a \cdot f \{ x_1(t)   \} + b
 
 Alle Differentialgleichungen der Form
 $$ \boxed{ \sum\limits_{i=0}^n  a_i \frac{\diff^i y(t) }{\diff t^i} = \sum\limits_{j=0}^m  b_j \frac{\diff^j x(t) }{\diff t^j} \, \laplace \, Y(s) \cdot \sum\limits_{i=0}^n a_i s^i = X(s) \cdot \sum\limits_{j=0}^m b_j s^j } $$
-beschreiben ein lineares, kausales, zeitinvariantes System (LTI-System).
+beschreiben ein lineares, kausales, zeitinvariantes System (LTI-System), sofern $m \leq n$. Die Laplace-Korrespondenz gilt für Anfangswerte $= 0$.
 
 
 \subsubsection{Nichtlineare Systeme}{167}
 
 Ein System, welches bei \textbf{kurzgeschlossenem Eingang} ($x(t) = 0$) ein \textbf{Ausgangssignal} hat ($y(t) \neq 0$), 
-ist ein \textbf{nichtlineares} System.
+ist \textbf{sicher nichtlinear} (hinreichend, nicht notwendig: z.B. $y = x^2$ ist nichtlinear mit $y(0) = 0$).
 
 \vspace{0.1cm}
 

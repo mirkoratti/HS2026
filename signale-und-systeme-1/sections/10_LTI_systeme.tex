@@ -16,7 +16,7 @@ Das Ausgangssignal $y(t)$ eines Systems entspricht der \textbf{Faltung} des Eing
 $$ \boxed{ y(t) = \int\limits_{-\infty}^{\infty} x(\tau) h(t-\tau) \, \diff \tau = \int\limits_{-\infty}^{\infty} h(\tau) x(t-\tau) \, \diff \tau } $$
 
 Die Faltungsoperation kann auch mit dem \textbf{Stern-Operator} geschrieben werden:
-$$ \boxed{ y(t) = x(t) * h(t) = h(t) * x(t) = (x * y)(t) } $$
+$$ \boxed{ y(t) = x(t) * h(t) = h(t) * x(t) = (x * h)(t) } $$
 
 \vspace{0.2cm}
 
@@ -29,7 +29,7 @@ $$ \boxed{ Y(\jimg \omega) = H(\jimg \omega) \cdot X(\jimg \omega) } \qquad \tex
 
 Der \cor{Frequenzgang $H(\jimg \omega)$} wird häufig als \cbl{Betrag (Amplitudengang)} und \cgn{Phase (Phasengang)} dargestellt:
 
-$$ \boxed{ \cor{H(\jimg \omega)} = \alpha \cdot e^{- \jimg \omega t_0} = \cbl{|H(\jimg \omega)|} \cdot e^{\cgn{\jimg \Theta (\jimg \omega)} } }$$
+$$ \boxed{ \cor{H(\jimg \omega)} = \cbl{|H(\jimg \omega)|} \cdot e^{\cgn{\jimg \Theta (\jimg \omega)} } }$$
 
 \vspace{-0.2cm}
 
@@ -141,7 +141,7 @@ Ein LTI-System ist grenzstabil (quasistabil), wenn: (UND-Verknüpfung)
 \vspace{0.1cm}
 
 \begin{itemize}
-	\item \textbf{kein} Pol in der rechten $s$-Halbebene liegt  ($\sigma < 0$)
+	\item \textbf{kein} Pol in der rechten $s$-Halbebene liegt  ($\sigma \leq 0$)
 	\item kein mehrfacher Pol auf der $\jimg \omega$-Achse der $s$-Ebene liegt
 	\item auf der $\jimg \omega$-Achse mindestens ein \textbf{einfacher Pol} ist
 \end{itemize}
@@ -163,7 +163,7 @@ Ein LTI-System ist grenzstabil (quasistabil), wenn: (UND-Verknüpfung)
 \vspace{-0.2cm}
 $$ P(s) = X(s) = a_n s^n + a_{n-1} s^{n-1} + ... + a_1 s + a_0 = a_n(s-p_1) \cdot ... \cdot (s-p_n) $$
 
-Das Stabilitätskriterium betrachtet den \textbf{Nennen} $\boldsymbol{D(s)}$ der Übertragungsfunktion 
+Das Stabilitätskriterium betrachtet den \textbf{Nenner} $\boldsymbol{D(s)}$ der Übertragungsfunktion 
 $$ H(s) = \frac{Y(s)}{X(s)} = \frac{N(s)}{D(s)}$$
 
 \begin{itemize}
@@ -308,7 +308,8 @@ Stimmt der zeitliche Verlauf einer Schwingung auf der Empfängerseite nicht mehr
 
 \subsubsection{Lineare Verzerrung}
 
-Eine \textbf{Dämpfung} eines Signals (z.B. durch einen Tiefpassfilter) entspricht einer \textbf{linearen Verzerrung}.
+Ein \textbf{frequenzabhängiger Amplitudengang} $|H(\jimg \omega)| \neq$ const. oder ein \textbf{nichtlinearer Phasengang} (z.B. durch einen Tiefpassfilter) ergibt eine \textbf{lineare Verzerrung}. \\
+Verzerrungsfrei: $|H(\jimg \omega)| = \alpha$ und $\theta(\omega) = -\omega t_0$.
 
 
 \subsubsection{Nichtlineare Verzerrung}
@@ -351,7 +352,7 @@ $U_1$ entspricht der Grundharmonischen!
 $$ \boxed{ a_k = 20 \cdot \log_{10} \Big( \frac{1}{k}  \Big)  } $$
 
 
-\subsubsection{Total Harmonic Disortion (THD)}
+\subsubsection{Total Harmonic Distortion (THD)}
 
 Wird vor allem im englisch-sprachigen Raum verwendet
 

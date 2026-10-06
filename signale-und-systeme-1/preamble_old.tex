@@ -7,6 +7,7 @@
 
 
 \usepackage{multicol}               % provides multicols environment
+\usepackage{multirow}
 \usepackage{geometry}               % set page layout
 
 
@@ -63,7 +64,6 @@
 
 \usepackage{datetime2}              % custom date format for versioning
 
-\usepackage{circuitikz}             % Circuitikz -> fancy schematics
 
 % ========================================== BASIC SETUP ==========================================
 
@@ -98,8 +98,8 @@
 
 
 % --------------------------------------- COLOR DEFINITIONS ---------------------------------------
-\definecolor{sectioncolor}{HTML}{ff9300}
-\definecolor{subsectioncolor}{HTML}{ffb400}
+\definecolor{sectioncolor}{HTML}{2eebbf}
+\definecolor{subsectioncolor}{HTML}{abf7e5}
 \definecolor{sectextcol}{HTML}{000000}
 \definecolor{subsectextcol}{HTML}{000000}
 
@@ -514,11 +514,26 @@
 % custom command for absolute value
 \newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
 
-% custom command for const text in math mode
-\newcommand{\const}{\ensuremath{\mathrm{const}}}
+% custom command for real part of complex number
+\newcommand{\RE}{\ensuremath{\mathrm{Re}}}
 
-% custom command for electron notation
-\newcommand{\el}{$\mathrm{e^-} \,$}
+% custom command for imaginary part of complex number
+\newcommand{\IM}{\ensuremath{\mathrm{Im}}}
+
+% custom command for cjs in correct print
+\newcommand{\cjs}{\ensuremath{\mathrm{cjs}}}
+
+% custom command for complex logarithm
+\newcommand{\Ln}{\ensuremath{\mathrm{Ln}}}
+
+% custom command for signum function
+\newcommand{\sgn}{\ensuremath{\mathrm{sgn}}}
+
+% custom command for variance
+\newcommand{\Var}{\ensuremath{\mathrm{Var}}}
+
+% custom command for imaginary unit, j
+\newcommand{\jimg}{\ensuremath{\mathrm{j}}}
 
 % shortcuts for colored text
 \newcommand{\cgn}[1]{{\color{green}#1}}
@@ -701,14 +716,6 @@
 }
 {\end{multicols*}}
 \ExplSyntaxOff
-
-
-\newcommand{\todo}[1][todo]{% Todo marker
-   \begin{tcolorbox}[colback=orange, beforeafter skip=2pt, boxrule=0pt, arc=2pt, left=0pt, right=0pt, top=0pt, bottom=0pt]%
-       {#1}%
-   \end{tcolorbox}%
-} 
-
 
 % ---------------------------------------- LISTINGS SETUP -----------------------------------------
 

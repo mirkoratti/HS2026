@@ -38,7 +38,7 @@ Es gilt stets: $X^2 \geq 0$ \qquad \qquad ({\small Per Energiesignal $X^2=0$})
 
 $$ \boxed{ X_{\rm eff} = \sqrt{X^2} = \sqrt{P_n}} $$
 
-Es gilt: $X_{\rm eff} > X_m$
+Es gilt: $X_{\rm eff} \geq \vert X_0 \vert$
 
 
 \subsection[Mittelwert n. Ordnung]{Mittelwert $\bm{n.}$ Ordnung}{6}
@@ -50,7 +50,7 @@ $$ \boxed{ X^n = \frac{1}{T} \int\limits_{-T/2}^{T/2} x^n(t) \, \diff t } $$
 
 \subsection[Varianz]{Varianz $\bm{\Var(x) = \sigma^2}$}{7}
 
-Die Varianz (1. zentrales Moment) ist der quadratische Mittelwert des rellen Signals $x(t)$ um $X_0$ 
+Die Varianz (2. zentrales Moment) ist der quadratische Mittelwert des reellen Signals $x(t)$ um $X_0$ 
 
 $$ \boxed{ \Var(x) = \sigma^2 = \frac{1}{T} \int\limits_{-T/2}^{T/2} \big( x(t) - X_0 \big)^2  \, \diff t } $$
 
@@ -72,7 +72,7 @@ $$ \boxed{ \Var(x) = \sigma^2 = X^2 - (X_0)^2 } $$
 
 Für reelle Signale gilt:
 
-$$ \boxed{ X^2  = \Var(x) + X_0^2 = \vert X \vert^2 = \Var(\vert x \vert) + \vert X_0 \vert ^2} $$
+$$ \boxed{ X^2  = \Var(x) + X_0^2 } $$
 
 
 \subsection{Tipps und Tricks zur Mittelwert-Berechnung}
@@ -91,11 +91,13 @@ $$ \boxed{ X^2  = \Var(x) + X_0^2 = \vert X \vert^2 = \Var(\vert x \vert) + \ver
     \renewcommand{\arraystretch}{1.6}
     \begin{tabular}{| l | c | c | c |}
         \hline
-        \textbf{Signal}         & $\bm{X_0}$                    & $\bm{X^2}$        & $\bm{X_{\rm eff}}$                \\
+        \textbf{Signal}         & $\bm{X_0}$                    & $\bm{X^2} = P_n$        & $\bm{X_{\rm eff}}$                \\
         \hline
         $\sin(t)$               & $0$                           & $\frac{1}{2}$     & $\frac{\sqrt{2}}{2}$              \\
         \hline
         $\cos(t)$               & $0$                           & $\frac{1}{2}$     & $\frac{\sqrt{2}}{2}$              \\
+        \hline
+        $A$ (Constant)          & $A$                           & $A^2$             & $A$\\
         \hline
         $A \cdot \sin(t)$       & $0$                           & $\frac{A^2}{2}$   & $A \cdot \frac{\sqrt{2}}{2}$      \\
         \hline
@@ -142,8 +144,8 @@ $$ \boxed{  \varphi_{xx}(\tau) = \frac{1}{T} \int\limits_{-T/2}^{T/2} x(t) \, x(
 
 \vspace{-0.2cm}
 
-$$ \boxed{ \varphi_{xx}(\tau) = \frac{1}{T} \lim\limits_{T \to \infty} \int\limits_{-T/2}^{T/2} x(t) \, x(t-\tau) \, \diff t 
-    = \frac{1}{T} \lim\limits_{T \to \infty}  \int\limits_{-T/2}^{T/2} x(t+\tau) \,x(t) \, \diff t = \varphi_{xx}(-\tau) } $$
+$$ \boxed{ \varphi_{xx}(\tau) = \lim\limits_{T \to \infty} \frac{1}{T} \int\limits_{-T/2}^{T/2} x(t) \, x(t-\tau) \, \diff t 
+    = \lim\limits_{T \to \infty} \frac{1}{T} \int\limits_{-T/2}^{T/2} x(t+\tau) \,x(t) \, \diff t = \varphi_{xx}(-\tau) } $$
 
 
 \subsubsection{AKF für Energiesignale (Klasse 1)}
@@ -161,7 +163,7 @@ $$ \boxed{ \varphi_{xx}(\tau) = \lim\limits_{T \to \infty}  \int\limits_{-T/2}^{
     \item $\varphi_{xx}(0) = X^2 = (X_0)^2 + \sigma^2 $ \textrightarrow\ Quadratischer Mittelwert (Definition)
     \item $\varphi_{xx}(\tau) = \varphi_{xx}(\tau \pm n \cdot T)$ mit $n \in \mathbb{N}$ \\
         d.h. die AKF ist periodisch mit der gleichen Periode $T$ wie das Signal $x(t)$ 
-    \item $\varphi_{xx}(\tau) = \varphi_{xx}(-\tau)$ d.h. AKF ist \textbf{gerade Funktion}
+    \item $\varphi_{xx}(\tau) = \varphi_{xx}(-\tau)$ d.h. AKF ist \textbf{gerade Funktion} \qquad {\small Anche se $x(t)$ ungerade}
     \item $\varphi_{xx}(0) \geq \vert \varphi_{xx}(\tau) \vert$ , d.h. AKF am grössten bei vollständiger Deckung
     \item $\varphi_{xx}(\tau) \geq (X_0)^2 - \sigma^2$ 
 \end{itemize}
@@ -172,12 +174,18 @@ $$ \boxed{ \varphi_{xx}(\tau) = \lim\limits_{T \to \infty}  \int\limits_{-T/2}^{
 Die KKF ist ein Mass für die \textbf{Ähnlichkeit von zwei verschiedenen} Signalen. \\
 \textbf{Grafisch:} Signal $x_2$ über $x_1$ 'schieben'
 
+\begin{itemize}
+    \item nicht kommutativ
+\end{itemize}
+
 \vspace{0.2cm}
 
-\crd{\textbf{Die KKF von 2 Signalen mit verschiedenen Perioden ist immer 0} }
+\crd{Haben $x_1$ und $x_2$ keine gemeinsamen Frequenzen, ist die KKF konstant:
 
+$\varphi_{x_1 x_2}(\tau) = \overline{x_1}\cdot\overline{x_2}$
+\textbf{(= 0, falls ein Signal mittelwertfrei ist \textrightarrow Keine DC-Offset)}}
 
-\subsubsection{KKF für reelle, periodeische Leistungssignale (Klasse 2a)}
+\subsubsection{KKF für reelle, periodische Leistungssignale (Klasse 2a)}
 
 $$ \boxed{ \varphi_{x_1 x_2}(\tau) = \frac{1}{T} \int\limits_{-T/2}^{T/2} x_1(t) \, x_2(t-\tau) \, \diff t 
     = \frac{1}{T} \int\limits_{-T/2}^{T/2} x_1(t+\tau) \, x_2(t) \, \diff t } $$
@@ -196,7 +204,7 @@ $$ \boxed{ \varphi_{x_1 x_2}(\tau) = \lim\limits_{T \to \infty} \frac{1}{T} \int
 
 \subsubsection{KKF für Energiesignale (Klasse 1)}
 
-$$ \boxed{ \varphi_{x_1 x_2}(\tau) = \lim\limits_{T \to \infty} \int\limits_{-T/2}^{T/2} x_1(t) \, x_2(t-\tau) \, \\diff t 
+$$ \boxed{ \varphi_{x_1 x_2}(\tau) = \lim\limits_{T \to \infty} \int\limits_{-T/2}^{T/2} x_1(t) \, x_2(t-\tau) \, \diff t 
     = \lim\limits_{T \to \infty}  \int\limits_{-T/2}^{T/2} x_1(t+\tau) \, x_2(t) \, \diff t } $$
 
 

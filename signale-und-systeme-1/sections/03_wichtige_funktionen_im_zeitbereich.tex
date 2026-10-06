@@ -189,14 +189,14 @@ $$  \boxed{ U_r = \sqrt{ 4 \cdot k \cdot T \cdot \Delta f \cdot R } } $$
 Das Signal-Rausch-Verhältnis wird auch Störabstand oder Rauschabstand $a_r$ genannt. \\
 Das SNR dient zur \textbf{Qualitätsbewertung von Signalen} 
 
-$$ \boxed{ a_r = 10 \cdot \log \left( \frac{P_s}{P_r} \right) = 20 \cdot \log \left( \frac{U_s}{U_r} \right) } $$
+$$ \boxed{ a_r = 10 \cdot \log_{10} \left( \frac{P_s}{P_r} \right) = 20 \cdot \log_{10} \left( \frac{U_s}{U_r} \right) } $$
 
 \begin{tabular}{lll}
     $a_r$   & Störabstand / Rauschabstand / SNR     & $[a_r] = \deci \bel$  \\
     $P_s$   & Leistung des Nutzsignals              & $[P_s] = \watt$       \\
     $P_r$   & Leistung des Rauschsignals            & $[P_r] = \watt$       \\
-    $U_s$   & Effektive Rauschspannung              & $[U_s] = \volt$       \\
-    $U_r$   & Effektive Rauschleistung              & $[U_r] = \volt$
+    $U_s$   & Effektive Signalspannung              & $[U_s] = \volt$       \\
+    $U_r$   & Effektive Rauschspannung              & $[U_r] = \volt$
 \end{tabular}
 
 
@@ -208,7 +208,7 @@ Der \textbf{ausgangsseitige Rauschabstand} wird so \textbf{verkleinert}.
 $$ \boxed{ F = \frac{\frac{P_{s \,\text{Eingang}}}{P_{r \,\text{Eingang}}}}{\frac{P_{s \,\text{Ausgang}}}{P_{r \,\text{Ausgang}}}}
     = \frac{P_{s \,\text{Eingang}}}{P_{r \,\text{Eingang}}} \cdot \frac{P_{r \,\text{Ausgang}}}{P_{s \,\text{Ausgang}}} } $$
 
-Eine Rauschzahl von $F = 1$ ergibt sich einem einem \textbf{idealen Vierpol}
+Eine Rauschzahl von $F = 1$ ergibt sich einem \textbf{idealen Vierpol}
 
 
 \subsubsection{Rauschmass $\bm{a_F}$}

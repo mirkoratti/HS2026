@@ -1,4 +1,4 @@
-\section{Laplace-Transformatio }{135}
+\section{Laplace-Transformation}{135}
 
 Die Laplace-Transformation kann als analytische Fortsetzung der Fourier-Transformation aufgefasst werden. \\
 Die Frequenz ist nun komplex $\cbl{(s = \sigma + \jimg \omega)}$ anstelle $\jimg \omega$. Dank dem Dämpfungsfaktor $\sigma$ kann die
@@ -40,18 +40,18 @@ $$ \boxed{ f(t) * g(t) = \int\limits_{-\infty}^{\infty} f(\tau) \, g(t - \tau) \
 \subsubsection{Faltung im Frequenzbereich (Multiplikation im Zeitbereich)}
 
 \vspace{-0.2cm}
-$$ \boxed{ f(t) \cdot g(t) \, \laplace \, \frac{1}{2 \pi \jimg} \int\limits_{c- \jimg \infty}^{c + \jimg \infty} F(\xi) * G(s - \xi) \, \diff \xi } $$
+$$ \boxed{ f(t) \cdot g(t) \, \laplace \, \frac{1}{2 \pi \jimg} \int\limits_{c- \jimg \infty}^{c + \jimg \infty} F(\xi) \, G(s - \xi) \, \diff \xi } $$
 
 
 \subsubsection{Ableitung(en) im Zeitbereich}
 
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{r c l}
-    $\frac{\diff f(t)}{\diff t}$        & $ \laplace$   & $s F(s) - f(0^+)$                                                                             \\
-    $\frac{\diff^2 f(t)}{\diff t^2}$    & $\laplace$    & $s^2 F(s) - s f(0^+) - \frac{\diff f(0^+)}{\diff t}$                                          \\
-    $\frac{\diff^3 f(t)}{\diff t^3}$    & $\laplace$    & $ s^3 F(s) - s^2 f(0^+) - s \frac{\diff f(0^+)}{\diff t} -\frac{\diff ^2f(0^+)}{\diff t^2}$   \\
+    $\frac{\diff f(t)}{\diff t}$        & $ \laplace$   & $s F(s) - f(0_-)$                                                                             \\
+    $\frac{\diff^2 f(t)}{\diff t^2}$    & $\laplace$    & $s^2 F(s) - s f(0_-) - \frac{\diff f(0_-)}{\diff t}$                                          \\
+    $\frac{\diff^3 f(t)}{\diff t^3}$    & $\laplace$    & $ s^3 F(s) - s^2 f(0_-) - s \frac{\diff f(0_-)}{\diff t} -\frac{\diff ^2f(0_-)}{\diff t^2}$   \\
                                         & \vdots        &                                                                                               \\
-    $\frac{\diff^n f(t)}{\diff t^n}$    & $\laplace$    & $s^n F(s) - s^{n-1} f(0^+) - s^{n-2} \frac{\diff f(0^+)}{\diff t} - \ldots - \frac{\diff^{n-1} f(0^+)}{\diff t^{n-1}}$
+    $\frac{\diff^n f(t)}{\diff t^n}$    & $\laplace$    & $s^n F(s) - s^{n-1} f(0_-) - s^{n-2} \frac{\diff f(0_-)}{\diff t} - \ldots - \frac{\diff^{n-1} f(0_-)}{\diff t^{n-1}}$
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
@@ -86,7 +86,7 @@ $$ \boxed{ (-t)^n f(t) \, \laplace \,  \frac{\diff ^n F(s)}{\diff s^n} \qquad (n
 \subsubsection{Verschiebung im Frequenzbereich (Dämpfung im Zeitbereich)}
 
 \vspace{-0.2cm}
-$$ \boxed{ f( t ) \, e^{\mp \alpha t} \, \laplace \, F(s \mp \alpha ) } $$
+$$ \boxed{ f( t ) \, e^{\mp \alpha t} \, \laplace \, F(s \pm \alpha ) } $$
 
 
 \subsubsection{Integration im Zeitbereich}
@@ -99,8 +99,8 @@ $$ \boxed{ \int\limits_0^t  f(\tau) \, \diff \tau \, \laplace \, \frac{F(s)}{s} 
 
 \vspace{-0.4cm}
 \begin{align*}
-    \text{\textbf{Anfangswert:}}    & \qquad \boxed{ \lim\limits_{t \to 0} = \lim\limits_{s \to \infty} s F(s) \quad \text{wenn } \lim\limits_{t \to 0} f(t) \text{ existiert} } \\
-    \text{\textbf{Endwert:}}        & \qquad \boxed{ \lim\limits_{t \to \infty} = \lim\limits_{s \to 0} s F(s) \quad \text{wenn } \lim\limits_{t \to \infty} f(t) \text{ existiert} }
+    \text{\textbf{Anfangswert:}}    & \qquad \boxed{ \lim\limits_{t \to 0} f(t) = \lim\limits_{s \to \infty} s F(s) \quad \text{wenn } \lim\limits_{t \to 0} f(t) \text{ existiert} } \\
+    \text{\textbf{Endwert:}}        & \qquad \boxed{ \lim\limits_{t \to \infty} f(t) = \lim\limits_{s \to 0} s F(s) \quad \text{wenn } \lim\limits_{t \to \infty} f(t) \text{ existiert (Pole von } sF(s) \text{ in der linken Halbebene)} }
 \end{align*}
 
 
@@ -121,7 +121,7 @@ $$ \boxed{ \int\limits_0^t  f(\tau) \, \diff \tau \, \laplace \, \frac{F(s)}{s} 
 
 \subsubsection{Rücktransformation gebrochen-rationaler Funktionen (PBZ)}
 
-\myul{\textbf{Vorgehen Patrialbruchzerlegung}}
+\myul{\textbf{Vorgehen Partialbruchzerlegung}}
 
 \vspace{0.1cm}
 
@@ -160,7 +160,7 @@ $$ \text{Ansatz PBZ:} \quad \frac{A_{11}}{s+4} + \frac{A_{21}}{s+3} + \frac{A_{2
 		
 \begin{enumerate}
     \item DGL inkl. Störfunktion $f(t)$ in Bildbereich transformieren \\
-        \textrightarrow\ Anfangswerte für $f^{(n)}(0^+)$ einsetzen!
+        \textrightarrow\ Anfangswerte für $f^{(n)}(0_-)$ einsetzen!
     \item Gleichung nach Laplace-Transofrmierter der gesuchten Funktion umformen
     \item Rücktransformation in den Zeitbereich
 \end{enumerate}

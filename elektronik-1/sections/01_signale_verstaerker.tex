@@ -72,20 +72,23 @@ Zweigen der Schaltung.
         $A_{\rm total} = A_{\deci \bel 1} + A_{\deci \bel 2}$                                                               &               & $A_{\rm total} = A_1 \cdot A_2$  (Serie-Verstärkern)                     
     \end{tabular}
     \renewcommand{\arraystretch}{1}
-\end{center}
+\end{center}\vspace{-1em}
 
 
 \section{Verstärker}
 
 \subsection[Übertragungsfaktor (reale Verstärker)]{Übertragungsfaktor $\bm{k}$ (reale Verstärker)}
+il fattore $k$ considera il partitore di tensione fra Verstärker non ideali (su $R_{\rm q}, R_{\rm out1}, R_{\rm out2}$ 
+perdità di tensione)
 
 \begin{center}
     \includegraphics[width=0.75\columnwidth]{images/kopplungsfaktor.jpg}
 \end{center}
 
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{lll}
     $ V_{\rm in1} = V_{\rm in} \cdot \cgn{ \underbrace{ \frac{R_{\rm in1}}{R_{\rm in1} + R_Q} }_{\substack{k_1}} } $            &
     $ V_{\rm in2} = \crd{\underbrace{ \frac{R_{\rm in2}}{R_{\rm in2} + R_{\rm out1}} }_{\substack{k_2}} } \cdot V_{\rm out1} $  &
-    $ V_{\rm out} = V_{\rm in} \cdot k_1 \cdot A_1 \cdot k_2 \cdot A_2 \cdot k_L $
-\end{tabular}
+    $ \boxed{V_{\rm out} = V_{\rm in} \cdot k_1 \cdot A_1 \cdot k_2 \cdot A_2 \cdot k_L} $
+\end{tabular}}
 

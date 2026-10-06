@@ -1,4 +1,20 @@
 \subsection{Fourier Transformation S. 23}
+
+La trasformata di Fourier mostra \textbf{quali frequenze} ci sono in un segnale
+e \textbf{quanto sono forti}.
+
+\[
+\underbrace{x(t)}_{\text{segnale nel tempo}}
+\quad \circ\!\!-\!\!\bullet \quad
+\underbrace{X(\omega)}_{\text{segnale in frequenza}}
+\]
+
+\begin{itemize}
+  \item $x(t)$: com'è fatto il segnale \textbf{nel tempo} (come lo vedi sull'oscilloscopio).
+  \item $X(\omega)$: lo \textbf{spettro}, cioè quanto c'è di ogni frequenza $\omega$ nel segnale
+        (come lo vedi sull'analizzatore di spettro).
+\end{itemize}
+
 Die Fourier Transformation erweitert die spektrale Analyse auf \textbf{deterministische Energiesignale}. Herleitung siehe Skript.
 
 Damit die Fourier Transformierte existiert muss die Funktion $x(t)$ absolut integrierbar ($\int_{-\infty}^{\infty} |x(t)| dt \leq \infty$) sein, sowie deren Fourier Transformierte $X(\omega)$ (sonst kann man sie nicht mehr zurück transformieren). Ist $f(t)$ eine Linearkombination von absolut integrierbaren Funktionen wie $x(t)$ und die resultierenden $F(\omega)$ von Funktionen wie $X(\omega)$ , dann ist $f(t)$ ebenfalls transformierbar (Linearität).
@@ -20,39 +36,11 @@ Damit die Fourier Transformierte existiert muss die Funktion $x(t)$ absolut inte
 	\end{tabularx}
 \end{table}
 
-\subsubsection{Wichtige Korrespondenzpaare}
-\begin{minipage}{4cm}
-	Impulsfunktion
-	\begin{empheq}[box={\fboxsep=6pt\fbox}]{align*}
-		\delta(t) \;\; &\Laplace \;\; 1(\omega) \\
-		1(t) \;\; &\Laplace \;\; 2\pi\delta(\omega)
-	\end{empheq}
-\end{minipage}
-\begin{minipage}{8cm}
-	Sinus und Cosinus
-	\boxedeq{%
-		cos(\omega_0t) \;\; &\Laplace \;\; \pi \cdot (\delta(\omega - \omega_0)+\delta(\omega + \omega_0)) \\
-		sin(\omega_0t) \;\; &\Laplace -j\pi \cdot (\delta(\omega - \omega_0)+\delta(\omega + \omega_0))
-	}
-\end{minipage}
+\subsubsection{Wichtige Formel}
+\[e^{\pm j\omega t} = \cos(\omega t) \pm j\sin(\omega t) \qquad 
+\cos(\omega t) = \frac{e^{j\omega t} + e^{-j\omega t}}{2} \qquad
+\sin(\omega t) = \frac{e^{j\omega t} - e^{-j\omega t}}{2j}\]
 
-
-\begin{minipage}{8cm}
-	Periodische Signale
-	\boxedeq{%
-	\sum_{n=-\infty}^{\infty}	c_n \cdot e^{jn\omega_0t} \;\; \Laplace \;\; 2\pi \sum_{n=-\infty}^{\infty} c_n \delta(\omega - n\omega_0)
-	}
-\end{minipage}
-
-\begin{minipage}{15cm}
-	Spektrum Einton Winkelmodulation
-	\boxedeq{%
-	\sum_{n=-\infty}^{\infty} c_n \cdot cos((\omega_c + n\omega_m) \cdot t) \;\; \Laplace \;\;
-	\sum_{n=-\infty}^{\infty}c_n\pi(\delta(\omega - (\omega_c+n\omega_m))+\delta(\omega+(\omega_c+n\omega_m)))
-	}
-\end{minipage}
-
-Für weitere Korrespondenzpaare siehe Skript Seite 28 und \textbf{Seite 253 ff}.
 
 \subsubsection{Eigenschaften der Fourier Transformation S.24}
 \renewcommand{\arraystretch}{2}
@@ -128,4 +116,69 @@ Für weitere Korrespondenzpaare siehe Skript Seite 28 und \textbf{Seite 253 ff}.
 	\frac{2\pi}{t_0}\right)$ \\ 
 	\hline
 \end{tabular}
+
+\subsubsection{Wichtige Fourier-Korrespondenzen}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Funktion} & $\boldsymbol{x(t)}$ & $\boldsymbol{X(\omega)}$ \\
+\hline
+Dirac-Impuls & $\delta(t)$ & $1$ \\
+\hline
+Verschobener Dirac & $\delta(t-t_0)$ & $e^{-j\omega t_0}$ \\
+\hline
+Konstante & $1$ & $2\pi\,\delta(\omega)$ \\
+\hline
+Komplexe Exponentialfunktion & $e^{j\omega_0 t}$ & $2\pi\,\delta(\omega-\omega_0)$ \\
+\hline
+Cosinus & $\cos(\omega_0 t)$ & $\pi\left[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)\right]$ \\
+\hline
+Sinus & $\sin(\omega_0 t)$ & $-j\pi\left[\delta(\omega-\omega_0)-\delta(\omega+\omega_0)\right]$ \\
+\hline
+Sprungfunktion & $u(t)$ & $\pi\,\delta(\omega)+\dfrac{1}{j\omega}$ \\
+\hline
+Signumfunktion & $\mathrm{sgn}(t)$ & $\dfrac{2}{j\omega}$ \\
+\hline
+Rechteckimpuls (Breite $2a$) & $p_a(t)$ & $\dfrac{2\sin(a\omega)}{\omega}$ \\
+\hline
+Rechteckimpuls (Breite $\tau$, Höhe $A$) & $A\cdot\mathrm{rect}\!\left(\dfrac{t}{\tau}\right)$ & $A\tau\cdot\dfrac{\sin(\omega\tau/2)}{\omega\tau/2}$ \\
+\hline
+Dreieckimpuls (Basis $2a$) & $\Lambda_a(t)$ & $\dfrac{4\sin^2(a\omega/2)}{a\,\omega^2} = a\left[\dfrac{\sin(a\omega/2)}{a\omega/2}\right]^2$ \\
+\hline
+Sincfunktion & $\mathrm{sinc}_a(t)=\dfrac{\sin(at)}{t}$ & $\pi\,p_a(\omega)$ \\
+\hline
+Sinc$^2$-Funktion & $\dfrac{\sin^2(at/2)}{t^2}$ & $\dfrac{\pi a}{2}\,\Lambda_a(\omega)$ \\
+\hline
+Einseitige Exponentialfunktion & $e^{-at}\,u(t),\ a>0$ & $\dfrac{1}{a+j\omega}$ \\
+\hline
+ & $t\,e^{-at}\,u(t),\ a>0$ & $\dfrac{1}{(a+j\omega)^2}$ \\
+\hline
+Zweiseitige Exponentialfunktion & $e^{-a|t|},\ a>0$ & $\dfrac{2a}{a^2+\omega^2}$ \\
+\hline
+Gedämpfter Cosinus & $e^{-at}\cos(\omega_0 t)\,u(t)$ & $\dfrac{a+j\omega}{(a+j\omega)^2+\omega_0^2}$ \\
+\hline
+Gedämpfter Sinus & $e^{-at}\sin(\omega_0 t)\,u(t)$ & $\dfrac{\omega_0}{(a+j\omega)^2+\omega_0^2}$ \\
+\hline
+Gaussimpuls & $e^{-at^2},\ a>0$ & $\sqrt{\dfrac{\pi}{a}}\;e^{-\omega^2/(4a)}$ \\
+\hline
+\end{tabular}
 \renewcommand{\arraystretch}{\arraystretchOriginal}
+\medbreak
+
+\begin{minipage}{8cm}
+	Periodische Signale\vspace{-1em}
+	\boxedeq{%
+	\sum_{n=-\infty}^{\infty}	c_n \cdot e^{jn\omega_0t} \;\; \Laplace \;\; 2\pi \sum_{n=-\infty}^{\infty} c_n \delta(\omega - n\omega_0)
+	}
+\end{minipage}
+\medbreak
+
+\begin{minipage}{15cm}
+	Spektrum Einton Winkelmodulation\vspace{-1em}
+	\boxedeq{%
+	\sum_{n=-\infty}^{\infty} c_n \cdot cos((\omega_c + n\omega_m) \cdot t) \;\; \Laplace \;\;
+	\sum_{n=-\infty}^{\infty}c_n\pi(\delta(\omega - (\omega_c+n\omega_m))+\delta(\omega+(\omega_c+n\omega_m)))
+	}
+\end{minipage}
+\medbreak
+
+Für weitere Korrespondenzpaare siehe Skript Seite 28 und \textbf{Seite 253 ff}.

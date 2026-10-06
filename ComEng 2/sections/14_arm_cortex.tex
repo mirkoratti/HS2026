@@ -8,28 +8,40 @@
 \end{itemize}
 
 \subsection{Spezialtimer STM32G4}
-\begin{itemize}
-    \item HRTIM (high resolution)
-    \item LPTIM (low power)
-    \item RTC
-    \item WWDG (eigenen Code überwachen)
-\end{itemize}
+\begin{tabularx}{\columnwidth}{XX}
+    HRTIM (high resolution) & LPTIM (low power)\\
+    RTC & WWDG (eigenen Code überwachen)
+\end{tabularx}
 
 \subsection{M4 vs M0}
 \begin{itemize}
-    \item \textbf{M4:} schnellere Taktung als M0
+    \item \textbf{M4:} schnellere Taktung als M0 \textrightarrow High Performance / neuere Technologie
     \item \textbf{M0:} Low Power / Low Cost (alte Technologie)
-    \item \textbf{M4:} High Performance / neuere Technologie
 \end{itemize}
 
 \subsubsection{Cortex-M4 Prozessor}
+
 \begin{itemize}
-    \item 3-stufige Pipeline für Thumb-2 Instruktionssatz
-    \item Erweiterte Busstruktur mit Harvard-Architektur (I-Code, D-Code, System-Bus \& PPB)
-    \item NVIC, SYSTICK \& leistungsfähige debug Units
-    \item Memory Protection Unit (MPU)
-    \item Floating Point Unit (FPU)
+        \item 3-stufige Pipeline für Thumb-2 Instruktionssatz
+        \item NVIC, SYSTICK \& leistungsfähige debug Units
+        \item Memory Protection Unit (MPU) und Floating Point Unit (FPU)
 \end{itemize}
+
+\begin{minipage}{0.5\columnwidth}
+    \begin{itemize}
+        \item Erweiterte Busstruktur
+        \begin{description}
+            \item[\cgn{I-Code Bus}] Instruction- \& Vector-Fetch; 32-Bit-Zugriff (Thumb-1).
+            \item[\cbl{D-Code Bus}] Daten- \& Debugzugriff auf ROM (Konstanten); unaligned Zugriff möglich (wird in aligned gewandelt).
+            \item[\crd{System Bus}] Zugriff auf SRAM \& Peripherie (Variablen); für Code \& Daten; unaligned Zugriff möglich.
+            \item[\cvt{PP Bus}] Privater Peripheriebus (Debug, MPU, FPU); nur word-aligned Transfer.
+        \end{description}
+     
+    \end{itemize}
+\end{minipage}
+\begin{minipage}{0.49\columnwidth}
+    \includegraphics[width=\linewidth]{images/busses.png}
+\end{minipage}
 
 \subsubsection{Vorteile Cortex-M4 gegenüber Cortex-M0}
 \begin{itemize}

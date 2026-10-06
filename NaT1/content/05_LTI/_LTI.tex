@@ -10,8 +10,13 @@
 
 \includegraphics{content/05_LTI/Faltung_System.pdf}
 \subsection{Verzerrungsfreies LTI-System S.33}
-\vspace{.03cm}
-Ein LTI System ist verzerrungsfrei wenn \efbox[linecolor=red]{$H(\omega) = k_a \cdot e^{-j\omega t_d}$} gilt. Der Amplitudengang muss konstant sein ($H(\omega) = k_a$) und der Phasengang eine lineare Funktion von $f$ bzw. $\omega$ sein. Für kausale Systeme muss \textbf{Verzögerung} $t_d > 0$ sein und damit fällt der Phasengang mit steigender Frequenz linear ab: $\varphi(\omega) = -t_d \cdot \omega$
+Ein LTI-System ist verzerrungsfrei, wenn das Ausgangssignal nur skaliert und verzögert ist: $y(t) = k_a \cdot x(t - t_d)$. Mit dem Verschiebungssatz folgt \efbox[linecolor=red]{$H(\omega) = k_a \cdot e^{-j\omega t_d}$}.
+\begin{itemize}
+	\item \textbf{Amplitudengang konstant:} $|H(\omega)| = k_a$, damit alle Frequenzanteile gleich stark verstärkt werden.
+	\item \textbf{Phasengang linear:} $\varphi(\omega) = -t_d \cdot \omega$, damit alle Frequenzanteile um dieselbe Zeit $t_d = -\frac{\varphi(\omega)}{\omega}$ verzögert werden. Gleichwertig: die Gruppenlaufzeit $\tau_g = -\frac{d\varphi}{d\omega} = t_d$ ist konstant.
+	\item \textbf{Kausalität:} $t_d > 0$, der Phasengang fällt daher linear mit steigender Frequenz ab.
+\end{itemize}
+In der Praxis genügt es, wenn beide Bedingungen innerhalb der Bandbreite des Signals erfüllt sind.
 
 \subsection{Dirac Impuls (Stösschen) S.30}
 \includegraphics[width=.95\linewidth]{content/05_LTI/stoesschen.pdf}

@@ -10,7 +10,7 @@ Der in das zweite Medium eindringende Strahl wird \textbf{gebrochener Strahl} ge
 \begin{minipage}[t]{0.34\columnwidth}
     \textbf{Achtung:} Es gilt $n_1 < n_2$
 
-    \includegraphics[width=\columnwidth, align=t]{images/brechung.jpg}
+    \includegraphics[width=0.9\columnwidth, align=t]{images/brechung.jpg}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.64\columnwidth}
@@ -18,7 +18,7 @@ Der in das zweite Medium eindringende Strahl wird \textbf{gebrochener Strahl} ge
     \boxed{ v_i = \frac{c}{n_i}  } $$
 
     Je grösser $n$, desto grösser die Ablenkung und desto\\
-    kleiner $\varepsilon$
+    kleiner $\varepsilon$ \qquad \qquad ($n_{\rm luft} = 1, \, n_{\rm wasser} = 1.333$)
 
     \medskip
 
@@ -31,20 +31,25 @@ Der in das zweite Medium eindringende Strahl wird \textbf{gebrochener Strahl} ge
 \end{minipage}
 
 \subsection{Totalreflexion}
+\textbf{Condizione:} la luce passa da un mezzo \textbf{più denso} a uno \textbf{meno denso}: $n_1 > n_2$\vspace{-1em}
 
-\begin{minipage}[c]{0.6\columnwidth}
-    Der Einfallswinkel $\varepsilon_1$ kann nicht grösser als 90° sein. \\
-    Für $\varepsilon_1 = 90$° berechnet sich $\varepsilon_2 = \varepsilon_g$ aus: 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.38\columnwidth}
-    $$ \varepsilon_g = \arcsin \left( \frac{n_1}{n_2} \right) $$
-\end{minipage}
+\[
+n_1 \sin(\varepsilon_g) = n_2 \sin(90^\circ)
+\quad\Rightarrow\quad
+\boxed{\varepsilon_g = \arcsin\!\left(\frac{n_2}{n_1}\right)}
+\qquad \left(\frac{n_{\text{meno denso}}}{n_{\text{più denso}}}\right)
+\]
 
-
-Für den Grenzfall von $\varepsilon_1 > 90$° wird der gesamte Stahl reflektiert.
+\begin{tabular}{ll}
+$\varepsilon_1 < \varepsilon_g$ & raggio rifratto + debole riflessione \\
+$\varepsilon_1 = \varepsilon_g$ & raggio rifratto radente alla superficie ($\varepsilon_2 = 90^\circ$) \\
+$\varepsilon_1 > \varepsilon_g$ & \textbf{nessun raggio rifratto: tutta la luce viene riflessa}
+\end{tabular}\vspace{-0.6em}
 
 \begin{center}
+    \begin{minipage}{0.19\columnwidth}
+        
+    \end{minipage}
     \begin{minipage}{0.4\columnwidth}
         \includegraphics[height=3.5cm]{images/totalreflexion.jpg}
     \end{minipage}
@@ -64,19 +69,27 @@ Der Lichtstrahl bliebt in der Kernzone (Medium 1) gefangen, da diese einen grös
 \subsection{Brechung an ebenen Grenzflächen}
 
 Ein Lichtstrahl wird verschoben bzw. in eine beliebige Richtung geändert
+\medskip
 
-\begin{minipage}{0.32\columnwidth}
-    \includegraphics[width=\columnwidth]{images/verschiebung_lichtstrahl.jpg}
+% \begin{minipage}{0.32\columnwidth}
+%     \includegraphics[width=\columnwidth]{images/verschiebung_lichtstrahl.jpg}
+% \end{minipage}
+% \hfill
+\begin{minipage}[c]{0.35\columnwidth}
+    \includegraphics[width=\columnwidth]{images/prisma.png}
 \end{minipage}
 \hfill
-\begin{minipage}{0.35\columnwidth}
-    \includegraphics[width=\columnwidth]{images/prisma.jpg}
-\end{minipage}
-\hfill
-\begin{minipage}{0.3\columnwidth}
-    $$\boxed{ n = \frac{\sin (\varepsilon_1)}{\sin(\varepsilon_2)} = \frac{\sin \left(\frac{\varphi + \delta}{2} \right)}{\sin \left( \frac{\varphi}{2} \right)} } $$
-\end{minipage}
+\begin{minipage}[c]{0.6\columnwidth}
+    \textbf{Prisma} ($\varphi$ = angolo al vertice, $\delta$ = Ablenkwinkel)
 
+    \textbf{Deviazione minima} $\delta_{\min}$: luce fa percorso simmetrico,
+    $\varepsilon_1 = \varepsilon_1'$, $\varepsilon_2 = \varepsilon_2' = \tfrac{\varphi}{2}$
+    \[
+        \boxed{\, n = \frac{n_2}{n_1}
+        = \frac{\sin\varepsilon_1}{\sin\varepsilon_2}
+        = \frac{\sin\!\left(\frac{\varphi + \delta_{\min}}{2}\right)}{\sin\frac{\varphi}{2}} \,}
+    \]
+\end{minipage}
 
 \subsection{Brechung an gekrümmten Flächen}
 
