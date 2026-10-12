@@ -7,40 +7,162 @@
 \smallbreak
 \textbf{Register FPU}
 
+\begin{tabularx}{\columnwidth}{XX}
+    32 Single Precision Register (S0-S31)&
+    16 Double Precision Register (D0-D15)
+\end{tabularx}
+
+\subsection{IEEE 754: Grundlagen} 
+\textbf{Nutzen Normalisierung der Mantisse}
 \begin{itemize}
-    \item 32 Single Precision Register (S0-S31)
-    \item 16 Double Precision Shadow Register (D0-D15)
+  \item Höhere Genauigkeit: Mantisse enthält nur signifikante Stellen, keine leading/trailing zeros.
+  \item Bei Fixed-Point mit zu hohem Wertebereich sind bei kleinen Zahlen die höherwertigen Bits verschwendet (alle 0).
 \end{itemize}
-
+ 
+\textbf{Nutzen Charakteristik}
+\begin{itemize}
+  \item Gibt an, in welchem Wertebereich (Grössenordnung) die Zahl liegt.
+  \item Verschiebt das binäre Komma: $128 = 1.0 \cdot 2^{7}$ und $0.25 = 1.0 \cdot 2^{-2}$ haben die gleiche Mantisse, nur die Charakteristik ist anders.
+\end{itemize}
+ 
+\textbf{Gleitkomma vs.\ Festkomma}
+\begin{itemize}
+  \item[+] \textbf{Float:} grosser Wertebereich, flexibel; Multiplikation unproblematisch (Charakteristiken addieren).
+  \item[--] \textbf{Float:} Rundungsfehler bei Addition stark unterschiedlicher Grössenordnungen, 
+  z.B. $2^{20} + 2^{-10} = 2^{20}$ (Bit fällt aus der 23-Bit-Mantisse). Gefahr: $f + \Delta f = f$, $\Delta f$ klein.
+  \item[+] \textbf{Fixed:} Format Resultats angepasst ($\text{I1Q4} \cdot \text{I1Q4} = \text{I2Q8}$), mehr Bits für den Wert, keine FPU nötig.
+  \item[--] \textbf{Fixed:} Wertebereich muss im Voraus gewählt werden.
+\end{itemize}
+ 
 \subsection{IEEE 754: Addition / Subtraktion}
-Nötige Schritte:
+% ---------------------------------------------------------------------
+%  Esempio: addizione 0.74 + 0.09 (Single Precision, round to nearest)
+% ---------------------------------------------------------------------
+\noindent\textbf{Esempio: $0.74 + 0.09 = 0.83$} 
+\medskip
+
+% ---------- Conversione ----------
+\noindent\textbf{Conversione:} normalizzare nella forma $1.f$, convertire la parte frazionaria in binario moltiplicando ripetutamente per $2$ (annotare il bit prima della virgola e continuare con il resto), arrotondare a 23 bit.\\
+$0.74 = 1.48 \cdot 2^{-1}$ \quad $\Rightarrow e = -1+127 = 126$, $s = 0$\\
+$0.09 = 1.44 \cdot 2^{-4}$ \quad $\Rightarrow e = -4+127 = 123$, $s = 0$
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}l l X@{}}
+        & Hex & Mantissa $1.f$ \\ \hline
+  $0.74$ & \texttt{3F3D70A4} & \texttt{1.0111\,1010\,1110\,0001\,0100\,100} \\
+  $0.09$ & \texttt{3DB851EC} & \texttt{1.0111\,0000\,1010\,0011\,1101\,100} \\
+\end{tabularx}}
+
+\bigskip
+
+\noindent\textbf{1 Normalizzati?} Entrambi i numeri hanno la forma $1.f$ \checkmark\par\nobreak
+\medskip
+
+\noindent\textbf{2 Allineare gli esponenti.} $0.09$ ha l'esponente minore: 
+$\Delta e = 126 - 123 = 3$. La mantissa viene spostata di 3 posizioni a \textbf{destra}, l'esponente aumenta di 3. I bit che escono (in \textcolor{gray}{grigio}) si tengono come resto.
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l l l@{}}
+  prima & $2^{-4}$ & \texttt{1.0111\,0000\,1010\,0011\,1101\,100} \\
+  dopo  & $2^{-1}$ & \texttt{0.0010\,1110\,0001\,0100\,0111\,101}\,\textcolor{gray}{\texttt{100}} \\
+\end{tabular}}
+\medskip
+
+\noindent\textbf{3 Sommare le mantisse} (portandosi dietro i bit di resto):
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l l l@{}}
+          & $2^{-1}$ & \texttt{\phantom{+\,}1.0111\,1010\,1110\,0001\,0100\,100}\,\textcolor{gray}{\texttt{000}} \\
+  $+$     & $2^{-1}$ & \texttt{\phantom{+\,}0.0010\,1110\,0001\,0100\,0111\,101}\,\textcolor{gray}{\texttt{100}} \\ \cline{3-3}
+  $=$     & $2^{-1}$ & \texttt{\phantom{+\,}1.1010\,1000\,1111\,0101\,1100\,001}\,\textcolor{gray}{\texttt{100}} \\
+\end{tabular}}
+\medskip
+
+\noindent\textbf{4 Normalizzare.} Somma $< 2$, quindi non serve nessuno spostamento.
+\medskip
+
+\noindent\textbf{5 Arrotondare} (round to nearest)
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l l@{}}
+  $2^{-1}$ & \texttt{1.1010\,1000\,1111\,0101\,1100\,01\textbf{0}} \\
+\end{tabular}}
+\medskip
+
+\noindent\textbf{6 Ritorno al formato IEEE.} $e = -1 + 127 = 126$; l'$1$ iniziale di $1.f$ viene omesso.
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c c l l@{}}
+  $s$ & $e$ (8 bit) & $f$ (23 bit) & Hex \\ \hline
+  \texttt{0} & \texttt{0111\,1110} & \texttt{101\,0100\,0111\,1010\,1110\,0010} & \texttt{3F547AE2} \\
+\end{tabular}}
+\medskip
+
+\paragraph{\color{blue}Segni diversi}
+Le mantisse sono senza segno (il segno sta nel bit $s$). Quindi:
 \begin{enumerate}
-    \item Beide Werte müssen normalisiert sein.
-    \item Exponenten auf grösseren Wert anpassen.
-    \item Mantissen addieren bzw. subtrahieren.
-    \item Resultat wenn nötig normalisieren.
-    \item Umwandlung in IEEE 754 Format.
+  \item Confrontare i valori assoluti (\textbf{dopo} aver allineato gli esponenti).
+  \item Calcolare sempre \textbf{valore assoluto maggiore meno valore assoluto minore}
+  \item Segno del risultato = segno del numero con il valore assoluto maggiore.
 \end{enumerate}
-Beispiel: $0.74 + 0.09 = 0.83$ \\
-\textit{Runden:} Ergebnis auf nächstliegende Zahl runden (round to nearest). \\
-\textit{Problematik:} Bei extremer Anpassung der Exponenten wird der Rundungsfehler immer massiver.
+\[
+  |A| > |B| \;\Rightarrow\; \text{mantissa} = |A| - |B|, \quad s = s_A
+\]
 
-\vspace{0.5em}
-\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Ausführliche Binär-Berechnung (Addition $0.74+0.09$)]}\vspace{10pt}}}
-\vspace{0.5em}
+\subsection{IEEE 754: Moltiplicazione / Divisione}
+% Passi necessari:
+% \begin{enumerate}
+%     \item Controllo se un valore è 0.0f
+%     \item Sommare risp. sottrarre gli esponenti
+%     \item Moltiplicare risp. dividere le mantisse e determinare il segno
+%     \item Normalizzare il risultato se necessario
+%     \item Conversione nel formato IEEE 754
+% \end{enumerate}
+% \textit{Arrotondamento:} anche qui "round to nearest".
 
-\subsection{IEEE 754: Multiplikation / Division}
-Nötige Schritte:
-\begin{enumerate}
-    \item Überprüfung auf Werte mit 0.0f
-    \item Exponenten addieren bzw. subtrahieren
-    \item Mantissen multiplizieren bzw. dividieren und Vorzeichen anpassen
-    \item Resultat wenn nötig normalisieren
-    \item Umwandlung in IEEE 754 Format
-\end{enumerate}
-Beispiel: $6.625 \cdot (-0.5) = -3.3125$ \\
-\textit{Runden:} Ebenfalls "round to nearest".
+\noindent\textbf{Esempio: $6.625 \cdot (-0.5) = -3.3125$}
+\medskip
 
-\vspace{0.5em}
-\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Ausführliche Binär-Berechnung (Multiplikation $6.625 \cdot -0.5$)]}\vspace{10pt}}}
-\vspace{0.5em}
+\noindent\textbf{Conversione} (stesso metodo dell'addizione):\\
+$6.625 = 110.101_2 = 1.10101 \cdot 2^{2}$ \quad $\Rightarrow e = 2+127 = 129$, $s = 0$\\
+$-0.5 = -1.0 \cdot 2^{-1}$ \quad $\Rightarrow e = -1+127 = 126$, $s = 1$
+\medskip
+
+\noindent\textbf{1 Zero?} Nessuno dei fattori è \texttt{0.0f} \checkmark
+\medskip
+
+\noindent\textbf{2 Sommare gli esponenti.} Il bias $127$ deve comparire \textbf{una sola volta}, quindi dopo la somma va sottratto una volta:
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l l@{}}
+  $e = e_1 + e_2 - 127 = 129 + 126 - 127 = 128$ & $\Rightarrow 2^{128-127} = 2^{1}$ \\
+\end{tabular}}
+\medskip
+
+\noindent\textbf{3 Moltiplicare le mantisse, determinare il segno.} Moltiplicare normalmente le mantisse ($1.f$); segno: $s = s_1 \oplus s_2 = 0 \oplus 1 = 1$.
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l l@{}}
+  \texttt{1.10101} $\cdot$ \texttt{1.00000} & $=$ \texttt{1.10101} \\
+\end{tabular}}
+\medskip
+
+\noindent\textbf{4 Normalizzare.} (Se $\ge 2$: mantissa di 1 posizione a destra, esponente $+1$.)
+\medskip
+
+\noindent\textbf{5 Formato IEEE.} Arrotondare, per il resto come nell'addizione.
+\smallskip
+
+\noindent{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c c l l@{}}
+  $s$ & $e$ (8 bit) & $f$ (23 bit) & Hex \\ \hline
+  \texttt{1} & \texttt{1000\,0000} & \texttt{101\,0100\,0000\,0000\,0000\,0000} & \texttt{C0540000} \\
+\end{tabular}}
+\medskip

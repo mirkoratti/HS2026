@@ -11,26 +11,28 @@
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\columnwidth}
-    Die Grösse, in der ein Gegenstand dem betrachtenden Auge erscheint \textbf{(in Bogenminuten)} $\cbl{1 \degree \Leftrightarrow\ 60'}$
+    Angolo sotto cui l'occhio vede un oggetto: determina quanto \textbf{grande ci appare}, indipendentemente dalle sue dimensioni reali. \\
+    Si misura in \textbf{minuti d'arco} $\cbl{1 \degree \Leftrightarrow\ 60'}$
+    $$ \tan\varepsilon = \frac{G}{g} $$
+    \small $G$: grandezza dell'oggetto, $g$: distanza dall'occhio
 \end{minipage}
 
 
 \medskip
 
-\para{Auflösung}
+\para{Risoluzione (Auflösung)}
 
-Minimaler Winkelabstand $\varepsilon _{\rm min}$, den zwei Punkte haben müssen, damit sie noch getrennt wahrgenommen werden. \\
-Normalsichtiges Auge: Auflösung ca. 1 Bogenminute ($1'$)
+Angolo \textbf{più piccolo} $\varepsilon _{\rm min}$ per cui due punti vicini si vedono ancora \textbf{separati}. Sotto questo angolo si fondono in un solo punto. \\
+Occhio normale: $\varepsilon _{\rm min} \approx 1'$
 
 \medskip
 
 
-\para{Sehschärfe}
+\para{Acutezza visiva (Sehschärfe)}
 
-Reziprokwert der Auflösung
+Inverso della risoluzione: più piccolo è $\varepsilon _{\rm min}$, migliore è la vista.\vspace{-1em}
 
-$$ \boxed{ S = \frac{1}{\varepsilon _{\rm min}} \qquad \text{beim Menschen also } S = 1  } $$ 
-
+$$ \boxed{ S = \frac{1}{\varepsilon _{\rm min}} \qquad \text{occhio normale: } S = 1 \ (\text{cioè } 10/10) } $$
 
 \medskip
 
@@ -53,9 +55,13 @@ $$ \boxed{ s = 25 \, \mathrm{cm} = 0.25 \, \mathrm{m}  } $$
             Korrektur
         \item Brille rückt Gegenstand näher heran 
     \end{itemize}
+
+    \medskip
+    \centering
+    \input{tikz/kurzsichtigkeit.tex}
 \end{minipage}
 \hfill
-\begin{minipage}{0.48\columnwidth}
+\begin{minipage}{0.49\columnwidth}
     \raggedright
     \textbf{Weitsichtigkeit}
 
@@ -64,6 +70,13 @@ $$ \boxed{ s = 25 \, \mathrm{cm} = 0.25 \, \mathrm{m}  } $$
         \item Konvexe Sammellinse als Korrektur
         \item Brille rückt Gegenstand weiter weg 
     \end{itemize}
+
+    \medskip
+    \centering
+    \input{tikz/weitsichtigkeit.tex}
+
+    \scriptsize $g=0.25\,$m
+
 \end{minipage}
 
 
@@ -182,6 +195,8 @@ $$ \boxed{ V = \frac{\tan(\varepsilon)}{\tan(\varepsilon_0)} = \frac{s}{f} } $$
 
 Es wird zuerst ein vergrössertes Bild erzeugt, welchs selber wiederum mit einer Lupe betrachtet wird.
 
+Objektiv \textrightarrow reelles Zwischenbild \qquad Okular \textrightarrow virtuelles Bild
+
 \begin{center}
     \includegraphics[width=0.9\columnwidth]{images/fernrohr.png}
 \end{center}
@@ -198,8 +213,6 @@ Es wird zuerst ein vergrössertes Bild erzeugt, welchs selber wiederum mit einer
         $B$                 & Bildgrösse                                    & $[B] = \meter$                
     \end{ctabular}
 \end{minipage}
-
-\columnbreak
 
 
 \subsection{Abbildungssysteme -- Mikroskop}

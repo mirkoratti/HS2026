@@ -79,29 +79,35 @@ Die \textbf{Feldblende} begrenzt das Bildfeld. Sie legt den Ausschnitt der Objek
 
 \begin{center}
     \includegraphics[width=0.65\columnwidth]{images/abbildungsgleichung.png}
-\end{center}
+\end{center}\vspace{-0.8em}
 \begingroup
 \small
 \renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\columnwidth}{|c|c|X||c|c|X|}
-        \hline
-        \multirow{2}{*}{$g$} & $+$ & oggetto davanti alla lente (reale)
-            & \multirow{2}{*}{$f$} & $+$ & lente convergente \\
-        \cline{2-3}\cline{5-6}
-            & $-$ & oggetto dietro la lente (virtuale)
-            & & $-$ & lente divergente \\
-        \hline
-        \multirow{2}{*}{$b$} & $+$ & immagine reale dietro la lente
-            & \multirow{2}{*}{$B$} & $+$ & immagine reale, capovolta \\
-        \cline{2-3}\cline{5-6}
-            & $-$ & immagine virtuale davanti alla lente
-            & & $-$ & immagine virtuale, dritta \\
-        \hline
-    \end{tabularx}
-\endgroup
+\begin{tabularx}{\columnwidth}{|c|c|X|X|}
+    \hline
+    & & \textbf{lente} & \textbf{specchio} \\
+    \hline
+    \multirow{2}{*}{$g$} & $+$ & oggetto davanti alla lente (reale) & oggetto davanti allo specchio (reale) \\
+    \cline{2-4}
+        & $-$ & oggetto dietro la lente (virtuale) & oggetto dietro lo specchio (virtuale) \\
+    \hline
+    \multirow{2}{*}{$b$} & $+$ & immagine reale \textbf{dietro} la lente & immagine reale \textbf{davanti} allo specchio \\
+    \cline{2-4}
+        & $-$ & immagine virtuale \textbf{davanti} alla lente & immagine virtuale \textbf{dietro} lo specchio \\
+    \hline
+    \multirow{2}{*}{$f$} & $+$ & lente convergente & specchio concavo \\
+    \cline{2-4}
+        & $-$ & lente divergente & specchio convesso \\
+    \hline
+    \multirow{2}{*}{$B$} & $+$ & \multicolumn{2}{c|}{\textcolor{orange}{immagine reale, capovolta \faExclamationTriangle}} \\
+    \cline{2-4}
+        & $-$ & \multicolumn{2}{c|}{\textcolor{orange}{immagine virtuale, dritta \faExclamationTriangle}} \\
+    \hline
+\end{tabularx}
+\endgroup\smallbreak
 
-\textcolor{blue}{\textbf{Hinweis:} Ein Spiegel hat eine Brennweite von $f = \infty$ \\
-\textrightarrow\  Vereinfachung der Abbildungsgleichung!}
+\textcolor{blue}{\textbf{Hinweis:}
+Ebener Spiegel: $f = \infty$ \textrightarrow\ $\frac{1}{g} + \frac{1}{b} = 0$ \textrightarrow\ $b = -g$, \ $B = -G$}
 
 
 \subsubsection{Vergrösserungsverhältnis}
@@ -122,7 +128,20 @@ Die \textbf{Feldblende} begrenzt das Bildfeld. Sie legt den Ausschnitt der Objek
     \end{tabular}
 \end{minipage}
 
+\subsection{Konvexe und Konkave Linsen}
 
+\begin{description}
+    \item[Konvex:] nach aussen gewölbt \textrightarrow\ Sammellinsen
+    \item[Konkav:] nach innen gewölbt \textrightarrow\ Zerstreuungslinsen
+\end{description}
+
+\vspace{-0.2cm}
+
+\begin{center}
+    \includegraphics[width=0.9\columnwidth]{images/Konvex.png}
+\end{center}
+
+\vspace{-0.2cm}
 
 \subsection[Brechkraft]{Brechkraft $\bm{D}$}
 
@@ -182,20 +201,7 @@ Die Kombination von zwei dünnen Linsen ohne Zwischenraum ist wie folgt definier
 $$ \boxed{D = D_1 + D_2} $$
 
 
-\subsection{Konvexe und Konkave Linsen}
 
-\begin{description}
-    \item[Konvex:] nach aussen gewölbt \textrightarrow\ Sammellinsen
-    \item[Konkav:] nach innen gewölbt \textrightarrow\ Zerstreuungslinsen
-\end{description}
-
-\vspace{-0.2cm}
-
-\begin{center}
-    \includegraphics[width=0.9\columnwidth]{images/Konvex.png}
-\end{center}
-
-\vspace{-0.2cm}
 
 
 \subsection{Aberration}
@@ -247,7 +253,8 @@ Unter dem Begriff Aberration versteht man die Abweichung vom idealisierten Fall.
 \end{minipage}
 \hfill
 \begin{minipage}{0.6\columnwidth}
-    Unter dem \textbf{Brewster Winkel} wird nur \textbf{linear polarisiertes Licht} zurückgeworfen. 
+    \cor{Unter dem \textbf{Brewster Winkel} wird nur \textbf{linear polarisiertes Licht} 
+    zurückgeworfen. } (può essere poi bloccata tramite un filtro)\smallbreak
 
     Der ins Medium 2 eindringende Strahl steht dabei \textbf{senkrecht} auf dem reflektierten Strahl
     $$ \boxed{  \tan(\varepsilon) = \frac{n_2}{n_1}  }$$
@@ -319,9 +326,10 @@ Nach einer gewissen Zeit $t$ haben die $x$- und $y$-Komponente einen Phasenunter
 
 \subsection{Streuung}
 
+
 \subsubsection{Diffuse Streuung}
 
-Streuung des Lichts an Teilchen von Dimensionen $d \gg \lambda$ 
+Streuung des Lichts an Teilchen von Dimensionen $d \gg \lambda$ (\textit{Particelle grandi})
 
 \begin{minipage}{0.45\columnwidth}
     \includegraphics[width=\columnwidth]{images/diffuse_streuung.jpg}
@@ -330,10 +338,10 @@ Streuung des Lichts an Teilchen von Dimensionen $d \gg \lambda$
 \begin{minipage}{0.53\columnwidth}
     \begin{itemize}
         \item Licht als \textbf{Strahlen}
-        \item Reflexion in alle Richtungen
+        \item la luce rimbalza in tutte le direzioni
         \item Keine bevorzugte Richtung \\
-            unabhängig von $\lambda$ 
-        \item Wolken, Nebel 
+            unabhängig von $\lambda$ (tutti i colori allo stesso modo)
+        \item Wolken, Nebel \textrightarrow bianche
         \item milchiche Lösungen 	  
     \end{itemize}
 \end{minipage}
@@ -342,6 +350,8 @@ Streuung des Lichts an Teilchen von Dimensionen $d \gg \lambda$
 \subsubsection{Rayleigh-Streuung}
 
 Streuung des Lichts an Teilchen von Dimensionen $d < \lambda$ (atomare Grösse)
+
+\textit{Particelle molto piccole (molecole d'aria):}
 
 \smallskip
 
@@ -352,13 +362,44 @@ Streuung des Lichts an Teilchen von Dimensionen $d < \lambda$ (atomare Grösse)
 \begin{minipage}{0.64\columnwidth}
     $$ \boxed{ I(\theta) = A \, f^4 \, \frac{\sin^2 (\theta)}{r^2} } $$
 
-    \textrightarrow\  hochfrequentes Licht wird viel stärker abgestrahlt!
-
+    
     \begin{itemize}
+        \item la luce blu (alta frequenza) viene diffusa molto più di quella rossa.
+        \begin{itemize}
+            \item al tramonto la luce attraversa molta atmosfera, resta il rosso (blu viene abgestralt).
+        \end{itemize}
         \item Licht als \textbf{Wellen} senkrecht zur Ausbreitungsrichtung 
         \item Abstrahlmuster eines Dipols
-        \item Himmel tagsüber blau 
-        \item Himmel abends rötlich	  
+    \end{itemize}
+\end{minipage}
+
+
+\subsubsection{Lambert-Strahler}
+\textit{È il modello ideale di una superficie opaca: emette più luce in direzione perpendicolare e meno di lato ($\cos\theta$), ma vista dall'osservatore sembra ugualmente luminosa da ogni angolo.}
+
+\smallskip
+\begin{minipage}{0.40\columnwidth}
+    \centering
+    \begin{tikzpicture}[>=latex, scale=0.8]
+        \draw[thick] (-1.6,0) -- (1.6,0);
+        \draw[blue, thick, domain=-90:90, samples=60, smooth]
+            plot ({1.5*cos(\x)*sin(\x)}, {1.5*cos(\x)*cos(\x)});
+        \draw[->, thick] (0,0) -- (0,1.9) node[above] {$\vec n$};
+        \draw[->, red, thick] (0,0) -- (35:1.35);
+        \draw (0,0.5) arc (90:35:0.5);
+        \node at (62:0.75) {$\theta$};
+    \end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.58\columnwidth}
+    $$ \boxed{ I(\theta) = I_0 \cos (\theta) } $$
+
+    \begin{itemize}
+        \item $\theta$ gemessen zur Flächennormalen
+        \item Strahlstärke $\propto \cos\theta$ (Lambertsches Kosinusgesetz)
+        \item Strahldichte $L$ \textbf{unabhängig} vom Blickwinkel \\
+            \textrightarrow\  erscheint aus jeder Richtung gleich hell
+        \item Projizierte Fläche $A\cos\theta$ \\ \textrightarrow\  hebt den $\cos\theta$ auf
     \end{itemize}
 \end{minipage}
 

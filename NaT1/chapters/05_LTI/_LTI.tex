@@ -6,9 +6,72 @@
 	\item Alle Eingangs-Funktionen müssen durch eine Linearkombination der
 	Basissignale darstellbar sein.\\ $\Rightarrow$ \textbf{Periode des Eingangssignals =	Anzahl Basissignale}
 \end{list}
-	\includegraphics[width=0.9\textwidth]{content/05_LTI/tab_LTI.pdf}
 
-\includegraphics{content/05_LTI/Faltung_System.pdf}
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.3}
+\providecommand{\ltikey}[1]{\fcolorbox{red!70!black}{white}{$#1$}}
+
+\noindent
+\begin{tabularx}{\linewidth}{|>{\bfseries}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+Begriff & \textbf{Beschreibung} & \textbf{Zusätzliche Bemerkungen} \\
+\hline
+System &
+Eindeutige Zuordnung von Ausgang (Wirkung) und Eingang (Ursache)
+\par
+\begin{tikzpicture}[baseline=(b.base)]
+  \node[draw,minimum width=1.4cm,minimum height=0.55cm] (b) {System};
+  \draw[->] ([xshift=-0.9cm]b.west) -- node[above]{$x(t)$} (b.west);
+  \draw[->] (b.east) -- node[above]{$y(t)$} ([xshift=0.9cm]b.east);
+\end{tikzpicture}\smallskip
+&
+Übertragungswege, Filter, Verstärker, Modulatoren, Abtaster
+\par
+SISO-, MIMO-, SIMO-, MISO-Systeme \\
+\hline
+Linear &
+Linearkombination am Eingang ruft entsprechende Linearkombination am Ausgang hervor
+\par\smallskip
+\emph{\color{orange}Vorgehen:}
+\par 1.~$T[\alpha x_1 + \beta x_2]$ ausrechnen
+\par 2.~$\alpha\,T[x_1] + \beta\,T[x_2]$ ausrechnen
+\par 3.~vergleichen: gleich für alle $\alpha,\beta$?
+&
+\ltikey{T[\alpha x_1 + \beta x_2] = \alpha\,T[x_1] + \beta\,T[x_2]}
+\par\smallskip
+\ltikey{x(t) = 0 \rightarrow y(t) = 0}\; (Schnelltest)
+\par\smallskip
+Linear: RLC, DSB-AM, Abtaster
+\par
+Nicht linear: AM mit Träger $A_{DC}$ (affin) \\
+\hline
+Zeit\-invariant &
+Zeitliche Verschiebung des Eingangs ruft identische zeitliche Verschiebung am Ausgang hervor
+\par\smallskip
+\emph{\color{orange}Vorgehen:}
+\par 1.~$T[x(t-t_0)]$: $t \to t-t_0$ \textbf{nur} in $x$
+\par 2.~$y(t-t_0)$: $t \to t-t_0$ \textbf{überall}
+\par 3.~vergleichen: gleich für alle $t_0$?
+&
+\ltikey{T[x(t-t_0)] = y(t-t_0)\;\;\forall\, t_0}
+\par\smallskip
+Zeitinvariant: RLC-Netzwerke
+\par
+Zeitvariant: AM, Abtaster (Multiplikation mit fester Funktion von $t$, z.\,B.\ $\cos(\omega_c t)$, $\delta_{T_s}(t)$) \\
+\hline
+Kausal &
+Wert am Ausgang hängt nur von gegenwärtigen und/oder vergangenen Werten am Eingang ab
+&
+$y(t) = f\{x(t-t_0)\}$, \; $t_0 \geq 0$
+\par
+alle realen Systeme \\
+\hline
+\end{tabularx}
+\endgroup
+% \includegraphics[width=0.9\textwidth]{chapters/05_LTI/figures/tab_LTI.pdf}
+
+\includegraphics{chapters/05_LTI/figures/Faltung_System.pdf}
 \subsection{Verzerrungsfreies LTI-System S.33}
 Ein LTI-System ist verzerrungsfrei, wenn das Ausgangssignal nur skaliert und verzögert ist: $y(t) = k_a \cdot x(t - t_d)$. Mit dem Verschiebungssatz folgt \efbox[linecolor=red]{$H(\omega) = k_a \cdot e^{-j\omega t_d}$}.
 \begin{itemize}
@@ -19,13 +82,13 @@ Ein LTI-System ist verzerrungsfrei, wenn das Ausgangssignal nur skaliert und ver
 In der Praxis genügt es, wenn beide Bedingungen innerhalb der Bandbreite des Signals erfüllt sind.
 
 \subsection{Dirac Impuls (Stösschen) S.30}
-\includegraphics[width=.95\linewidth]{content/05_LTI/stoesschen.pdf}
+\includegraphics[width=.95\linewidth]{chapters/05_LTI/figures/stoesschen.pdf}
 
 \subsection{Signalmanipulationen}
-\includegraphics[width=\textwidth]{content/05_LTI/signalmanipulation.pdf}
+\includegraphics[width=\textwidth]{chapters/05_LTI/figures/signalmanipulation.pdf}
 
 \subsection{Grundlegende Funktionen S.30}
-\includegraphics[width=\textwidth]{content/05_LTI/grundlegende_funktionen.pdf}
+\includegraphics[width=\textwidth]{chapters/05_LTI/figures/grundlegende_funktionen.pdf}
 
 \subsection{Filtereigenschaften von LTI Systemen S.33}
 
@@ -57,7 +120,7 @@ In der Praxis genügt es, wenn beide Bedingungen innerhalb der Bandbreite des Si
 \subsubsection{Bandbreite}
 Die Bandbreite ist nur für \textbf{Tiefpass und Bandpassfilter} definiert. Bei realen Filtern wird üblicherweise die \textbf{\qty{3}{\dB} Eckfrequenz} angenommen, dabei erreicht die Amplitudendämpfung einen Wert von $k=\frac{1}{\sqrt{2}}$
 
-\includegraphics{content/05_LTI/tiefbandpassbandbreite.pdf}
+\includegraphics{chapters/05_LTI/figures/tiefbandpassbandbreite.pdf}
 
 \subsection{Quadraturfilter, Hilberttransformation S. 37}
 Der Quadraturfilter ist ein Allpassfilter, dieser lässt die Amplitude unverändert und dreht nur die Phase um eine viertel Periode $-\frac{\pi}{2}$. Es resultiert eine grosse Verzögerung für tieffrequente Anteile und eine kleine für hochfrequente Anteile.

@@ -65,13 +65,14 @@ $A = \{ X \leq a  \} = \{ \omega \in \Omega | X(\omega) \leq a \}$
 
 \vspace{0.1cm}
 
-$P(X = a) = P( \{ X \leq a  \}) = P( \{ \omega \in \Omega | X(\omega) \leq a \} )$ 
+$P(X \leq a) = P( \{ X \leq a  \}) = P( \{ \omega \in \Omega | X(\omega) \leq a \} )$ 
 
 
 
 \subsection[Erwartungswert]{Erwartungswert  $\bm{E(X)}$} 
 
-Ist $X$ eine Zufallsvariable, dann ist der Erwartungswert
+Il valore atteso $E(X)$ è la media che otterresti ripetendo l'esperimento infinite volte: si calcola sommando ogni valore possibile moltiplicato per la sua probabilità.
+
 $$  \boxed{ E(X) =\sum \text{Wert} \cdot \text{Wahrscheinlichkeit} } $$
 $$ E(X) = \sum\limits_{\omega \in \Omega} X(\omega) \cdot P(\{ \omega \} ) = \sum\limits_{i=1}^k X(A_i) \cdot P(A_i)  $$ 
 wobei $X$ konstant auf $A_i$ und $\cup \, A_i = \Omega$ sein muss.
@@ -126,17 +127,16 @@ $$ \boxed{ E(E(X)) = E(X) } $$
 \vspace{-0.2cm}
 $$ \boxed{ E(X + Y) = E(X) + E(Y) } $$
 
-\vspace{0.2cm}
-
 \myul{\textbf{Herleitung}}
-
+\begingroup
+\small
 \vspace{0.1cm}
 
 \begin{tabular}{ll}
 	$E(X + Y)$	& $= \sum\limits_{\omega} \big( X(\omega) + Y(\omega)  \big) \cdot P(\omega)$ 										\\
 				& $= \sum\limits_{\omega} X(\omega) \cdot P(\omega) + \sum\limits_{\omega} Y(\omega) \cdot P(\omega) = E(X) + E(Y)$
 \end{tabular}
- 
+\endgroup
 
 \subsubsection{Verbindung zur Wahrscheinlichkeit}
 
@@ -177,21 +177,29 @@ $X$ und $Y$ sind unabhängig, wenn die Ereignisse $\{ X \leq x \} $ und $\{ Y \l
 		unabhängig		& $\Rightarrow$		& unkorreliert	\\
 		unkorreliert 	& $\nRightarrow$ 	& unabhängig
 	\end{tabular}
-\end{minipage}
+\end{minipage}\vspace{1em}
+\begin{itemize}
+	\item \textbf{Indipendenti}: conoscere $X$ non dice nulla su $Y$.
+	\item \textbf{Scorrelate}: tra $X$ e $Y$ non c'è nessuna tendenza lineare, ma può esserci un legame di altro tipo.
+\end{itemize}
 
+Esempio: $X \in \{-1, 0, 1\}$ e $Y = X^2$. $Y$ dipende completamente da $X$ (parabola), ma non c'è nessuna tendenza lineare, quindi sono scorrelate ma dipendenti.
 
 \subsection[Varianz]{Varianz $\bm{\var(X)}$}
 
-Die Varianz misst die 'Streuung' einer Zufallsvariable und entspricht der mittleren quadratischen Abweichung vom Erwartungswert. \\
+Die Varianz misst die 'Streuung' einer Zufallsvariable und entspricht der \textbf{mittleren quadratischen Abweichung vom Erwartungswert.} \\
 Die Formel gilt auch für empirische Daten (Messwerte)
 
 \begin{minipage}[c]{0.4\columnwidth}
 	\includegraphics[width=\columnwidth]{images/varianz_darstellung.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.48\columnwidth}
+\begin{minipage}[c]{0.5\columnwidth}
+	\centering
 	$$ \boxed{  \var(X) = E( \, (X - E(X))^2 \, ) }  $$
-	$$ \boxed{  \var(X) = E(X^2) - E(X)^2 } $$
+	$$ \boxed{  \var(X) = E(X^2) - E(X)^2 } $$\medskip
+
+	wo $E(X^2) = \sum\limits_{\omega \in \Omega} X(\omega)^2 \cdot P(\{ \omega \})$
 \end{minipage}
 
 
@@ -215,6 +223,7 @@ Die Formel gilt auch für empirische Daten (Messwerte)
 Die Kovarianz ist ein Korrelationsmass für $X$ und $Y$ 
 $$ \boxed{ \cov(X, \, Y) = E(XY) - E(X) \cdot E(Y) } $$
 
+$\operatorname{cov}(X,Y) = 0$ heisst nur: kein \textbf{linearer} Zusammenhang.
 
 \subsection{Tschebyscheff-Ungleichung}
 
@@ -230,7 +239,9 @@ Ist $X$ eine Zufallsvariable mit Erwartungswert $\mu = E(X)$, dann gilt:
 \begin{minipage}{0.48\columnwidth}
 	$$ \boxed{ P( | \crd{X} - \mu | > \varepsilon ) \leq \frac{\var(X)}{\varepsilon^2} = A } $$
 	
-	\vspace{0.2cm}
+	\medbreak
+
+	$A$: tutto quello che è fuori da $\mu \pm \varepsilon$\smallbreak
 
 	\textrightarrow\ Wenn die Streubreite (Varianz) zunimmt, nimmt auch die Wahrscheinlichkeit zu, ausserhalb der 'Toleranz' zu landen
 \end{minipage}
@@ -247,8 +258,8 @@ Varianz $\var(X) = \var(X_1) = \ldots = \var(X_n)$
 
 \vspace{0.1cm}
 
-$M_n = \frac{X_1 + \ldots + X_n}{n}$ \qquad $E(M_n) = E(X)$ \qquad $\var(M_n) = \frac{1}{n} \var(X)$
-$$ \boxed{ P( | M_n - \mu | > \varepsilon ) \leq \frac{\var(X)}{ n \cdot \varepsilon^2} } $$
+$M_n = \frac{X_1 + \ldots + X_n}{n}$ \qquad $E(M_n) = E(X)$
+$$ \boxed{ P( | M_n - \mu | > \varepsilon ) \leq \frac{\var(X)}{ n \cdot \varepsilon^2} } \qquad \qquad \var(M_n) = \frac{1}{n} \var(X)$$
 
 \textrightarrow\ Je mehr Messungen, desto unwahrscheinlicher eine grosse Abweichung des Mittelwerts vom Erwartungswert 
 

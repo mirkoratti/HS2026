@@ -279,71 +279,61 @@ Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
 
 \subsection{Einfache Filterschaltungen mit OpAmps}
 
-\subsubsection{Integratoren}
+\textbf{Grundidee:} Invertierer mit Impedanzen \textrightarrow\ $\boxed{ H(j\omega) = -Z_f / Z_1 }$, \; $Z_C = \frac{1}{j\omega C}$ \\
+\cbl{Tiefe $f$}: $C$ = Unterbruch \quad \cgn{Hohe $f$}: $C$ = Kurzschluss \quad \textrightarrow\ Gain jedes Bereichs
 
-\begin{tabular}{ll}
-	RL-Integrator:	& Spulen sind nichtideal und teuer 		\\
-					& Spulen erzeugen oft Oszillationen 	\\
-	RC-Integrator: 	& fast immer für aktive Filter verwendet
-\end{tabular}
-
-\vspace{0.2cm}
+\subsubsection{Integrator \quad {\small $Z_1 = R_1$, $Z_f = C_f$}}
 
 \begin{minipage}[c]{0.4\columnwidth}
 	\includegraphics[width=\columnwidth]{images/integrator.png} 
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-	$$ \boxed{ V_{\rm out}(t) = - \frac{1}{R_1 \cdot C_f} \int\limits_0^t V_{\rm in}(\tau) \, \diff \tau + V_{C_f}(0) } $$
-	$$ \boxed{ V_{\rm out}(t) = - \frac{1}{C_f} \int\limits_0^t I_{C_f}(\tau) \, \diff \tau + V_{C_f}(0) } $$
+	$$ \boxed{ V_{\rm out}(t) = - \frac{1}{R_1 C_f} \int\limits_0^t V_{\rm in}(\tau) \, \diff \tau + V_{C_f}(0) } $$
+	$$ \boxed{ H(j\omega) = -\frac{1}{j\omega R_1 C_f} } $$
 \end{minipage}
 
+\begin{itemize}
+	\item $I = V_{\rm in}/R_1$ lädt $C_f$ \textrightarrow\ $V_{\rm out} = -V_{C_f}$ \quad (Rechteck \textrightarrow\ Dreieck)
+	\item $-20 \, \deci \bel$/Dek, Phase $+90 \, \degree$, $0 \, \deci \bel$ bei $\omega = 1/(R_1 C_f)$
+	\item \textbf{Problem:} DC-Gain $\to \infty$ \textrightarrow\ $V_{\rm os}$, $I_B$ aufintegriert \textrightarrow\ Sättigung. \textbf{Lösung:} $R_f \parallel C_f$ \textrightarrow\ Tiefpass
+\end{itemize}
 
-\subsubsection{Differenzierer}
+\subsubsection{Differenzierer \quad {\small $Z_1 = C_1$, $Z_f = R_f$}}
 
 \begin{minipage}[c]{0.4\columnwidth}
 \includegraphics[width=\columnwidth]{images/differenzierer.png}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-	$$ \boxed{ V_{\rm out} = - R_f \cdot C_1 \frac{\diff V_{\rm in}}{\diff t} } $$
-	$$ \boxed{ i_{c} = C_1 \frac{\diff v_c}{\diff t} = C_1 \frac{\diff V_{\rm in}}{\diff t} } $$
+	$$ \boxed{ V_{\rm out} = - R_f C_1 \frac{\diff V_{\rm in}}{\diff t} } $$
+	$$ \boxed{ H(j\omega) = -j\omega R_f C_1 } $$
 \end{minipage}
 
-\vspace{0.2cm}
-
-\myul{\textbf{Differenzierer im Frequenzbereich}}
-
-\vspace{0.1cm}
-
 \begin{itemize}
-	\item Hohe Freqeunzen werden mehr verstärkt
-	\item Rückkopplungsfunktion ist Tiefpass
-	\item Realer OpAmp bildet auch Tiefpass
-	\item Beide Tiefpasse erzeugen zusammen $180 \, \degree$ Phasenschiebung \\
-		\textrightarrow\ Mitkopplung \textrightarrow\ Schwingung 
-	\item Kleines $C$ parallel zu $R_f$ unterdrückt Schwingungen
+	\item $i_C = C_1 \, \diff V_{\rm in} / \diff t$ fliesst durch $R_f$ \quad (Dreieck \textrightarrow\ Rechteck)
+	\item $+20 \, \deci \bel$/Dek, Phase $-90 \, \degree$, $0 \, \deci \bel$ bei $\omega = 1/(R_f C_1)$
+	\item \textbf{Probleme:} HF-Rauschen stark verstärkt; Rückkopplung $\beta$ = Tiefpass ($-90 \, \degree$) + realer OpAmp (GBWP, $-90 \, \degree$) \textrightarrow\ $180 \, \degree$ \textrightarrow\ Mitkopplung \textrightarrow\ Schwingung
+	\item \textbf{Lösung:} $R_1$ in Serie zu $C_1$, kleines $C_f \parallel R_f$ \textrightarrow\ Bandpass
 \end{itemize}
 
-
-\subsubsection{Tiefpass}
+\subsubsection{Tiefpass \quad {\small $Z_1 = R_1$, $Z_f = R_f \parallel C_f$}}
 
 \begin{minipage}[c]{0.4\columnwidth}
 	\includegraphics[width=\columnwidth]{images/tiefpass.png}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
+	$$ H(j\omega) = -\frac{R_f}{R_1} \cdot \frac{1}{1 + j\omega R_f C_f} $$
 	\begin{tabular}{ll}
-		\cbl{Tiefe $f$}:  	& $R_f$ limitiert Verstärkung 	\\
-							& $I_{C_f} = 0$ (Unterbruch) 	\\
-		\cgn{Hohe $f$}:		& $-20 \, \deci \bel$ / Dek
+		\cbl{Tiefe $f$}: & $C_f$ offen \textrightarrow\ Inverter \\
+		\cgn{Hohe $f$}:	 & $C_f$ schliesst $R_f$ kurz \textrightarrow\ Integrator
 	\end{tabular}
 
-	$$ \cbl{ \boxed{ V_{\rm out} = - \frac{R_f}{R_1} \cdot V_{\rm in} } } \qquad \cgn{ \boxed{ f_g = \frac{1}{2 \, \pi \cdot R_f \cdot C_1} } } $$
+	$$ \cbl{ \boxed{ V_{\rm out} = - \frac{R_f}{R_1} \cdot V_{\rm in} } } \qquad \cgn{ \boxed{ f_g = \frac{1}{2 \, \pi \cdot R_f \cdot C_f} } } $$
 \end{minipage}
 
-
-\subsubsection{Bandpass}
+\subsubsection{Bandpass \quad {\small $Z_1 = R_1 + Z_{C_1}$, $Z_f = R_f \parallel C_f$}}
 
 \begin{minipage}[c]{0.48\columnwidth}
 	\includegraphics[width=\columnwidth]{images/bandpass.png} 
@@ -353,36 +343,28 @@ Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
 	\includegraphics[width=\columnwidth]{images/bandpass_amplitudengang.png}
 \end{minipage}
 
-\vspace{0.2cm}
-
 \begin{tabular}{ll}
-	$R_1$ & limitiert Eingangsstrom 						\\
-	$C_f$ & limitiert $V_{\rm out}$ bei hohen Frequenzen 
+	$\omega < \omega_1 = 1/(R_1 C_1)$: 	& $C_1$ dominiert \textrightarrow\ Differenzierer ($+20 \, \deci \bel$/Dek) \\
+	$\omega_1 < \omega < \omega_2$: 	& $C_1$ kurz, $C_f$ offen \textrightarrow\ flach, $-R_f/R_1$ \\
+	$\omega > \omega_2 = 1/(R_f C_f)$: 	& $C_f$ schliesst $R_f$ kurz \textrightarrow\ Integrator ($-20 \, \deci \bel$/Dek)
 \end{tabular}
-
 
 \subsubsection{Allpass}
 
-\begin{itemize}
-	\item Betrag der Verstärkung $= 1$ ($-1$ @ $180 \, \degree$ \textrightarrow\ $1$ @ $0 \, \degree$)
-	\item Phase ändert mit der Frequenz von $180 \, \degree$ auf $0 \, \degree $
-\end{itemize}
-
-\vspace{0.2cm}
+$|H| = 1$ für alle $f$, Phase von $180 \, \degree$ auf $0 \, \degree$. \, $C$, $R$ am $+$-Eingang = Hochpass.
 
 \begin{minipage}[c]{0.4\columnwidth}
 	\includegraphics[width=\columnwidth]{images/allpass.png}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
+	$$ H = \frac{j\omega RC - 1}{1 + j\omega RC} \quad \varphi = 180 \, \degree - 2 \arctan(\omega RC) $$
 	\begin{tabular}{ll}
-		\cbl{tiefe $f$}:	& $C$ sperrt (Unterbruch) 										\\
-							& \textrightarrow\ $I_{C_f} = 0$  								\\
-		\cgn{hohe $f$}: 	& $C$ ist Kurzschluss 											\\
-							& $V_{\rm opn} = V_{\rm opp}$ \textrightarrow\ $I_{R_x} = 0$ 
+		\cbl{tiefe $f$}: & $C$ sperrt \textrightarrow\ $V_{\rm opp} = 0$ \textrightarrow\ Inverter \\
+		\cgn{hohe $f$}:  & $C$ Kurzschluss \textrightarrow\ $V_{\rm opp} = V_{\rm in}$
 	\end{tabular}
 
-	$$ \cbl{ \boxed{ V_{\rm out} = - \frac{R_x}{R_x} \cdot V_{\rm in} = - V_{\rm in} } } \qquad 
+	$$ \cbl{ \boxed{ V_{\rm out} = - V_{\rm in} } } \qquad 
 	   \cgn{ \boxed{ V_{\rm out} = V_{\rm in} } } $$
 \end{minipage}
 

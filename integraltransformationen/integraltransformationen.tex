@@ -22,7 +22,7 @@
 \def\author{Simone Stitz, Luca Loop, Mirko Ratti}        			% author(s)
 \def\repo{https://gitlab.com/sstitz/integraltransformationen}       % repository link
 \def\version{3.0.\today}    										% version
-\def\pagelimit{4}           										% page limit -> causes pages after limit to be red
+\def\pagelimit{5}           										% page limit -> causes pages after limit to be red
 \def\titleoption{compact}   										% options: compact, normal
 \def\enableToC{false}
 
@@ -40,4 +40,9 @@
 		\input{sections/05_laplacetransfomration.tex}
 		\input{sections/06_mathematische_grundlagen.tex}
     \end{layout}
+	
+	% Laplace and furier table 
+	\includepdf[pages=1, fitpaper=true,
+            pagecommand={\thispagestyle{empty}\phantomsection\label{tab:fourierlaplace}}]
+           {sections/fourierLaplaceTabelle_v02.pdf}
 \end{document}

@@ -1,5 +1,5 @@
 \section{Übertragung von digitalen Signalen S. 93}
-\includegraphics{content/08_digsigtransmit/leitungscodierung.pdf}\\
+\includegraphics{chapters/08_digsigtransmit/figures/leitungscodierung.pdf}\\
 	\newpage
 \begin{tabularx}{\linewidth}{p{.1\linewidth} p{.4\linewidth} p{.1\linewidth} p{.4\linewidth}}
 	NRZ: & ZOH über ganze Symbolzeit & Mark: & übertragenes Bit mit Wert 1 \\
@@ -15,7 +15,7 @@ Bandbreitenbedarf ist nicht explizit berechenbar, er ist abhängig von Anzahl Bi
 \begin{tabularx}{.6\linewidth}{m{.4\linewidth} m{.3\linewidth} m{.3\linewidth}}
 	Samplingrate: 			& $f_s > 2\cdot B_m$ 	&
 	\multirow{4}{.75\linewidth}{\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{content/08_digsigtransmit/pcm.pdf}\\
+		\includegraphics[width=\linewidth]{chapters/08_digsigtransmit/figures/pcm.pdf}\\
 		4 Bit PCM 
 	\end{minipage}} \\
 	Bitrate: 				& $n\cdot f_s > 2n \cdot B_m$ \\
@@ -38,14 +38,14 @@ Wenn erstes Nyquist-Kriterium erfüllt ist, kann Intersymbol-Interferenz elimini
 	\begin{minipage}{\linewidth}
 		\textbf{Im Zeitbereich}\\
 		\boxedeq{\begin{split} \sum_{n=-\infty}^{\infty} s_p(n\cdot T) \cdot \delta(t-n\cdot T) = s_{p0} \cdot \delta(t) \end{split}} \\
-		\includegraphics{content/08_digsigtransmit/1nyquisttimedomain.pdf}\\
+		\includegraphics{chapters/08_digsigtransmit/figures/1nyquisttimedomain.pdf}\\
 		Signal muss mit $f_s = \frac{1}{T_s} = \frac{1}{T}$ abgetastet werden. 
 	\end{minipage}
 	&
 	\begin{minipage}{\linewidth}
 		\textbf{Im Frequenzbereich}\\
 		\boxedeq{\begin{split} \frac{1}{T} \sum_{n=-\infty}^{\infty} S_p(\omega - n\cdot \frac{2\pi}{T}) \cdot \delta(t-n\cdot T) = s_{p0} \end{split}}\\
-		\includegraphics{content/08_digsigtransmit/1nyquistfrequencydomain.pdf}\\
+		\includegraphics{chapters/08_digsigtransmit/figures/1nyquistfrequencydomain.pdf}\\
 		Das Spektrum muss summiert konstant sein!\\
 		Minimale Bandbreite: $B_{min} = \frac{1}{T} = \frac{f_s}{2}$
 	\end{minipage}
@@ -64,23 +64,23 @@ Von der Gruppe der Raised-Cosine Pulsen erfüllen nur diejenigen mit Roll-off Fa
 \end{tabularx}
 
 \begin{tabularx}{\linewidth}{m{.65\linewidth} m{.35\linewidth}}
-	\includegraphics{content/08_digsigtransmit/fancyRCequation.pdf}
+	\includegraphics{chapters/08_digsigtransmit/figures/fancyRCequation.pdf}
 	&
 	\textbf{Bandbreite:} $B=\frac{f_s}{2} \cdot (1+\alpha) $
 \end{tabularx}
 
 \begin{tabularx}{\linewidth}{m{.31\linewidth} m{.36\linewidth} m{.24\linewidth}}
-	\includegraphics[width=\linewidth]{content/08_digsigtransmit/abbildung7_11.pdf}
+	\includegraphics[width=\linewidth]{chapters/08_digsigtransmit/figures/abbildung7_11.pdf}
 	&
-	\includegraphics[width=\linewidth]{content/08_digsigtransmit/abbildung7_12.pdf}
+	\includegraphics[width=\linewidth]{chapters/08_digsigtransmit/figures/abbildung7_12.pdf}
 	&
-	\includegraphics[width=\linewidth]{content/08_digsigtransmit/abbildung7_13.pdf}
+	\includegraphics[width=\linewidth]{chapters/08_digsigtransmit/figures/abbildung7_13.pdf}
 \end{tabularx}
 
-\includegraphics[trim=2cm 1cm 2cm 0cm,clip]{content/08_digsigtransmit/RC_mt_timedomain.png}
+\includegraphics[trim=2cm 1cm 2cm 0cm,clip]{chapters/08_digsigtransmit/figures/RC_mt_timedomain.png}
 
 \subsection{Digitale Modulation von Trägersignal S. 111}
-\includegraphics{content/08_digsigtransmit/digModCarrier.pdf}
+\includegraphics{chapters/08_digsigtransmit/figures/digModCarrier.pdf}
 
 \subsection{Äquivalente Basisbanddarstellung von Bandpassignalen S. 116}
 Ein Bandpasssignal kann als Basisbandsignal aufgefasst werden, welches zur (positiven) Trägerfrequenz $+f_c$ hin verschoben wird.\\
@@ -91,10 +91,10 @@ $X_{BP}(\omega)$ asymmetrisch zu $\omega_c \;\;\; \rightarrow \;\;\; x_{eq}(t)$ 
 
 \subsubsection{Basisbanddarstellung}
 Ist das Nachrichtensignal ein Rechteck, beschränkt sich die Basisbanddarstellung auf einzelne Werte in der komplexen Ebene.\\
-\includegraphics{content/08_digsigtransmit/basisbanddarstellungen.pdf}
+\includegraphics{chapters/08_digsigtransmit/figures/basisbanddarstellungen.pdf}
 
 \subsection{Quadratur Amplitudenmodulation (QAM) S. 118}
-\includegraphics{content/08_digsigtransmit/qam.pdf}
+\includegraphics{chapters/08_digsigtransmit/figures/qam.pdf}
 
 Anzahl Bit pro Symbol $= floor(\log_2(\text{Anzahl Punkte}))$ \hspace{.5cm} \efbox[linecolor=red]{$B_{QAM-rc} = f_s(1+\alpha) \;\;\; |\;\; \alpha \text{ Roll-off Faktor}$}
 
@@ -110,7 +110,7 @@ Anzahl Bit pro Symbol $= floor(\log_2(\text{Anzahl Punkte}))$ \hspace{.5cm} \efb
 \end{minipage}
 \hspace{1cm}
 \begin{minipage}{.6\linewidth}
-	\includegraphics[width=.8\linewidth]{content/08_digsigtransmit/graycodeqam.pdf}
+	\includegraphics[width=.8\linewidth]{chapters/08_digsigtransmit/figures/graycodeqam.pdf}
 \end{minipage}
 
 \subsubsection{Pulsformfilter zur QAM S. 121}
@@ -119,7 +119,7 @@ Bandbreite im Basisband kann mit Pulsformfilter gezielt reduziert werden.\\
 Geeigenter Filter: \textbf{Raised-Cosine Filter}
 
 \paragraph{Gefilterte Übergänge}
-\includegraphics{content/08_digsigtransmit/gefilterteuebergaenge.pdf}
+\includegraphics{chapters/08_digsigtransmit/figures/gefilterteuebergaenge.pdf}
 
 \paragraph{Filterung mit Offset}
-\includegraphics{content/08_digsigtransmit/filterungmitoffset.pdf}
+\includegraphics{chapters/08_digsigtransmit/figures/filterungmitoffset.pdf}

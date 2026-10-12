@@ -81,9 +81,10 @@ dann funktioniert die Umwandlung:
 \begin{tabular}{lll}
     Fouriertransformierte:  & $F(\omega) = \int \limits_{-\infty}^{\infty} f(t) \, \e^{- \jimg \omega t} \, \diff t$ & (\crd{Spezialfall $\omega = 0$!})                   \\
     Rücktransformation:     & $f(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} F(\omega) \, \e^{\jimg \omega t} \, \diff \omega$ &
-\end{tabular}
+\end{tabular}\medbreak
 \renewcommand{\arraystretch}{1}
 
+\textbf{Grenzwerte:} $\mathrm{e}^{(a-\mathrm{j}\omega)t} = \mathrm{e}^{at}\cdot\mathrm{e}^{-\mathrm{j}\omega t}$,mit $|\mathrm{e}^{-\mathrm{j}\omega t}| = 1$ (Drehung) $\Rightarrow$ nur $\mathrm{e}^{at}$ entscheidet.
 
 \subsubsection{Darstellung der Fouriertransformierten}
 
@@ -98,11 +99,7 @@ dann funktioniert die Umwandlung:
 
 
 \subsection{Eigenschaften / Rechenregeln Fouriertransformation}
-
-\textbf{\textrightarrow\ siehe Tabelle!}
-
-\textbf{Es folgen Ergänzungen zur Tabelle}	
-
+\textbf{\textrightarrow\ siehe \hyperref[tab:fourierlaplace]{Fourier-/Laplace-Tabelle}}
 
 \subsubsection{Sprungstellen / Symmetrie}
 
@@ -143,6 +140,12 @@ $\int \limits_{-\infty}^{\infty} \vert f(t) \vert ^2 \, \diff t
 $$ f(t) = \sum \limits_{k = - \infty}^{\infty} c_k \, \e^{\jimg k \omega_0 t} \;  \laplace \; 
 F(\omega) = 2 \pi \sum \limits_{k = - \infty}^{\infty} c_k \, \delta(\omega - k \omega_0) $$
 
+\textbf{Hinweis:} $\omega_0 = \frac{2\pi}{T}$. Konstanter Term $c_0$ ($k=0$) separat transformieren, dann Summe:
+\[
+c_0 + \sum_{k\neq 0} c_k\,\mathrm{e}^{\mathrm{j}k\omega_0 t}
+\laplace
+2\pi\,c_0\,\delta(\omega) + 2\pi\sum_{k\neq 0} c_k\,\delta(\omega - k\omega_0)
+\]
 
 \subsection{Sampling zeitlich kontinuierlicher Signale}
 

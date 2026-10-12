@@ -59,6 +59,7 @@
 
 \usepackage{hyperref}               % clickable links
 \usepackage{qrcode}                 % QR code generation (also clickable)
+\usepackage{fontawesome5}
 
 
 \usepackage{ifthen}                 % if-then-else commands
@@ -162,7 +163,8 @@
 \usetikzlibrary{shapes}
 \usetikzlibrary{calc}
 
-\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.17}
 
 % ------------------------------------ OTHER PACKAGE SETTINGS -------------------------------------
 
@@ -507,7 +509,7 @@
     \expandafter\usebox\csname arrowbox@#1\endcsname
 }
 \renewrobustcmd{\textrightarrow}{%
-    \raisebox{0.2ex}{\@cachedarrowbox{r-\f@size}{\@buildtextrightarrow}}%
+    \raisebox{0.2ex}{\@cachedarrowbox{r-\f@size}{\@buildtextrightarrow}\,}%
 }%
 \newrobustcmd{\textlrarrow}{%
     \raisebox{0.2ex}{\@cachedarrowbox{lr-\f@size}{\@buildtextlrarrow}}%

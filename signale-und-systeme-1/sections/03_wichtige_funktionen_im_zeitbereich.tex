@@ -97,7 +97,8 @@ Der Bereich von $-a$ bis $a$ heisst 'Support der Funktion'
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\columnwidth}
-    $$ \mathrm{sinc}(t) = \frac{\sin(t)}{t} \, \forall  \, t $$
+    $$\boxed{\mathrm{sinc}(t) = \frac{\sin(t)}{t} \, \forall  \, t }$$
+    \[\text{Matlab: } \mathrm{sinc}(t) = \frac{\sin(\pi t)}{\pi t}\]
 \end{minipage}
 
 
@@ -130,15 +131,15 @@ Der Bereich von $-a$ bis $a$ heisst 'Support der Funktion'
 \subsection{Signalmanipulationen}{23-24}
 
 % Von Analysis 1a Zusammenfassung
-
+$$y= \textcolor{blue}{A} \cdot f(\textcolor{violet}{a} \cdot (x-\textcolor{green}{b})) + \textcolor{red}{B}$$
 \begin{tabular}{lll}
-    1.  & Streckung um $\bm{\frac{1}{a}}$ in $x$-Richtung               & $y = f(a \cdot x)$    \\
-        & Spiegelung an $y$-Achse bei $\bm{-a}$ \\
-    2.  & Verschiebung nach links ($\bm{+b}$) oder rechts ($\bm{-b}$)   & $y = f(x \pm b)$      \\
-    3.  & Streckung um $\bm{c}$ in $y$-Richtung                         & $y = c \cdot f(x)$    \\
-        & Spiegelung an $x$-Achse bei $\bm{-c}$ \\
-    4.  & Verschiebung nach oben ($\bm{+d}$) oder unten ($\bm{-d}$)     & $y = f(x) \pm d $ 
-\end{tabular}
+    \textcolor{violet}{a}.  & Modulazione periodo x per il fattore $\bm{\frac{1}{a}}$               & $y = f(a \cdot x)$    \\
+        & Riflessione sull'asse-$y$ quando $\bm{-a}$ \\
+    \textcolor{blue}{A}.  & Streckung um $\bm{A}$ in $y$-Richtung                         & $y = A \cdot f(x)$    \\
+        & Riflessione sull'asse-$x$ quando $\bm{-A}$ \\
+    \textcolor{green}{b}.  & Verschiebung nach links ($\bm{+b}$) oder rechts ($\bm{-b}$)   & $y = f(x \pm b)$      \\
+    \textcolor{red}{B}  & Verschiebung nach oben ($\bm{+B}$) oder unten ($\bm{-B}$)     & $y = f(x) \pm B $ 
+\end{tabular}\vspace{0.5em}
 
 
 \subsection{Rauschen}{25}

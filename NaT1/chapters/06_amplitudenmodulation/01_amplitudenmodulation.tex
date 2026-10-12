@@ -2,7 +2,7 @@
 Bei der Amplitudenmodulation formt das Nachrichtensignal die Amplitude des Trägersignals (carrier).
 
 \vspace{.1cm}
-\includegraphics{content/06_amplitudenmodulation/AMbasic.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/AMbasic.pdf}
 
 \vspace{.1cm}
 $\rightarrow$ \textbf{Euler}:\hspace{.1cm} \efbox[linecolor=red]{$
@@ -12,7 +12,7 @@ $\rightarrow$ \textbf{Euler}:\hspace{.1cm} \efbox[linecolor=red]{$
 \subsubsection{Frequenzmischer, Frequenzmultiplex S. 46}
 Die Multiplikation des Signals $x(t)$ mit dem Träger $cos(\omega_0t)$ verschiebt das Spektrum nach $+/- \omega_0$.
 
-\includegraphics{content/06_amplitudenmodulation/Frequenzmischer.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/Frequenzmischer.pdf}
 
 \newpage
 \subsubsection{Gewöhnliche Amplitudenmodulation S. 44}
@@ -20,7 +20,7 @@ Bei der gewöhnlichen AM wird das Nachrichtensignal $m(t)$ mit einem DC offset a
 \textbf{Aufgrund des DC-Anteils ist die gewöhnliche AM nicht linear und nicht zeitinvariant!}
 
 \paragraph{Modulation}
-\includegraphics{content/06_amplitudenmodulation/AM_grafik.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/AM_grafik.pdf}
 
 \boxedeq{\begin{split}
 		x_{_{AM}}(t) = (1 + \mu \cdot m_n(t)) \cdot A_C \cdot  \cos(\omega_c t)
@@ -31,11 +31,11 @@ Bei der gewöhnlichen AM wird das Nachrichtensignal $m(t)$ mit einem DC offset a
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{X X X}
 		\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{content/06_amplitudenmodulation/abbildung5_10.pdf}
+		\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_10.pdf}
 		\end{minipage}
 		&
 		\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{content/06_amplitudenmodulation/abbildung5_12.pdf}
+		\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_12.pdf}
 		\end{minipage}
 		&
 		\begin{minipage}{1.05\linewidth}
@@ -70,9 +70,9 @@ Bei der gewöhnlichen AM wird das Nachrichtensignal $m(t)$ mit einem DC offset a
 	
 	&
 	\begin{minipage}{0.4\linewidth}
-		\includegraphics{content/06_amplitudenmodulation/abbildung5_9.pdf}
+		\includegraphics{chapters/06_amplitudenmodulation/figures/abbildung5_9.pdf}
 		
-		\includegraphics{content/06_amplitudenmodulation/envelope_graph.pdf}
+		\includegraphics{chapters/06_amplitudenmodulation/figures/envelope_graph.pdf}
 	\end{minipage}
 
 \end{tabular}
@@ -90,18 +90,18 @@ Vereinfacht gesagt wird die \textbf{Schwingung des Trägeres einfach weggelassen
 		In Abbildung rechts:
 		$A_c = 1$, $\mu = \qty{25}{\%}$ (Länge des roten Strichs geht von 0.75 bis 1.25)
 	\end{minipage}
-	 & \includegraphics[width=.9\linewidth]{content/06_amplitudenmodulation/eqBaseCosine.pdf} \\ 
+	 & \includegraphics[width=.9\linewidth]{chapters/06_amplitudenmodulation/figures/eqBaseCosine.pdf} \\ 
 	 \begin{minipage}{\linewidth}
 	 	Für Sinusträger muss wegen Euler noch ein $-j$ beibehalten werden! \\
 	 	\vspace{.3cm}
 	 	\hspace{.2cm}\efbox[linecolor=red]{$x_{eq}(t) = -j \cdot A_c \cdot (1+ \mu m_n(t))$}\\
 	 	$A_c = 1$, $\mu = \qty{50}{\%}$ (Länge des roten Strichs geht von 0.50j bis 1.5j)
 	 \end{minipage}
- & \includegraphics[width=.9\linewidth]{content/06_amplitudenmodulation/eqBaseSine.pdf}
+ & \includegraphics[width=.9\linewidth]{chapters/06_amplitudenmodulation/figures/eqBaseSine.pdf}
 \end{tabular}
 \begin{minipage}{.3\textwidth}
 	\begin{center}
-		\includegraphics[width=.75\linewidth]{content/06_amplitudenmodulation/egBasePhaseShift.pdf}
+		\includegraphics[width=.75\linewidth]{chapters/06_amplitudenmodulation/figures/egBasePhaseShift.pdf}
 	\end{center}
 Cosinusträger mit Phasenverschobenem Trägersignal \\
 \begin{center}
@@ -122,15 +122,15 @@ Die maximal mögliche Effizienz ($\mu = \qty{100}{\%}$) beträgt \qty{33}{\%}. B
 Double-Sideband Suppressed-Carrier Modulation
 \paragraph{Modulation}
 
-\includegraphics{content/06_amplitudenmodulation/DCBmodulation_grafik.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/DCBmodulation_grafik.pdf}
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{X X X}
 		\begin{minipage}{\linewidth}
-			\includegraphics[width=\linewidth]{content/06_amplitudenmodulation/abbildung5_17.pdf}
+			\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_17.pdf}
 		\end{minipage}
 		&
 		\begin{minipage}{\linewidth}
-			\includegraphics[width=\linewidth]{content/06_amplitudenmodulation/abbildung5_18.pdf}
+			\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_18.pdf}
 		\end{minipage}
 		&
 		\begin{minipage}{1\linewidth}
@@ -143,11 +143,11 @@ Double-Sideband Suppressed-Carrier Modulation
 \textbf{DSB-SC ist linear, aber nicht zeitinvariant!} Trotzdem wird AM oft als lineare Modulation bezeichnet. Weil bei DSB-C und gewöhnlicher AM das Spektrum nur verschoben wird.
 
 \paragraph{Demodulation S. 53}
-\includegraphics{content/06_amplitudenmodulation/DSB_SC_demodulation.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/DSB_SC_demodulation.pdf}
 
 Das DSB-Signal wird mit einem sogenannten \textbf{synchronen Demodulator} oder \textbf{kohärenten Demodulator} zurückgewonnen. Weicht die \textbf{Frequenz oder die Phase} des demodulierten, lokalen Trägers von dem, des ursprünglichen Trägers ab, so ergibt sich eine \textbf{Abschwächung im demodulierten Signal}.
 
-\includegraphics{content/06_amplitudenmodulation/demod_abweichung.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/demod_abweichung.pdf}
 
 \subsubsection{Einseitenbandamplitudenmodulation (SSB) S. 53}
 Bei der SSB Modulation wird \textbf{nur ein Seitenband übertragen}. Die Implementierung gegenüber gewöhnlicher AM und DSB ist komplexer.
@@ -155,24 +155,24 @@ Bei der SSB Modulation wird \textbf{nur ein Seitenband übertragen}. Die Impleme
 Mit einem Bandpassfilter kann entweder das USB (upper side band) oder das LSB (lower side band) unterdrückt werden um ein Einseitenband-Signal zu erhalten. Allerdings stellt dies \textbf{hohe Anforderungen an die Flankensteilheit} des Filters.
 
 \paragraph{Modulation - Phasenmethode}
-\includegraphics{content/06_amplitudenmodulation/abbildung5_23.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/abbildung5_23.pdf}
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{X X}
 		\begin{minipage}{\linewidth}
-			\includegraphics[width=\linewidth]{content/06_amplitudenmodulation/abbildung5_22_1.pdf}
+			\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_22_1.pdf}
 		\end{minipage}
 	&
 	\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{content/06_amplitudenmodulation/abbildung5_22_2.pdf}
+		\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_22_2.pdf}
 	\end{minipage}
 	\end{tabularx}
 \end{table}
-\includegraphics{content/06_amplitudenmodulation/SSB_phasenmethode.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/SSB_phasenmethode.pdf}
 
 \paragraph{Demodulation S. 56}
 \textbf{Kohärente Demodulation ist erforderlich!}
 
-\includegraphics{content/06_amplitudenmodulation/SSB_demod.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/SSB_demod.pdf}
 
 \subsubsection{Restseitenband-Amplitudenmodulation (VSB) S. 57}
 Siehe auch Folie 23 NaT1\underline{ }3c; Restseitenband-AM ist ein Kompromiss zwischen:
@@ -181,7 +181,7 @@ Siehe auch Folie 23 NaT1\underline{ }3c; Restseitenband-AM ist ein Kompromiss zw
 	\item Einfacher technischer Realisierung von DSB (keine extremen Anforderungen an Filtersteilheit)
 \end{list}
 \paragraph{Modulation}
-\includegraphics{content/06_amplitudenmodulation/VSB_mod.pdf}
+\includegraphics{chapters/06_amplitudenmodulation/figures/VSB_mod.pdf}
 \paragraph{Demodulation}
 \textbf{Kohärente Demodulation ist erforderlich!}\\
 Demodulation erfolgt gleich wie bei SSB-AM
@@ -191,5 +191,5 @@ Gleichzeitige Übertragung von zwei Basisbandsignalen im gleichen Frequenzband a
 Vorteil: ebenso hohe Bandbreiteneffizienz wie SSB-AM \\
 Nachteil: technisch aufwändiger als DSB-AM
 \paragraph{Modulation und Demodulation S. 59}
-\includegraphics[width=.8\linewidth]{content/06_amplitudenmodulation/abbildung5_25.pdf}\\
+\includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_25.pdf}\\
 \efbox[linecolor=red]{$B_{QAM} = 2\cdot max(B_{m1}, B_{m2}) $} $\rightarrow$ gleich wie DSB; Wenn $m_1$ die Hilberttrafo von $m_2$ ist, dann Bandbreite wie SSB $B_{SSB} = B_m$

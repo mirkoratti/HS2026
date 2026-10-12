@@ -202,6 +202,8 @@ $a \cos(\omega t) + b \sin(\omega t) = A \cos(\omega t - \varphi)$ mit $A = \sqr
         \bottomrule
     \end{tabular}
 \end{center}
+
+
 \subsubsection{Laplace-Transformation}
 % Gemäss Modul Integraltransformationen
 \vspace{-0.2cm}
@@ -377,3 +379,36 @@ $$ u(t) = \text{Einheitssprung} $$
 \begin{minipage}[c]{0.48\columnwidth}
     \includegraphics[width=\columnwidth]{images/PDF/rechtecksignal_amplitudendichte.pdf} 
 \end{minipage}
+
+\subsection{Q-Funktion und Standardisierung}
+\label{sec:qfunktion}
+
+\paragraph{Q-Funktion}
+Die $Q$-Funktion ist die Fl\"ache des rechten Ausl\"aufers der Standardnormalverteilung $N(0,1)$:
+\[
+  Q(x) = \frac{1}{\sqrt{2\pi}} \int_{x}^{\infty} e^{-t^2/2}\,\mathrm{d}t
+\]
+\begin{itemize}
+  \item $Q(0) = \tfrac{1}{2}$, \quad $Q$ ist monoton fallend
+  \item $Q(-x) = 1 - Q(x)$ (Symmetrie der Glockenkurve)
+\end{itemize}\medskip
+
+\paragraph{Standardisierung}
+Jede Normalverteilung $N(\mu,\sigma)$ wird mit der Substitution $z = \frac{a-\mu}{\sigma}$, $\mathrm{d}a = \sigma\,\mathrm{d}z$ auf $N(0,1)$ zur\"uckgef\"uhrt:
+
+
+\textbf{Hinweis:} Die Fl\"ache (= Wahrscheinlichkeit) bleibt bei der Standardisierung \emph{gleich}.
+Die Kurve wird nur verschoben ($\mu \to 0$) und gestaucht bzw.\ gestreckt ($\sigma \to 1$)
+
+\paragraph{Vorgehen}
+\begin{enumerate}
+  \item $\mu = X_0$ und $\sigma = \sqrt{X_{\mathrm{eff}}^2 - X_0^2}$ bestimmen.
+        Achtung: $\sigma \neq X_{\mathrm{eff}}$, sobald $X_0 \neq 0$.
+  \item Grenzen standardisieren: $z_i = \frac{a_i-\mu}{\sigma}$.
+  \item $P = Q(z_1) - Q(z_2)$. F\"ur negative Argumente: $Q(-x) = 1 - Q(x)$.
+  \item Plausibilit\"at: $\mu \pm \sigma$ enth\"alt ca.\ $68\,\%$ der Fl\"ache.
+\end{enumerate}
+
+\resizebox{0.8\columnwidth}{!}{
+    \input{tikz/standardisierung.tex}
+}

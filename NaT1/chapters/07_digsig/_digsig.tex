@@ -1,5 +1,5 @@
 \section{Digitalisierung von Signalen S. 71}
-\includegraphics{content/07_digsig/digitalisierungBlockschema.pdf}
+\includegraphics{chapters/07_digsig/figures/digitalisierungBlockschema.pdf}
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{X|X}
 		\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
@@ -20,18 +20,18 @@
 
 \subsection{Abtastung S. 73}
 \subsubsection{Ideale Abtastung S.75}
-\includegraphics[width=.90\linewidth]{content/07_digsig/idealeAbtastung.pdf}
+\includegraphics[width=.90\linewidth]{chapters/07_digsig/figures/idealeAbtastung.pdf}
 
 \subsubsection{Rekonstruktion mit Tiefpass S. 78}
-\includegraphics[width=.95\linewidth]{content/07_digsig/rekonstruktionTP.pdf}
+\includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/rekonstruktionTP.pdf}
 
 \subsubsection{Natural Sampling S. 73}
-\includegraphics{content/07_digsig/naturalSampling.pdf}\\
+\includegraphics{chapters/07_digsig/figures/naturalSampling.pdf}\\
 \textbf{Rekonstruktion:} Bei der Rekonstruktion muss das Signal nach dem Tiefpass noch mit dem Faktor $\frac{T_s}{\tau}$ multipliziert werden, um die Dämpfung wieder aufzuheben.
 
 \subsubsection{Sample {\&} Hold (ZOH), Flat-Top Sampling S. 78}
 ZOH $\rightarrow$ Zero Order Hold. $H_{ZOH}(\omega) = \tau \cdot \frac{sin(\frac{\tau \omega}{2})}{\frac{\tau \omega}{2 }} \;\;\; , \;\;\; \tau \leq T_s$\\
-\includegraphics{content/07_digsig/flattopsampling.pdf}
+\includegraphics{chapters/07_digsig/figures/flattopsampling.pdf}
 
 \subsubsection{Nyquist-Shannon Abtasttheorem S. 76}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
@@ -54,7 +54,7 @@ ZOH $\rightarrow$ Zero Order Hold. $H_{ZOH}(\omega) = \tau \cdot \frac{sin(\frac
 \end{minipage}
 
 \paragraph{Abtasttheroem für Bandpasssignale S. 76 (Subsampling)}
-\includegraphics{content/07_digsig/subsampling.pdf}
+\includegraphics{chapters/07_digsig/figures/subsampling.pdf}
 \newpage
 \paragraph{Interpolation im digitalen Bereich S. 80 (Oversampling)}
 Bei Oversampling werden auf \textbf{digitaler Seite Zwischenwerte berechnet} (Interpolation) um mehr Samples zu generieren vor der D/A Wandlung. Das führt dazu, dass das \textbf{Basisband erweitert} wird (also die Blöcke im Amplitudendichtespektrum auseinandergeschoben werden, vgl Abbildung unten und "ideale Abtastung").\\
@@ -63,9 +63,9 @@ Berechnung der Zwischenwerte: \efbox[linecolor=red]{$m(t)=\sum_{n=-\infty}^{\inf
 \textbf{Vorteile:} TP-Filter kann einfacher realisiert werden (\textbf{weniger Steilheit} erforderlich), Signal wird originalgetreuer rekonstruiert; Amplitudengang des ZOH kann digital kompensiert werden.
 
 \begin{center}
-	\includegraphics[width=.75\linewidth]{content/07_digsig/abbildung6_6.pdf}\\
+	\includegraphics[width=.75\linewidth]{chapters/07_digsig/figures/abbildung6_6.pdf}\\
 	Zweifach interpoliertes Zero-Order Hold Signal, vor und nach dem digitalen Tiefpassfilter\\
-	\includegraphics[width=.75\linewidth]{content/07_digsig/abbildung6_7.pdf}\\
+	\includegraphics[width=.75\linewidth]{chapters/07_digsig/figures/abbildung6_7.pdf}\\
 	Zweifach interpoliertes Zero-Order Hold Signal im Frequenzbereich
 \end{center}
 
@@ -109,6 +109,6 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 	\end{list}
 
 \subsection{Deltamodulator S. 88}
-\includegraphics[width=.95\linewidth]{content/07_digsig/deltamodulator.pdf}\\
+\includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/deltamodulator.pdf}\\
 \subsection{Delta-Sigma Modulator S. 89}
-\includegraphics[width=.95\linewidth]{content/07_digsig/deltasigmamodulator.pdf}\\
+\includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/deltasigmamodulator.pdf}\\

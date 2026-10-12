@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=1 by 2, vertical sep=1.6cm},
+  width=0.78\linewidth, height=3.6cm,
+  axis x line=bottom, axis y line=left,
+  ytick=\empty, ymin=0, samples=80
+]
+\nextgroupplot[
+  xmin=-12, xmax=14,
+  xtick={-5,1,5}, xticklabels={$-5\,\mathrm{V}$,$1\,\mathrm{V}$,$5\,\mathrm{V}$},
+  xlabel={$a$}, ylabel={$p(a)$},
+  title={$N(\mu = 1\,\mathrm{V},\ \sigma = \sqrt{24}\,\mathrm{V})$}
+]
+\addplot[domain=-12:-5, fill=orange!35, draw=none] {exp(-(x-1)^2/48)/sqrt(48*pi)} \closedcycle;
+\addplot[domain=-5:5,   fill=teal!35,   draw=none] {exp(-(x-1)^2/48)/sqrt(48*pi)} \closedcycle;
+\addplot[domain=5:14,   fill=orange!35, draw=none] {exp(-(x-1)^2/48)/sqrt(48*pi)} \closedcycle;
+\addplot[domain=-12:14, thick] {exp(-(x-1)^2/48)/sqrt(48*pi)};
+\node at (axis cs:1,0.035) {$P \approx 0.683$};
+\node[font=\footnotesize] at (axis cs:-9.5,0.026) {$Q\!\left(\frac{6}{\sqrt{24}}\right)$};
+\node[font=\footnotesize] at (axis cs:11.5,0.026) {$Q\!\left(\frac{4}{\sqrt{24}}\right)$};
+
+\nextgroupplot[
+  xmin=-2.6536, xmax=2.6536,
+  xtick={-1.2247,0,0.8165}, xticklabels={$-\frac{6}{\sqrt{24}}$,$0$,$\frac{4}{\sqrt{24}}$},
+  xlabel={$z$}, ylabel={$p(z)$},
+  title={$N(0,\,1)$}
+]
+\addplot[domain=-2.6536:-1.2247, fill=orange!35, draw=none] {exp(-x^2/2)/sqrt(2*pi)} \closedcycle;
+\addplot[domain=-1.2247:0.8165,  fill=teal!35,   draw=none] {exp(-x^2/2)/sqrt(2*pi)} \closedcycle;
+\addplot[domain=0.8165:2.6536,   fill=orange!35, draw=none] {exp(-x^2/2)/sqrt(2*pi)} \closedcycle;
+\addplot[domain=-2.6536:2.6536, thick] {exp(-x^2/2)/sqrt(2*pi)};
+\node at (axis cs:0,0.17) {$P \approx 0.683$};
+\end{groupplot}
+\draw[->, thick] ([xshift=0.3cm]group c1r1.south east) -- ([xshift=0.3cm]group c1r2.north east)
+  node[midway, right, align=left] {$z = \dfrac{a-\mu}{\sigma}$};
+\end{tikzpicture}

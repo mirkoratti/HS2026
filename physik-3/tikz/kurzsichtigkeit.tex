@@ -1,0 +1,22 @@
+\begin{tikzpicture}[>=latex, scale=0.78, font=\scriptsize]
+        % optische Achse und Linse (Streulinse: Pfeile nach innen)
+        \draw[gray, dashed] (-2.8,0) -- (1.6,0);
+        \draw[blue!70!black, very thick, <->] (0,-1.5) -- (0,1.5);
+        \draw[blue!70!black, thick] (-0.12,1.5) -- (0.12,1.5) (-0.12,-1.5) -- (0.12,-1.5);
+        \node[blue!70!black, above] at (0,1.5) {Streulinse};
+        % Gegenstand
+        \draw[red!70!black, very thick, ->] (-2.5,0) -- (-2.5,1) node[above] {Gegenstand};
+        % Brennpunkt (virtuell, gegenstandsseitig)
+        \fill (-1.667,0) circle (1.2pt) node[below] {$F$};
+        % Strahl 1: parallel, danach divergent (scheinbar aus F)
+        \draw[orange!90!black, thick] (-2.5,1) -- (0,1) -- (1.4,1.84);
+        \draw[orange!90!black, dashed] (0,1) -- (-1.667,0);
+        % Strahl 2: durch die Linsenmitte
+        \draw[orange!90!black, thick] (-2.5,1) -- (1.4,-0.56);
+        % virtuelles Bild
+        \draw[violet, very thick, dashed, ->] (-1,0) -- (-1,0.4);
+        \node[violet, below right=-1pt and -6pt] at (-1,0) {virt. Bild};
+        % Masse
+        \draw[red!70!black, <->] (-2.5,-0.8) -- (0,-0.8) node[midway, below] {$g=0.25\,$m};
+        \draw[violet, <->] (-1,-1.45) -- (0,-1.45) node[midway, below] {$b=-0.10\,$m};
+    \end{tikzpicture}
