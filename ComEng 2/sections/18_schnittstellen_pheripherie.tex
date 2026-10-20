@@ -32,7 +32,8 @@ Wichtigkeit, den Taktgeber richtig zu wählen:
 \begin{itemize}
     \item Daten werden nicht mittels Load/Store über CPU transferiert, sondern direkt über den DMA.
     \item Daten werden nicht bearbeitet oder verändert, sie werden als ganze Pakete transferiert.
-    \item Erst am Ende bzw. nach der Hälfte eines Datenpaket-Transfers wird ein Interrupt generiert.
+    \item Erst am Ende bzw. nach der Hälfte eines Datenpaket-Transfers wird ein Interrupt
+     generiert. (non è obbligatorio generare interrupt, pheri \textrightarrow pheri)
     \item Interrupt Stacking \& Fetching wird reduziert.
 \end{itemize}
 

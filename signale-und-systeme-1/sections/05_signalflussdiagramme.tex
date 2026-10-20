@@ -18,18 +18,20 @@ $$\cbl{ X_4 = h \cdot X_3 + c \cdot X_6 } $$
 \begin{itemize}
     \setlength\itemsep{5pt}
 
-    \item \textbf{Knoten} Stellt bestimmte Grösse (Variable) dar ($X_1, \, X_2, \, ...$)
+    \item \textbf{Knoten} \cbl{$x_i$} Stellt bestimmte Grösse (Variable) dar ($X_1, \, X_2, \, ...$)
     \item \textbf{Zweig} Gerichtete Strecke stellt funktionale Abhängigkeit zwischen Knoten dar
     \item \textbf{Quelle} Knoten ohne einmündende Zweige ($X_1$) stellen unabh. Variable dar
     \item \textbf{Senke} Knoten ohne weggehende Zweige ($X_5$) stellen Variable dar, von welcher keine andere Variable im System abhängt
     \item \textbf{Gemischter Knoten} Knoten mit hineinführenden und weggehenden Zweigen ($X_2, \, X_3, \, X_4, \, X_6$)
     \item \textbf{Pfad} Kontinuierliche Folge von Zweigen, welche alle in die gleiche Richtung zeigen ($abcd, \, aef, \, bcd \, \ldots$)
     \item \textbf{Offener Pfad} Pfad, bei dem jeder beteiligte Knoten nur \textbf{einmal} durchquert wird
-    \item \textbf{Vorwärtspfad} Offener Pfad zw. Quelle und Senke oder einem gemischten Knoten
-    \item \textbf{Schleife} Geschlossener Pfad, welcher zum Ausgangsknoten zurückkehrt ($ef, \, g$)
+    \item \textbf{Vorwärtspfad} \cbl{$P_k$} Offener Pfad zw. Quelle und Senke oder einem gemischten Knoten, $P_k$ = Produkt der Zweigtransmittanzen
+    \item \textbf{Schleife} \cbl{$L_i$} Geschlossener Pfad, welcher zum Ausgangsknoten zurückkehrt, jeder Knoten nur \textbf{einmal} ($ef, \, g$)
     \item \textbf{Eigenschleife} Rückkopplungsschleife aus einem Zweig und einem Knoten ($g$)
-    \item \textbf{Zweigtransmittanz} Proportionalitätskonstante zwischen zwei Knoten (Vorfaktor von Variable)
-    \item \textbf{Schleifentransmittanz} Produkt der Zweigtransmittanzen einer Schleife ($ef, \, g$)
+    \item \textbf{Zweigtransmittanz} \cbl{$a, b, \ldots$} Proportionalitätskonstante zwischen zwei Knoten (Vorfaktor von Variable)
+    \item \textbf{Schleifentransmittanz} \cbl{$L_i$} Produkt der Zweigtransmittanzen einer Schleife ($ef, \, g$)
+    \item \textbf{Berühren} Zwei Schleifen bzw. Pfad und Schleife berühren sich, wenn sie \textbf{mind. einen gemeinsamen Knoten} haben
+    \item \textbf{Graphdeterminante} \cbl{$\Delta$}, \textbf{Kofaktor} \cbl{$\Delta_k$} \textrightarrow\ siehe Mason's Regel
 \end{itemize}
 
 
@@ -144,8 +146,6 @@ das nur eine Schleife und einen Vorwärtspfad enthält ist:
     \includegraphics[width=0.9\columnwidth]{images/einzelne_schleife.png}
 \end{center}
 
-\columnbreak
-
 
 \myul{\textbf{Mehrere sich nicht berührende Schleifen}}
 
@@ -207,7 +207,10 @@ im SFD berührt (d.h., dass er \textbf{wenigstens einen Knoten mit jeder Schleif
 
 \fcolorbox{red}{white}{\parbox{0.97\columnwidth}{
  $\Delta = $ 1 \cor{$-$} (Summe aller Schleifen) \cor{$+$} (Summe aller Produkte zweier Schleifen, die sich \textbf{nicht berühren}) 
-    \cor{$-$} (Summe aller Produkte dreier Schleifen, die sich \textbf{nicht berühren}) \cor{$+$} $\ldots$}}
+    \cor{$-$} (Summe aller Produkte dreier Schleifen, die sich \textbf{nicht berühren}) \cor{$+$} $\ldots$
+    $$ \Delta = 1 - \sum_i L_i + \sum_{i,j} L_i L_j - \sum_{i,j,k} L_i L_j L_k + \ldots $$
+    In $\sum L_iL_j$, $\sum L_iL_jL_k$ nur Schleifen, die sich \textbf{paarweise nicht berühren}. \\
+    Keine solchen Paare $\Rightarrow \Delta = 1 - \sum_i L_i$}}
  
 \begin{center}
     \includegraphics[width=0.9\columnwidth]{images/beispiel_schleifenreduktion.png}
@@ -240,23 +243,26 @@ im SFD berührt (d.h., dass er \textbf{wenigstens einen Knoten mit jeder Schleif
     $H_{ij}$    & Gesamte Transmittanz                                                          \\ 
     $P_{k}$     & Transmittanz des k-ten offenen Pfades zwischen $x_i$ und $x_j$                \\
     $\Delta$    & Graph- / Netzwerkdeterminante                                                 \\
-    $\Delta_k$  & Kofaktor (Kodeterminante) \textrightarrow\ siehe \crd{rote} Box               \\
-                & Schleifentransmittanzen, welche k-ten Vorwärtspfad \textbf{nicht} berühren    \\
-                & \textrightarrow\ siehe \crd{rote} Box
+    $\Delta_k$  & Kofaktor (Kodeterminante) des k-ten Vorwärtspfades \\
 \end{tabular}
 
 \vspace{0.2cm}
 
-\textbf{Es gibt gleich viele Kofaktoren wie Vorwärtspfade}
+\fcolorbox{red}{white}{\parbox{0.97\columnwidth}{
+    \textbf{Calcolo di $\Delta_k$ (per ogni cammino $P_k$):}
+    \begin{enumerate}
+        \item Cancellare tutti i loop che \textbf{toccano} $P_k$ (almeno un nodo \cbl{$X_k$} in comune con $P_k$)
+        \item Con i loop \textbf{rimasti} calcolare $\Delta$ con la stessa formula della \crd{rote} Box
+    \end{enumerate}
+    \begin{itemize}
+        \item Nessun loop rimasto (tutti toccano $P_k$) $\Rightarrow \Delta_k = 1$
+        \item Rimane solo $L$ $\Rightarrow \Delta_k = 1 - L$
+        \item Rimangono $L_1, L_2$ che non si toccano $\Rightarrow \Delta_k = 1 - L_1 - L_2 + L_1L_2$
+    \end{itemize}}}
 
 \vspace{0.2cm}
 
-\textbf{Wenn $\bm{x_i}$ (hier als Beispiel $\bm{x_2}$) keine Quelle ist:} 
-$$ \cbl{ H_{23} = \frac{x_3}{x_2} = \frac{\frac{x_3}{x_1}}{\frac{x_2}{x_1}} 
-    = \frac{H_{13}}{H_{12}} = \frac{\frac{P_4 \Delta_4 + P_5 \Delta_5}{\Delta}}{\frac{P_1 \Delta_1 + P_2 \Delta_2 + P_3 \Delta_3}{\Delta}} 
-    \quad \text{ \textrightarrow\ } \Delta \text{ streicht sich} }$$
-
-
+\textbf{Es gibt gleich viele Kofaktoren wie Vorwärtspfade}
 
 \example{Beispiel Mason's Regel}
 

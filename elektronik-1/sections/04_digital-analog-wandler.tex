@@ -99,9 +99,9 @@ Um eine Ausgangsspannung $V_{\rm out}$ zu erhalten, wird ein OPV nachgeschaltet 
     \includegraphics[width=\columnwidth]{images/waegeverfahren.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.53\columnwidth}
+\begin{minipage}[c]{0.56\columnwidth}
     \begin{itemize}
-        \item[+] $N$ Widerstände, $N$ Schalter 
+        \item[+] $N$ Widerstände, $n$ Schalter (Bits)
         \item[-] Nicht garantiert stetig
         \item[-] Grosser Wertebereich der Widerstände nötig 
     \end{itemize}
@@ -136,7 +136,7 @@ $$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V
     2 Phasen: PH0 und PH1 
 
     \vspace{0.2cm}
-    PH0: $V_{\rm out} = V_{\rm ref0}$ \\
+    PH0: $V_{\rm out} = V_{\rm ref0}$ (Ladungen resettate)\\
     PH1: Ausgang gültig (nach Einschwingen)
 
     $$ \boxed{ V_{\rm out} = -(V_{\rm ref1} - V_{\rm ref0}) \cdot \Bigg( \frac{n \cdot C}{C_{fb}}  \Bigg) + V_{\rm ref0} } $$

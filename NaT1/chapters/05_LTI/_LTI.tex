@@ -1,4 +1,4 @@
-\section{LTI-Systeme (S.29)}
+\section{LTI-Systeme (S.35)}
 \begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} \setlength{\topsep}{0cm}} 
 	\item Lineare Systeme sind durch die Antworten auf die
 	Basissignale bestimmt.
@@ -72,7 +72,21 @@ alle realen Systeme \\
 % \includegraphics[width=0.9\textwidth]{chapters/05_LTI/figures/tab_LTI.pdf}
 
 \includegraphics{chapters/05_LTI/figures/Faltung_System.pdf}
-\subsection{Verzerrungsfreies LTI-System S.33}
+
+\subsection{Übertragungsfunktion \texorpdfstring{$H(\omega)$}{H(ω)}}
+
+Fourier-Transformierte der Impulsantwort $h(t)$; beschreibt, wie das LTI-System jede Frequenz verstärkt und phasenverschiebt:
+\efbox[linecolor=red]{$H(\omega) = \mathcal{F}\{h(t)\} = \frac{Y(\omega)}{X(\omega)} = |H(\omega)| \cdot e^{j\varphi(\omega)}$}
+\quad mit \; $y(t) = x(t) * h(t) \;\laplace\; Y(\omega) = X(\omega) \cdot H(\omega)$.
+
+\begin{tabular}{ll}
+	$|H(\omega)|$: Amplitudengang & $\varphi(\omega) = \arg \left(H(\omega)\right)$: Phasengang.\\[1em]
+	$|H(\omega)| \, [\text{dB}] = 20 \cdot \log{|H(\omega)|}$ & 
+	$|Y(\omega)| \, [\text{dB}_R] = |H(\omega)| \, [\text{dB}_R] + |H(\omega)| \, [\text{dB}]$
+\end{tabular}
+
+
+\subsection{Verzerrungsfreies LTI-System S.39}
 Ein LTI-System ist verzerrungsfrei, wenn das Ausgangssignal nur skaliert und verzögert ist: $y(t) = k_a \cdot x(t - t_d)$. Mit dem Verschiebungssatz folgt \efbox[linecolor=red]{$H(\omega) = k_a \cdot e^{-j\omega t_d}$}.
 \begin{itemize}
 	\item \textbf{Amplitudengang konstant:} $|H(\omega)| = k_a$, damit alle Frequenzanteile gleich stark verstärkt werden.
@@ -81,48 +95,60 @@ Ein LTI-System ist verzerrungsfrei, wenn das Ausgangssignal nur skaliert und ver
 \end{itemize}
 In der Praxis genügt es, wenn beide Bedingungen innerhalb der Bandbreite des Signals erfüllt sind.
 
-\subsection{Dirac Impuls (Stösschen) S.30}
+\subsection{Dirac Impuls (Stösschen) S.13}
 \includegraphics[width=.95\linewidth]{chapters/05_LTI/figures/stoesschen.pdf}
 
 \subsection{Signalmanipulationen}
 \includegraphics[width=\textwidth]{chapters/05_LTI/figures/signalmanipulation.pdf}
 
-\subsection{Grundlegende Funktionen S.30}
+\subsection{Grundlegende Funktionen S.13}
 \includegraphics[width=\textwidth]{chapters/05_LTI/figures/grundlegende_funktionen.pdf}
 
-\subsection{Filtereigenschaften von LTI Systemen S.33}
+\subsection{Filtereigenschaften von LTI Systemen S.39}
 
-\begin{minipage}{.4\linewidth}
+\begin{minipage}{.28\linewidth}
 	\begin{center}
 		\begin{tabular}{|c|c|c|}
 			\hline
-			Tiefpass & Lowpass Filter & LPF \\
+			Tiefpass & Lowpass & LPF \\
 			\hline
-			Hochpass & Highpass Filter & HPF \\
+			Hochpass & Highpass & HPF \\
 			\hline
-			Bandpass & Bandpass Filter & BPF \\
+			Bandpass & Bandpass & BPF \\
 			\hline
-			Bandsperre & Bandstop Filter & BSF \\
+			Bandsperre & Bandstop & BSF \\
 			\hline
 		\end{tabular}
 	\end{center}
 \end{minipage}
-\begin{minipage}{.6\linewidth}
+\begin{minipage}{.71\linewidth}
 	Ideale Filter sind \textbf{akausal} und deshalb \textbf{nicht realisierbar}. Reale Filter stellen einen Kompromiss dar:
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} \setlength{\topsep}{0cm}} 
-		\item Filterflankensteilheit
-		\item Dämpfung im Sperrbereich
-		\item Flachem Frequenzgang im Durchlassbereich
-		\item Linearität des Phasengangs
+		\item Filterflankensteilheit (fianchi ripidi)
+		\item Dämpfung im Sperrbereich (buona attenuazione in banda bloccata)
+		\item Flachem Frequenzgang im Durchlassbereich (poca ondulazione in banda passante)
+		\item Linearität des Phasengangs (fase lineare)
 	\end{list}
-\end{minipage}
+\end{minipage}\vspace{-1em}
 
 \subsubsection{Bandbreite}
 Die Bandbreite ist nur für \textbf{Tiefpass und Bandpassfilter} definiert. Bei realen Filtern wird üblicherweise die \textbf{\qty{3}{\dB} Eckfrequenz} angenommen, dabei erreicht die Amplitudendämpfung einen Wert von $k=\frac{1}{\sqrt{2}}$
 
-\includegraphics{chapters/05_LTI/figures/tiefbandpassbandbreite.pdf}
+\begin{minipage}{.74\columnwidth}
+	\includegraphics{chapters/05_LTI/figures/tiefbandpassbandbreite.pdf}
+\end{minipage}
+\begin{minipage}{0.25\columnwidth}
+	\[\lvert H(\omega_c) \rvert = \frac{\sqrt{2}}{2} \cdot \lvert H(0) \rvert\]
+	\[\lvert H(\omega_c) \rvert_{\rm dB} = \lvert H(0) \rvert_{\rm dB} - 3 dB\]
+	Risolvere per $\omega_c$\medskip
+	
+\end{minipage}
+\[|H|_{dB} = 20 \cdot \log\left(\frac{\omega}{\omega_c}\right) \qquad \text{Forme standard:} \quad
+H_{\mathrm{LPF}}(\omega)=\frac{H_0}{1+j\,\omega/\omega_c},\quad
+H_{\mathrm{HPF}}(\omega)=H_\infty\,\frac{j\,\omega/\omega_c}{1+j\,\omega/\omega_c}
+\]
 
-\subsection{Quadraturfilter, Hilberttransformation S. 37}
+\subsection{Quadraturfilter, Hilberttransformation S. 43}
 Der Quadraturfilter ist ein Allpassfilter, dieser lässt die Amplitude unverändert und dreht nur die Phase um eine viertel Periode $-\frac{\pi}{2}$. Es resultiert eine grosse Verzögerung für tieffrequente Anteile und eine kleine für hochfrequente Anteile.
 
 \vspace{.03cm}
@@ -138,5 +164,8 @@ Der Quadraturfilter ist ein Allpassfilter, dieser lässt die Amplitude unveränd
 	\vspace{.03cm}
 	\hspace{.01cm}
 	\efbox[linecolor=red]{$h(t) = \frac{1}{\pi \cdot t}$}
-\end{minipage}
+\end{minipage}\medbreak
 
+\[{x}(t) = x(t) * \frac{1}{\pi t} = \frac{1}{\pi} \int_{-\infty}^{+\infty} \frac{x(\tau)}{t-\tau}\, d\tau 
+\qquad 
+{X}(\omega) = X(\omega) \cdot H(\omega) = -j \cdot \operatorname{sgn}(\omega) \cdot X(\omega)\]

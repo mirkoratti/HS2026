@@ -279,7 +279,7 @@ Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
 
 \subsection{Einfache Filterschaltungen mit OpAmps}
 
-\textbf{Grundidee:} Invertierer mit Impedanzen \textrightarrow\ $\boxed{ H(j\omega) = -Z_f / Z_1 }$, \; $Z_C = \frac{1}{j\omega C}$ \\
+Invertierer, bei dem $R_1$ und/oder $R_f$ durch Kondensatoren ersetzt bzw. ergänzt werden \\
 \cbl{Tiefe $f$}: $C$ = Unterbruch \quad \cgn{Hohe $f$}: $C$ = Kurzschluss \quad \textrightarrow\ Gain jedes Bereichs
 
 \subsubsection{Integrator \quad {\small $Z_1 = R_1$, $Z_f = C_f$}}
@@ -290,14 +290,16 @@ Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
 	$$ \boxed{ V_{\rm out}(t) = - \frac{1}{R_1 C_f} \int\limits_0^t V_{\rm in}(\tau) \, \diff \tau + V_{C_f}(0) } $$
-	$$ \boxed{ H(j\omega) = -\frac{1}{j\omega R_1 C_f} } $$
+	$$ \boxed{ I_{C_f} = C_f \frac{\diff V_{C_f}}{\diff t} = -C_f \frac{\diff V_{\rm out}}{\diff t} = \frac{V_{\rm in}}{R_1} } $$
 \end{minipage}
 
-\begin{itemize}
-	\item $I = V_{\rm in}/R_1$ lädt $C_f$ \textrightarrow\ $V_{\rm out} = -V_{C_f}$ \quad (Rechteck \textrightarrow\ Dreieck)
-	\item $-20 \, \deci \bel$/Dek, Phase $+90 \, \degree$, $0 \, \deci \bel$ bei $\omega = 1/(R_1 C_f)$
-	\item \textbf{Problem:} DC-Gain $\to \infty$ \textrightarrow\ $V_{\rm os}$, $I_B$ aufintegriert \textrightarrow\ Sättigung. \textbf{Lösung:} $R_f \parallel C_f$ \textrightarrow\ Tiefpass
-\end{itemize}
+\begin{tabularx}{\columnwidth}{lX}
+	\textbf{Prinzip}	& $I = V_{\rm in}/R_1$ lädt $C_f$ \textrightarrow\ $V_{\rm out} = -V_{C_f}$ \quad (Rechteck \textrightarrow\ Dreieck) \\
+	\textbf{Bode}		& $-20 \, \deci \bel$/Dek, $0 \, \deci \bel$ bei $\omega = 1/(R_1 C_f)$ \\
+	\crd{\textbf{Problem}}	& $C_f$ offen bei DC \textrightarrow\ DC-Gain $\to \infty$ \\
+						& $V_{\rm os}$, $I_B$ werden aufintegriert \textrightarrow\ Rampe \textrightarrow\ Sättigung \\
+	\cgn{\textbf{Lösung}}	& $R_f \parallel C_f$ \textrightarrow\ DC-Gain endlich ($-R_f/R_1$), Tiefpass
+\end{tabularx}
 
 \subsubsection{Differenzierer \quad {\small $Z_1 = C_1$, $Z_f = R_f$}}
 
@@ -307,15 +309,18 @@ Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
 	$$ \boxed{ V_{\rm out} = - R_f C_1 \frac{\diff V_{\rm in}}{\diff t} } $$
-	$$ \boxed{ H(j\omega) = -j\omega R_f C_1 } $$
+	$$ \boxed{ I_{C_1} = C_1 \frac{\diff V_{\rm in}}{\diff t} = I_{R_f} = -\frac{V_{\rm out}}{R_f} } $$
 \end{minipage}
 
-\begin{itemize}
-	\item $i_C = C_1 \, \diff V_{\rm in} / \diff t$ fliesst durch $R_f$ \quad (Dreieck \textrightarrow\ Rechteck)
-	\item $+20 \, \deci \bel$/Dek, Phase $-90 \, \degree$, $0 \, \deci \bel$ bei $\omega = 1/(R_f C_1)$
-	\item \textbf{Probleme:} HF-Rauschen stark verstärkt; Rückkopplung $\beta$ = Tiefpass ($-90 \, \degree$) + realer OpAmp (GBWP, $-90 \, \degree$) \textrightarrow\ $180 \, \degree$ \textrightarrow\ Mitkopplung \textrightarrow\ Schwingung
-	\item \textbf{Lösung:} $R_1$ in Serie zu $C_1$, kleines $C_f \parallel R_f$ \textrightarrow\ Bandpass
-\end{itemize}
+\begin{tabularx}{\columnwidth}{lX}
+	\textbf{Prinzip}	& $I_{C_1}$ fliesst durch $R_f$ \quad (Dreieck \textrightarrow\ Rechteck) \\
+	\textbf{Bode}		& $+20 \, \deci \bel$/Dek, $0 \, \deci \bel$ bei $\omega = 1/(R_f C_1)$ \\
+	\crd{\textbf{Problem 1}}	& Gain steigt mit $f$ \textrightarrow\ HF-Rauschen stark verstärkt \\
+	\crd{\textbf{Problem 2}}	& $\beta$ = Tiefpass ($-90 \, \degree$) + realer OpAmp (GBWP, $-90 \, \degree$) \textrightarrow\ $180 \, \degree$ \\
+						& \textrightarrow\ Mitkopplung \textrightarrow\ Schwingung (falls Schleifenverstärkung $\geq 1$) \\
+	\cgn{\textbf{Lösung}}	& $R_1$ in Serie zu $C_1$: Gain bei hohen $f$ auf $-R_f/R_1$ begrenzt \\
+						& kleines $C_f \parallel R_f$: Gain noch tiefer \textrightarrow\ Bandpass, stabil
+\end{tabularx}
 
 \subsubsection{Tiefpass \quad {\small $Z_1 = R_1$, $Z_f = R_f \parallel C_f$}}
 
@@ -324,7 +329,6 @@ Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-	$$ H(j\omega) = -\frac{R_f}{R_1} \cdot \frac{1}{1 + j\omega R_f C_f} $$
 	\begin{tabular}{ll}
 		\cbl{Tiefe $f$}: & $C_f$ offen \textrightarrow\ Inverter \\
 		\cgn{Hohe $f$}:	 & $C_f$ schliesst $R_f$ kurz \textrightarrow\ Integrator
@@ -358,7 +362,7 @@ $|H| = 1$ für alle $f$, Phase von $180 \, \degree$ auf $0 \, \degree$. \, $C$, 
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-	$$ H = \frac{j\omega RC - 1}{1 + j\omega RC} \quad \varphi = 180 \, \degree - 2 \arctan(\omega RC) $$
+	$$ \varphi = 180 \, \degree - 2 \arctan(\omega RC) $$
 	\begin{tabular}{ll}
 		\cbl{tiefe $f$}: & $C$ sperrt \textrightarrow\ $V_{\rm opp} = 0$ \textrightarrow\ Inverter \\
 		\cgn{hohe $f$}:  & $C$ Kurzschluss \textrightarrow\ $V_{\rm opp} = V_{\rm in}$

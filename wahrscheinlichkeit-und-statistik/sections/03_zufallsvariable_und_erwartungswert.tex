@@ -104,39 +104,20 @@ $$ \boxed{ E(X) = \sum\limits_i X(i) \cdot P(X = x_i) \approx \sum\limits_i x_i 
 \textbf{Intuition:} Rechenregeln vom Differenzieren / Integrieren funktionieren auch für den Erwartungswert!
 
 
-\subsubsection{Multiplikation mit Konstante}
-
-\vspace{-0.2cm}
-$$ \boxed{ E( \cor{\lambda} \, X) = \sum\limits_{\omega} \cor{\lambda} \, X(\omega) \cdot P(\omega) = \cor{\lambda} \cdot E(X) } $$
-
-
-\subsubsection{Erwartungswert einer Konstanten $a$}
-
-\vspace{-0.2cm}
-$$ \boxed{ E(a) = a } $$
-
-
-\subsubsection{Erwartungswert vom Erwartungswert}
-
-\vspace{-0.2cm}
-$$ \boxed{ E(E(X)) = E(X) } $$
-
-
-\subsubsection{Summen}
-
-\vspace{-0.2cm}
-$$ \boxed{ E(X + Y) = E(X) + E(Y) } $$
-
-\myul{\textbf{Herleitung}}
-\begingroup
-\small
-\vspace{0.1cm}
-
-\begin{tabular}{ll}
-	$E(X + Y)$	& $= \sum\limits_{\omega} \big( X(\omega) + Y(\omega)  \big) \cdot P(\omega)$ 										\\
-				& $= \sum\limits_{\omega} X(\omega) \cdot P(\omega) + \sum\limits_{\omega} Y(\omega) \cdot P(\omega) = E(X) + E(Y)$
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}l l l@{}}
+	\textbf{Regel}				& \textbf{Formel}							& \textbf{Bemerkung} \\ \hline
+	Konstante als Faktor		& $E(\cor{\lambda} X) = \cor{\lambda} \, E(X)$	& $\lambda$ si porta fuori dalla $\sum$ \\
+	Konstante $a$				& $E(a) = a$									& costante: nessuna casualità \\
+	EW vom EW					& $E(E(X)) = E(X)$							& $E(X)$ è già una costante \\
+	Summe						& $E(X + Y) = E(X) + E(Y)$					& vale \textbf{sempre} \\
+	Linearität					& $E(\lambda X + a) = \lambda \, E(X) + a$	& \\
 \end{tabular}
-\endgroup
+\renewcommand{\arraystretch}{1}
+
+\smallskip
+{\small \myul{\textbf{Herleitung Summe:}} \;
+$E(X + Y) = \sum\limits_{\omega} \big( X(\omega) + Y(\omega) \big) P(\omega) = \sum\limits_{\omega} X(\omega) P(\omega) + \sum\limits_{\omega} Y(\omega) P(\omega)$}
 
 \subsubsection{Verbindung zur Wahrscheinlichkeit}
 
@@ -207,8 +188,6 @@ Die Formel gilt auch für empirische Daten (Messwerte)
 
 \crd{Für \textbf{unabhängige} Zufallsvariablen} $X$ und $Y$ gilt:
 
-\vspace{0.2cm}
-
 \begin{minipage}[c]{0.48\columnwidth}
 	$$ \boxed{  \var(\lambda \, X) = \lambda^{\crd{2}} \var(X) } $$
 \end{minipage}
@@ -249,41 +228,62 @@ Ist $X$ eine Zufallsvariable mit Erwartungswert $\mu = E(X)$, dann gilt:
 
 \subsection{Bernoulli: Genauigkeit des Mittelwertes}
 
-\textbf{Abweichung des Mittelwerts vom Erwartungswert}
+\textbf{Domanda:} quanto può sbagliare la media di $n$ misure rispetto al vero valore $\mu$?
 
-Gegeben: Zufallsvariable $X$ \\
-Stichproben: $X_1, \, \ldots \, X_n$ Zufallsvariablen mit gleichem \\
-Erwartungswert $\mu = E(X) = E(X_1) = \ldots = E(X_n)$ und gleicher \\
-Varianz $\var(X) = \var(X_1) = \ldots = \var(X_n)$
+\textbf{Gegeben:} $n$ Messungen $X_1, \ldots, X_n$ (unabhängig), alle mit \\
+gleichem Erwartungswert $\mu = E(X_i)$ und gleicher Varianz $\var(X_i) = \var(X)$
 
-\vspace{0.1cm}
+\begin{minipage}[c]{0.5\columnwidth}
+	\textbf{Mittelwert} (media delle misure):
+	$$ M_n = \frac{X_1 + \ldots + X_n}{n} $$
+	$$ E(M_n) = \mu \qquad \boxed{ \var(M_n) = \frac{\var(X)}{n} } $$
+	\small perché: $\var(\tfrac{1}{n} \sum X_i) = \tfrac{1}{n^2} \cdot n \var(X)$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.46\columnwidth}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[width=1.15\linewidth, height=3.6cm, axis lines=left,
+			xtick={0}, xticklabels={$\mu$}, ytick=\empty, ymin=0, ymax=1.7,
+			samples=80, domain=-3:3, legend style={font=\tiny, draw=none, at={(1,1)}, anchor=north east}]
+			\fill[gray!20] (axis cs:-0.8,0) rectangle (axis cs:0.8,1.7);
+			\addplot[thick, blue]   {exp(-x^2/2)/sqrt(2*pi)};
+			\addplot[thick, orange] {2*exp(-2*x^2)/sqrt(2*pi)};
+			\addplot[thick, red]    {4*exp(-8*x^2)/sqrt(2*pi)};
+			\legend{$n=1$, $n=4$, $n=16$}
+		\end{axis}
+	\end{tikzpicture}
+	\\ \tiny distribuzione di $M_n$: più $n$ cresce, più è stretta \\ (zona grigia $= \mu \pm \varepsilon$)
+\end{minipage}
 
-$M_n = \frac{X_1 + \ldots + X_n}{n}$ \qquad $E(M_n) = E(X)$
-$$ \boxed{ P( | M_n - \mu | > \varepsilon ) \leq \frac{\var(X)}{ n \cdot \varepsilon^2} } \qquad \qquad \var(M_n) = \frac{1}{n} \var(X)$$
+\medskip
+Tschebyscheff angewendet auf $M_n$ (al posto di $\var(X)$ si mette $\var(M_n)$):
+$$ \boxed{ P( | M_n - \mu | > \varepsilon ) \leq \frac{\var(X)}{ n \cdot \varepsilon^2} } $$
 
-\textrightarrow\ Je mehr Messungen, desto unwahrscheinlicher eine grosse Abweichung des Mittelwerts vom Erwartungswert 
+\textrightarrow\ Je mehr Messungen, desto unwahrscheinlicher eine grosse Abweichung des Mittelwerts vom Erwartungswert. \\
+\textrightarrow\ L'errore tipico (deviazione standard) scende come $1/\sqrt{n}$: per dimezzarlo servono $4\times$ misure.
 
 
 \subsection{Bernoulli: Gesetz der grossen Zahlen}
 
-\textbf{Abweichung relative Häufigkeit von der Wahrscheinlichkeit} 
+\textbf{Domanda:} la frequenza relativa osservata si avvicina alla probabilità vera $P(A)$? \\
+\textbf{Idea:} è lo stesso caso di 3.9, con una variabile che vale solo $0$ o $1$.
 
-Ereignis: $A \subset \Omega$ \\
-Experiment: $X = \chi_A$, Werte \{0,1\}, $P(A) = E(X)$, $\var(X) = P(A) - P(A)^2 = P(A)(1- P(A))$ 
+\begin{tabular}{@{}ll@{}}
+	Experiment		& $X = \chi_A = \begin{cases} 1 & A \text{ eingetreten} \\ 0 & \text{sonst} \end{cases}$ \\[0.6em]
+	Kennwerte		& $E(X) = P(A)$, \quad $\var(X) = P(A)\,(1-P(A))$ \\[0.3em]
+	$n$-mal wiederholt	& $X_1, \ldots, X_n$ \\[0.3em]
+	Relative Häufigkeit	& $h_n = \dfrac{X_1 + \ldots + X_n}{n}$ \quad (= quante volte $A$ / $n$) \\[0.6em]
+	Kennwerte		& $E(h_n) = P(A)$, \quad $\var(h_n) = \dfrac{P(A)(1-P(A))}{n}$
+\end{tabular}
 
-\vspace{0.1cm}
-
-Wiederholtes Experiment: $X_1, \, ..., \, X_n$, Stichprobe von $X$
-
-\vspace{0.1cm}
-
-Relative Häufigkeit: $h_n = \frac{X_1, \, ..., \, X_n}{n}$, $E(h_n) = P(A)$ \\
-$\var(h_n) = \frac{1}{n} \var(X) = \frac{1}{n} P(A)(1-P(A))$ 
-
+\medskip
+Formel aus 3.9 mit $M_n = h_n$, $\mu = P(A)$:
 $$ \boxed{ P( | h_n - P(A) | > \varepsilon ) \leq \frac{P(A)(1-P(A))}{ n \cdot \varepsilon^2} \leq \frac{1}{4 \, n \, \varepsilon^2} } $$
 
-\textrightarrow\ Je grösser die Anzahl Durchführungen $n$, desto kleiner die Wahrscheinlichkeit, dass die relative Häufigkeit 
-stark von der Wahrscheilichkeit abweicht.
+\small L'ultima stima vale sempre, perché $P(A)(1-P(A)) \leq \tfrac14$ (massimo per $P(A) = \tfrac12$): utile se $P(A)$ non è noto. \normalsize
+
+\textrightarrow\ Je grösser $n$, desto kleiner die Wahrscheinlichkeit, dass die relative Häufigkeit stark von der Wahrscheinlichkeit abweicht.
 
 
 \subsection{Lineare Regression (Vorlage!)}

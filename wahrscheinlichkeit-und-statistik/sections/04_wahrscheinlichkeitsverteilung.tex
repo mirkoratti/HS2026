@@ -7,15 +7,21 @@
 \end{minipage}
 \hfill
 \begin{minipage}{0.6\columnwidth}
-	$$ H_j  = \sum\limits_{k=1}^j  h_k = | \{ x_i | x_i \leq a_j \} | $$
-	$=$ Anzahl Merkmalsausprägungen 'links von $a_j$'
-	
+	\textbf{Absolute Häufigkeit} (rot): \\
+	$h_j$ = Anzahl Messwerte mit $x_i = a_j$, \quad $n = \sum_j h_j$
+
 	\vspace{0.2cm}
 
-	Allgemeiner:
-	$$ H(x) = | \{ i | x_i \leq x \} | $$
-	Stückweise konstant, Sprungstellen bei $a_j$ \\
-	\textbf{Sprunghöhe} \crd{$h_j$}
+	\textbf{Kumulative Häufigkeit} (grün):
+	\[ H_j = \sum_{k=1}^{j} h_k = \lvert \{ x_i \mid x_i \leq a_j \} \rvert \]
+	$=$ Anzahl Merkmalsausprägungen `links von $a_j$' (inkl. $a_j$)
+
+
+	\begin{itemize}
+		\item Stückweise konstant, Sprungstellen bei $a_j$
+		\item \textbf{Sprunghöhe} \crd{$h_j$}
+		\item Monoton wachsend, Endwert $H(x) = n$ für $x \geq a_{\max}$
+	\end{itemize}
 \end{minipage}
 
 

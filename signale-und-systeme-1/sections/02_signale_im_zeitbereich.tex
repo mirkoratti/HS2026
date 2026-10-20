@@ -212,20 +212,26 @@ $$ \boxed{ \varphi_{x_1 x_2}(\tau) = \lim\limits_{T \to \infty} \int\limits_{-T/
 $$ \boxed{ y(t) = x_1(t) * x_2(t) = (x_1 * x_2)(t) = \int\limits_{-\infty}^{\infty} x_1(\tau) \cdot x_2(t - \tau) \; \diff \tau } $$ 
 
 \subsubsection{Grafische Faltung}
+\textbf{La convoluzione non è semplicemente l'area della zona in cui i due segnali
+si sovrappongono: in ogni istante $\tau$ si \cbl{moltiplicano i valori di $x_1$ e di
+$x_2$} (ribaltato e traslato), e $y(t)$ è l'\cbl{area sotto questo prodotto.}} Lo stesso concetto vale per KKF\medbreak
 
-\textbf{Grafisch:} Signal $x_2$ an $y$-Achse spiegeln und \textbf{gespiegeltes} Signal über $x_1$ 'schieben' \\
-(oder umgekehrt)
+\paragraph{Procedimento}
+\begin{enumerate}
+  \item \textbf{Ribaltare} $x_2$ rispetto all'asse $y$ (la Faltung è commutativa: si può ribaltare anche $x_1$).
+  \item \textbf{Traslare} il segnale ribaltato di $t$ verso destra, sopra $x_1$.
+  \item \textbf{Moltiplicare} i due segnali in ogni istante $\tau$.
+  \item \textbf{Calcolare l'area} del prodotto: è $y(t)$.
+\end{enumerate}\medbreak
 
-\vspace{0.2cm}
+\textbf{Supporto e punti di rottura.}
+\begin{itemize}
+  \item Inizio: $s_1+s_2$. Fine: $e_1+e_2$. Fuori vale $y(t)=0$.
+  \item Il risultato cambia forma ai punti $(\text{bordo di }x_1)+(\text{bordo di }x_2)$.
+\end{itemize}\smallbreak
 
-\begin{tabular}{ll}
-    Startpunkt: & 'Addition vom Start der beiden Supports'                              \\
-    Endpunkt: 	& 'Addition vom Ende der beiden Supports'                               \\
-    Maximum:	& Wenn Überlappung beider Signale am grössten                           \\
-                & \textrightarrow\ nach Anzahl geschobenen Zeitschritte                 \\
-    Fläche 		& Die Fläche des Faltungsprodukts entspricht der Fläche unter $x_1$ mal \\
-                & der Fläche unter $x_2$         
-\end{tabular}
+\textbf{Massimo.} Non è sempre dove la sovrapposizione è massima (vale solo
+per rettangoli della stessa altezza).
 
 
 \subsubsection{Eigenschaften des Faltungsprodukts}

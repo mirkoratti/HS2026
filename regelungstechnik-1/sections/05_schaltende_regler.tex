@@ -36,7 +36,8 @@ Ein \textbf{stetiger Regler} kann/soll auf \textbf{kleine Änderungen} der Signa
 \vspace{0.2cm}
 
 Einem \textbf{schaltenden Regler} stehen Signale nur in \textbf{beschränkter Auflösung} zur Verfügung - oft nur 1 Bit. 
-Ein zu schnelles Hin- und Herschalten des Reglers wird oft durch eine \textbf{Hysterese} verhindert. 
+Ein zu schnelles Hin- und Herschalten des Reglers wird oft durch eine \textbf{Hysterese} 
+verhindert. (ad Es. PWM)
 
 
 \subsection{Zweipunktregler (Strecke: Integrator)}{64}
@@ -76,7 +77,14 @@ $$ \boxed{\text{Fehler:} \quad e(t) = r(t) - y(t)} $$
 \hfill
 \begin{minipage}[c]{0.33\columnwidth}
     $$ \boxed{e(t) = r(t) - y(t) }$$
-\end{minipage}
+
+    \textbf{Schwingbedingungen} \\
+    ($A = r$: Sollwert / Mitte der Hysterese)
+\begin{enumerate}
+    \item $A > a$ \quad Regler schaltet ein, $y$ unter $A - a$ liegt. 
+    \item $Kb > A + a$ \quad Regler schaltet aus, $y$ die Schwelle $A + a$ erreicht.
+\end{enumerate}
+\end{minipage}\vspace{-1em}
 
 \begin{center}
     \includegraphics[width=0.9\columnwidth]{images/zweipunkteregler_PT1_simulation.png} 
@@ -90,12 +98,19 @@ $$ \boxed{\text{Fehler:} \quad e(t) = r(t) - y(t)} $$
 \end{enumerate}
 
 
-\subsubsection{Berechnungen am Grenzzyklus}
+\subsubsection{Berechnungen am Grenzzyklus}\vspace{-1em}
 
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/zweipunkteregler_PT1_berechnungen.png} 
+    \renewcommand{\arraystretch}{2.2}
+    \begin{tabular}{@{}r@{\;}l@{\qquad\qquad}l@{}}
+        $h$ & $\displaystyle = e^{-T_u/T_g}, \quad \text{hilfgrösse }, \quad 1 \geq h > 0$ & $[-]$ \\
+        $\Delta y$ & $\displaystyle = Kb(1-h) + 2ha$ & $[^\circ\mathrm{C}]$ \\
+        $T$ & $\displaystyle = T_g \cdot \ln\left[\left(1 - \frac{Kb}{h(A-a)}\right)\left(1 + \frac{Kb}{h(A+a-Kb)}\right)\right]$ & $[\mathrm{s}]$ \\
+        $y_m$ & $\displaystyle = h\left(A - \frac{Kb}{2}\right) + \frac{Kb}{2}$ & $[^\circ\mathrm{C}]$ \\
+        $e_m$ & $\displaystyle = (1-h)\left(A - \frac{Kb}{2}\right)$ & $[^\circ\mathrm{C}]$
+    \renewcommand{\arraystretch}{1}
+    \end{tabular}
 \end{center}
-
 
 \subsection{Dreipunkteregler / Mehrpunkteregler}{71}
 
@@ -105,7 +120,21 @@ $$ \boxed{\text{Fehler:} \quad e(t) = r(t) - y(t)} $$
 \hfill
 \begin{minipage}[c]{0.66\columnwidth}
     \raggedright
-    Ein Dreipunkteregler hat drei mögliche Werte für das Stellsignal $u(t)$, z.B. vorwärts, aus und rückwärts. 
-    Die Realisierung kann z.B. mit \textbf{zwei Hysteresen} erfolgen, wobei sich \textbf{vier Schaltbedingungen} ergeben. 
+    Ein Dreipunkteregler hat drei mögliche Werte für das Stellsignal $u(t)$, z.B. vorwärts, aus und rückwärts.
+    Die Realisierung kann z.B. mit \textbf{zwei Hysteresen} erfolgen, wobei sich \textbf{vier Schaltbedingungen} ergeben.
 \end{minipage}
 
+\vspace{1ex}
+\textbf{Parameter} (Eingang: $e = r - y$)
+\begin{itemize}
+    \item $b_1 > 0 > b_2$: Stellwerte (z.B. heizen / kühlen), dazwischen $u = 0$ (aus)
+    \item $a$: \textbf{Einschaltschwelle}, $c$: \textbf{Ausschaltschwelle},  $|a| > |c|$
+    \item Index 1: Seite $e > 0$ (zu kalt \textrightarrow heizen); Index 2: Seite $e < 0$ (zu warm \textrightarrow kühlen)\\
+    \cbl{\textbf{Attenzione: }$e$ ha segno opposto rispetto a $\Delta y$!}
+\end{itemize}
+
+\textbf{Schaltbedingungen}
+\begin{align*}
+    e > a_1 &\Rightarrow u = b_1 & e < c_1 &\Rightarrow u = 0 \\
+    e < a_2 &\Rightarrow u = b_2 & e > c_2 &\Rightarrow u = 0
+\end{align*}

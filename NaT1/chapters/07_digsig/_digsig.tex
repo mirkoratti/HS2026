@@ -1,4 +1,4 @@
-\section{Digitalisierung von Signalen S. 71}
+\section{Digitalisierung von Signalen S. 79}
 \includegraphics{chapters/07_digsig/figures/digitalisierungBlockschema.pdf}
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{X|X}
@@ -18,25 +18,25 @@
 	\end{tabularx}
 \end{table}
 
-\subsection{Abtastung S. 73}
-\subsubsection{Ideale Abtastung S.75}
+\subsection{Abtastung S. 80}
+\subsubsection{Ideale Abtastung S.82}
 \includegraphics[width=.90\linewidth]{chapters/07_digsig/figures/idealeAbtastung.pdf}
 
-\subsubsection{Rekonstruktion mit Tiefpass S. 78}
+\subsubsection{Rekonstruktion mit Tiefpass S. 87}
 \includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/rekonstruktionTP.pdf}
 
-\subsubsection{Natural Sampling S. 73}
+\subsubsection{Natural Sampling S. 81}
 \includegraphics{chapters/07_digsig/figures/naturalSampling.pdf}\\
 \textbf{Rekonstruktion:} Bei der Rekonstruktion muss das Signal nach dem Tiefpass noch mit dem Faktor $\frac{T_s}{\tau}$ multipliziert werden, um die Dämpfung wieder aufzuheben.
 
-\subsubsection{Sample {\&} Hold (ZOH), Flat-Top Sampling S. 78}
+\subsubsection{Sample {\&} Hold (ZOH), Flat-Top Sampling S. 90}
 ZOH $\rightarrow$ Zero Order Hold. $H_{ZOH}(\omega) = \tau \cdot \frac{sin(\frac{\tau \omega}{2})}{\frac{\tau \omega}{2 }} \;\;\; , \;\;\; \tau \leq T_s$\\
 \includegraphics{chapters/07_digsig/figures/flattopsampling.pdf}
 
-\subsubsection{Nyquist-Shannon Abtasttheorem S. 76}
+\subsubsection{Nyquist-Shannon Abtasttheorem S. 85}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
 	\setlength{\topsep}{0cm}} 
-		\item Nachrichtensignal muss auf eine Bandbreite begrenzt sein $|M(\omega)|\approx 0 \text{ für } \omega > 2\pi B_m$ (Aliasing S. 77)
+		\item Nachrichtensignal muss auf eine Bandbreite begrenzt sein $|M(\omega)|\approx 0 \text{ für } \omega > 2\pi B_m$ (Aliasing S. 87)
 		\item im Basisband darf es keine Überlappungen von Teilspektren geben, d.h. $f_s$ muss die Spektralanteile genügend weit vom ursprünglichen Spektrum wegschieben.
 	\end{list}
 
@@ -53,10 +53,10 @@ ZOH $\rightarrow$ Zero Order Hold. $H_{ZOH}(\omega) = \tau \cdot \frac{sin(\frac
 	\end{table}
 \end{minipage}
 
-\paragraph{Abtasttheroem für Bandpasssignale S. 76 (Subsampling)}
+\paragraph{Abtasttheroem für Bandpasssignale S. 85 (Subsampling)}
 \includegraphics{chapters/07_digsig/figures/subsampling.pdf}
 \newpage
-\paragraph{Interpolation im digitalen Bereich S. 80 (Oversampling)}
+\paragraph{Interpolation im digitalen Bereich S. 92 (Oversampling)}
 Bei Oversampling werden auf \textbf{digitaler Seite Zwischenwerte berechnet} (Interpolation) um mehr Samples zu generieren vor der D/A Wandlung. Das führt dazu, dass das \textbf{Basisband erweitert} wird (also die Blöcke im Amplitudendichtespektrum auseinandergeschoben werden, vgl Abbildung unten und "ideale Abtastung").\\
 \vspace{.3cm}
 Berechnung der Zwischenwerte: \efbox[linecolor=red]{$m(t)=\sum_{n=-\infty}^{\infty} m(nT_0) \frac{sin(\omega_c(t-nT_0))}{\omega_c(t-T_0)} \text{  mit  } \omega_c = \frac{\omega_s}{2}$}\\
@@ -69,9 +69,9 @@ Berechnung der Zwischenwerte: \efbox[linecolor=red]{$m(t)=\sum_{n=-\infty}^{\inf
 	Zweifach interpoliertes Zero-Order Hold Signal im Frequenzbereich
 \end{center}
 
-\subsection{Quantisierung S. 81}
+\subsection{Quantisierung S. 93}
 Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplitudenkontinuierlich} vor!
-\subsubsection{Gleichförmige Quantisierung S.82}
+\subsubsection{Gleichförmige Quantisierung S.93}
 
 \begin{tabularx}{\linewidth}{p{.25\linewidth} p{.2\linewidth} p{.25\linewidth} p{.2\linewidth}}
 	Skalierung von $m(t)$:    & $|m_n(t) < 1$ & Wortlänge der Samples: & n Bits \\
@@ -84,7 +84,7 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 	Maximaler Fehler:		&  $-\Delta/2 < q_e(nT_s) < \Delta/2$ \hspace{2cm} \efbox[linecolor=red]{$P_{qe}=N=\frac{1}{\Delta} \int_{-\Delta/2}^{\Delta/2} q_e^2dq_e = \frac{\Delta^2}{12}$}
 \end{tabularx}\\
 
-\paragraph{SNR Signal-Rausch Verhältnis S. 82}
+\paragraph{SNR Signal-Rausch Verhältnis S. 93}
 \begin{tabularx}{\linewidth}{p{.45\linewidth} p{.5\linewidth}}
 	\begin{minipage}{\linewidth}
 			\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
@@ -100,7 +100,7 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 \end{minipage}
 \end{tabularx}
 
-\subsubsection{Ungleichförmige Quantisierung S. 83}
+\subsubsection{Ungleichförmige Quantisierung S. 94}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
 		\setlength{\topsep}{0cm}} 
 		\item Bei gleichförmiger Quantisierung ist N konstant $\rightarrow$ Verschlechterung der SNR bei tiefen Signalpegeln
@@ -108,7 +108,7 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 		\item Quanatisierungsintervalle $\Delta$ sind für kleine Signalpegel klein und für grosse Signalpegel grösser $\rightarrow$ SNR wird verbessert
 	\end{list}
 
-\subsection{Deltamodulator S. 88}
+\subsection{Deltamodulator S. 99}
 \includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/deltamodulator.pdf}\\
-\subsection{Delta-Sigma Modulator S. 89}
+\subsection{Delta-Sigma Modulator S. 100}
 \includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/deltasigmamodulator.pdf}\\

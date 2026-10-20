@@ -28,7 +28,7 @@
 \usepackage{mhsetup}                % needed to modify pmatrix environment
 % \usepackage{txfonts}                % Times math font
 \usepackage{newtxtext}
-\usepackage{newtxmath}
+\usepackage[libertine]{newtxmath}
 \usepackage[squaren]{SIunits}       % SI-units
 \usepackage{bm}                     % bold math symbols
 % Double defined laplace symbol (with newtxmath)
@@ -556,6 +556,8 @@
 % FIX command for missing \e in newmath
 \newcommand{\e}{\mathrm{e}}
 
+% custom command for electron notation
+\newcommand{\el}{$\mathrm{e^-} \,$}
 
 % shortcuts for colored text
 \newcommand{\cgn}[1]{{\color{green}#1}}

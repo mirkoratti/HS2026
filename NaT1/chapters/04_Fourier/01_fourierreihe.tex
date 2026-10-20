@@ -1,4 +1,4 @@
-\subsection{Fourierreihe S.20}
+\subsection{Fourierreihe S.23}
 
 Fourierreihe funktioniert nur mit \textbf{periodischen} Signalen.
 
@@ -93,15 +93,15 @@ Siehe auch Skript Seite 22\\
 	\hline
 \end{tabular}
 
-\subsection{Rechtecksignale S.256}
+\subsection{Rechtecksignale S.272}
 \boxedeq{\begin{split} A_n=\frac{2}{T}\int\limits_{-t_1/2}^{t_1/2}A\cos\left(\frac{2\pi n}{T}t\right)dt= \frac{2A}{\pi n}\sin\left(\frac{\pi t_1}{T}n\right) \end{split}}
 
 Für Verhältnisse $\frac{T}{ggT(t_1,T)}=n\in\mathbb{N}$ verschwinden die
 $n.$ Harmonische und deren Vielfache. (ggT = grösster gemeinsamer Teiler, für sehr wenig schlaue: Taschenrechner \textbf{ggT = gcd} ;-))\\
-Formel Skript S. 256; $\tau = \frac{t_{1}}{T}$, $t_1$ ist die Einschaltzeit\\
+Formel Skript S. 272; $\tau = \frac{t_{1}}{T}$, $t_1$ ist die Einschaltzeit\\
 \includegraphics[width=19cm]{chapters/04_fourier/figures/fourierreihe-rechteck.png}
 
-\subsection{Satz von Parseval S. 23}
+\subsection{Satz von Parseval S. 27}
 Die mittlere Leistung kann auch aus den komplexen Fourierkoeffizienten berechnet werden.
 \begin{equation*}
 	\overline{P_x} = \frac{1}{T} \int_{T}|x(t)|^2 dt = \sum_{n=-\infty}^{\infty} |c_k|^2 = \sum_{n=-\infty}^{\infty} |\frac{a_n-jb_n}{2}|^2

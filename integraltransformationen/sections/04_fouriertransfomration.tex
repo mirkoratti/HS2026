@@ -128,6 +128,9 @@ $\int \limits_{-\infty}^{\infty} \vert f(t) \vert ^2 \, \diff t
 
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{r c l}
+    $\delta(t)$             & $\laplace$    & $1$                                                                   \\
+    $1$ (const.)            & $\laplace$    & $2 \pi \, \delta(\omega)$                                             \\
+    $\e^{\jimg \omega_0 t}$ & $\laplace$    & $2 \pi \, \delta(\omega - \omega_0)$                                  \\
     $\cos(\omega_0 \, t)$   & $\laplace$    & $\pi(\delta( \omega + \omega_0) + \delta ( \omega - \omega_0))$       \\
     $\sin(\omega_0 \, t)$   & $\laplace$    & $\jimg \pi(\delta( \omega + \omega_0) - \delta ( \omega - \omega_0))$
 \end{tabular}
@@ -157,12 +160,20 @@ $$ x_a (t) = \sum \limits_{n = - \infty}^{\infty} x(t) \cdot \delta(t - nT) = \s
 
 \includegraphics[width=\columnwidth]{images/sampling.png}
 
-\vspace{0.2cm}
 
 \textbf{Wechsel in den Frequenzbereich (Fouriertransformierte)}
 $$ x_a (t) = \sum \limits_{n = - \infty}^{\infty} x[n]\cdot \delta(t - nT)  \; \laplace \; 
 X_a(\omega) = \frac{1}{T} \sum \limits_{n = - \infty}^{\infty} X(\omega - n \omega_a) \quad \text{mit } \omega_a = \frac{2 \pi}{T} $$		 
 
+\subsubsection{Abtasttheorem / Aliasing}
+
+Il segnale $x(t)$ ha pulsazione massima $\omega_{\max}$ e viene campionato con $\omega_a = \frac{2\pi}{T}$.
+
+\[
+\omega_a > 2\,\omega_{\max} \quad\Longleftrightarrow\quad \text{nessun Aliasing}
+\]
+
+Se $\omega_a \le 2\,\omega_{\max}$, le copie di $X(\omega - n\omega_a)$ si sovrappongono: c'è Aliasing e il segnale non si può più ricostruire. Per $f$ e $f_a$ vale lo stesso: $f_a > 2f_{\max}$.
 
 \subsection{Diskrete Fouriertransformation (DFT)}
 
@@ -184,7 +195,7 @@ $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reelle
     Ein Signal $s(t)$ wird auf dem Intervall [0,1] mit der Frequenz $f_a = 4 \, \text{Hz}$ abgetastet.
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.38\columnwidth}
+\begin{minipage}[c]{0.44\columnwidth}
     $s(t) = \begin{cases}			
         t(1-t)  & \text{für} \; t \in [0,1] \\
         0       & \text{sonst} 
@@ -227,6 +238,3 @@ $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reelle
     $c_{k + N/2} =  \frac{1}{N} \left( c_{g,k} - E_N^k \, c_{u,k} \right)$
 \end{tabular}
 \renewcommand{\arraystretch}{1}
-
-\columnbreak
-

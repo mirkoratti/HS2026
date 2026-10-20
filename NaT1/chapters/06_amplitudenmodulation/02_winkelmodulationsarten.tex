@@ -1,4 +1,4 @@
-\subsection{Winkelmodulation (FM/PM) S. 60}
+\subsection{Winkelmodulation (FM/PM) S. 66}
 Besser Störfestigkeit aber grösserer Bandbreitenbedarf als AM.
 
 \begin{minipage}{.45\linewidth}
@@ -67,10 +67,10 @@ Besser Störfestigkeit aber grösserer Bandbreitenbedarf als AM.
 PM und FM können äquivalent realisiert werden (mit zusätzlichem Integrator oder Differenziator)\\
 \includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/PMundFM.png}
 
-\subsubsection{Spektrum der Winkelmodulation S. 62}
+\subsubsection{Spektrum der Winkelmodulation S. 70}
 \includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/spektrumWinkelmodulation.pdf}
 
-\subsubsection{Kleinhub Winkelmodulation S. 62}
+\subsubsection{Kleinhub Winkelmodulation S. 70}
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{m{.65\linewidth} m{.35\linewidth}}
 		\begin{minipage}{\linewidth}
@@ -85,11 +85,11 @@ PM und FM können äquivalent realisiert werden (mit zusätzlichem Integrator od
 	\end{tabularx}
 \end{table}
 
-\paragraph{Spektrum S. 62}
+\paragraph{Spektrum S. 70}
 \includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/SpektrumNB_PM.pdf}\\
 \textbf{Vergleich AM und NP-PM:} Qualitativ gilt für die Amplitudenspektren $|X_{AM}(\omega)| = |X_{NBPM(\omega)}$
 
-\subsubsection{Grosshub Winkelmodulation S. 63}
+\subsubsection{Grosshub Winkelmodulation S. 71}
 WideBand Angle Modulation, siehe auch  Skript Seite 67 \hspace{.3cm} \efbox[linecolor=red]{$|\varphi (t)| > 1$}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} 	\setlength{\topsep}{0cm}} 
 	\item nicht lineare Terme von $\varphi (t)$ nicht mehr vernachlässigbar
@@ -114,7 +114,7 @@ WideBand Angle Modulation, siehe auch  Skript Seite 67 \hspace{.3cm} \efbox[line
 	\end{tabularx}
 \end{table}
 
-\subsubsection{Spektrum Einton-Winkelmodulation S. 64}
+\subsubsection{Spektrum Einton-Winkelmodulation S. 72}
 \vspace{.1cm}
 \efbox[linecolor=red]{$x_{ST} = A_c \cdot \Re (e^{j(\omega_c t + \varphi (t))}) = A_c \cdot cos(\omega_c t + \beta \cdot sin(\omega_mt)) = A_c \cdot \sum_{n=-\infty}^{\infty}J_n(\beta) \cdot cos((\omega_c + n\cdot \omega_m)t)$} \\
 mit $\varphi(t)$ als Nachrichtensignal gemäss Phasen- oder Winkelmodulation (siehe Tabelle oben) und \\$J_n(\beta)$: Bessel Funktion erster Art und n-ter Ordnung
@@ -136,15 +136,15 @@ mit $\varphi(t)$ als Nachrichtensignal gemäss Phasen- oder Winkelmodulation (si
 	$\Delta T$: Zeitverzögerung bezogen auf Grundschwingung ($f_c$) \\
 	$n$: n-te Harmonische \\
 	
-	Tabelle Skript S. 66 bzw. 258 ff.
+	Tabelle Skript S. 74 bzw. 274 ff.
 \end{minipage}
 
-\subsubsection{Bandbreite Einton-Winkelmodulation S. 67}
+\subsubsection{Bandbreite Einton-Winkelmodulation S. 75}
 Theoretisch unendliche Bandbreite \\
 Praktisch approximation nach Carson: \efbox[linecolor=red]{$B_{ST} = 2 \cdot (\Delta f+f_m) = 2 \cdot (\beta + 1) \cdot \frac{\omega_m}{2\pi}$} (min. \qty{98}{\%} der Signalleistung)\\
 \includegraphics{chapters/06_amplitudenmodulation/figures/bandbreite.pdf}
 
-\subsubsection[Bandbreite für beliebige m(t)]{Bandbreite für beliebige $m(t)$ S. 67}
+\subsubsection[Bandbreite für beliebige m(t)]{Bandbreite für beliebige $m(t)$ S. 75}
 \includegraphics{chapters/06_amplitudenmodulation/figures/bandbreiteBeliebigem.pdf}
 
 \subsubsection{Realisierung}
@@ -159,5 +159,5 @@ Die Amplitude des Ausgangssignals eines Frequenz-Diskriminators ist proportional
 \textbf{PM:} $y_d(t)=k_d\cdot k_p \cdot m'(t)$ \\
 \textbf{FM:} $y_d(t) = k_d \cdot k_f \cdot m(t)$
 
-\subsubsection{FM Empfänger S. 68}
+\subsubsection{FM Empfänger S. 77}
 \includegraphics{chapters/06_amplitudenmodulation/figures/FMreceiver.pdf}
