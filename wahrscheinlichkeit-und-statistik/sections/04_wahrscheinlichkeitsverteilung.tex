@@ -184,10 +184,22 @@ Verteilungsfunktion von $F_{\mathrm{max}(X_1 ,X_2)}(x) = F_{X_1} (x_1)^2 = F_{X_
 
 \myul{\textbf{Spannweite $\bm{R}$ / Quartilabstand $\bm{Q}$}}
 
+\vspace{0.1cm}
+
+\begin{itemize}
+	\item $x_{0.25}$ / $x_{0.75}$ = \textbf{unteres / oberes Quartil}
+	\item Daten sortieren $x_1 \leq \dots \leq x_n$ und $k = n \cdot p$ berechnen ($p: 0.75 / 0.25$):
+	\begin{itemize}
+		\item $k$ nicht ganzzahlig: $j = \lceil k \rceil$ und $x_p = x_j$
+		\item $k$ ganzzahlig: $x_p = \dfrac{x_k + x_{k+1}}{2}$
+	\end{itemize}
+\end{itemize}
+
 \begin{center}
 	\includegraphics[width=0.65\columnwidth]{images/spannweite_quartilabstand.png}
 \end{center}
 
+\columnbreak
 
 \subsection[Wahrscheinlichkeitdichte]{Wahrscheinlichkeitdichte $\bm{\varphi(x)}$}
 
@@ -205,7 +217,8 @@ Verteilungsfunktion von $F_{\mathrm{max}(X_1 ,X_2)}(x) = F_{X_1} (x_1)^2 = F_{X_
 	\vspace{0.1cm}
 
 	\begin{itemize}
-		\item $\crd{\varphi}(x) = \cgn{F}'(x)$
+		\item $\crd{\varphi}(x) = \cgn{F}'(x)$\\
+		Derivata di $F(x)$, ora l'area è importante
 		\item $P(a < X \leq b) = \int\limits_a^b \crd{\varphi}(x) \, \diff x $
 		\item $\cgn{F}(x) = \int\limits_{-\infty}^x \varphi(\xi) \, \diff \xi$
 		\item $\int\limits_{-\infty}^{\infty} \varphi(x) = 1$ (Normierungsbedingung)
@@ -213,7 +226,8 @@ Verteilungsfunktion von $F_{\mathrm{max}(X_1 ,X_2)}(x) = F_{X_1} (x_1)^2 = F_{X_
 	\end{itemize}
 \end{minipage}
 
-$$ \varphi_{X+Y}(x) = (\varphi_X * \varphi_Y)(x) = \int\limits_{-\infty}^{\infty} \varphi_X(t) \cdot \varphi_Y(x - t) \, \diff t \quad \text{(Faltung)} $$
+$$ \varphi_{X+Y}(x) = (\varphi_X * \varphi_Y)(x) = \int\limits_{-\infty}^{\infty} \varphi_X(t) \cdot \varphi_Y(x - t) \, 
+\diff t \quad \text{(Faltung)} $$
 
 
 \subsection{Erwartungswert mittels Wahrscheinlichkeitsdichte}

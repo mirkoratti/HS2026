@@ -124,6 +124,8 @@ Partielle Integration darf mehrfach angewendet werden. \\
     \hline
     \cbl{$ - \jimg \omega \e^{- \jimg \omega t}$}   & \cbl{$\e^{- \jimg \, \omega \, t}$}   & \cbl{$\frac{\e^{- \jimg \, \omega \, t}}{- \jimg \, \omega} = \frac{\jimg}{\omega} \e^{-\jimg \, \omega \, t}$} & \cbl{ $(n \neq 0)$ } \\
     \hline
+    \cbl{$(1 - \jimg \omega t) \, \e^{- \jimg \omega t}$}   & \cbl{$t \, \e^{- \jimg \, \omega \, t}$}   & \cbl{$\e^{- \jimg \omega t} \left( \frac{\jimg t}{\omega} + \frac{1}{\omega^2} \right)$} & \cbl{ $(\omega \neq 0)$ } \\
+    \hline
 \end{ctabular}
 \renewcommand{\arraystretch}{1}
 
@@ -209,17 +211,13 @@ H(\omega) = \frac{1}{1-\omega^2+\mathrm{j}\omega}
 \]
 \textbf{Hinweis:} equivale a $H(\omega)=G(s)\big|_{s=\mathrm{j}\omega}$ (vedi 5.6).
 
-% \subsection{Rechenregeln der Fouriertransformation}\label{chap:rechenregel_ft}
-% \renewcommand{\arraystretch}{1.5}
-% \begin{tabularx}{\linewidth}{XXX}
-%     \hline
-%     \textbf{Regel} & \textbf{Zeitbereich} & \textbf{Frequenzbereich} \\
-%     \hline
-%     Linearität        & $a\,f(t) + b\,g(t)$                         & $a\,F(\omega) + b\,G(\omega)$ \\
-%     Zeitverschiebung  & $f(t - t_0)$                                & $\mathrm{e}^{-\mathrm{j}\omega t_0}\,F(\omega)$ \\
-%     Modulation        & $\mathrm{e}^{\mathrm{j}\omega_0 t}\,f(t)$   & $F(\omega - \omega_0)$ \\
-%     Streckung ($\alpha \neq 0$) & $f(\alpha t)$                     & $\dfrac{1}{|\alpha|}\,F\!\left(\dfrac{\omega}{\alpha}\right)$ \\
-%     Ableitung         & $f'(t)$                                     & $\mathrm{j}\omega\,F(\omega)$ \\
-%     Faltung           & $(f * g)(t)$                                & $F(\omega)\cdot G(\omega)$ \\
-%     \hline
-% \end{tabularx}
+\subsection{Rekonstruktion aus Abtastwerten (Shannon)}
+\begin{enumerate}
+    \item $X(\omega) = T \cdot X_a(\omega) \cdot \mathrm{rect}\!\left(\frac{\omega}{\omega_a}\right)$ \quad (Tiefpass ideale: estrazione copia centrale dello spettro)
+    \item Rücktransformation (Multiplikationssatz $\Rightarrow$ Faltung con $\mathrm{si}$):
+\end{enumerate}
+\[
+x(t) = \sum_{n=-\infty}^{\infty} x[n] \cdot \mathrm{si}\!\left(\frac{\pi (t - nT)}{T}\right)
+= \sum_{n=-\infty}^{\infty} x[n] \, \frac{\sin\!\big(\pi (t - nT)/T\big)}{\pi (t - nT)/T}
+\]
+Ogni campione è una $\mathrm{si}$ scalata (altezza $x[n]$) e traslata in $t = nT$. In $t = nT$ vale $x[n]$ (la $\mathrm{si}$ è $1$ in $0$ e $0$ in tutti gli altri $mT$), ma la somma è corretta per \textbf{ogni} $t$. In pratica: somma finita $\Rightarrow$ solo approssimazione.

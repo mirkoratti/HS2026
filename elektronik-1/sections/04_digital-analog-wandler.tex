@@ -13,6 +13,12 @@
     $$ \boxed{ V_{\rm out} =  \frac{D}{2^n} \, (V_{\rm refp} - V_{\rm refn}) + V_{\rm refn} } $$
 \end{minipage}
 
+\vspace{0.2cm}
+
+\textbf{Fehler mit Lastwiderstand $R_L$} (DAC = Thévenin-Quelle mit $V_{\rm id}$ und $R_{\rm th}$):
+$$ \boxed{ V_{\rm real} = V_{\rm id} \cdot \frac{R_L}{R_L + R_{\rm th}} } \qquad \boxed{ F = \frac{V_{\rm real} - V_{\rm id}}{V_{\rm id}} = - \frac{R_{\rm th}}{R_L + R_{\rm th}} \approx - \frac{R_{\rm th}}{R_L} } $$
+$R_{\rm th}$: Referenzen auf 0 V \textrightarrow\ alle Leitwerte parallel, z.B. Wägeverfahren: $R_{\rm th} = \frac{1}{2^n \cdot G_0}$.
+
 
 \subsection{Parallelverfahren}
 
@@ -43,7 +49,7 @@
 
     \begin{itemize}
         \item[+] Garantiert Stetigkeit
-        \item $2^n$ Widerstände, $2^n$ Schalter \textrightarrow\ $n-\mathrm{to}-2^n$ Decoder
+        \item \cbl{$2^n$ = Anzahl \textbf{Widerstände}} = Anzahl Schalter \textrightarrow\ $n$-to-$2^n$ Decoder
     \end{itemize}
 \end{minipage}
 
@@ -109,7 +115,8 @@ Um eine Ausgangsspannung $V_{\rm out}$ zu erhalten, wird ein OPV nachgeschaltet 
     $$ \textbf{Leitwerte!} \qquad \bm{G_0 = \frac{1}{8R} } $$
 \end{minipage}
 
-$$ \boxed{ V_{\rm out} = \frac{B_0 \cdot 2^0 \cdot G_0 + B_1 \cdot 2^1 \cdot G_0 + B_2 \cdot 2^2 \cdot G_0+ B_3 \cdot 2^3 \cdot G_0}{2^4 \cdot G_0} (V_{\rm refp}- V_{\rm refn}) + V_{\rm refn} } $$
+Bit $B_i$ schaltet Leitwert $2^i \cdot G_0$ nach $V_{\rm refp}$ (sonst $V_{\rm refn}$), Gesamtleitwert $2^n \cdot G_0$ \textrightarrow\ $G_0$ kürzt sich:
+$$ \boxed{ V_{\rm out} = \frac{D}{2^n} (V_{\rm refp}- V_{\rm refn}) + V_{\rm refn} = D \cdot q + V_{\rm refn} } $$
 
 
 \subsubsection{Kapazitiver DAC ohne Ausgangsbuffer (4 Bit)}
@@ -118,6 +125,7 @@ $$ \boxed{ V_{\rm out} = \frac{B_0 \cdot 2^0 \cdot G_0 + B_1 \cdot 2^1 \cdot G_0
     \includegraphics[width=0.85\columnwidth]{images/kapazitiver_DAC_2.png}
 \end{center}
 
+\textbf{Ladungserhaltung:} Ladung der Platten am Knoten $V_{\rm out}$ bleibt konstant, \mbox{$Q = C \cdot \Delta V$} \textrightarrow\ Teiler Kap.~\ref{cap-teiler} \\
 Wenn Kapazitäten entladen sind, bevor geschaltet wird: 
 $$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V_{\rm refn}  \quad  \text{mit } C_1 + C_2 = 2^n \cdot C } $$
 
@@ -126,21 +134,22 @@ $$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V
 
 \subsubsection{Kapazitiver DAC mit Ausgangsbuffer}
 
-\begin{minipage}[c]{0.4\columnwidth}
+\begin{minipage}[c]{0.44\columnwidth}
     \includegraphics[width=\columnwidth]{images/kapazitiver_DAC_ausgangsbuffer.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.53\columnwidth}
+\begin{minipage}[c]{0.55\columnwidth}
     \raggedright
-    Immer nur ein Schalter geschlossen! \\
-    2 Phasen: PH0 und PH1 
+    \cbl{Bit $B_i = 1$: Kondensator an $V_{\rm ref1}$, sonst an $V_{\rm ref0}$} \\
+    2 Phasen: PH0 und PH1
 
-    \vspace{0.2cm}
     PH0: $V_{\rm out} = V_{\rm ref0}$ (Ladungen resettate)\\
     PH1: Ausgang gültig (nach Einschwingen)
 
-    $$ \boxed{ V_{\rm out} = -(V_{\rm ref1} - V_{\rm ref0}) \cdot \Bigg( \frac{n \cdot C}{C_{fb}}  \Bigg) + V_{\rm ref0} } $$
-\end{minipage}
+    $$ \boxed{ V_{\rm out} = -(V_{\rm ref1} - V_{\rm ref0}) \cdot \frac{\cbl{C_{\rm tot}}}{C_{fb}} + V_{\rm ref0} } $$
+\end{minipage}\smallbreak
+
+\cbl{$C_{\rm tot}$} = Summe der an $V_{\rm ref1}$ geschalteten Kondensatoren $= \sum_i B_i\, 2^i C$ \\ \textbf{Ladungserhaltung} am $-$-Knoten: Kap.~\ref{cap-teiler}
 
 \vspace{0.2cm}
 
@@ -154,9 +163,9 @@ $$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.53\columnwidth}
-    $$ \boxed{ I_{\rm dac_{max}} = \frac{V_{\rm refp} - V_{\rm refn}}{R} \frac{2^n -1}{2^n} } $$
-    $$ \boxed{ I_{\rm dac} = \frac{V_{\rm refp} - V_{\rm refn}}{R} \frac{D}{2^n}  } $$
-    $$ \boxed{ V_{\rm out} = V_{\rm refn} - R \cdot I_{\rm dac} } $$
+    $$ \boxed{ I_{\rm dac_{max}} = \frac{V_{\rm refp} - V_{\rm refn}}{R_{\rm LSB}} (2^n -1) } $$
+    $$ \boxed{ I_{\rm dac} = \frac{V_{\rm refp} - V_{\rm refn}}{R_{\rm LSB}} \, D } $$
+    $$ \boxed{ V_{\rm out} = V_{\rm refn} - R_{fb} \cdot I_{\rm dac} } $$
 
     \vspace{0.2cm}
     \begin{itemize}
@@ -165,16 +174,23 @@ $$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V
     \end{itemize}
 \end{minipage}
 
+\textbf{Binär gewichtet:} $R_i = R_{\rm LSB}/2^i$ (Bit $B_i$), $R_{\rm LSB}$ = \textbf{grösster} $R_i$ \textrightarrow\ $\boxed{ |q| = \frac{R_{fb}}{R_{\rm LSB}} \cdot |\Delta V_{\rm ref}| }$ \\
 
 \subsubsection{DAC mit R2R-Netzwerk}
 \label{R2R}
 
-\begin{minipage}[c]{0.4\columnwidth}
+\begin{minipage}[c]{0.43\columnwidth}
     \includegraphics[width=\columnwidth]{images/R2R_netzwerk}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.56\columnwidth}
     Für Ersatzwiderstand \textbf{von rechts} her 'schauen'
+
+    {(\footnotesize R si combinano sempre creando Part. U con
+    \tikz[baseline=-0.5ex, line width=0.2pt]{
+        \draw (0,0) -- (0.2,0) node[draw, minimum width=0.4cm, minimum height=0.2cm, inner sep=0pt, anchor=west] (a) {\tiny R} (a.east) -- ++(0.2,0)
+        node[draw, minimum width=0.4cm, minimum height=0.2cm, inner sep=0pt, anchor=west] (b) {\tiny R} (b.east) -- ++(0.2,0);
+    })}
 
     \vspace{0.2cm}
     
@@ -189,9 +205,14 @@ $$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V
 Variiert $V_{\rm refp}$, dann variiert auch $V_{\rm out}$
 
 \textbf{Jeder geschlossene Schalter trägt gewichtet zur Ausgangsspannung bei! \\
-Achtung: Invertierung!}
+\crd{Achtung: Invertierung!}}
 
-$$ \boxed{V_{\rm out} = V_{\rm refn} - (V_{\rm refp} - V_{\rm refn}) \cdot \frac{D}{2^n}}  $$
+$$ \boxed{V_{\rm out} = V_{\rm refn} - (V_{\rm refp} - V_{\rm refn}) \cdot \frac{D}{2^n}}  $$\vspace{-0.5em}
+
+{\footnotesize $n$ = Anzahl Bits, \quad $D = \sum_i B_i\, 2^i$ = 
+Dezimalwert des Digitalworts (z.B.\ $1010_2 = 8 + 2 = 10$)\\
+\textbf{Mit Buffer statt Opamp (nicht invertierend):} $V_{\rm out} = V_{\rm refn} + (V_{\rm refp} - V_{\rm refn}) \frac{D}{2^n}$ \\
+Herleitung: Thévenin Knoten für Knoten, $R_{\rm th} = R$ konstant, $V_{\rm th}$ halbiert sich pro Knoten (Teiler \textbf{nicht} multiplizieren!)}\smallbreak
 
 
 \cbl{\myul{\textbf{Beispiel:}}
@@ -205,18 +226,6 @@ $$ \boxed{V_{\rm out} = V_{\rm refn} - (V_{\rm refp} - V_{\rm refn}) \cdot \frac
 \end{tabular}
 }
 \renewcommand{\arraystretch}{1}
-
-
-\subsection{Einschub: Kapazitiver Spannungsteiler}
-
-\begin{minipage}[c]{0.4\columnwidth}
-    \includegraphics[width=0.7\columnwidth]{images/CapSpannungsteiler.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-    $$ \boxed{ U_2 = U_1 \cdot \frac{X_2}{X_1 + X_2} = U_1 \cdot \frac{C_1}{C_1 + C_2} } $$
-\end{minipage}
-
 
 \subsection{Zählverfahren (PWM)}
 
@@ -254,18 +263,16 @@ $$ \boxed{V_{\rm out} = V_{\rm refn} - (V_{\rm refp} - V_{\rm refn}) \cdot \frac
     \end{itemize}
 \end{minipage}
 
-\vspace{0.2cm}
+
 
 \myul{\textbf{PWM-Ansteuerung für Schalter $\bm{S}$}}
 
-\vspace{0.1cm}
-
-\begin{minipage}[c]{0.4\columnwidth}
-    $$ \boxed{ \overline{V_{\rm out}} = V_{\rm ref} \cdot \frac{n}{N} }  $$
+\begin{minipage}{0.4\columnwidth}
+    \centering $$ \boxed{ \overline{V_{\rm out}} = V_{\rm refn} + (V_{\rm refp} - V_{\rm refn}) \cdot \frac{n}{N} }$$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-    \includegraphics[width=\columnwidth]{images/PWM_ansteuerung_2.png} 
+    \input{circuits/pwm_ansteuerung.tex}
 \end{minipage}
 
 

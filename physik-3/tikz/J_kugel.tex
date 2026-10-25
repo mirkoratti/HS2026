@@ -1,0 +1,12 @@
+\begin{tikzpicture}[>=Latex, scale=0.9]
+  % Kugel
+  \shade[ball color=gray!45] (0,0) circle (0.9);
+  \draw[thick] (0,0) circle (0.9);
+
+  % Drehachse
+  \draw[red, dashed, thick] (0,-1.2) -- (0,1.2);
+
+  % Radius
+  \filldraw (0,0) circle (0.03);
+  \draw[<->] (0,0) -- (0.9,0) node[midway, above] {\footnotesize $r$};
+\end{tikzpicture}

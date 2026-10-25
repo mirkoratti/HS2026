@@ -1,0 +1,11 @@
+\begin{tikzpicture}[>=Latex, scale=0.9]
+  % Drehachse
+  \draw[red, dashed, thick] (0,-0.8) -- (0,0.8);
+
+  % Masse
+  \shade[ball color=gray!50] (1.6,0) circle (0.18);
+  \node[below=2pt] at (1.6,-0.18) {\footnotesize $m$};
+
+  % Abstand
+  \draw[<->] (0,0) -- (1.42,0) node[midway, above] {\footnotesize $r$};
+\end{tikzpicture}

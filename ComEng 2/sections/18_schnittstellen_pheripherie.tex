@@ -8,6 +8,28 @@
     \item Ein- bzw. Ausgabe über I/O-Ports.
 \end{itemize}
 
+\subsection{GPIO}
+\textbf{BSRR} (Bit Set/Reset Register): 32 Bit, \textit{write-only}, ändert Pins von \texttt{ODR} ohne Read-Modify-Write.\vspace{-1.3em}
+
+\begin{center}
+\begin{tabular}{|c|c|l|}
+\hline
+Bits & Name & Wirkung bei Schreiben von $1$ \\
+\hline
+$[15:0]$ & BSx & Pin $x$ \textbf{setzen} ($\text{ODR}_x=1$) \\
+$[31:16]$ & BRx & Pin $x$ \textbf{rücksetzen} ($\text{ODR}_x=0$) \\
+\hline
+\end{tabular}
+\end{center}
+\begin{itemize}
+    \item Schreiben von $0$ hat \textbf{keine} Wirkung: andere Pins bleiben unverändert.
+    \item Set und Reset für denselben Pin gleichzeitig: \textbf{Set gewinnt}.
+    \item \textbf{Atomar}: kein Konflikt mit Interrupts, im Gegensatz zu \texttt{ODR}.
+\end{itemize}
+\textbf{Beispiel:}
+\texttt{GPIOA->BSRR = (1<<5);} (setzen), \quad
+\texttt{GPIOA->BSRR = (1<<(5+16));} (rücksetzen)
+
 \subsection{Schieberegister}
 \textbf{Parallel In Serial Out (PISO):}
 Einfache Verkettung von Flip-Flops. Zusätzliche Multiplexer nötig.
@@ -30,7 +52,7 @@ Wichtigkeit, den Taktgeber richtig zu wählen:
 
 \subsection{Direct Memory Access (DMA)}
 \begin{itemize}
-    \item Daten werden nicht mittels Load/Store über CPU transferiert, sondern direkt über den DMA.
+    \item Daten  nicht mittels Load/Store über CPU transferiert, sondern direkt über den DMA.
     \item Daten werden nicht bearbeitet oder verändert, sie werden als ganze Pakete transferiert.
     \item Erst am Ende bzw. nach der Hälfte eines Datenpaket-Transfers wird ein Interrupt
      generiert. (non è obbligatorio generare interrupt, pheri \textrightarrow pheri)

@@ -1,0 +1,15 @@
+\begin{tikzpicture}[>=Latex, dot/.style={circle, fill, inner sep=1.6pt}]
+  % Kette
+  \node[dot, label=above:{$x_1$}] (a1) at (0,0) {};
+  \node[dot, label=above:{$x_2$}] (a2) at (3,0) {};
+  \node[dot, label=above:{$x_3$}] (a3) at (6,0) {};
+  \draw[->] (a1) -- node[above=2pt] {$a$} (a2);
+  \draw[->] (a2) -- node[above=2pt] {$b$} (a3);
+  \node[anchor=west] at (7.5,0) {$x_2 = a \cdot x_1,\qquad x_3 = b \cdot x_2$};
+
+  % Zusammengefasst
+  \node[dot, label=above:{$x_1$}] (b1) at (0,-1.8) {};
+  \node[dot, label=above:{$x_3$}] (b3) at (6,-1.8) {};
+  \draw[->] (b1) -- node[above=2pt] {$a \cdot b$} (b3);
+  \node[anchor=west] at (7.5,-1.8) {$x_3 = a \cdot b \cdot x_1$};
+\end{tikzpicture}

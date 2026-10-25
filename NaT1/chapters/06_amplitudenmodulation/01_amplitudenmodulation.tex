@@ -1,120 +1,147 @@
 \subsection{Amplitudenmodulation (AM) S. 51}
-Bei der Amplitudenmodulation formt das Nachrichtensignal die Amplitude des Trägersignals (perriodisches Hilfssignal).
+Nachrichtensignal $m(t)$ $\rightarrow$ formt die \textbf{Amplitude} eines sinusförmigen Trägers.
+{\color{accent}} il \textbf{Träger} non porta informazione, è solo il \glqq furgone\grqq{} che sposta il messaggio in una banda adatta a canale e antenna; portanti diverse $\Rightarrow$ \textbf{Frequenzmultiplex}.
+
+% Mini-Spektrum (nur positive Frequenzen): #1 Inhalt
+\newcommand{\amspek}[1]{%
+	\begin{tikzpicture}[x=.5cm,y=.42cm,font=\scriptsize,baseline=0]
+		\draw[->] (-2,0) -- (2.3,0) node[below left,inner sep=1pt]{$\omega$};
+		\draw (0,.08) -- (0,-.08) node[below,inner sep=1pt]{$\omega_c$};
+		#1
+	\end{tikzpicture}}
 
 \vspace{.1cm}
+{\footnotesize\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{|l|Y|Y|Y|Y|Y|}
+	\hline
+	& \textbf{Gewöhnliche AM} & \textbf{DSB-SC} & \textbf{SSB} & \textbf{VSB} & \textbf{QAM} \\ \hline
+	\makecell[l]{Spektrum\\ \tiny($\omega>0$)} &
+	\amspek{\draw[red,thick] (-1.5,0)--(-1.5,1.2)--(0,0)--(1.5,1.2)--(1.5,0); \draw[->,thick,primary] (0,0)--(0,2);} &
+	\amspek{\draw[red,thick] (-1.5,0)--(-1.5,1.2)--(0,0)--(1.5,1.2)--(1.5,0);} &
+	\amspek{\draw[red,thick] (0,0)--(1.5,1.2)--(1.5,0);} &
+	\amspek{\draw[red,thick] (-.5,0)--(-.3,.3)--(0,0)--(1.5,1.2)--(1.5,0);} &
+	\amspek{\draw[red,thick] (-1.5,0)--(-1.5,1.2)--(0,0)--(1.5,1.2)--(1.5,0); \draw[blue,thick] (-1.1,0)--(-1.1,1.6)--(0,0)--(1.1,1.6)--(1.1,0);} \\
+	Trägeranteil & ja & nein & nein$^*$ & nein$^*$ & nein \\
+	Bandbreite & $2B_m$ & $2B_m$ & $B_m$ & $\approx 1.25\,B_m$ & $2\max(B_{m1},B_{m2})$ \\
+	Demodulation & Hüllkurve / kohärent & kohärent & kohärent & kohärent, $\varphi=0$ & kohärent \\ \hline
+\end{tabularx}\\
+$^*$ beigefügter Trägeranteil (Pilot) erleichtert die Synchronisation. \quad {\color{primary}$\uparrow$} = Trägerlinie, {\color{red}rot}/{\color{blue}blau} = Seitenbänder.}
+
+% ------------------------------------------------------------
+\subsubsection{Grundprinzip: Träger mal Nachricht S. 51}
 \includegraphics{chapters/06_amplitudenmodulation/figures/AMbasic.pdf}
 
-\vspace{.1cm}
+\vspace{.05cm}
+% $x_{Mod}(t) = A_c\cdot x_c(t)\cdot m_n(t)$ \quad mit $|m_n(t)|\le 1$, $\langle m_n(t)\rangle = 0$, $m_{pp}=2$ \quad $\xrightarrow{\text{nur Grundharm.}}$ \quad \efbox[linecolor=red]{$x_{Mod}(t) = A_c\cos(\omega_c t)\cdot m_n(t)$}\\
+{\color{accent}} un \textbf{Träger} periodico ha armoniche (formula di eulero) e il segnale modulato occupa banda attorno a \emph{ognuna} $\Rightarrow$ il più efficiente è il \textbf{Cosinus}.\\
+\textbf{Multiplizierende Schaltungen:} Ringmodulator (zeitvariant) $\cdot$ nichtlineare Bauteile: 
+$(a+b)^2 = a^2 + \underline{2ab} + b^2$ $\cdot$ steuerbarer Verstärker $\cdot$ digital. (modo per moltiplicare 2 segnali tramite diodi)
+
+\vspace{.05cm}
 $\rightarrow$ \textbf{Euler}:\hspace{.1cm} \efbox[linecolor=red]{$
-		\sin(t) = \frac{1}{2j}\cdot (e^{jt} - e^{.jt}) \qquad
-		\cos(t) = \frac{1}{2}\cdot (e^{jt} + e^{.jt})$}
+		\sin(t) = \frac{1}{2j}\cdot (e^{jt} - e^{-jt}) \qquad
+		\cos(t) = \frac{1}{2}\cdot (e^{jt} + e^{-jt})$}
+\hspace{.3cm}
+\efbox[linecolor=red]{$\cos\alpha\cos\beta = \tfrac12\cos(\alpha-\beta) + \tfrac12\cos(\alpha+\beta)$}
 
-\subsubsection{Frequenzmischer, Frequenzmultiplex S. 46}
-Ein \textbf{Frequenzmischer} multipliziert $m_n(t)$ mit einem Träger $\cos(\omega_ct)$ 
-oder $\sin(\omega_ct)$ und halbiert; die Bandbreite verdoppelt sich ($B = 2B_m$).
-
-\begin{minipage}{0.6\columnwidth}
+% ------------------------------------------------------------
+\subsubsection{Modulationssatz, Mischer, Frequenzmultiplex S. 46}
+\begin{minipage}{0.7\columnwidth}
 	\efbox[linecolor=red]{$A_c \cdot m_n(t) \cdot \cos(\omega_c t)\, \laplace \,\frac{A_c}{2} \cdot \left( M_n(\omega - \omega_c) + M_n(\omega + \omega_c) \right)$}
 	\medbreak
 	\efbox[linecolor=red]{$A_c \cdot m_n(t) \cdot \sin(\omega_c t)\, \laplace \,\frac{A_c}{2} \cdot \left( -j \cdot M_n(\omega - \omega_c) + j \cdot M_n(\omega + \omega_c) \right)$}
-\end{minipage}
+
+	\vspace{.1cm}
+	{\color{accent}} il prodotto di due coseni dà \textbf{somma e differenza} delle frequenze $\Rightarrow$ $M(\omega)$ viene copiato a $\pm\omega_c$ e dimezzato. Nascono l'\textbf{oberes} (USB) e l'\textbf{unteres Seitenband} (LSB): immagini speculari con la stessa informazione $\Rightarrow$ $B = 2B_m$.
+\end{minipage}\hfill
 \begin{minipage}{0.25\columnwidth}
 	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/frequenzmischer.png}
 \end{minipage}
 
-\textbf{Frequenzmultiplex (FDM):} Mehrere Signale werden mit \emph{verschiedenen} 
-Trägern $\omega_{c,i}$ in getrennte Frequenzbänder geschoben und gleichzeitig über einen Kanal übertragen. 
-Bedingung: Bänder überlappen nicht, d.h. $|\omega_{c,i+1}-\omega_{c,i}| \geq 2\pi 
-\cdot 2B_m$.
+\vspace{.05cm}
+\textbf{Mischer:} Basisband $\xrightarrow{\times\cos}$ Übertragungsband $\xrightarrow{\times\cos}$ Basisband bzw. Zwischenfrequenz $f_{ZF}$.
+\textbf{Superhet:} ZF-Filter fest, LO verstellbar: $|f_{LO}-f_c| = f_{ZF}$ (MW: $f_{ZF}=\qty{455}{kHz}$).\\
+\textbf{Frequenzmultiplex (FDM):} verschiedene Träger $\omega_{c,i}$, Bänder dürfen nicht überlappen: $|\omega_{c,i+1}-\omega_{c,i}| \geq 2\pi
+\cdot 2B_m$. Bsp. Mittelwelle: $f_c = \qtyrange{531}{1602}{kHz}$, \qty{9}{kHz}-Raster $= 2\cdot\qty{4.5}{kHz}$.
 
+% ------------------------------------------------------------
+\subsubsection{Demodulationsprinzipien: inkohärent und kohärent}\label{sec:am_demodprinzip}
+{\small\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{|l|X|X|}
+	\hline
+	& \textbf{Inkohärent: Hüllkurvendetektor} & \textbf{Kohärent: Produktdemodulator (synchron)} \\ \hline
+	Prinzip & Diode + $RC$ folgt den Spitzen $\rightarrow$ $y(t) \approx x_{env}(t)$ & $x(t)\cdot\cos(\omega_c t+\varphi)$ $\rightarrow$ Tiefpass \\
+	Vorteil & kein lokaler Oszillator, einfachster Empfänger & funktioniert für $m(t)<0$ (DSB, SSB, QAM) \\
+	Problem & $m(t)<0$ $\rightarrow$ detektiert $|m(t)|$ & Anteile bei $2\omega_c$; Frequenz-/Phasenfehler des LO \\
+	Lösung & DC-Offset vor Modulation $\rightarrow$ \textbf{gewöhnliche AM} & Tiefpass; \textbf{Synchronisation} (\ref{sec:dsb_demod}) \\ \hline
+\end{tabularx}}
 
+\vspace{.1cm}
+\begin{minipage}[c]{.6\linewidth}
+	{\color{accent}\textbf{Hüllkurvendetektor}:} il diodo conduce solo quando l'ingresso supera la tensione su $C$, altrimenti $C$ si scarica lentamente su $R$ $\Rightarrow$ l'uscita \glqq tocca\grqq{} solo le punte, cioè l'inviluppo superiore.\\[.05cm]
+	{\color{accent}\textbf{kohärent}:} dividere per $\cos(\omega_c t)$ non si può (zeri). Si rimoltiplica: $\cos^2(\omega_c t) = \tfrac12 + \tfrac12\cos(2\omega_c t)$ ha valor medio $\tfrac12$ e conserva il segno di $m(t)$; il \textbf{Tiefpass} toglie la copia a $2\omega_c$.
+\end{minipage}\hfill
+\begin{minipage}[c]{.39\linewidth}
+	\includegraphics[width=.58\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_9.pdf}\hfill
+	\includegraphics[width=.4\linewidth]{chapters/06_amplitudenmodulation/figures/envelope_graph.pdf}
+\end{minipage}
 
+% ------------------------------------------------------------
 \subsubsection{Gewöhnliche Amplitudenmodulation S. 51}
-Bei der gewöhnlichen AM wird das Nachrichtensignal $m(t)$ mit einem DC offset angehoben um einen Nulldurchgang von $m(t)$ zu verhindern:\hspace{0.01cm} \vspace{.05cm} \efbox[linecolor=red]{$x_{AM}(t) = A_c \cdot (1+\mu \cdot m_n(t)) \cdot cos(\omega_c t)$ \;\; mit $|m(t)| \leq 1$ und Modulationsgrad $\mu$} \\
-\textbf{Aufgrund des DC-Anteils ist die gewöhnliche AM nicht linear und nicht zeitinvariant!}
+\paragraph{Zeitbereich}
+\efbox[linecolor=red]{$x_{AM}(t) = A_c \cdot (1+\mu \cdot m_n(t)) \cdot \cos(\omega_c t)$ \;\; mit $|m_n(t)| \leq 1$, $\langle m_n(t)\rangle = 0$ und Modulationsgrad $\mu$}
 
-\paragraph{Modulation}
-\includegraphics{chapters/06_amplitudenmodulation/figures/AM_grafik.pdf}
+\vspace{.05cm}
+{\color{accent}} l'offset \glqq$1+$\grqq{} tiene l'inviluppo $A_c(1+\mu m_n)$ sempre positivo $\Rightarrow$ basta un \textbf{Hüllkurvendetektor} (ricevitore più semplice: radio AM, oggi Flugfunk).
 
-\boxedeq{\begin{split}
-		x_{_{AM}}(t) = (1 + \mu \cdot m_n(t)) \cdot A_C \cdot  \cos(\omega_c t)
-		\; \;\;\; \laplace \;\;\; \; X_{AM}(\omega) = \frac{\mu A_c}{2}  (M(\omega - \omega_c) + 
-		M(\omega + \omega_c)) \\ + \pi A_c [\delta (\omega - \omega_c) + 
-		\delta (\omega + \omega_c)] \end{split}}
+\includegraphics[width=.75\linewidth]{chapters/06_amplitudenmodulation/figures/AM_grafik.pdf}
 
-\begin{table}[H]
-	\begin{tabularx}{\linewidth}{X X X}
-		\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_10.pdf}
-		\end{minipage}
-		&
-		\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_12.pdf}
-		\end{minipage}
-		&
-		\begin{minipage}{1.05\linewidth}
-			\textbf{DC-Anteil:} bewirkt, dass Carrier im Frequenzbereich nicht verschwindet \\
-			\textbf{Modulationsindex $\mu$ :} $0 < \mu < 1$ \\
-			$\mu > 1$ $\rightarrow$ Übermodulation \\
-			 \efbox[linecolor=red]{$\mu = \frac{\max|x_{AM}|-min|x_{AM}|}{\max|x_{AM}|+min|x_{AM}|} $}
-		\end{minipage}
-	\end{tabularx}
-\end{table}
+\begin{minipage}[c]{.4\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_10.pdf}
+\end{minipage}\hfill
+\begin{minipage}[c]{.58\linewidth}
+	\textbf{Modulationsgrad:} $0 < \mu \le \qty{100}{\%}$\\[.05cm]\efbox[linecolor=red]{$\mu = \frac{\max x_{env}-\min x_{env}}{\max x_{env}+\min x_{env}}$} {\footnotesize (obere Umhüllende, $\mu\le\qty{100}{\%}$)}\\[.1cm]
+	$\mu > \qty{100}{\%}$ $\Rightarrow$ \textbf{Übermodulation}: $1+\mu m_n(t) < 0$ \\
+	$\Rightarrow$ untere Enveloppe $>$ obere $\Rightarrow$ Hüllkurvendetektor verzerrt\\
+	$\Rightarrow$ kohärente Demodulation \emph{nicht} betroffen\\[.1cm]
+	\textbf{Linearität:} Modulator $\approx$ linear (DC-Anteil), zeitvariant (für die Frequenzverschiebung) $\cdot$ Sender + Empfänger: \textbf{LTI}
+\end{minipage}
 
-\begin{tabular}{m{10cm} m{5cm}}
-\paragraph{Demodulation}\mbox{ }
-		\vspace{.2cm}
-	
-	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} 	\setlength{\topsep}{0cm}} 
-		\item Hüllkurvendetektor (Envelope Detector) S.51
-		\item Kohärente Produktdemodulation (siehe DSB-SC)
-	\end{list}
-\vspace{.5cm}
-	\textbf{Bedingungen für Envelop-Demodulation}
-	\vspace{.2cm}
-	
-	\begin{minipage}{\linewidth}
-	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} 	\setlength{\topsep}{0cm}} 
-		\item Umhüllende darf \textbf{nicht unter Null} fallen
-		\item Modulationsindex $0 < \mu < 1$, bei Übermodulation fällt Umhüllende unter Null
-		\item optimale Zeitkonstante des Hüllkurvendetektors \\
-		$B_m < \frac{1}{RC} << f_c $ mit $B_m$: Bandbreite von $m(t)$
-	\end{list}
-	\end{minipage}
-	
-	&
-	\begin{minipage}{0.4\linewidth}
-		\includegraphics{chapters/06_amplitudenmodulation/figures/abbildung5_9.pdf}
-		
-		\includegraphics{chapters/06_amplitudenmodulation/figures/envelope_graph.pdf}
-	\end{minipage}
+\paragraph{Frequenzbereich}
+\efbox[linecolor=red]{$x_{AM}(t) = A_c(1 + \mu \cdot m_n(t))\cos(\omega_c t) \;\laplace\; X_{AM}(\omega) = \underbrace{\pi A_c [\delta (\omega - \omega_c) + \delta (\omega + \omega_c)]}_{\text{Trägeranteil}} + \underbrace{\frac{\mu A_c}{2}  (M_n(\omega - \omega_c) + M_n(\omega + \omega_c))}_{\text{Seitenbänder}}$}
 
-\end{tabular}
+\begin{minipage}[c]{.5\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_12.pdf}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}\raggedright
+	$B_{AM} = 2\cdot B_m$; Seitenbänder skaliert mit $A_c$, $\mu$, $\frac12$\\
+	Sinusträger: bei $+\omega_c$ Faktor $-j$, bei $-\omega_c$ Faktor $+j$\\[.05cm]
+	{\color{accent}} la riga del \textbf{Träger} viene dall'offset e non dipende da $m(t)$: con $\mu=0$ le \textbf{Seitenbänder} spariscono, la riga resta.
+\end{minipage}
 
-\newpage
-\paragraph{Äquivalente Basisbanddarstellung der gewöhnlichen AM S. 53}
-\emph{Idea:} si sostituisce la portante reale ad alta frequenza con un \textbf{fasore complesso} $x_{eq}(t)$ che contiene ampiezza e fase $\rightarrow$ si calcola solo col segnale lento in banda base.
+\paragraph{Äquivalente Basisbanddarstellung S. 53}
+{\color{accent}\textit{Idea:}} si sostituisce la portante reale ad alta frequenza con un \textbf{komplexer Zeiger} $x_{eq}(t)$ che contiene solo ampiezza e fase $\rightarrow$ si calcola solo col segnale lento in banda base (solo per portanti reali sinusoidali).
 
 \begin{minipage}[t]{.52\textwidth}
 	$x_{AM}(t) = A_c(1+\mu m_n)\cdot\tfrac{1}{2}\left(e^{+j\omega_c t}+e^{-j\omega_c t}\right)$\\[.05cm]
 	\emph{Tre semplificazioni:}
 	\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}\setlength{\topsep}{0pt}
-		\item \textbf{Togli il fasore a $-\omega_c$}: è sempre il coniugato del primo, nessuna info in più ($v+v^*=\Re\{2v\}$).
-		\item \textbf{Non scrivere $\Re\{\cdot\}$}: sottinteso, si prende alla fine.
-		\item \textbf{Non scrivere $e^{+j\omega_c t}$}: rotazione nota e uguale per tutti, non cambia l'inviluppo.
+		\item \textbf{togli il Zeiger a $-\omega_c$}: è sempre il coniugato, nessuna info in più ($v+v^*=\Re\{2v\}$)
+		\item \textbf{non scrivere $\Re\{\cdot\}$}: sottinteso, si prende alla fine
+		\item \textbf{non scrivere $e^{+j\omega_c t}$}: rotazione nota e uguale per tutti, non cambia la \textbf{Umhüllende}
 	\end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}[t]{.45\textwidth}
 	\efbox[linecolor=red]{$x(t) = \Re\{x_{eq}(t)\, e^{j\omega_c t}\}$, \; $x_{eq} = I + jQ = |x_{eq}|\, e^{j\varphi}$}\\[.05cm]
 	$\Rightarrow x(t) = I\cos(\omega_c t) - Q\sin(\omega_c t)$\\
-	$I$: in fase (asse orizz.), $Q$: in quadratura (asse vert.)\\
-	$|x_{eq}|$ = inviluppo, $\arg x_{eq}$ = fase\\[.05cm]
+	$I$: Inphase (asse orizz.), $Q$: Quadratur (asse vert.)\\
+	$|x_{eq}|$ = Umhüllende, $\arg x_{eq}$ = Phase\\[.05cm]
 	\textbf{Träger $\rightarrow$ Zeiger:} $\cos(\omega_c t+\varphi)\rightarrow e^{j\varphi}$\\
 	$\cos \rightarrow 1,\ \sin \rightarrow -j,\ -\cos \rightarrow -1,\ -\sin \rightarrow +j$
 \end{minipage}
 
 \vspace{.1cm}
-Si disegna la \textbf{Ortskurve} di $x_{eq}$ (tutti i valori assunti, senza l'andamento nel tempo). AM: il punto si muove solo su una \textbf{retta per l'origine} (fase fissa, cambia solo la lunghezza).
+\textbf{Ortskurve} di $x_{eq}$ = tutti i valori assunti (senza l'andamento nel tempo). AM: il punto si muove solo su una \textbf{retta per l'origine} (fase fissa, cambia solo la lunghezza).
 
 % Ortskurve: #1 Winkel [deg], #2 r_min, #3 r_max, #4/#5 Beschriftung min/max, #6/#7 Anker min/max
 \newcommand{\eqbaseplot}[7]{%
@@ -139,7 +166,7 @@ Si disegna la \textbf{Ortskurve} di $x_{eq}$ (tutti i valori assunti, senza l'an
 	\efbox[linecolor=red]{$x_{eq}=A_c(1+\mu m_n)$} &
 	\efbox[linecolor=red]{$x_{eq}=-j A_c(1+\mu m_n)$} &
 	\efbox[linecolor=red]{$x_{eq}=\tfrac{1+j}{\sqrt2}A_c(1+\mu m_n)$} &
-	$x_{eq}<0$: salto di fase \ang{180} \\[.25cm]
+	$x_{eq}<0$: Phasensprung \ang{180} \\[.25cm]
 	\footnotesize $A_c=1$ &
 	\footnotesize $\sin(\omega_c t)=\Re\{-j\,e^{j\omega_c t}\}$ &
 	\footnotesize $e^{j\pi/4}=\tfrac{1+j}{\sqrt2}$, $|x_{eq}|\le 2$ &
@@ -147,87 +174,153 @@ Si disegna la \textbf{Ortskurve} di $x_{eq}$ (tutti i valori assunti, senza l'an
 \end{tabularx}
 
 \vspace{.1cm}
-\textbf{Merke:} AM $\rightarrow$ segmento (cambia solo $|x_{eq}|$), PM/FM $\rightarrow$ arco di cerchio (cambia solo $\varphi$), QAM $\rightarrow$ tutto il piano ($I$, $Q$ indipendenti).
+\textbf{Merke:} AM $\rightarrow$ Strecke (nur $|x_{eq}|$ ändert), PM/FM $\rightarrow$ Kreisbogen (nur $\varphi$ ändert), QAM $\rightarrow$ ganze Ebene ($I$, $Q$ unabhängig).
 
-\paragraph{Leistungseffizienz der gewöhnlichen AM S. 56}
-Unter der Effizienz $\eta$ der gewöhnlichen AM versteht man das Verhältnis von Signalleistung $P_s$ der \textbf{beiden Seitenbänder} zur Gesamtleistung $P_t$ des AM-Signals.
-\begin{equation*}
-	P_c = \frac{A_c^2}{2} \;\; \text{und} \;\; P_t = \frac{A_c^2}{2} + \frac{A_c^2 \mu^2P_m}{2} \rightarrow \eta = \frac{P_s}{P_t} = \frac{P_t - P_c}{P_t} = \frac{\mu^2P_m}{1+\mu^2P_m} = \frac{(\frac{\mu}{C})^2}{1+(\frac{\mu}{C})^2} = \frac{\mu^2 \cdot m^2_{rms}}{1+\mu^2 \cdot m^2_{rms}}
-\end{equation*}
-Die maximal mögliche Effizienz ($\mu = \qty{100}{\%}$) beträgt \qty{33}{\%}. Bei $\mu = \qty{50}{\%}$ sind noch \qty{11.1}{\%} möglich.
+\paragraph{Leistungseffizienz S. 56}
+\begin{minipage}[c]{.69\linewidth}
+	\begin{equation*}
+		P_c = \frac{A_c^2}{2}, \quad P_{SB} = \frac{A_c^2}{2}\mu^2 P_m = \frac{A_c^2\mu^2}{2C^2} \;\;\rightarrow\;\; \eta = \frac{P_{SB}}{P_c + P_{SB}} = \frac{\mu^2P_m}{1+\mu^2P_m} = \frac{(\frac{\mu}{C})^2}{1+(\frac{\mu}{C})^2}
+	\end{equation*}
+	mit $P_m = m_{rms}^2$ und Crestfaktor $C = \frac{m_p}{m_{rms}} = \frac{1}{m_{rms}}$.\\
+	{\color{accent}} il \textbf{Trägeranteil} consuma potenza ma non porta informazione $\Rightarrow$ AM ordinaria è inefficiente.
+\end{minipage}\hfill
+\begin{minipage}[c]{.29\linewidth}
+	{\small\renewcommand{\arraystretch}{1.15}
+	\begin{tabular}{|l|c|c|}
+		\hline
+		$m_n(t)$ & $\mu$ & $\eta$ \\ \hline
+		Rechteck ($C=1$) & \qty{100}{\%} & \qty{50}{\%} \\
+		Sinus ($C=\sqrt2$) & \qty{100}{\%} & \qty{33.3}{\%} \\
+		Sinus & \qty{50}{\%} & \qty{11.1}{\%} \\
+		Sprache ($C\approx4$) & \qty{100}{\%} & $\approx\qty{6}{\%}$ \\ \hline
+		DSB-SC & -- & \qty{100}{\%} \\ \hline
+	\end{tabular}}
+\end{minipage}
 
+\paragraph{Demodulation}
+Kohärent (wie DSB-SC) oder Hüllkurvendetektor (\ref{sec:am_demodprinzip}). \textbf{Bedingungen für den Hüllkurvendetektor:}\\
+\efbox[linecolor=red]{$1 + \mu\, m_n(t) \ge 0 \;\Rightarrow\; \mu \le \qty{100}{\%}$} \qquad
+\efbox[linecolor=red]{$B_m < \frac{1}{RC} \ll f_c$} \;($B_m$: Bandbreite von $m(t)$)\\
+{\color{accent}\textit{Intuizione $RC$:}} 
+
+$RC$ troppo piccolo $\rightarrow$ ripple a $f_c$
+
+$RC$ troppo grande $\rightarrow$ $C$ si scarica più lentamente di quanto scende l'inviluppo e l'uscita resta indietro. (sopra al sengale $m$)
+
+% ------------------------------------------------------------
 \subsubsection{DSB-SC - Zweiseitenbandamplitudenmodulation ohne Träger S. 58}
-Double-Sideband Suppressed-Carrier Modulation
-\paragraph{Modulation}
+Double-Sideband Suppressed-Carrier = gewöhnliche AM \emph{ohne} DC-Offset (Variante: Sinusträger)\\
+\efbox[linecolor=red]{$x_{DSB}(t) = A_c \cdot m_n(t) \cdot \cos(\omega_c t)$ \;\; $\laplace$ \;\; $X_{DSB}(\omega) = \frac{A_c}{2}\left(M_n(\omega - \omega_c) + M_n(\omega + \omega_c)\right)$}
 
-\includegraphics{chapters/06_amplitudenmodulation/figures/DCBmodulation_grafik.pdf}
-\begin{table}[H]
-	\begin{tabularx}{\linewidth}{X X X}
-		\begin{minipage}{\linewidth}
-			\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_17.pdf}
-		\end{minipage}
-		&
-		\begin{minipage}{\linewidth}
-			\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_18.pdf}
-		\end{minipage}
-		&
-		\begin{minipage}{1\linewidth}
-			\textbf{Bandbreite:} \\$X(\omega) = 2 \cdot \text{ Bandbreite } M(\omega)$ \\
-			\textbf{Amplitude:} \\$1/2 \text{ Amplitude } M(\omega)$\\
-			(wenn $A_c = 1$)
-		\end{minipage}
-	\end{tabularx}
-\end{table}
-\textbf{DSB-SC ist linear, aber nicht zeitinvariant!} Trotzdem wird AM oft als lineare Modulation bezeichnet. Weil bei DSB-C und gewöhnlicher AM das Spektrum nur verschoben wird.
+\includegraphics[width=.75\linewidth]{chapters/06_amplitudenmodulation/figures/DCBmodulation_grafik.pdf}
 
-\paragraph{Demodulation S. 59}
-\includegraphics{chapters/06_amplitudenmodulation/figures/DSB_SC_demodulation.pdf}
+\begin{minipage}[c]{.36\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_17.pdf}
+\end{minipage}\hfill
+\begin{minipage}[c]{.52\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_18.pdf}
+\end{minipage}\hfill\null
 
-Das DSB-Signal wird mit einem sogenannten \textbf{synchronen Demodulator} oder \textbf{kohärenten Demodulator} zurückgewonnen. Weicht die \textbf{Frequenz oder die Phase} des demodulierten, lokalen Trägers von dem, des ursprünglichen Trägers ab, so ergibt sich eine \textbf{Abschwächung im demodulierten Signal}.
+\vspace{.05cm}
+$B_{DSB} = 2\cdot B_m$ $\cdot$ Faktoren $A_c$, $\frac12$ $\cdot$ \textbf{kein} Trägeranteil $\Rightarrow$ $\eta = \qty{100}{\%}$\\\textbf{Linear, aber nicht zeitinvariant}; Sender + Empfänger: LTI $\Rightarrow$ AM = \glqq lineare Modulation\grqq{} (Winkelmodulation: nichtlinear)\\
+\efbox[linecolor=red]{$x_{DSB}(t) = A_c\,|m(t)|\cos\big(\omega_c t + \varphi_m(t)\big)$ \quad mit $\varphi_m = 0$ für $m>0$, \; $\varphi_m = \ang{180}$ für $m<0$}\\
+{\color{accent}} l'\textbf{Umhüllende} porta solo $|m(t)|$, il \textbf{segno} sta nella \textbf{Phase}. Un \textbf{Phasensprung} di \ang{180} (inviluppo che si strozza a 0, poi portante invertita) significa che $m(t)$ ha \emph{cambiato} segno; il segno assoluto si legge solo rispetto a un riferimento $\cos(\omega_c t)$ $\Rightarrow$ serve demodulazione \textbf{kohärent} (LO sbagliato di \ang{180} $\rightarrow$ $-m(t)$).
+Il \textbf{Hüllkurvendetektor} è cieco alla fase $\rightarrow$ dà $|m(t)|$.
 
-\includegraphics{chapters/06_amplitudenmodulation/figures/demod_abweichung.pdf}
+\paragraph{Demodulation S. 59}\label{sec:dsb_demod}
+\includegraphics[width=.85\linewidth]{chapters/06_amplitudenmodulation/figures/DSB_SC_demodulation.pdf}
 
+\begin{minipage}[c]{.6\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/demod_abweichung.pdf}
+\end{minipage}\hfill
+\begin{minipage}[c]{.38\linewidth}
+	{\small\renewcommand{\arraystretch}{1.15}
+	\begin{tabular}{|l|l|}
+		\hline
+		Fehler LO & $y_{TP}(t)$ \\ \hline
+		$\varphi = 0$ & $\frac{A_c}{2}m(t)$ \; (ideal) \\
+		$\varphi = \ang{90}$ & $0$ \; (ausgelöscht) \\
+		$\varphi = \ang{180}$ & $-\frac{A_c}{2}m(t)$ \; (invertiert) \\
+		$\Delta\omega \ne 0$ & schwankt mit $\cos(\Delta\omega t)$ \\ \hline
+	\end{tabular}}
+\end{minipage}
+
+\begin{align*}
+y(t) &= x_{DSB}(t)\cdot\cos(\omega_c t) = A_c\,m(t)\cos^2(\omega_c t)
+      && \text{(moltiplica per il LO, l’oscillatore locale)}\\
+     &= \underbrace{\tfrac12 A_c\,m(t)}_{\text{messaggio}}
+      + \underbrace{\tfrac12 A_c\,m(t)\cos(2\omega_c t)}_{\text{copia a }2f_c}
+      && \cos^2\alpha=\tfrac12+\tfrac12\cos 2\alpha\\
+y_m(t) &= \tfrac12 A_c\,m(t)
+      && \text{(passa-basso: elimina } 2f_c)
+\end{align*}
+$\cos^2(\omega_c t)\ge 0$ con valor medio $\tfrac12$: dove $m(t)<0$ la portante
+ricevuta è capovolta, e moltiplicandola per lo stesso coseno il segno torna giusto.
+
+% ------------------------------------------------------------
 \subsubsection{Einseitenbandamplitudenmodulation (SSB) S. 60}
-Bei der SSB Modulation wird \textbf{nur ein Seitenband übertragen}. Die Implementierung gegenüber gewöhnlicher AM und DSB ist komplexer.
-\paragraph{Modulation - Filtermethode S. 61}
-Mit einem Bandpassfilter kann entweder das USB (upper side band) oder das LSB (lower side band) unterdrückt werden um ein Einseitenband-Signal zu erhalten. Allerdings stellt dies \textbf{hohe Anforderungen an die Flankensteilheit} des Filters.
+\efbox[linecolor=red]{$x_{SSB}(t) = A_c\, m_n(t) \cos(\omega_c t) \mp A_c\, \hat m_n(t) \sin(\omega_c t)$ \;\; ($-$: USB, $+$: LSB)} \; $\hat m_n(t)$: Hilberttransformierte\\
+$B_{SSB} = B_m$ $\cdot$ linear, zeitvariant (Gesamtsystem $\approx$ LTI) $\cdot$ Umhüllende $\not\propto m(t)$ $\Rightarrow$ kein Hüllkurvendetektor $\cdot$ Implementierung aufwändiger\\
+{\color{accent}} le due \textbf{Seitenbänder} portano la stessa informazione $\Rightarrow$ ne basta una, banda dimezzata.
 
-\paragraph{Modulation - Phasenmethode}
-\includegraphics{chapters/06_amplitudenmodulation/figures/abbildung5_23.pdf}
-\begin{table}[H]
-	\begin{tabularx}{\linewidth}{X X}
-		\begin{minipage}{\linewidth}
-			\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_22_1.pdf}
-		\end{minipage}
-	&
-	\begin{minipage}{\linewidth}
-		\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_22_2.pdf}
-	\end{minipage}
-	\end{tabularx}
-\end{table}
-\includegraphics{chapters/06_amplitudenmodulation/figures/SSB_phasenmethode.pdf}
+\vspace{.1cm}
+{\small\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{|l|X|X|}
+	\hline
+	& \textbf{Filtermethode} S. 61 & \textbf{Phasenmethode} (Hartley-Modulator) \\ \hline
+	Prinzip & DSB-SC $\rightarrow$ Bandpass unterdrückt USB oder LSB & $m_n\cos(\omega_c t) \mp \hat m_n \sin(\omega_c t)$ (Blockschaltbild unten) \\
+	Vorteil & leicht verständlich, etabliertes Filterdesign & keine steilen Filter nötig \\
+	Nachteil & sehr hohe \textbf{Flankensteilheit} nötig & Hilberttransformator ($-\pi/2$) nötig \\
+	Spektrum & skaliert mit $A_c$ und $\frac12$ & skaliert mit $A_c$ \\ \hline
+\end{tabularx}}\\
+{\color{accent}\textit{Intuizione \textbf{Phasenmethode}:}} la \textbf{Hilberttransformation} ruota le frequenze positive di $-\ang{90}$ e le negative di $+\ang{90}$: sommando i due rami una \textbf{Seitenband} si somma, l'altra si cancella.
+
+\includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_23.pdf}
+
+\noindent\begin{minipage}{.4\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_22_1.pdf}
+\end{minipage}\hspace{.05\linewidth}
+\begin{minipage}{.4\linewidth}
+	\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_22_2.pdf}
+\end{minipage}
+
+\includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/SSB_phasenmethode.pdf}
 
 \paragraph{Demodulation S. 63}
-\textbf{Kohärente Demodulation ist erforderlich!}
+\textbf{Nur kohärent!} \; $\varphi$ von $x_{LO}$ $\rightarrow$ ändert nur das \emph{Phasen}spektrum von $y_m(t)$, \textbf{nicht das Betragsspektrum} $\Rightarrow$ auch bei $\varphi = \frac{\pi}{2}$ keine Auslöschung $\Rightarrow$ ok für Sprache; mit quarzgenauen Frequenzen evtl. ohne Synchronisation.
 
-\includegraphics{chapters/06_amplitudenmodulation/figures/SSB_demod.pdf}
+\includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/ssb_demod.pdf}
 
+% ------------------------------------------------------------
 \subsubsection{Restseitenband-Amplitudenmodulation (VSB) S. 64}
-Siehe auch Folie 23 NaT1\underline{ }3c; Restseitenband-AM ist ein Kompromiss zwischen:
-\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} 	\setlength{\topsep}{0cm}} 
-	\item Bandbreiteneffizienz von SSB (1.25 x Bandbreite von SSB)
-	\item Einfacher technischer Realisierung von DSB (keine extremen Anforderungen an Filtersteilheit)
-\end{list}
-\paragraph{Modulation}
-\includegraphics{chapters/06_amplitudenmodulation/figures/VSB_mod.pdf}
-\paragraph{Demodulation}
-\textbf{Kohärente Demodulation ist erforderlich!}\\
-Demodulation erfolgt gleich wie bei SSB-AM
+Ein Seitenband komplett + \textbf{Restseitenband} des anderen (siehe auch Folie 23 NaT1\underline{ }3c). Kompromiss:\\
+{\small\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{|X|X|X|}
+	\hline
+	\textbf{von SSB:} Bandbreiteneffizienz, $B_{VSB} \approx 1.25\cdot B_m$ & \textbf{von DSB-SC:} einfache Realisierung, keine extreme Filtersteilheit, Pilotton auf $f_c$ leicht empfangbar & \textbf{Nachteil:} ca. \qty{25}{\%} mehr Bandbreite als SSB. \textbf{Bsp.:} analoges TV, ATSC 1.0 \\ \hline
+\end{tabularx}}
 
+\includegraphics[width=.85\linewidth]{chapters/06_amplitudenmodulation/figures/VSB_mod.pdf}
+
+\textbf{Demodulation:} nur kohärent, wie SSB, aber Phase muss stimmen: \efbox[linecolor=red]{$\varphi = 0$}
+
+% ------------------------------------------------------------
 \subsubsection{Quadraturamplitudenmodulation (QAM) S. 64}
-Gleichzeitige Übertragung von zwei Basisbandsignalen im gleichen Frequenzband aber mit zwei orthogonalen Trägersignalen $cos(\omega_c t)$ und $sin(\omega_c t)$.\\
-Vorteil: ebenso hohe Bandbreiteneffizienz wie SSB-AM \\
-Nachteil: technisch aufwändiger als DSB-AM
-\paragraph{Modulation und Demodulation S. 65}
-\includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_25.pdf}\\
-\efbox[linecolor=red]{$B_{QAM} = 2\cdot max(B_{m1}, B_{m2}) $} $\rightarrow$ gleich wie DSB; Wenn $m_1$ die Hilberttrafo von $m_2$ ist, dann Bandbreite wie SSB $B_{SSB} = B_m$
+\efbox[linecolor=red]{$x_{QAM}(t) = A_c\, m_1(t) \cos(\omega_c t) + A_c\, m_2(t) \sin(\omega_c t)$} = zwei DSB-SC im selben Band, orthogonale Träger\\
+{\color{accent}} $\cos$ e $\sin$ sono \textbf{orthogonal}: i due messaggi si sovrappongono in frequenza ma in ricezione si separano, perché ogni ramo vede l'altro solo a $2\omega_c$.\\
+Vorteil: Bandbreiteneffizienz wie SSB $\cdot$ Nachteil: Kohärenz muss sehr präzis sein (Trainingssequenz in Präambel) $\cdot$ Bsp.: Modems V.29/V.32, OFDM-Subträger, Chrominanz PAL/NTSC
+
+\includegraphics[width=.75\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_25.pdf}
+
+\begin{minipage}[t]{.46\linewidth}\raggedright
+	\textbf{Modulator} = Hartley-Struktur, aber $m_1$, $m_2$ unabhängig\\
+	\efbox[linecolor=red]{$B_{QAM} = 2\cdot \max(B_{m1}, B_{m2})$} $\rightarrow$ wie DSB\\
+	$m_1$ = Hilberttrafo von $m_2$ $\Rightarrow$ $B_{SSB} = B_m$\\
+	Teilspektren addieren sich komplex, aber: \efbox[linecolor=red]{$P_{QAM} = P_{DSB1} + P_{DSB2}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{.52\linewidth}
+	\textbf{Kohärente Demodulation} (Zweig $\cos$):\\
+	$A_c m_1 \cos\cdot\cos = \frac{A_c}{2} m_1 [1 + \cos(2\omega_c t)] \xrightarrow{TP} \frac{A_c}{2} m_1$\\
+	$A_c m_2 \sin\cdot\cos = \frac{A_c}{2} m_2 \sin(2\omega_c t) \xrightarrow{TP} 0$\\
+	Zweig $\sin$ analog $\Rightarrow$ $y_{m2} = \frac{A_c}{2} m_2(t)$
+\end{minipage}

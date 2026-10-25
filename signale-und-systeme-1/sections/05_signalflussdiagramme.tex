@@ -6,33 +6,36 @@
 \subsection{Definitionen}{53-54}
 
 \begin{center}
-    \includegraphics[width=0.75\columnwidth]{images/signalflussdiagramm.png}
+    \includegraphics[width=0.65\columnwidth]{images/signalflussdiagramm.png}
 \end{center}
 
 
-\cbl{Der Wert einer Variablen, (Knoten) berechnet sich durch \textbf{Addition} der Zweige, die in diesen Knoten \textbf{einmünden}} 
+\cbl{Der Wert einer Variablen, (Knoten) berechnet sich durch \textbf{Addition} der Zweige, die in diesen Knoten \textbf{einmünden}}
 $$\cbl{ X_4 = h \cdot X_3 + c \cdot X_6 } $$
 
-\vspace{0.2cm}
+\vspace{0.1cm}
 
-\begin{itemize}
-    \setlength\itemsep{5pt}
-
-    \item \textbf{Knoten} \cbl{$x_i$} Stellt bestimmte Grösse (Variable) dar ($X_1, \, X_2, \, ...$)
-    \item \textbf{Zweig} Gerichtete Strecke stellt funktionale Abhängigkeit zwischen Knoten dar
-    \item \textbf{Quelle} Knoten ohne einmündende Zweige ($X_1$) stellen unabh. Variable dar
-    \item \textbf{Senke} Knoten ohne weggehende Zweige ($X_5$) stellen Variable dar, von welcher keine andere Variable im System abhängt
-    \item \textbf{Gemischter Knoten} Knoten mit hineinführenden und weggehenden Zweigen ($X_2, \, X_3, \, X_4, \, X_6$)
-    \item \textbf{Pfad} Kontinuierliche Folge von Zweigen, welche alle in die gleiche Richtung zeigen ($abcd, \, aef, \, bcd \, \ldots$)
-    \item \textbf{Offener Pfad} Pfad, bei dem jeder beteiligte Knoten nur \textbf{einmal} durchquert wird
-    \item \textbf{Vorwärtspfad} \cbl{$P_k$} Offener Pfad zw. Quelle und Senke oder einem gemischten Knoten, $P_k$ = Produkt der Zweigtransmittanzen
-    \item \textbf{Schleife} \cbl{$L_i$} Geschlossener Pfad, welcher zum Ausgangsknoten zurückkehrt, jeder Knoten nur \textbf{einmal} ($ef, \, g$)
-    \item \textbf{Eigenschleife} Rückkopplungsschleife aus einem Zweig und einem Knoten ($g$)
-    \item \textbf{Zweigtransmittanz} \cbl{$a, b, \ldots$} Proportionalitätskonstante zwischen zwei Knoten (Vorfaktor von Variable)
-    \item \textbf{Schleifentransmittanz} \cbl{$L_i$} Produkt der Zweigtransmittanzen einer Schleife ($ef, \, g$)
-    \item \textbf{Berühren} Zwei Schleifen bzw. Pfad und Schleife berühren sich, wenn sie \textbf{mind. einen gemeinsamen Knoten} haben
-    \item \textbf{Graphdeterminante} \cbl{$\Delta$}, \textbf{Kofaktor} \cbl{$\Delta_k$} \textrightarrow\ siehe Mason's Regel
-\end{itemize}
+{\rowcolors{2}{gray!12}{white}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash\hspace{0pt}}p{0.24\columnwidth} X@{}}
+    \toprule
+    \textbf{Begriff}                & \textbf{Bedeutung} (Bsp.)                                                             \\
+    \midrule
+    \textbf{Knoten} $x_i$           & Stellt bestimmte Grösse (Variable) dar ($X_1, X_2, \ldots$)                           \\
+    \textbf{Zweig}                  & Gerichtete Strecke, stellt funktionale Abhängigkeit zwischen Knoten dar               \\
+    \textbf{Quelle}                 & Knoten ohne einmündende Zweige, stellt unabh. Variable dar ($X_1$)                    \\
+    \textbf{Senke}                  & Knoten ohne weggehende Zweige, Variable von welcher keine andere Variable im System abhängt ($X_5$) \\
+    \textbf{Gemischter Knoten}      & Knoten mit hineinführenden und weggehenden Zweigen ($X_2, X_3, X_4, X_6$)             \\
+    \textbf{Pfad}                   & Kontinuierliche Folge von Zweigen, welche alle in die gleiche Richtung zeigen ($abcd, aef, bcd, \ldots$) \\
+    \textbf{Offener Pfad}           & Pfad, bei dem jeder beteiligte Knoten nur \textbf{einmal} durchquert wird             \\
+    \textbf{Vorwärtspfad} $P_k$     & Offener Pfad zw. Quelle und Senke oder einem gemischten Knoten, $P_k$ = Produkt der Zweigtransmittanzen \\
+    \textbf{Schleife} $L_i$         & Geschlossener Pfad, welcher zum Ausgangsknoten zurückkehrt, jeder Knoten nur \textbf{einmal} ($ef, g$) \\
+    \textbf{Eigenschleife}          & Rückkopplungsschleife aus einem Zweig und einem Knoten ($g$)                          \\
+    \textbf{Zweigtransmittanz} $a, b, \ldots$ & Proportionalitätskonstante zwischen zwei Knoten (Vorfaktor von Variable)    \\
+    \textbf{Schleifentransmittanz} $L_i$ & Produkt der Zweigtransmittanzen einer Schleife ($ef, g$)                         \\
+    \textbf{Berühren}               & Zwei Schleifen bzw. Pfad und Schleife berühren sich, wenn sie \textbf{mind. einen gemeinsamen Knoten} haben \\
+    \textbf{Graphdeterminante} $\Delta$, \textbf{Kofaktor} $\Delta_k$ & \textrightarrow\ siehe Mason's Regel                    \\
+    \bottomrule
+\end{tabularx}}
 
 
 \subsection{Konstruktionsregeln}{55}
@@ -52,24 +55,21 @@ Gleichungssysteme können mit den folgenden Regeln vereinfacht werden. Die Verei
 Elimination abhängiger Variablen}.
 
 
-\subsubsection{Kettentransformation}{59}
+\subsubsection{Ketten- und Paralleltransformation}{59}
 
 \begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/kettentransformation.png}
-\end{center}
+    \includegraphics[width=0.65\columnwidth]{images/kettentransformation.png}
 
+    \vspace{0.2cm}
 
-\subsubsection{Paralleltransformation}{59}
-
-\begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/paralleltransformation.png}
+    \includegraphics[width=0.55\columnwidth]{images/paralleltransformation.png}
 \end{center}
 
 
 \subsubsection{Entfernung eines Knotens}{60}
 
 \begin{center}
-    \includegraphics[width=0.85\columnwidth]{images/entfernung_knoten.png}
+    \includegraphics[width=0.7\columnwidth]{images/entfernung_knoten.png}
 \end{center}
 
 
@@ -79,11 +79,11 @@ Elimination abhängiger Variablen}.
 verschoben wird 
 
 \begin{center}
-    \includegraphics[width=0.85\columnwidth]{images/transmittanzverschiebung_1.png}
+    \includegraphics[width=0.7\columnwidth]{images/transmittanzverschiebung_1.png}
 
-    \vspace{0.2cm}
+    \vspace{0.1cm}
 
-    \includegraphics[width=0.75\columnwidth]{images/transmittanzverschiebung_2.png}
+    \includegraphics[width=0.6\columnwidth]{images/transmittanzverschiebung_2.png}
 \end{center}
 
 
@@ -101,7 +101,7 @@ invertieren:
 \end{itemize}
 
 \begin{center}
-    \includegraphics[width=0.9\columnwidth]{images/pfadinversion_2.png}
+    \includegraphics[width=0.75\columnwidth]{images/pfadinversion_2.png}
 \end{center}
 
 \textbf{Achtung:} Inversion eines Pfades hat Effekt, dass Quelle vom einen Ende des Pfades zum anderen Ende verschoben wird.\\
@@ -114,11 +114,23 @@ invertieren:
 Transmittanzen von allen anderen Zweigen, welche in betroffenen Knoten \textbf{einmünden} durch $(1-b)$ dividieren 
 
 \begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/entfernung_eigenschleife.png} 
+    \includegraphics[width=0.7\columnwidth]{images/entfernung_eigenschleife.png}
 \end{center}
 
 
 \subsubsection{Schleifenreduktion}{63-64}
+
+\textbf{Bezeichnungen} (gelten auch für Mason's Regel):
+
+\begin{tabular}{ll}
+    $H_{ij}$            & Gesamte Transmittanz von $x_i$ nach $x_j$                 \\
+    $P_{ij}$, $P_k$     & Transmittanz des (k-ten) Vorwärtspfades von $x_i$ nach $x_j$ \\
+    $L$, $L_i$          & Transmittanz der Schleife                                 \\
+    $\Delta$            & Graph- / Netzwerkdeterminante                             \\
+    $\Delta_k$          & Kofaktor (Kodeterminante) des k-ten Vorwärtspfades
+\end{tabular}
+
+\vspace{0.2cm}
 
 \myul{\textbf{Einzelne Schleife}}
 
@@ -127,23 +139,10 @@ Transmittanzen von allen anderen Zweigen, welche in betroffenen Knoten \textbf{e
 Die Transmittanz einer unabhängigen Variablen (Quelle) $x_i$ zu einer abhängigen Variablen (innerer Knoten / Senke) in einem SFD,
 das nur eine Schleife und einen Vorwärtspfad enthält ist:
 
-\vspace{0.2cm}
-
-
-\begin{minipage}[c]{0.24\columnwidth}
-    $$ \boxed{ H_{ij} = \frac{P_{ij}}{1-L} }$$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.73\columnwidth}
-    \begin{tabular}{ll}
-    $H_{ij}$    & Gesamte Transmittanz                                  \\ 
-    $P_{ij}$    & Transmittanz des Vorwärtspfades von $x_i$ nach $x_j$  \\
-    $L$         & Transmittanz der Schleife
-    \end{tabular}
-\end{minipage}
+$$ \boxed{ H_{ij} = \frac{P_{ij}}{1-L} }$$
 
 \begin{center}
-    \includegraphics[width=0.9\columnwidth]{images/einzelne_schleife.png}
+    \includegraphics[width=0.75\columnwidth]{images/einzelne_schleife.png}
 \end{center}
 
 
@@ -154,23 +153,10 @@ das nur eine Schleife und einen Vorwärtspfad enthält ist:
 Bei einer Kaskade von sich nicht berührenden Schleifen (d.h., dass sie \textbf{keinen gemeinsamen Knoten} haben) ist die gesamte
 Transmittanz gegeben durch: 
 
-\vspace{0.2cm}
-
-\begin{minipage}[c]{0.45\columnwidth}
-    $$ \boxed{ H_{\rm in} = \frac{P_{ij}}{1-L_j} \cdot\frac{P_{jk}}{1-L_k} \cdot \ldots \cdot \frac{P_{(n-1)n}}{1-L_n} } $$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.5\columnwidth}
-    \begin{tabular}{ll}
-        $H_{\rm in}$& Gesamte Transmittanz              \\ 
-        $P_{ij}$    & Transmittanz des Vorwärtspfades   \\
-                    & von $x_i$ nach $x_j$              \\
-        $L$         & Transmittanz der Schleife 
-    \end{tabular}
-\end{minipage}
+$$ \boxed{ H_{\rm in} = \frac{P_{ij}}{1-L_j} \cdot\frac{P_{jk}}{1-L_k} \cdot \ldots \cdot \frac{P_{(n-1)n}}{1-L_n} } $$
 
 \begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/nicht_beruehrende_schleifen.png}
+    \includegraphics[width=0.7\columnwidth]{images/nicht_beruehrende_schleifen.png}
 \end{center}
 
 
@@ -179,7 +165,7 @@ Transmittanz gegeben durch:
 Für den Fall, dass zwei Schleifen mind. einen \textbf{gemeinsamen Knoten} haben, ist die gesamte Transmittanz gegeben durch:
 
 \begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/beruehrende_schleifen.png} 
+    \includegraphics[width=0.7\columnwidth]{images/beruehrende_schleifen.png}
 \end{center}
 
 
@@ -188,32 +174,17 @@ Für den Fall, dass zwei Schleifen mind. einen \textbf{gemeinsamen Knoten} haben
 Es existiert \textbf{nur ein Pfad} zwischen einer Quelle $x_i$ und einem abhängigen Knoten $x_j$, wobei dieser Pfad jede Schleife
 im SFD berührt (d.h., dass er \textbf{wenigstens einen Knoten mit jeder Schleife} gemeinsam hat)
 
-\vspace{0.2cm}
+$$ \boxed{ H_{ij} = \frac{x_j}{x_i} = \frac{P_{ij}}{\Delta} } $$
 
-\begin{minipage}{0.25\columnwidth}
-    $$ \boxed{ H_{ij} = \frac{x_j}{x_i} = \frac{P_{ij}}{\Delta} } $$
-\end{minipage}
-\hfill
-\begin{minipage}{0.7\columnwidth}
-    \begin{tabular}{ll}
-        $H_{ij}$    & Gesamte Transmittanz              \\ 
-        $P_{ij}$    & Transmittanz des Vorwärtspfades   \\
-                    & von $x_i$ nach $x_j$              \\
-        $\Delta$    & Graph- / Netzwerkdeterminante
-    \end{tabular}
-\end{minipage}
-
-\vspace{0.2cm}
-
-\fcolorbox{red}{white}{\parbox{0.97\columnwidth}{
- $\Delta = $ 1 \cor{$-$} (Summe aller Schleifen) \cor{$+$} (Summe aller Produkte zweier Schleifen, die sich \textbf{nicht berühren}) 
-    \cor{$-$} (Summe aller Produkte dreier Schleifen, die sich \textbf{nicht berühren}) \cor{$+$} $\ldots$
+\fcolorbox{blue}{white}{\parbox{0.97\columnwidth}{
+ $\Delta = $ 1 \crd{$-$} (Summe aller Schleifen) \crd{$+$} (Summe aller Produkte zweier Schleifen, die sich \textbf{nicht berühren})
+    \crd{$-$} (Summe aller Produkte dreier Schleifen, die sich \textbf{nicht berühren}) \crd{$+$} $\ldots$
     $$ \Delta = 1 - \sum_i L_i + \sum_{i,j} L_i L_j - \sum_{i,j,k} L_i L_j L_k + \ldots $$
     In $\sum L_iL_j$, $\sum L_iL_jL_k$ nur Schleifen, die sich \textbf{paarweise nicht berühren}. \\
     Keine solchen Paare $\Rightarrow \Delta = 1 - \sum_i L_i$}}
  
 \begin{center}
-    \includegraphics[width=0.9\columnwidth]{images/beispiel_schleifenreduktion.png}
+    \includegraphics[width=0.75\columnwidth]{images/beispiel_schleifenreduktion.png}
 \end{center}
 
 \textrightarrow\ \textbf{Schleifen dürfen auch innerhalb von Schleifen sein}
@@ -239,20 +210,18 @@ im SFD berührt (d.h., dass er \textbf{wenigstens einen Knoten mit jeder Schleif
 
 \vspace{0.2cm}
 
-    \begin{tabular}{ll}
-    $H_{ij}$    & Gesamte Transmittanz                                                          \\ 
-    $P_{k}$     & Transmittanz des k-ten offenen Pfades zwischen $x_i$ und $x_j$                \\
-    $\Delta$    & Graph- / Netzwerkdeterminante                                                 \\
-    $\Delta_k$  & Kofaktor (Kodeterminante) des k-ten Vorwärtspfades \\
-\end{tabular}
+\fcolorbox{blue}{white}{\parbox{0.97\columnwidth}{
+    \textbf{$P_k$: ogni nodo max.\ \cbl{1 volta}} \\
+    OK: scavalcare $x_j$ e raggiungerlo dopo (1ª volta) \\
+    NO: ripassare su un nodo $\Rightarrow$ è una Schleife (già in $\Delta$)}}
 
 \vspace{0.2cm}
 
-\fcolorbox{red}{white}{\parbox{0.97\columnwidth}{
+\fcolorbox{blue}{white}{\parbox{0.97\columnwidth}{
     \textbf{Calcolo di $\Delta_k$ (per ogni cammino $P_k$):}
     \begin{enumerate}
-        \item Cancellare tutti i loop che \textbf{toccano} $P_k$ (almeno un nodo \cbl{$X_k$} in comune con $P_k$)
-        \item Con i loop \textbf{rimasti} calcolare $\Delta$ con la stessa formula della \crd{rote} Box
+        \item Cancellare tutti i loop che \textbf{toccano} $P_k$ (almeno un nodo $X_k$ in comune con $P_k$)
+        \item Con i loop \textbf{rimasti} calcolare $\Delta$ con la stessa formula della box di $\Delta$ (sopra)
     \end{enumerate}
     \begin{itemize}
         \item Nessun loop rimasto (tutti toccano $P_k$) $\Rightarrow \Delta_k = 1$
@@ -262,23 +231,25 @@ im SFD berührt (d.h., dass er \textbf{wenigstens einen Knoten mit jeder Schleif
 
 \vspace{0.2cm}
 
-\textbf{Es gibt gleich viele Kofaktoren wie Vorwärtspfade}
+\fcolorbox{blue}{white}{\parbox{0.97\columnwidth}{
+    \textbf{Semplificare $H$:} Zähler und Nenner $\cdot\, s^n$ ($n$ = max.\ Potenz von $1/s$) $\Rightarrow$ Polynom/Polynom \\
+    $\Delta$ uguale per tutte le UTF della rete}}
 
 \example{Beispiel Mason's Regel}
 
 \begin{center}
-    \includegraphics[width=0.65\columnwidth]{images/mason_beispiel_1.png} 
+    \includegraphics[width=0.55\columnwidth]{images/mason_beispiel_1.png}
 \end{center}
 
 
 \myul{\textbf{$\bm{x_1}$ ist Quelle:}}
 
 \begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/mason_beispiel_2.png}
+    \includegraphics[width=0.7\columnwidth]{images/mason_beispiel_2.png}
 \end{center}
 
 
-\cbl{\myul{\textbf{$\bm{x_2}$ ist keine Quelle:} }}
+\crd{\myul{\textbf{$\bm{x_2}$ ist keine Quelle:} }}
 
 \vspace{0.2cm}
 
@@ -296,7 +267,7 @@ Diese zu entfernenden Knoten heissen \cbl{\textbf{fundamentale Knoten}}
 \textbf{Hinweis:} 'Entfernen' bedeutet, den Knoten ersatzlos zu streichen (und somit Pfade bzw. die \textbf{Schleifen} zu zerstören)
 
 \begin{center}
-    \includegraphics[width=0.9\columnwidth]{images/ordnung_SFD.png}
+    \includegraphics[width=0.75\columnwidth]{images/ordnung_SFD.png}
 \end{center}
 
 \textrightarrow\ Die \textbf{Ordnung eines SFDs} entspricht im Allgemeinen \textbf{nicht der Ordnung} des dazugehörigen \textbf{Systems}
@@ -343,7 +314,9 @@ Die Transposition ist eine wichtige Methode für die Ableitung von \textbf{alter
    \item Bezeichnungswechsel von Eingangs- und Ausgangsknoten
 \end{enumerate}
 
-\includegraphics[width=\columnwidth]{images/transposition.png} 
+\begin{center}
+    \includegraphics[width=0.8\columnwidth]{images/transposition.png}
+\end{center}
 
 
 \subsubsection{Inversion vs. Transposition}
@@ -406,6 +379,6 @@ Die Menge $N_a$ enthält dabei den Eingangsknoten
 \subsection{Anwendung: Operationsverstärker}{78-79}
 
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/OPV_als_DFD.png}
+    \includegraphics[width=0.55\columnwidth]{images/OPV_als_DFD.png}
 \end{center}
 

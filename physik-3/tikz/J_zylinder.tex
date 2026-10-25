@@ -1,0 +1,12 @@
+\begin{tikzpicture}[>=Latex, scale=0.9]
+  % Körper
+  \path[left color=gray!70, right color=gray!25, draw=black, thick]
+    (0,0.8) -- (2,0.8) arc(90:-90:0.3 and 0.8) -- (0,-0.8) arc(270:90:0.3 and 0.8) -- cycle;
+  \draw[thick, fill=gray!10] (2,0) ellipse (0.3 and 0.8);
+
+  % Drehachse
+  \draw[red, dashed, thick] (-0.9,0) -- (3.1,0);
+
+  % Radius
+  \draw[<->] (2,0) -- (2,0.8) node[midway, right=1pt] {\footnotesize $r$};
+\end{tikzpicture}

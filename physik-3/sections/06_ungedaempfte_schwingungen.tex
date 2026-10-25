@@ -2,27 +2,31 @@
 
 \subsection{Schwingungen -- Übersicht}
 
-\paragraph{Freie Schwingung}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.22\linewidth}
+                >{\raggedright\arraybackslash}X
+                >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Tipo} & \textbf{Che cosa succede} & \textbf{Chi detta la frequenza} \\
+\midrule
+\textbf{Libera} \newline (\textit{freie Schwingung, Eigenschwingung})
+  & sistema viene portato fuori dall'equilibrio e poi lasciato a sé stesso.
+  & sistema stesso: oscilla alla sua frequenza propria. \\
+\addlinespace
+\textbf{Forzata} \newline (\textit{erzwungene, fremderregte Schwingung})
+  & Una perturbazione esterna, periodica o no, continua ad agire sul sistema.
+  & Soprattutto l'eccitazione esterna. \\
+\addlinespace
+\textbf{Autoeccitata} \newline (\textit{selbsterregte Schwingung})
+  & sistema preleva energia da una sorgente e la reimmette da solo al ritmo giusto
+  & sistema stesso, anche se la sorgente è costante. \\
+\bottomrule
+\end{tabularx}\smallbreak
 
-Wird ein schwingungsfähiges System aus dem Gleichgewichtszustand gebracht 
-und dann sich selbst überlassen, so führt es freie Schwingungen oder Eigenschwingungen aus.
-
-
-\medskip
-
-\paragraph{Erzwungene / Fremderregte Schwingung}
-
-Wird ein System von aussen durch periodische oder auch nichtperiodische Störungen zum
-Schwingen veranlasst, wird von fremderregten Schwingungen gesprochen. 
-
-
-\medskip
-
-\paragraph{Selbsterregte Schwingung}
-
-Ein schwingungsfähiges System kann unter Umständen einer Energiequelle Energie entziehen
-und diese der eigenen Schwingung selbst zuführen, so dass die Schwingung trotz einer
-eventuell vorhandenen Dämpfung nicht abklingt. 
+Per distinguere forzata da autoeccitata chiediti se \emph{la sorgente di energia oscilla già di suo}.
+\begin{itemize}
+  \item Sì $\Rightarrow$ \textbf{forzata}. Esempio: un altoparlante alimentato con una tensione alternata.
+  \item No, la sorgente è costante e il ritmo lo crea il sistema $\Rightarrow$ \textbf{autoeccitata}.
+\end{itemize}
 
 
 \subsection{Freie Schwingungen}
@@ -75,7 +79,7 @@ $$ \text{Kräftegleichgewicht:} \quad m \cdot \ddot{x} = -k \cdot x $$
 \]
 
 \begin{ctabular}{clc}
-    $m$     & Masse             & $[m] = \meter$                    \\
+    $x$     & Allungamento o posizione             & $[x] = \meter$                    \\
     $k=c$   & Federkonstante    & $[k] = \frac{\newton}{\meter}$
 \end{ctabular}
 
@@ -98,44 +102,35 @@ $$ \text{Kräftegleichgewicht:} \quad m \cdot \ddot{x} = -k \cdot x $$
                 &= \frac{k A^2}{2} ( \sin^2(\omega \, t + \varphi) + \cos^2(\omega \, t + \varphi) )
 \end{align*}
 
-$$ \boxed{ E_{\rm tot} = \frac{k \cdot A^2}{2} } $$
+$$ \boxed{ E_{\rm tot} = \frac{k \cdot A^2}{2} } \quad \text{(const)}$$
 
 
 \subsection{Beschreibung einer 1D-Schwingung}
 
-\subsubsection{Zeitbreich}
-
-\begin{minipage}[t]{0.42\columnwidth}
-    \includegraphics[width=\columnwidth, align=t]{images/zeitbereich.png}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.52\columnwidth}
-    Auslenkung in Abhängigkeit der Zeit \\
-    Beispiel: Oszilloskop 
+\begin{minipage}[t]{0.32\columnwidth}
+    \centering
+    \textbf{Zeitbereich} \\[2pt]
+    \parbox[c][2.6cm][c]{\linewidth}{\centering\includegraphics[width=\linewidth]{images/zeitbereich.png}} \\[2pt]
+    \raggedright
+    Auslenkung über der Zeit (z.B.\ Oszilloskop)
     $$ x(t) = A \cdot \sin(\omega \, t + \varphi) $$
 \end{minipage}
-
-
-\subsubsection{Zeigerdarstellung}
-
-\begin{minipage}[c]{0.4\columnwidth}
-    \input{tikz/zeigerdarstellung.tex}
+\hfill
+\begin{minipage}[t]{0.32\columnwidth}
+    \centering
+    \textbf{Zeigerdarstellung} \\[2pt]
+    \parbox[c][2.6cm][c]{\linewidth}{\centering\scalebox{0.85}{\input{tikz/zeigerdarstellung.tex}}} \\[2pt]
+    \raggedright
+    Zeiger (komplexe Zahl), der um den Ursprung rotiert
+    $$ z(t) = \underbrace{ x(t) }_{\mathcal{R}(z)} + i \, \underbrace{ y(t) }_{\mathcal{I}(z)} $$
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.56\columnwidth}
-    Auslenkung als Zeiger (komplexe Zahl), der um den Ursprung rotiert 
-    $$ z(t) = \underbrace{ x(t) }_{\substack{\mathcal{R}(z)}} + i \, \underbrace{ y(t) }_{\substack{ \mathcal{I}(z)}} $$
-\end{minipage}
-
-
-\subsubsection{Phasenraum}
-
-\begin{minipage}[c]{0.4\columnwidth}
-    \input{tikz/phasenraum.tex}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.54\columnwidth}
-    Darstellung der Position $y$ und der Ableitung (Geschwindigkeit)
+\begin{minipage}[t]{0.32\columnwidth}
+    \centering
+    \textbf{Phasenraum} \\[2pt]
+    \parbox[c][2.6cm][c]{\linewidth}{\centering\scalebox{0.85}{\input{tikz/phasenraum.tex}}} \\[2pt]
+    \raggedright
+    Position $y$ und Ableitung $\dot{y}$ (Geschwindigkeit)
 \end{minipage}
 
 
@@ -229,7 +224,8 @@ $$ \varphi(t) = \varphi_0 \cdot \sin(\omega \, t + \delta) $$
     \end{tabular}
 
     $$ \boxed{ \text{DGL: } \ddot{\varphi} = -\omega^2 \, \varphi  \quad \text{mit } \omega^2 =  \frac{g}{L^*} = \frac{g \cdot a \cdot m}{J_A}  }$$
-    $$ \boxed{L^* = \frac{J_A}{a \cdot m}} \qquad \boxed{J_A = J_s + m \cdot a^2 } $$  
+    $$ \boxed{L^* = \frac{J_A}{a \cdot m}} \qquad \boxed{J_A = J_s + m \cdot a^2 } $$
+    $$ \boxed{ T = 2 \, \pi \sqrt{\frac{L^*}{g}} = 2 \, \pi \sqrt{\frac{J_A}{a \cdot m \cdot g}} } $$
 
     \medskip
     $\varphi$ folgt der gleichen DGL wie $x$ im Fall des Federpendels
@@ -239,26 +235,37 @@ $$ \varphi(t) = \varphi_0 \cdot \sin(\omega \, t + \delta) $$
 
 \textbf{Physikalisches Pendel mit mehreren Massen}
 
-\vspace{-0.2cm}
+\vspace{0.1cm}
 
 \begin{minipage}[c]{0.51\columnwidth}
-    $$ \boxed{  T = \frac{2 \, \pi}{\omega} = 2 \, \pi \sqrt{\frac{J_{A1} + J_{A2}}{(a_1 \cdot m_1 + a_2 \cdot m_2) \cdot g}} } $$
+    $$ \boxed{  T = 2 \, \pi \sqrt{\frac{\sum_i J_{Ai}}{g \left( \sum_i a_i \, m_i\right)}} } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
+    (mit $J_{Ai} = J_{si} + m_i \, a_i^2$ )\\
     \textbf{ \textrightarrow\ $\bm{J}$-Tabelle im Anhang Abschnitt \ref{Massenträgheitsmomente}}
 \end{minipage}
+
+\smallskip
+
+\textbf{Segno di $\bm{a_i}$:} la distanza $a_i$ ha un segno, a seconda che la massa $m_i$ \textit{stabilizzi} o no.
+\begin{itemize}
+    \item $a_i > 0$: $m_i$ sta \textbf{sotto} il punto di sospensione $\Rightarrow$ momento \textbf{stabilizzante} (\textit{rückstellend}), come nel pendolo singolo (lì $a > 0$ per costruzione).
+    \item $a_i < 0$: $m_i$ sta \textbf{sopra} il punto di sospensione $\Rightarrow$ momento \textbf{destabilizzante}, tende a far cadere il pendolo.
+\end{itemize}
 
 \begin{ctabular}{clc}
     $S$     & Schwerpunkt des Körpers           &                                           \\
     $J_s$   & Trägheitsmoment bzgl. $S$         & $[J_S] = \kilogram \cdot \meter\squared$  \\
-    $a$     & Abstand Schwerpunkt -- Drehpunkt  & $[a] = \meter$                            \\
+    $a$     & Abstand Schwerpunkt -- Drehpunkt, $a > 0$ if $S$ unter $A$ & $[a] = \meter$ \\
     $L^*$   & Reduzierte Länge                  & $[L^*] = \meter$                          \\
     $J_A$   & Trägheitsmoment um Aufhängepunkt  & $[J_A] = \kilogram \cdot \meter\squared$ 
 \end{ctabular}
 
 
-\subsection{Perkussionszentrum}
+\subsection{Eigenschaften von \texorpdfstring{$L^*$}{L*}}
+
+\subsubsection{Perkussionszentrum}
 
 \textbf{Frage:} Wie weit vom Drehpunkt $A$ muss ein Impuls auf einen Körper ausgeübt werden, damit keine Kraft auf die Achse ausgeübt wird?
 
@@ -267,9 +274,20 @@ $$ \varphi(t) = \varphi_0 \cdot \sin(\omega \, t + \delta) $$
 \textbf{Antwort:} Auf Höhe der \textbf{reduzierten Länge} $L^* = \frac{J_A}{a \cdot m}$
 
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/perkussionszentrum.png}
-\end{center}
+    \includegraphics[width=0.6\columnwidth]{images/perkussionszentrum.png}
+\end{center}\vspace{-1em}
 
+\subsubsection{Umkehrbarkeit (Reversionspendel)}
+$A$ (\textit{Drehpunkt}) und $M$ (\textit{Perkussionszentrum}) sind \textbf{vertauschbar}: 
+gleiches $L^*$ $\Rightarrow$ gleiches $T$. Nützlich, um $g$ zu messen 
+: $T = 2\pi\sqrt{L^*/g}$ mit $L^* = $ 
+Abstand der beiden Aufhängepunkte.\vspace{-0.5em}
+
+$$ A \xrightarrow{\;a\;} S \xrightarrow{\;L^*-a\;} M \qquad \Rightarrow \qquad \boxed{ L'^* = L^* \;\Rightarrow\; T' = T } $$
+
+% \textbf{Beweis:}
+% $$ J_s = J_A - m a^2 = m\,a\,(L^* - a) \qquad (\text{da } J_A = m\,a\,L^*) $$
+% $$ a' = L^* - a \;\Rightarrow\; L'^* = \frac{J_s + m a'^2}{m\,a'} = \frac{m\,a\,a' + m\,a'^2}{m\,a'} = a + a' = L^* \quad \checkmark $$
 
 
 \subsection{Periodische Schwingung}

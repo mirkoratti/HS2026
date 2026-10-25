@@ -183,35 +183,35 @@ $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reelle
 
 \renewcommand{\arraystretch}{2.8}
 \begin{tabular}{ll}
-    $x[n] = \sum \limits_{k = 0}^{N-1} c_k \, e^{\jimg k (2 \pi / N) \, n}$                 & für $n \in \{ 0, \, \ldots \, , N-1 \}$ \\
-    $c_k = \frac{1}{N} \sum \limits_{n = 0}^{N-1} x[n] \, e^{- \jimg k (2 \pi / N) \, n}  $ & für $k \in \{ 0, \, \ldots \, , N-1 \}$ 
+    $\displaystyle x[n] = \sum \limits_{k = 0}^{N-1} c_k \, e^{\jimg k (2 \pi / N) \, n}$                 & für $n \in \{ 0, \, \ldots \, , N-1 \}$ \\
+    $\displaystyle c_k = \frac{1}{N} \sum \limits_{n = 0}^{N-1} x[n] \, e^{- \jimg k (2 \pi / N) \, n}  $ & für $k \in \{ 0, \, \ldots \, , N-1 \}$ 
 \end{tabular}				
 \renewcommand{\arraystretch}{1}
 
 
-\example{Abtastwerte $x[n]$ finden}
+% \example{Abtastwerte $x[n]$ finden}
 
-\begin{minipage}[c]{0.55\columnwidth}
-    Ein Signal $s(t)$ wird auf dem Intervall [0,1] mit der Frequenz $f_a = 4 \, \text{Hz}$ abgetastet.
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.44\columnwidth}
-    $s(t) = \begin{cases}			
-        t(1-t)  & \text{für} \; t \in [0,1] \\
-        0       & \text{sonst} 
-    \end{cases}$  
-\end{minipage}
+% \begin{minipage}[c]{0.55\columnwidth}
+%     Ein Signal $s(t)$ wird auf dem Intervall [0,1] mit der Frequenz $f_a = 4 \, \text{Hz}$ abgetastet.
+% \end{minipage}
+% \hfill
+% \begin{minipage}[c]{0.44\columnwidth}
+%     $s(t) = \begin{cases}			
+%         t(1-t)  & \text{für} \; t \in [0,1] \\
+%         0       & \text{sonst} 
+%     \end{cases}$  
+% \end{minipage}
 
-\vspace{0.2cm}
+% \vspace{0.2cm}
 
-\renewcommand{\arraystretch}{2}
-\begin{tabular}{lll}
-    $x[0] = s(0) = 0$                                                                               & & 
-    $x[1] = s\left( \frac{1}{4} \right) = \frac{1}{4} \left( 1 - \frac{1}{4} \right) = \frac{3}{16}$    \\
-    $x[2] = s \left( \frac{1}{2} \right) = \frac{1}{2} \left(1- \frac{1}{2} \right) = \frac{1}{4}$  & &
-    $x[3] = s \left( \frac{3}{4} \right) = \frac{3}{4} \left (1 - \frac{3}{4} \right) = \frac{3}{16}$
-\end{tabular}
-\renewcommand{\arraystretch}{1}
+% \renewcommand{\arraystretch}{2}
+% \begin{tabular}{lll}
+%     $x[0] = s(0) = 0$                                                                               & & 
+%     $x[1] = s\left( \frac{1}{4} \right) = \frac{1}{4} \left( 1 - \frac{1}{4} \right) = \frac{3}{16}$    \\
+%     $x[2] = s \left( \frac{1}{2} \right) = \frac{1}{2} \left(1- \frac{1}{2} \right) = \frac{1}{4}$  & &
+%     $x[3] = s \left( \frac{3}{4} \right) = \frac{3}{4} \left (1 - \frac{3}{4} \right) = \frac{3}{16}$
+% \end{tabular}
+% \renewcommand{\arraystretch}{1}
 
 
 \subsection{Schnelle Fouriertransformation (FFT)}
@@ -226,15 +226,20 @@ $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reelle
 
 \renewcommand{\arraystretch}{2.5}
 \begin{tabular}{ll}
-    $c_k = \frac{1}{N} \left( c_{g,k} + E_N^k \, c_{u,k} \right)$   & mit $E_N := e^{-\jimg(2 \pi/N)}$  \\
+    $\boxed{c_k = \frac{1}{N} \left( c_{g,k} + E_N^k \, c_{u,k} \right)}$   & mit $E_N := e^{-\jimg(2 \pi/N)}$  \\
     $c_{g,k}:= \sum \limits_{m = 0}^{N/2-1} x[2m] \,  E_N^{k2m}$    & $c_{u,k}:= \sum \limits_{m = 0}^{N/2-1} x[2m+1] \,  E_N^{k2m}$
 \end{tabular}
-
-
-\subsubsection{Fourierkoeffizienten $c_{k + N/2}$ }
-
-\vspace{-0.2cm}
-\begin{tabular}{l}
-    $c_{k + N/2} =  \frac{1}{N} \left( c_{g,k} - E_N^k \, c_{u,k} \right)$
-\end{tabular}
 \renewcommand{\arraystretch}{1}
+
+\subsubsection{Fourierkoeffizienten $c_{k + N/2}$ }\vspace{-1em}
+
+$$c_{k + N/2} =  \frac{1}{N} \left( c_{g,k} - E_N^k \, c_{u,k} \right)
+\quad
+\text{\small Ricevo 'gratuitamente' i coefficenti della metà superiore}
+$$
+
+\subsubsection*{Rekursive Anwendung}
+
+$c_{g,k}$, $c_{u,k}$ sono DFT di lunghezza $\frac{N}{2}$ (campioni \textbf{pari} / \textbf{dispari}) $\to$ 
+si divide di nuovo in pari/dispari, fino a lunghezza $1$. Poi si risale: ogni $E_N^k\,c_{u,k}$ vale per due 
+coefficienti ($\pm$). Aufwand: $N\log_2 (N)$ statt $N^2$.
