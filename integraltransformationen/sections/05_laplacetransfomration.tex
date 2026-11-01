@@ -21,7 +21,7 @@ Es gilt die Korrespondenz: $f(t) \; \laplace \; F(s)$ (Bildbereich)
 \renewcommand{\arraystretch}{1}
 
 
-\subsection{Konvergenzhalbebene}
+\subsection{Konvergenzhalbebene}\label{sec:konvergenz}
 
 Es gibt jeweils mehrere (komplexe) Zahlen $s$, \textbf{für welche das Laplace-Integral konvergiert.} 
 Die Konvergenzhalbebene beinhaltet alle diese Zahlen $s$
@@ -31,10 +31,13 @@ Die Konvergenzhalbebene beinhaltet alle diese Zahlen $s$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
-    Die Halbebene wird durch die \textbf{am weitesten rechts liegende Polstelle} von $F(s)$ begrenzt (Kreuzchen)
-    \vspace{0.2cm}
-    Falls $F(s)$ keine Polstelle hat, ist die Konvergenzhalbebene gleich $\mathbb{C}$
+    Begrenzt durch die \textbf{am weitesten rechts liegende Polstelle} von $F(s)$ (Kreuzchen)
+    $$\boxed{\Re(s) > \max \Re(s_p)}$$
+    Falls $F(s)$ keine Polstelle hat, ist die Konvergenzhalbebene gleich $\mathbb{C}$\smallbreak
+
+    \hyperref[anh:konvergenz]{regole ed esempio nell'Anhang}
 \end{minipage}
+
 
 
 Liegt die imaginäre Achse in der Konvergenzhalbebene, so \textbf{existiert} die Fouriertransformierte!
@@ -120,6 +123,7 @@ $$ \text{ \textrightarrow\ Korrespondenzpaar: } \e^{at} \; \laplace \; \frac{1}{
 
 
 \subsection[Übertragungsfunktion (LTI-Systeme)]{Übertragungsfunktion $\bm{G(s)}$ (LTI-Systeme)}
+\textbf{\color{red}Für ruhendes LTI-System}
 
 \begin{minipage}[c]{0.4\columnwidth}
     $$ G(s) = Y_{\delta}(s) = \frac{Y(s)}{X(s)} $$

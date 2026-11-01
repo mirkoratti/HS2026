@@ -181,7 +181,7 @@ $\rightarrow$ \textbf{Euler}:\hspace{.1cm} \efbox[linecolor=red]{$
 	\begin{equation*}
 		P_c = \frac{A_c^2}{2}, \quad P_{SB} = \frac{A_c^2}{2}\mu^2 P_m = \frac{A_c^2\mu^2}{2C^2} \;\;\rightarrow\;\; \eta = \frac{P_{SB}}{P_c + P_{SB}} = \frac{\mu^2P_m}{1+\mu^2P_m} = \frac{(\frac{\mu}{C})^2}{1+(\frac{\mu}{C})^2}
 	\end{equation*}
-	mit $P_m = m_{rms}^2$ und Crestfaktor $C = \frac{m_p}{m_{rms}} = \frac{1}{m_{rms}}$.\\
+	mit $P_m = m_{rms}^2$ und Crestfaktor $C = \frac{m_{\rm peak}}{m_{\rm rms}} = \frac{1}{m_{\rm rms}}$.\\
 	{\color{accent}} il \textbf{Trägeranteil} consuma potenza ma non porta informazione $\Rightarrow$ AM ordinaria è inefficiente.
 \end{minipage}\hfill
 \begin{minipage}[c]{.29\linewidth}
@@ -197,7 +197,7 @@ $\rightarrow$ \textbf{Euler}:\hspace{.1cm} \efbox[linecolor=red]{$
 	\end{tabular}}
 \end{minipage}
 
-\paragraph{Demodulation}
+\paragraph{Demodulation AM}
 Kohärent (wie DSB-SC) oder Hüllkurvendetektor (\ref{sec:am_demodprinzip}). \textbf{Bedingungen für den Hüllkurvendetektor:}\\
 \efbox[linecolor=red]{$1 + \mu\, m_n(t) \ge 0 \;\Rightarrow\; \mu \le \qty{100}{\%}$} \qquad
 \efbox[linecolor=red]{$B_m < \frac{1}{RC} \ll f_c$} \;($B_m$: Bandbreite von $m(t)$)\\
@@ -227,7 +227,7 @@ $B_{DSB} = 2\cdot B_m$ $\cdot$ Faktoren $A_c$, $\frac12$ $\cdot$ \textbf{kein} T
 {\color{accent}} l'\textbf{Umhüllende} porta solo $|m(t)|$, il \textbf{segno} sta nella \textbf{Phase}. Un \textbf{Phasensprung} di \ang{180} (inviluppo che si strozza a 0, poi portante invertita) significa che $m(t)$ ha \emph{cambiato} segno; il segno assoluto si legge solo rispetto a un riferimento $\cos(\omega_c t)$ $\Rightarrow$ serve demodulazione \textbf{kohärent} (LO sbagliato di \ang{180} $\rightarrow$ $-m(t)$).
 Il \textbf{Hüllkurvendetektor} è cieco alla fase $\rightarrow$ dà $|m(t)|$.
 
-\paragraph{Demodulation S. 59}\label{sec:dsb_demod}
+\paragraph{Demodulation DSB-SC S. 59}\label{sec:dsb_demod}
 \includegraphics[width=.85\linewidth]{chapters/06_amplitudenmodulation/figures/DSB_SC_demodulation.pdf}
 
 \begin{minipage}[c]{.6\linewidth}
@@ -254,14 +254,17 @@ y(t) &= x_{DSB}(t)\cdot\cos(\omega_c t) = A_c\,m(t)\cos^2(\omega_c t)
 y_m(t) &= \tfrac12 A_c\,m(t)
       && \text{(passa-basso: elimina } 2f_c)
 \end{align*}
-$\cos^2(\omega_c t)\ge 0$ con valor medio $\tfrac12$: dove $m(t)<0$ la portante
-ricevuta è capovolta, e moltiplicandola per lo stesso coseno il segno torna giusto.
+\textbf{LO mit Fehler} $x_{LO}(t)=\cos\big((\omega_c+\Delta\omega)t+\varphi\big)$: \efbox[linecolor=red]{$y_{TP}(t)=\tfrac{A_c}{2}\,m(t)\cos(\Delta\omega\, t+\varphi)$} $\rightarrow$ daraus folgt die Tabelle oben.\\[.05cm]
+\textbf{Synchronisation} S. 59 (Info z.B. in den Nulldurchgängen von $x_{DSB}$):\\
+\textbf{Frequenz} $f_c$: gewöhnliche AM $\rightarrow$ Trägeranteil $A_c\cos(\omega_c t)$ herausfiltern; DSB-SC $\rightarrow$ $x_{DSB}^2(t)$ bilden, $2\omega_c$ herausfiltern, Frequenz halbieren\\
+\textbf{Phase} $\varphi$: Phase-Locked Loop (PLL) oder Costas-Loop
 
 % ------------------------------------------------------------
 \subsubsection{Einseitenbandamplitudenmodulation (SSB) S. 60}
-\efbox[linecolor=red]{$x_{SSB}(t) = A_c\, m_n(t) \cos(\omega_c t) \mp A_c\, \hat m_n(t) \sin(\omega_c t)$ \;\; ($-$: USB, $+$: LSB)} \; $\hat m_n(t)$: Hilberttransformierte\\
+\efbox[linecolor=red]{$x_{SSB}(t) = A_c\, m_n(t) \cos(\omega_c t) \mp A_c\, \hat m_n(t) \sin(\omega_c t)$ \;\; ($-$: USB, $+$: LSB)} \; $\hat m_n(t)$: Hilberttransformierte \smallbreak
+
 $B_{SSB} = B_m$ $\cdot$ linear, zeitvariant (Gesamtsystem $\approx$ LTI) $\cdot$ Umhüllende $\not\propto m(t)$ $\Rightarrow$ kein Hüllkurvendetektor $\cdot$ Implementierung aufwändiger\\
-{\color{accent}} le due \textbf{Seitenbänder} portano la stessa informazione $\Rightarrow$ ne basta una, banda dimezzata.
+le due \textbf{Seitenbänder} portano la stessa informazione $\Rightarrow$ ne basta una, banda dimezzata.
 
 \vspace{.1cm}
 {\small\renewcommand{\arraystretch}{1.15}
@@ -272,8 +275,44 @@ $B_{SSB} = B_m$ $\cdot$ linear, zeitvariant (Gesamtsystem $\approx$ LTI) $\cdot$
 	Vorteil & leicht verständlich, etabliertes Filterdesign & keine steilen Filter nötig \\
 	Nachteil & sehr hohe \textbf{Flankensteilheit} nötig & Hilberttransformator ($-\pi/2$) nötig \\
 	Spektrum & skaliert mit $A_c$ und $\frac12$ & skaliert mit $A_c$ \\ \hline
-\end{tabularx}}\\
-{\color{accent}\textit{Intuizione \textbf{Phasenmethode}:}} la \textbf{Hilberttransformation} ruota le frequenze positive di $-\ang{90}$ e le negative di $+\ang{90}$: sommando i due rami una \textbf{Seitenband} si somma, l'altra si cancella.
+\end{tabularx}}\smallbreak
+
+{\color{accent}\textit{\textbf{Phasenmethode}, warum:}} Kosinus-Zweig hat auf beiden Hälften einer Kopie \textbf{gleiches} Vorzeichen, Sinus-Zweig (dank $\operatorname{sgn}$ von Hilbert) \textbf{entgegengesetztes} $\Rightarrow$ eine Hälfte verdoppelt sich, die andere löscht sich aus.
+
+\noindent\begin{minipage}[c]{.5\linewidth}
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|cc|cc}
+	& $X_{\cos}$ & $X_{\sin}$ & $X_{\cos}-X_{\sin}$ & $X_{\cos}+X_{\sin}$ \\ \hline
+	$|\omega|>\omega_c$ (aussen) & $+\tfrac12 M$ & $-\tfrac12 M$ & $M$ & $0$ \\
+	$|\omega|<\omega_c$ (innen) & $+\tfrac12 M$ & $+\tfrac12 M$ & $0$ & $M$ \\ \hline
+	& & & \textbf{USB} & \textbf{LSB}
+\end{tabular}}\smallbreak
+\textit{Merke:} $-\tfrac{\pi}{2}$ wirkt im Argument, kein Vorzeichen: $\cos(\omega t-\tfrac{\pi}{2})=\sin(\omega t)$ $\cdot$ 
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\centering
+\begin{tikzpicture}[x=.42cm,y=.55cm,font=\scriptsize]
+	\definecolor{ssbR}{HTML}{1F6FB5}\definecolor{ssbL}{HTML}{E07B16}
+	\def\ssbB{1.3}
+	\def\hR#1#2{\fill[ssbR!30] (#1,0)--(#1,#2)--({#1+\ssbB},0)--cycle; \draw[ssbR!85!black,thick] (#1,0)--(#1,#2)--({#1+\ssbB},0);}
+	\def\hL#1#2{\fill[ssbL!30] (#1,0)--(#1,#2)--({#1-\ssbB},0)--cycle; \draw[ssbL!85!black,thick] (#1,0)--(#1,#2)--({#1-\ssbB},0);}
+	\def\ax#1{\draw[->,gray] (-5.8,0)--(6,0) node[right,black]{$\omega$}; \node[anchor=east] at (-5.9,0.3) {#1};}
+	\foreach \x in {-4,4} \draw[gray!50,dashed] (\x,1.3)--(\x,-6.3);
+	\node at (-4,-6.7) {$-\omega_c$}; \node at (4,-6.7) {$+\omega_c$};
+	\begin{scope}
+		\ax{$X_{\cos}$} \hR{4}{.5}\hL{4}{.5}\hR{-4}{.5}\hL{-4}{.5}
+	\end{scope}
+	\begin{scope}[yshift=-1.75*.55cm]
+		\ax{$X_{\sin}$} \hR{4}{-.5}\hL{4}{.5}\hR{-4}{.5}\hL{-4}{-.5}
+	\end{scope}
+	\begin{scope}[yshift=-3.6*.55cm]
+		\ax{USB ($-$)} \hR{4}{1}\hL{-4}{1}
+	\end{scope}
+	\begin{scope}[yshift=-5.6*.55cm]
+		\ax{LSB ($+$)} \hL{4}{1}\hR{-4}{1}
+	\end{scope}
+\end{tikzpicture}
+\end{minipage}
 
 \includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_23.pdf}
 
@@ -286,8 +325,10 @@ $B_{SSB} = B_m$ $\cdot$ linear, zeitvariant (Gesamtsystem $\approx$ LTI) $\cdot$
 
 \includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/SSB_phasenmethode.pdf}
 
-\paragraph{Demodulation S. 63}
-\textbf{Nur kohärent!} \; $\varphi$ von $x_{LO}$ $\rightarrow$ ändert nur das \emph{Phasen}spektrum von $y_m(t)$, \textbf{nicht das Betragsspektrum} $\Rightarrow$ auch bei $\varphi = \frac{\pi}{2}$ keine Auslöschung $\Rightarrow$ ok für Sprache; mit quarzgenauen Frequenzen evtl. ohne Synchronisation.
+\paragraph{Demodulation SSB S. 63}
+\textbf{Nur kohärent!} \; $\varphi$ von $x_{LO}$ $\rightarrow$ ändert nur das \emph{Phasen}spektrum von $y_m(t)$, \textbf{nicht das Betragsspektrum} $\Rightarrow$ auch bei $\varphi = \frac{\pi}{2}$ keine Auslöschung $\Rightarrow$ ok für Sprache; mit quarzgenauen Frequenzen evtl. ohne Synchronisation.\\
+USB, $x_{LO}=\cos(\omega_c t+\varphi)$: \efbox[linecolor=red]{$y_{TP}(t)=\tfrac{A_c}{2}\big[m(t)\cos\varphi+\hat m(t)\sin\varphi\big]$} \quad ($\varphi=0$: $Y_m(\omega)=\tfrac{A_c}{2}M(\omega)$)\\
+$\Rightarrow$ \efbox[linecolor=red]{$Y_{TP}(\omega)=\tfrac{A_c}{2}M(\omega)\,e^{-j\varphi\operatorname{sgn}(\omega)}$}, $|e^{-j\varphi}|=1$ $\Rightarrow$ Betrag bleibt, nur Phase dreht
 
 \includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/ssb_demod.pdf}
 

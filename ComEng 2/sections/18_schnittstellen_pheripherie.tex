@@ -30,6 +30,14 @@ $[31:16]$ & BRx & Pin $x$ \textbf{rücksetzen} ($\text{ODR}_x=0$) \\
 \texttt{GPIOA->BSRR = (1<<5);} (setzen), \quad
 \texttt{GPIOA->BSRR = (1<<(5+16));} (rücksetzen)
 
+\subsubsection{GPIO: Pegel \& Eingänge}
+\textbf{Level-Shifter} nötig, wenn die Pegel von Treiber und Last nicht zusammenpassen (z.B.\ 3.3\,V $\leftrightarrow$ 5\,V).
+\textbf{Schmitt-Trigger} sinnvoll bei:
+\begin{itemize}
+    \item nicht klar definierten Schaltschwellen
+    \item verrauschten oder sehr langsamen digitalen Eingangssignalen (Hysterese $V_{T+} \neq V_{T-}$)
+\end{itemize}
+
 \subsection{Schieberegister}
 \textbf{Parallel In Serial Out (PISO):}
 Einfache Verkettung von Flip-Flops. Zusätzliche Multiplexer nötig.
@@ -37,9 +45,7 @@ Einfache Verkettung von Flip-Flops. Zusätzliche Multiplexer nötig.
 \textbf{Serial In Parallel Out (SIPO):}
 Einfache Verkettung von Flip-Flops.
 
-\vspace{0.5em}
-\noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Diagramme zu PISO / SIPO / Peripherie Blockschaltbild]}\vspace{10pt}}}
-\vspace{0.5em}
+% TODO (placeholder tolto per il limite pagine): \noindent\framebox{\parbox{\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Diagramme zu PISO / SIPO / Peripherie Blockschaltbild]}\vspace{10pt}}}
 
 
 \subsection[Taktgeber in einem uP-System]{Taktgeber in einem $\mu$P-System}

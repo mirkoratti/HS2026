@@ -24,14 +24,18 @@ $$ \boxed{ \cgn{ \Phi( \alpha_A \cdot u_A(t) + \alpha_B \cdot u_B(t)) } = \cbl{ 
 
 Ein guter Test ist, ein \textbf{'Gegenbeweis'} mit der Bedingung $u(t) = 0$ 
 $$ \Phi(0 \cdot u(t)) = 0 \cdot \Phi(u(t)) = 0 $$
-\textrightarrow\ Wenn dieser Test \textbf{fehlschlägt} ist das System \textbf{nichtlinear}!
+\begin{itemize}
+	\item Wenn dieser Test \textbf{fehlschlägt} ist das System \textbf{nichtlinear}!
+	\item se il sitema non passa da ($0,0$) il \textbf{sistema non è lineare, è affine}
+\end{itemize}
+
 
 
 \subsection{Lineare Systeme}
 
 Alle Systeme, die mit \textbf{Differentialgleichungen mit konstanten Koeffizienten} beschrieben werden, sind linear 
 $$ \boxed{ a_n y(t)^{(n)} + ... + a_1 \dot{y}(t) + a_0 y(t) = b_m u(t)^{(m)} + ... + b_1 \dot{u}(t) + b_0 u(t) } $$
-\textrightarrow\ Zeitverschiebung ändert nichts an der Linearität des Systems!
+\cbl{\textrightarrow\ Zeitverschiebung ändert nichts an der Linearität des Systems!}
 
 
 \subsubsection{Beispiele linearer Systeme}
@@ -51,7 +55,7 @@ $$ \boxed{ a_n y(t)^{(n)} + ... + a_1 \dot{y}(t) + a_0 y(t) = b_m u(t)^{(m)} + .
 \end{minipage}
 
 
-\subsection{Zeitinvarianz (Defintion)}{79}
+\subsection{Zeitinvarianz (Definition)}{79}
 
 Gegeben sei ein System 
 $$\Phi: u(t) \rightarrow y(t) \qquad y(t) = \Phi(u(t))$$
@@ -59,6 +63,20 @@ $$\Phi: u(t) \rightarrow y(t) \qquad y(t) = \Phi(u(t))$$
 Ist das System zeitinvariant, so gilt
 $$ \boxed{ \Phi(u(t-T_t)) = y(t - T_t) \quad \forall \; T_t } $$
 \textrightarrow\ Die Antwort des Systems ist unabhängig davon, zu welchem Zeitpunkt der Eingang anliegt
+
+\vspace{0.2cm}
+
+\example{Wo wird $t$ ersetzt? \quad $y(t) = t \cdot u(t)$}
+
+\begin{tabular}{ll}
+	\textbf{Eingang schieben:} $t \to t - T_t$ \textbf{nur in $u$}
+		& $\Phi(u(t - T_t)) = t \cdot u(t - T_t)$ \\[2pt]
+	\textbf{Ausgang schieben:} $t \to t - T_t$ \textbf{in jedem $t$}
+		& $y(t - T_t) = (t - T_t) \cdot u(t - T_t)$
+\end{tabular}
+
+\vspace{0.1cm}
+\textrightarrow\ Ungleich ($t \neq t - T_t$) $\Rightarrow$ \textbf{zeitvariant}
 
 
 \subsubsection{Eigenschaften zeitvarianter Systeme}
@@ -68,12 +86,13 @@ $$ \boxed{ \Phi(u(t-T_t)) = y(t - T_t) \quad \forall \; T_t } $$
 
 	\item Sie \textbf{können} linear sein, weil Superpositionsprinzip möglich \\
 		$\Phi( \alpha_A \cdot u_A(t) + \alpha_B \cdot u_B(t), \, t)  \, = \, \alpha_A \cdot \Phi(u_A(t), \, t) + \alpha_B \cdot \Phi(u_B(t), \, t)$ \\
-		$\Phi( \alpha_A \cdot u_A(t) + \alpha_B \cdot u_B(t), \, t - T_t)  \, = \, \alpha_A \cdot \Phi(u_A(t), \, t - T_t) + \alpha_B \cdot \Phi(u_B(t), \, t - T_t)$ 
+		$\Phi( \alpha_A \cdot u_A(t) + \alpha_B \cdot u_B(t), \, t - T_t)  \, = \, \alpha_A \cdot \Phi(u_A(t), \, t - T_t) + \alpha_B \cdot \Phi(u_B(t), \, t - T_t)$ \\
+		\textrightarrow\ Nach dem Komma steht der \emph{Zeitpunkt}, zu dem das System ausgewertet wird (nicht eine Verschiebung des Eingangs): Superposition gilt zu jedem Zeitpunkt
 
 	\item Oft ist nicht klar, ob ein Effekt zeitvariant oder nichtlinear ist
 	\begin{itemize}
-		\item Verschleiss in Abängigkeit der Beanspruchung \textrightarrow\ nichtlinear
-		\item Verschleiss in Abängigkeit der Zeit (Alterung) \textrightarrow\ zeitvariant
+		\item Verschleiss in Abhängigkeit der Beanspruchung \textrightarrow\ nichtlinear
+		\item Verschleiss in Abhängigkeit der Zeit (Alterung) \textrightarrow\ zeitvariant
 	\end{itemize}
 		
 
@@ -115,6 +134,53 @@ Blöcke dürfen \textbf{verschoben werden}, müssen allerdings mit ihrer \textbf
 	\includegraphics[width=0.73\columnwidth]{images/bloecke_schieben_2.png}
 	\vspace{0.2cm}
 
-	\includegraphics[width=0.73\columnwidth]{images/bloecke_schieben_3.png} 
+	\includegraphics[width=0.73\columnwidth]{images/bloecke_schieben_3.png}
 \end{center}
+
+
+\subsection{Spickzettel: System klassifizieren}
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\columnwidth}{@{}lXX@{}}
+	\toprule
+	& \textbf{Test} & \textbf{Durchgefallen $\rightarrow$ typisch} \\
+	\midrule
+	\textbf{Linear?}
+		& 1) Nulltest: $u \equiv 0 \Rightarrow y \equiv 0$ \newline
+		  2) Superposition: $\Phi(\alpha_A u_A + \alpha_B u_B) = \alpha_A \Phi(u_A) + \alpha_B \Phi(u_B)$
+		& nichtlinear: $u^2,\ |u|,\ \ln u,\ \sin u$ \newline
+		  Nulltest nicht bestanden: affin ($u + c$) \\
+	\textbf{Zeitinv.?}
+		& $\Phi(u(t - T_t)) \overset{?}{=} y(t - T_t)$ \newline
+		  (Eingang schieben $\leftrightarrow$ Ausgang schieben)
+		& zeitvariant: \textbf{freies $t$} ($t \cdot u$, $\sin t$) \newline
+		  DGL mit konst. Koeff. $\rightarrow$ zeitinvariant \\
+	\textbf{Statisch?}
+		& $y(t)$ nur von $u(t)$ (gleicher Zeitpunkt)
+		& dynamisch: $\dot y,\ \ddot y,\ \int,\ u(t - T_t)$ \\
+	\bottomrule
+\end{tabularx}
+
+\vspace{0.2cm}
+
+\begin{tabularx}{\columnwidth}{@{}Xccc@{}}
+	\toprule
+	\textbf{System} & \textbf{linear} & \textbf{zeitinv.} & \textbf{statisch} \\
+	\midrule
+	$y = K \cdot u$ 				& \checkmark & \checkmark & \checkmark \\
+	$y = t \cdot u$ 				& \checkmark & $\times$ & \checkmark \\
+	$y = u + c$ 					& $\times$ (affin) & \checkmark & \checkmark \\
+	$y = u(t - T_t)$ 				& \checkmark & \checkmark & $\times$ \\
+	$T \dot y + y = K u$ 			& \checkmark & \checkmark & $\times$ \\
+	$y = t \cdot u(t - \beta)$ 		& \checkmark & $\times$ & $\times$ \\
+	\bottomrule
+\end{tabularx}
+
+\vspace{0.1cm}
+
+\textbf{Blockschaltbild mit Rückkopplung:} DGL aufstellen (Eingang des Integrators $= u - $ Rückführung, $\dot x = \dots$) und in Standardform bringen \\
+\textrightarrow\ z.B. Integrator mit Rückführung 1: $\dot x + x = u$ $\Rightarrow$ $\text{PT}_1$ mit $T = 1$, $K = 1$
+\endgroup
 

@@ -3,7 +3,8 @@
 \subsection{Klassifizierung von Regelstrecken oder Modellen}
 
 \begin{itemize}
-    \item statisch $\leftrightarrow$ \underline{dynamisch} 
+    \item statisch $\leftrightarrow$ \underline{dynamisch} \quad 
+    {\small(Stat. \textrightarrow Senza memoria \textrightarrow Da input \textbf{momentaneo} derivo output)}
     \begin{itemize}
         \item Drehzahlregelung eines Getriebes?
         \item Stromregelung eines Widerstandes?
@@ -16,7 +17,7 @@
     \item \underline{linear} $\leftrightarrow$ nichtlinear
     \item \underline{zeitinvariant} $\leftrightarrow$ zeitvariant
     \item \underline{mit Ausgleich} $\leftrightarrow$ ohne Ausgleich
-    \item \underline{konzentrierte Parameter} $\leftrightarrow$ verteilte Parameter
+    \item \underline{konzentrierte Parameter} (Dipende da tempo) $\leftrightarrow$ verteilte Parameter (Dipende da tempo e posizione)
     \begin{itemize}
         \item ODE vs. PDE
     \end{itemize}
@@ -40,10 +41,9 @@ Ein zu schnelles Hin- und Herschalten des Reglers wird oft durch eine \textbf{Hy
 verhindert. (ad Es. PWM)
 
 
-\subsection{Zweipunktregler (Strecke: Integrator)}{64}
+\subsection{Zweipunktregler (Strecke: Integrator)}{64}\vspace{-1em}
 
-\vspace{-0.2cm}
-$$ \boxed{\text{Fehler:} \quad e(t) = r(t) - y(t)} $$
+$$ \boxed{\text{Fehler:} \quad e(t) = r(t) - y(t)} $$\vspace{-1em}
 \begin{center}
     \includegraphics[width=0.85\columnwidth]{images/zweipunkteregler_beispiel.png} 
 \end{center}

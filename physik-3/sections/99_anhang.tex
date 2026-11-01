@@ -26,6 +26,40 @@ La linea rossa tratteggiata è l'asse di rotazione (\textit{Drehachse}).
 \endgroup
 
 
+\subsection{Analogie Translation \texorpdfstring{$\leftrightarrow$}{<->} Rotation}\label{AnalogieRotation}
+
+\begingroup
+\renewcommand{\arraystretch}{1.4}
+\begin{ctabular}{| l | c | c | l |}
+    \hline
+    \textbf{Translation}     & & & \textbf{Rotation}                         \\
+    \hline
+    Weg                      & $x$                  & $\varphi$                  & Winkel                    \\
+    Geschwindigkeit          & $v = \dot{x}$        & $\omega = \dot{\varphi}$   & Winkelgeschwindigkeit     \\
+    Beschleunigung           & $a = \ddot{x}$       & $\alpha = \ddot{\varphi}$  & Winkelbeschleunigung      \\
+    Masse                    & $m$                  & $J$                        & Trägheitsmoment           \\
+    Kraft                    & $F = m\ddot{x}$      & $M = J\ddot{\varphi}$      & Drehmoment                \\
+    Federkonstante           & $c$                  & $c^*$                      & Winkelrichtgrösse         \\
+    Rückstellkraft           & $F = -c\,x$          & $M = -c^*\varphi$          & Rückstellmoment           \\
+    Dämpfung                 & $b\,\dot{x}$         & $b^*\dot{\varphi}$         & Drehdämpfung              \\
+    Impuls                   & $p = m v$            & $L = J\omega$              & Drehimpuls                \\
+    kin. Energie             & $\tfrac{1}{2}mv^2$   & $\tfrac{1}{2}J\omega^2$    & Rotationsenergie          \\
+    pot. Energie             & $\tfrac{1}{2}c\,x^2$ & $\tfrac{1}{2}c^*\varphi^2$ & pot. Energie (Torsion)    \\
+    \hline
+\end{ctabular}
+\endgroup
+
+\medskip
+
+\textbf{Schwingungen:} gleiche DGL, nur Grössen austauschen
+\begin{align*}
+    m\ddot{x} + b\dot{x} + c\,x &= F_0 \sin(\omega t)
+    & \omega_0^2 &= \tfrac{c}{m} & \delta &= \tfrac{b}{2m} \\
+    J\ddot{\varphi} + b^*\dot{\varphi} + c^*\varphi &= M_0 \sin(\omega t)
+    & \omega_0^2 &= \tfrac{c^*}{J} & \delta &= \tfrac{b^*}{2J}
+\end{align*}
+
+
 \subsection{Trigonometrie}
 
 \begingroup

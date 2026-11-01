@@ -19,8 +19,45 @@ Damit die Funktion gewährleistet werden kann, darf bei der Übertragung eines F
 $$ f_{c,i} = \left(1 \pm \frac{\Delta t_{\rm max}}{t_{\rm max}}\right) * f_{2,i} = \left(1 \pm \frac{1 \text{ Bit}}{2 \cdot \text{Framelänge}}\right) * f_{c,i} $$
 
 \vspace{0.5em}
-\noindent\framebox{\parbox{0.9\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Diagramm / Text bezüglich ADC Rauschen und statistischer Verteilung (Messwerte 460.782)]}\vspace{10pt}}}
-\vspace{0.5em}
+\subsection{Oversampling: Voraussetzungen}
+Die Mittelung von $M$ Samples bringt nur dann mehr Auflösung, wenn der ADC-Code zwischen Nachbarwerten \textbf{springt}:
+\begin{itemize}
+    \item \textbf{Mittelwertfreies Rauschen} (oder künstliches Dither-Signal) ist dem Eingang überlagert, Amplitude $\gtrsim 1$\,LSB.
+    \item Rauschen \textbf{unkorreliert} von Sample zu Sample.
+    \item Messsignal bleibt während der $M$ Samples \textbf{konstant}.
+\end{itemize}
+\vspace{-0.6em}
+\begin{center}
+\begin{tikzpicture}[x=0.4cm,y=0.42cm,font=\scriptsize]
+    % ohne Rauschen
+  \begin{scope}
+    \draw[gray] (0,0)--(10.4,0);
+    \foreach \c [count=\i from 0] in {460,461,462}{\node at ({1.2+3.4*\i},-0.55) {\tiny\c};}
+    \fill[blue!55] (2.4,0) rectangle (4.4,4.2);
+    \draw[orange,thick,densely dashed] ({1.2+3.4*0.763},-0.1)--({1.2+3.4*0.763},5.3);
+    \node[orange!80!black,anchor=south] at ({1.2+3.4*0.763},5.3) {vero 460.763};
+    \draw[blue!80!black,thick] (3.4,-0.1)--(3.4,4.2);
+    \node[blue!80!black,anchor=west] at (4.6,3.2) {$\bar x=461$};
+    \node[anchor=west,font=\small\bfseries] at (0,7.3) {ohne Rauschen};
+    \node[anchor=west] at (0,6.4) {Code immer 461};
+  \end{scope}
+  % mit Rauschen
+  \begin{scope}[shift={(12.2,0)}]
+    \draw[gray] (0,0)--(10.4,0);
+    \foreach \c [count=\i from 0] in {460,461,462}{\node at ({1.2+3.4*\i},-0.55) {\tiny\c};}
+    \fill[blue!55] (0.2,0) rectangle (2.2,2.0);
+    \fill[blue!55] (2.4,0) rectangle (4.4,4.2);
+    \fill[blue!55] (4.6,0) rectangle (6.6,0.55);
+    \draw[orange,thick,densely dashed] ({1.2+3.4*0.763},-0.1)--({1.2+3.4*0.763},5.3);
+    \node[orange!80!black,anchor=south] at ({1.2+3.4*0.763},5.3) {vero 460.763};
+    \node[blue!80!black,anchor=west] at (6.8,3.2) {$\bar x\approx460.76$};
+    \node[anchor=west,font=\small\bfseries] at (0,7.3) {mit Rauschen};
+    \node[anchor=west] at (0,6.4) {Code streut um den Wert};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\vspace{-0.6em}
+\textbf{Ohne Rauschen} liefert der ADC immer denselben Code: die Mittelung gibt nur diesen zurück, die Information \glqq wie hoch genau\grqq{} ist verloren. \textbf{Mit Rauschen} streuen die Codes je nach Lage des wahren Wertes im Gradienten, der Mittelwert nähert sich ihm mit wachsendem
 
 % --------------- Added in quickreference (screenshot) ---------------
 % ---------------------- if necessary uncomment ----------------------

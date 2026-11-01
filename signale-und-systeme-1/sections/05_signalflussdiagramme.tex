@@ -315,7 +315,7 @@ Die Transposition ist eine wichtige Methode für die Ableitung von \textbf{alter
 \end{enumerate}
 
 \begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/transposition.png}
+    \includegraphics[width=1\columnwidth]{images/transposition.png}
 \end{center}
 
 
@@ -354,15 +354,19 @@ Die Resultierende nichtkausale Funktion ist die Summe aller Pfade von der neuen 
 Ein 'Trennbündel' trennt den Graphen in zwei Mengen $N_a$ und $N_b$ \\
 Die Menge $N_a$ enthält dabei den Eingangsknoten 
 
-
-\subsubsection{Vorgehen Skalierung}
-
-\begin{enumerate}
-   \item 'Trennbündel' festlegen
-   \item Hineinführende Zweige mit $\lambda$ multiplizieren
-   \item Hinausführende Zweige durch $\lambda$ dividieren
-   \item Zweige im 'Trennbündel' nicht ändern!
-\end{enumerate}
+\begin{minipage}{0.6\columnwidth}
+    \subsubsection{Vorgehen Skalierung}
+    
+    \begin{enumerate}
+        \item 'Trennbündel' festlegen
+        \item Hineinführende Zweige mit $\lambda$ multiplizieren
+        \item Hinausführende Zweige durch $\lambda$ dividieren
+        \item Zweige im 'Trennbündel' nicht ändern!
+    \end{enumerate}
+\end{minipage}
+\begin{minipage}{0.39\columnwidth}
+    $\lambda$ è un numero a scelta $\in \mathbb{R}$
+\end{minipage}
 
 \vspace{0.2cm}
 
@@ -378,7 +382,152 @@ Die Menge $N_a$ enthält dabei den Eingangsknoten
 
 \subsection{Anwendung: Operationsverstärker}{78-79}
 
+\tikzset{
+    sfdknoten/.style={circle, fill, inner sep=0pt, minimum size=3pt},
+    sfdpfeil/.style={pos=0.55, sloped, allow upside down, isosceles triangle, isosceles triangle apex angle=50, fill, inner sep=0pt, minimum height=3.5pt},
+    opv/.pic={
+        \draw (0,0.45) -- (0,-0.45) -- (0.8,0) -- cycle;
+        \node[font=\tiny] at (0.12,0.22) {$-$};
+        \node[font=\tiny] at (0.12,-0.22) {$+$};
+        \coordinate (-minus) at (0,0.22);
+        \coordinate (-plus) at (0,-0.22);
+        \coordinate (-out) at (0.8,0);
+    },
+    masse/.pic={
+        \draw (-0.1,0) -- (0.1,0);
+        \draw (-0.06,-0.04) -- (0.06,-0.04);
+        \draw (-0.02,-0.08) -- (0.02,-0.08);
+    }
+}
+
+SFD sind nützlich für \textbf{Analyse} und \textbf{Synthese} von Schaltungen mit OP/OTA (z.B. SC-/SI-Filter). Dafür braucht man das \textbf{SFD des OP}.
+
+\vspace{0.1cm}
+
 \begin{center}
-    \includegraphics[width=0.55\columnwidth]{images/OPV_als_DFD.png}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|m{0.5\columnwidth}|>{\centering\arraybackslash}m{0.36\columnwidth}|}
+    \hline
+    \multicolumn{1}{|c|}{\textbf{OP}} & \textbf{SFD} \\
+    \hline
+    % a) differentieller Eingang, endliche Verstärkung
+    \textbf{a)} Differentiell, endliches $A$ \newline
+    \begin{tikzpicture}
+        \pic (op) at (0,0) {opv};
+        \node at (0.33,0) (b) {\small $A$};
+        \draw (op-minus) -- ++(-0.4,0) node[sfdknoten, label=left:$V_i$] {};
+        \draw (op-plus) -- ++(-0.4,0) node[sfdknoten, label=left:$V_n$] {};
+        \draw (op-out) -- ++(0.35,0) node[sfdknoten, label=right:$V_0$] {};
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}
+        \node[sfdknoten, label=left:$V_i$] (i) at (0,0.4) {};
+        \node[sfdknoten, label=left:$V_n$] (n) at (0,-0.4) {};
+        \node[sfdknoten, label=right:$V_0$] (o) at (1.3,0) {};
+        \draw (i) -- node[sfdpfeil] {} node[above, pos=0.6] {\small $-A$} (o);
+        \draw (n) -- node[sfdpfeil] {} node[below, pos=0.6] {\small $A$} (o);
+    \end{tikzpicture}
+    \\
+    \hline
+    % b) asymmetrischer neg. Eingang
+    \textbf{b)} Asymm.\ neg.\ Eingang, endliches $A$ \newline
+    \begin{tikzpicture}
+        \pic (op) at (0,0) {opv};
+        \node at (0.33,0) (b) {\small $A$};
+        \draw (op-minus) -- ++(-0.4,0) node[sfdknoten, label=left:$V_i$] {};
+        \draw (op-plus) -- ++(-0.2,0) -- ++(0,-0.2) pic {masse};
+        \draw (op-out) -- ++(0.35,0) node[sfdknoten, label=right:$V_0$] {};
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}
+        \node[sfdknoten, label=left:$V_i$] (i) at (0,0) {};
+        \node[sfdknoten, label=right:$V_0$] (o) at (1.3,0) {};
+        \draw (i) -- node[sfdpfeil] {} node[above, pos=0.5] {\small $-A$} (o);
+    \end{tikzpicture}
+    \\
+    \hline
+    % c) unendliche Verstärkung
+    \textbf{c)} Differentiell, $A\to\infty$ \newline
+    \begin{tikzpicture}
+        \pic (op) at (0,0) {opv};
+        \node at (0.33,0) (b) {\small $\infty$};
+        \draw (op-minus) -- ++(-0.4,0) node[sfdknoten, label=left:$V_i$] {};
+        \draw (op-plus) -- ++(-0.4,0) node[sfdknoten, label=left:$V_n$] {};
+        \draw (op-out) -- ++(0.35,0) node[sfdknoten, label=right:$V_0$] {};
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}
+        \node[sfdknoten, label=left:$V_i$] (i) at (0,0.4) {};
+        \node[sfdknoten, label=left:$V_n$] (n) at (0,-0.4) {};
+        \node[sfdknoten, label=below:$V_0$] (o) at (1.3,0) {};
+        \draw (i) -- node[sfdpfeil] {} node[above, pos=0.6] {\small $-1$} (o);
+        \draw (n) -- node[sfdpfeil] {} node[below, pos=0.6] {\small $1$} (o);
+        \draw (o) .. controls +(0,0.9) and +(0.9,0.2) .. node[sfdpfeil, pos=0.5] {} node[above right, pos=0.5, inner sep=1pt] {\small $1$} (o);
+    \end{tikzpicture}
+    \\
+    \hline
+\end{tabular}
 \end{center}
 
+\textbf{c)} modelliert \textbf{unendliche Verstärkung mit endlichen Transmittanzen} (Eigenschleife $1$: $V_0 = V_n - V_i + V_0 \Rightarrow V_n = V_i$). Die SFD-Darstellung ist \textbf{nicht eindeutig}: sie hängt vom gewählten Gleichungssystem ab.
+
+% \example{Invertierender Verstärker (SC, $z$-Bereich)}
+%
+% Wegen der hohen Verstärkung ist der OP-Eingang $V_2$ \textbf{virtuell auf Masse} ($Z_{in}\to\infty$). $Z_i(z)$: zeitdiskrete Impedanz-UTF.
+%
+% \vspace{0.1cm}
+%
+% \noindent
+% \begin{minipage}[c]{0.55\columnwidth}
+%     \centering
+%     \begin{tikzpicture}[every node/.style={font=\small}]
+%         \node[sfdknoten, label=left:$V_1$] (v1) at (0,0) {};
+%         \draw (v1) -- node[sfdpfeil, pos=0.6] {} node[above, pos=0.6] {$I_1$} (0.7,0);
+%         \draw (0.7,-0.1) rectangle node[below=2pt] {$Z_1$} (1.4,0.1);
+%         \draw (1.4,0) -- (2.1,0) node[sfdknoten, label={[xshift=-2pt]above left:$V_2$}] (v2) {};
+%         \pic (op) at (2.5,-0.22) {opv};
+%         \node at (2.83,-0.22) {$A$};
+%         \draw (v2) -- (op-minus);
+%         \draw (op-plus) -- ++(-0.15,0) -- ++(0,-0.2) pic {masse};
+%         \draw (op-out) -- (3.9,-0.22) node[sfdknoten, label=right:$V_3$] (v3) {};
+%         \draw (v2) -- (2.1,0.8) -- (2.65,0.8);
+%         \draw (2.65,0.7) rectangle node[above=2pt] {$Z_2$} (3.35,0.9);
+%         \draw (3.35,0.8) -- (3.6,0.8) -- (3.6,-0.22);
+%         \node[sfdknoten] at (3.6,-0.22) {};
+%     \end{tikzpicture}
+% \end{minipage}
+% \hfill
+% \begin{minipage}[c]{0.42\columnwidth}
+%     Gleichungen (2.13):
+%     \begin{align*}
+%         I_1 &= (V_1 - V_2)/Z_1 \\
+%         V_2 &= -V_3/A \\
+%         V_3 &= V_2 - Z_2\, I_1
+%     \end{align*}
+% \end{minipage}
+%
+% \vspace{0.1cm}
+%
+% \noindent
+% \begin{minipage}[c]{0.5\columnwidth}
+%     \centering
+%     \begin{tikzpicture}[every node/.style={font=\small}]
+%         \node[sfdknoten, label=below:$V_1$] (v1) at (0,0) {};
+%         \node[sfdknoten, label=below:$I_1$] (i1) at (1.2,0) {};
+%         \node[sfdknoten, label=below:$V_3$] (v3) at (2.4,0) {};
+%         \node[sfdknoten, label=above:$V_2$] (v2) at (1.8,1.1) {};
+%         \draw (v1) -- node[sfdpfeil] {} node[above] {$\frac{1}{Z_1}$} (i1);
+%         \draw (i1) -- node[sfdpfeil] {} node[below=2pt] {$-Z_2$} (v3);
+%         \draw (v3) to[out=90, in=0] node[sfdpfeil] {} node[right] {$-\frac{1}{A}$} (v2);
+%         \draw (v2) to[out=180, in=90] node[sfdpfeil] {} node[left] {$-\frac{1}{Z_1}$} (i1);
+%         \draw (v2) to[out=-80, in=150] node[sfdpfeil] {} node[left=-1pt, pos=0.6] {$1$} (v3);
+%     \end{tikzpicture}
+% \end{minipage}
+% \hfill
+% \begin{minipage}[c]{0.48\columnwidth}
+%     Mit Mason (S.\,80):
+%     \begin{align*}
+%         H_{13} = \frac{V_3}{V_1} &= -\frac{Z_2}{Z_1}\cdot\frac{A}{1 + Z_2/Z_1 + A} \\
+%         &\xrightarrow{A\to\infty}\; \bm{-\frac{Z_2}{Z_1}}
+%     \end{align*}
+% \end{minipage}

@@ -215,21 +215,26 @@ Dezimalwert des Digitalworts (z.B.\ $1010_2 = 8 + 2 = 10$)\\
 Herleitung: Thévenin Knoten für Knoten, $R_{\rm th} = R$ konstant, $V_{\rm th}$ halbiert sich pro Knoten (Teiler \textbf{nicht} multiplizieren!)}\smallbreak
 
 
-\cbl{\myul{\textbf{Beispiel:}}
+% \cbl{\myul{\textbf{Beispiel:}}
+%
+% \renewcommand{\arraystretch}{1.8}
+% \begin{tabular}{lll}
+%     $B_3 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{2}$    & &
+%     $B_2 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{4}$    \\
+%     $B_1 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{8}$    & &
+%     $B_0 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{16}$
+% \end{tabular}
+% }
+% \renewcommand{\arraystretch}{1}
 
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{lll}
-    $B_3 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{2}$    & & 
-    $B_2 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{4}$    \\
-    $B_1 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{8}$    & & 
-    $B_0 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{16}$
-\end{tabular}
-}
-\renewcommand{\arraystretch}{1}
+\textbf{Multiplizierender DAC} (R2R + OPV, z.B.\ DAC8811)
+
+$V_{\rm ref}$ ist ein \textbf{Eingangssignal} (auch AC) \textrightarrow\ Ausgang = Produkt aus analog und digital:
+
+$R_x$ = Kombination der ``eingeschalteten'' Beine. $V_{\rm ref}$ darf negativ sein \textrightarrow\ 2 Quadranten. Schalter an virtueller Masse \textrightarrow\ kaum Verzerrung.
 
 \subsection{Zählverfahren (PWM)}
 
-\subsubsection{PWM: Pulse Width Modulation}
 
 \begin{minipage}[c]{0.45\columnwidth}
     \includegraphics[width=\columnwidth]{images/PWM_DAC}
@@ -237,8 +242,7 @@ Herleitung: Thévenin Knoten für Knoten, $R_{\rm th} = R$ konstant, $V_{\rm th}
 \hfill
 \begin{minipage}[c]{0.52\columnwidth}
     \raggedright
-    $S$ schaltet zwischen $V_{\rm refp}$ und $V_{\rm refn}$ (\textrightarrow\ PWM) \\
-    (\textrightarrow\ meistens $V_{\rm ref}$ und $GND$ )
+    $S$ schaltet zwischen $V_{\rm refp}$ und $V_{\rm refn}$ \\
 
     \vspace{0.2cm}
 
@@ -264,20 +268,16 @@ Herleitung: Thévenin Knoten für Knoten, $R_{\rm th} = R$ konstant, $V_{\rm th}
 \end{minipage}
 
 
-
-\myul{\textbf{PWM-Ansteuerung für Schalter $\bm{S}$}}
-
 \begin{minipage}{0.4\columnwidth}
-    \centering $$ \boxed{ \overline{V_{\rm out}} = V_{\rm refn} + (V_{\rm refp} - V_{\rm refn}) \cdot \frac{n}{N} }$$
+    $$ \boxed{ \overline{V_{\rm out}} = V_{\rm refn} + (V_{\rm refp} - V_{\rm refn}) \cdot \frac{n}{N} }$$
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.58\columnwidth}
+\begin{minipage}{0.58\columnwidth}
     \input{circuits/pwm_ansteuerung.tex}
 \end{minipage}
 
 
 \subsection{Kaskadierte Wandler und Mischformen}
-
 \subsubsection{Kaskadierte DACs}
 
 \begin{minipage}[c]{0.6\columnwidth}
@@ -340,6 +340,6 @@ Herleitung: Thévenin Knoten für Knoten, $R_{\rm th} = R$ konstant, $V_{\rm th}
 Schnelle DACs haben oft einen Stromausgang und benötigen daher einen Ausgangsverstärker
 \textrightarrow\ Ströme können schneller geschaltet werden als Spannungen!
 
-\vspace{0.2cm}
+\vspace{0.1cm}
 
-Es gilt: Für optimale Resultate müssen \textbf{Kompromisse} eingegangen werden! 
+\textbf{Schlechtester Schaltfall:} Übergang am \textbf{MSB} (Major Carry, z.B.\ $0111_2 \to 1000_2$), alle Bits schalten gleichzeitig \textrightarrow\ Glitch, bei Gewichtsfehlern ggf.\ nicht monoton (DNL).
