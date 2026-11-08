@@ -1,0 +1,20 @@
+\begin{tikzpicture}[font=\scriptsize, >={Stealth}]
+  % --- Symmetrisch: phi1 = phi2 ---
+  \fill[gray!35] (-0.3,0) rectangle (1.7,0.12);
+  \draw[gray, densely dashed] (0,0) -- (0,-1.85) (1.4,0) -- (1.4,-1.85);
+  \draw[thick] (0,0) -- (0.353,-1.663) (1.4,0) -- (1.753,-1.663);
+  \fill (0.243,-1.773) rectangle ++(0.22,0.22) (1.643,-1.773) rectangle ++(0.22,0.22);
+  \draw[blue, thick] plot[domain=0:1, samples=80] ({0.187+1.4*\x}, {-0.88+0.06*sin(\x*360*7)});
+  \draw[->, blue] (0.55,-1.45) -- ++(0.35,0);
+  \draw[->, blue] (1.95,-1.45) -- ++(0.35,0);
+  \node[align=center] at (0.85,-2.35) {\textcolor{blue}{\textbf{Symmetrisch}} $\varphi_1 = \varphi_2$\\ Feder entspannt $\Rightarrow \omega$};
+  % --- Antisymmetrisch: phi1 = -phi2 ---
+  \fill[gray!35] (3.7,0) rectangle (5.7,0.12);
+  \draw[gray, densely dashed] (4.0,0) -- (4.0,-1.85) (5.4,0) -- (5.4,-1.85);
+  \draw[thick] (4.0,0) -- (3.647,-1.663) (5.4,0) -- (5.753,-1.663);
+  \fill (3.537,-1.773) rectangle ++(0.22,0.22) (5.643,-1.773) rectangle ++(0.22,0.22);
+  \draw[orange, thick] plot[domain=0:1, samples=80] ({3.813+1.774*\x}, {-0.88+0.06*sin(\x*360*7)});
+  \draw[->, orange] (3.4,-1.45) -- ++(-0.35,0);
+  \draw[->, orange] (5.95,-1.45) -- ++(0.35,0);
+  \node[align=center] at (4.7,-2.35) {\textcolor{orange}{\textbf{Antisymmetrisch}} $\varphi_1 = -\varphi_2$\\ Feder gedehnt $\Rightarrow \omega_k > \omega$};
+\end{tikzpicture}

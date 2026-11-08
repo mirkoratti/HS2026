@@ -1,498 +1,225 @@
-\section{Operationsverstaerker}
- 
-\subsection{Eigenschaften eines OpAmps}
- 
-\begin{minipage}{0.6\columnwidth}
-	\begin{center}
-		\input{circuits/opv_overview.tex}
-	\end{center}
-\end{minipage}
-\hfill
-\begin{minipage}{0.38\columnwidth}
-	\includegraphics[width=0.8\columnwidth]{images/OPV_2.jpg}
-\end{minipage}
- 
-\vspace{0.1cm}
- 
-\textbf{Idealer OpAmp:} \quad $A_{\rm ol} = \infty$ \quad $Z_{\rm in} = \infty$ ($I_{\rm opp} = I_{\rm opn} = 0$) \quad $Z_{\rm out} = 0$ \quad $V_{\rm os} = 0$
- 
-$$ \boxed{ V_{\rm out} = A_{\rm ol} \cdot (V_{\rm opp} + V_{\rm os} - V_{\rm opn}) } $$
- 
-\subsubsection*{Legende}
-\begin{itemize}
-	\item \textbf{$V_{\rm os}$ (Tensione di offset d'ingresso):} tensione parassita in serie al morsetto $+$. Viene amplificata come un segnale su $V_{\rm opp}$.
-	\item \textbf{$A_{\rm ol}$ (Guadagno ad anello aperto):} guadagno differenziale interno. Ideale $= \infty$ 
-	\item \textbf{$A_{\rm cl}$ (Guadagno ad anello chiuso):} guadagno effettivo del circuito con retroazione, $A_{\rm cl} = V_{\rm out}/V_{\rm in}$.
-	\item \textbf{$V_{\rm AGND}$ ($= V_{\rm COM}$):} potenziale di riferimento (massa analogica).
-\end{itemize}
- 
- 
-\subsection{OpAmp als Verstärker}
- 
-\begin{itemize}
-	\item \textbf{Rückkopplung auf negativen Eingang} \textrightarrow\ OpAmp stellt $V_{\rm out}$ so ein, dass \\
-		$V_{\rm opn} = V_{\rm opp}$ \quad (\textbf{virtueller Kurzschluss})
-	\item $I_{\rm opn} = I_{\rm opp} = 0$ \textrightarrow\ Strom durch Eingangs-R = Strom durch Rückkopplungs-R
-	\item Lineare Schaltung (solange nicht am Anschlag) \textrightarrow\ \textbf{Superposition}: \\
-		jede Quelle einzeln, andere Spannungsquellen auf AGND setzen
-	\item \cbl{Für $A_{\rm ol} \neq \infty$}: $V_{\rm opn}$ per Superposition aus $V_{\rm out}$ und den Eingängen ausdrücken, \\
-		in Grundgleichung einsetzen und nach $V_{\rm out}$ auflösen
-\end{itemize}
- 
-\myul{\textbf{Rückkopplungsfaktor und Closed-Loop-Gain}}
- 
-\vspace{0.1cm}
- 
-\begin{minipage}[c]{0.48\columnwidth}
-	$$ \beta = \frac{V_{\rm opn}}{V_{\rm out}}\Bigg|_{\text{Eing. aus}} = \frac{R_1}{R_1 + R_2} $$
-	% ($R_2$: Rückkopplung, $R_1$: nach AGND bzw. $V_{\rm in}$)
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	Schleifenverstärkung: $\beta A_{\rm ol}$ \\
-	Rauschverstärkung: $\dfrac{1}{\beta} = 1 + \dfrac{R_2}{R_1}$
-\end{minipage}
- 
-\vspace{0.1cm}
- 
-$$ \boxed{ A_{\rm cl} = A_{\rm ideal} \cdot \frac{\beta A_{\rm ol}}{1 + \beta A_{\rm ol}} \approx A_{\rm ideal} \left( 1 - \frac{1}{\beta A_{\rm ol}} \right) } $$
-\centerline{rel. Fehler: $\varepsilon \approx \frac{1}{\beta A_{\rm ol}}$}
- 
-Nicht-invertierend: $A_{\rm ideal} = \frac{1}{\beta}$ \textrightarrow\ $A_{\rm cl} = \frac{A_{\rm ol}}{1 + \beta A_{\rm ol}}$ \qquad
-Invertierend: $A_{\rm ideal} = -\frac{R_2}{R_1}$
- 
- 
-\subsection{Grundschaltungen OpAmp}
- 
-\subsubsection{Nicht-Invertierender Verstärker}
- 
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/nicht-invertierender_verstaerker_offset.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	\textbf{Spannungsteiler an opn:}
-	$$ V_{\rm opn} = \frac{R_2}{R_1 + R_2} \cdot V_{\rm AGND} + \frac{R_1}{R_1 + R_2} \cdot V_{\rm out} $$
-	\textbf{Gain:} \quad $\boxed{ A = 1 + \dfrac{R_2}{R_1} = \dfrac{1}{\beta} }$ \\[0.1cm]
-	$Z_{\rm in} \approx \infty$, \quad gleichphasig ($0 \, \degree$)
-\end{minipage}
- 
-\vspace{0.1cm}
- 
-\begin{minipage}[t]{0.5\columnwidth}
-	\textbf{Real}
- 
-	\scalebox{0.8}{
-	$ \boxed{ V_{\rm out} = \frac{A_{\rm ol}}{1 + \beta A_{\rm ol}} \Big[ V_{\rm in} + V_{\rm os} - \frac{R_2}{R_1 + R_2} V_{\rm AGND} \Big] } $}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\columnwidth}
-	\textbf{Ideal}
- 
-	\scalebox{0.8}{
-	$ \boxed{ V_{\rm out} = \Big(1 + \frac{R_2}{R_1}\Big)(V_{\rm in} + V_{\rm os}) - \frac{R_2}{R_1} V_{\rm AGND} } $}
-\end{minipage}
- 
- 
-\subsubsection{Invertierender Verstärker}
- 
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=0.9\columnwidth]{images/invertierender_verstaerker_offset.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	\textbf{Knoten opn} ($I_{\rm opn} = 0$, ideal $V_{\rm opn} = 0$):
-	$$ \frac{V_{\rm in} - V_{\rm opn}}{R_1} = \frac{V_{\rm opn} - V_{\rm out}}{R_2} \;\Rightarrow\; V_{\rm out} = -\frac{R_2}{R_1} V_{\rm in} $$
-	\textbf{Spannungsteiler an opn:}
-	$$ V_{\rm opn} = \frac{R_2}{R_1 + R_2} \cdot V_{\rm in} + \frac{R_1}{R_1 + R_2} \cdot V_{\rm out} $$
-\end{minipage}
- 
-\vspace{0.1cm}
- 
-\textbf{Gain:} \, $\boxed{ A = -\dfrac{R_2}{R_1} }$ \quad {\small $Z_{\rm in} = R_1$, \quad gegenphasig ($180 \, \degree$), \quad Noise Gain $\frac{1}{\beta} = 1 + \frac{R_2}{R_1} \neq |A|$}
- 
-\vspace{0.1cm}
- 
-\begin{minipage}[t]{0.5\columnwidth}
-	\textbf{Real}
- 
-	\scalebox{0.8}{
-	$ \boxed{ V_{\rm out} = \frac{A_{\rm ol}}{1 + \beta A_{\rm ol}} \Big[ V_{\rm AGND} + V_{\rm os} - \frac{R_2}{R_1 + R_2} V_{\rm in} \Big] } $}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\columnwidth}
-	\textbf{Ideal}
- 
-	\scalebox{0.8}{
-	$ \boxed{ V_{\rm out} = \Big(1 + \frac{R_2}{R_1}\Big)(V_{\rm AGND} + V_{\rm os}) - \frac{R_2}{R_1} V_{\rm in} } $}
-\end{minipage}
- 
- 
-\subsubsection{Invertierender Summierender Verstärker (Addierer)}
- 
-\begin{minipage}[c]{0.38\columnwidth}
-	\includegraphics[width=\columnwidth]{images/invertierender_summierender_verstaerker.jpg}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.61\columnwidth}
-	Knoten opn: \quad $I_2 = -I_0 - I_1$
-	\[ I_0 = \frac{V_{\rm in0} - V_{\rm COM} - V_{\rm os}}{R_0} \quad I_1 = \frac{V_{\rm in1} - V_{\rm COM} - V_{\rm os}}{R_1} \]
-	\textbf{Gain pro Eingang:} \quad $\boxed{ A_i = -\dfrac{R_F}{R_i} }$ \\[0.1cm]
-	opn = virtuelle Masse \textrightarrow\ Eingänge beeinflussen sich nicht
-\end{minipage}
- 
-\vspace{0.1cm}
- 
-$$ \boxed{ V_{\rm out} = (V_{\rm COM} + V_{\rm os}) \cdot \Bigg( 1 + \frac{R_F}{R_0 || R_1} \Bigg) - R_F \cdot \Bigg( \frac{V_{\rm in0}}{R_0} + \frac{V_{\rm in1}}{R_1} \Bigg) } $$
- 
-Für $R_0 = R_1 = R$, $V_{\rm COM} = 0$: \quad $V_{\rm out} = -\frac{R_F}{R} \, (V_{\rm in0} + V_{\rm in1})$
- 
- 
-\subsubsection{Buffer (Spannungsfolger)}
- 
-\begin{minipage}[c]{0.48\columnwidth}
-	\begin{center}
-		\includegraphics[width=0.65\columnwidth]{images/buffer_1.jpg}
-	\end{center}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	\begin{center}
-		\includegraphics[width=0.7\columnwidth]{images/buffer_offset.png}
-	\end{center}
-\end{minipage}
- 
-\begin{minipage}[c]{0.48\columnwidth}
-	\begin{itemize}
-		\item \textbf{Gain} $A = 1$, \; $\beta = 1$ ($V_{\rm opn} = V_{\rm out}$)
-		\item $Z_{\rm in} \approx \infty$ \textrightarrow\ keine Belastung an $V_{\rm in}$
-		\item $Z_{\rm out} \approx 0$ \textrightarrow\ Impedanzwandler
-	\end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	\textbf{Real:} \quad $\boxed{ V_{\rm out} = \dfrac{A_{\rm ol}}{1 + A_{\rm ol}} (V_{\rm in} + V_{\rm os}) }$ \\[0.15cm]
-	\textbf{Ideal:} \quad $\boxed{ V_{\rm out} = V_{\rm in} + V_{\rm os} }$ \\[0.1cm]
-	$\frac{V_{\rm out}}{V_{\rm in}} \approx 1 - \frac{1}{A_{\rm ol}}$
-\end{minipage}
- 
- 
-% \subsubsection*{Übersicht Grundschaltungen (ideal)}
- 
-% \begin{center}
-% \renewcommand{\arraystretch}{1.4}
-% \begin{tabular}{l|c|c|c}
-% 	\textbf{Schaltung} 	& \textbf{Gain $A$} 					& \textbf{$Z_{\rm in}$} 	& \textbf{Phase} \\ \hline
-% 	Buffer				& $1$									& $\infty$					& $0 \, \degree$ \\
-% 	Nicht-invertierend	& $1 + \frac{R_2}{R_1}$ 				& $\infty$					& $0 \, \degree$ \\
-% 	Invertierend		& $-\frac{R_2}{R_1}$ 					& $R_1$						& $180 \, \degree$ \\
-% 	Addierer			& $-\frac{R_F}{R_i}$ pro Eingang		& $R_i$						& $180 \, \degree$ \\
-% 	Differenzverstärker	& $\frac{R_4}{R_3}$ auf $V_{\rm in1} - V_{\rm in2}$ & endlich		& -- \\
-% 	Instrumentenverst.	& $\frac{R_4}{R_3}\big(1 + \frac{R_{f1} + R_{f2}}{R_g}\big)$ & $\infty$ & --
-% \end{tabular}
-% \end{center}
- 
-\subsection{Analoge Rechenschaltungen mit OpAmps}
- 
-\subsubsection{Differenzverstärker (Gewichteter Subtrahierer)}
- 
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/differenzverstärker.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	\textbf{Superposition:} \\
-	nur $V_{\rm in2}$ (oben): invertierend \textrightarrow\ $-\frac{R_4}{R_3}$ \\
-	nur $V_{\rm opp}$ (unten): nicht-invertierend \textrightarrow\ $1 + \frac{R_4}{R_3}$
-	$V_{\rm opp} = \frac{R_1}{R_1 + R_2} V_{\rm AGND} + \frac{R_2}{R_1 + R_2} V_{\rm in1}$
-	$$ V_{\rm out} = \frac{R_3 + R_4}{R_3} \cdot V_{\rm opp} - \frac{R_4}{R_3} \cdot V_{\rm in2} $$
-\end{minipage}
- 
-$$ \boxed{ V_{\rm out} = \frac{R_3 + R_4}{R_3} \cdot \Bigg( \frac{R_1}{R_1 + R_2} \cdot V_{\rm AGND} + \frac{R_2}{R_1 + R_2} \cdot V_{\rm in1} \Bigg) - \frac{R_4}{R_3} \cdot V_{\rm in2} } $$
-$$ \boxed{ \text{Für } R_1 = R_3, \, R_2 = R_4: \quad V_{\rm out} = V_{\rm AGND} + \frac{R_4}{R_3} \cdot ( V_{\rm in1} - V_{\rm in2}) } $$
- 
-\textbf{Gain:} \quad Differenz $A_D = \frac{R_4}{R_3}$, \quad $A_{\rm AGND} = 1$, \quad Gleichtakt $A_{\rm CM} = 0$
-% Nachteile: R-Toleranzen \textrightarrow\ $A_{\rm CM} \neq 0$  \; $Z_{\rm in}$ endlich \textrightarrow\ Instrumentenverstärker
- 
- 
-\subsubsection{Instrumentenverstärker}
- 
-1. Stufe: OP1 und OP2 nicht-invertierend mit gemeinsamem $R_g$, 2. Stufe: Differenzverstärker
- 
-\begin{minipage}[c]{0.5\columnwidth}
-	\includegraphics[width=\columnwidth]{images/instrumentenverstaerker.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	$$ I_{\rm Rg} = \frac{V_{\rm in2} - V_{\rm in1}}{R_g} $$
-	$$ V_{\rm opo2} = V_{\rm in2} + \frac{R_{f2}}{R_g} \cdot (V_{\rm in2} - V_{\rm in1}) $$
-	$$ V_{\rm opo1} = V_{\rm in1} + \frac{R_{f1}}{R_g} \cdot (V_{\rm in1} - V_{\rm in2}) $$
-\end{minipage}
- 
-\[ \boxed{ \Delta V_{\rm opo} = V_{\rm opo1} - V_{\rm opo2} = \Bigg( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Bigg) \cdot (V_{\rm in1} - V_{\rm in2}) } \]
-\[ \boxed{ \text{Für } R_1 = R_3, \, R_2 = R_4: \quad V_{\rm out} = V_{\rm REF} + \frac{R_4}{R_3} \cdot \Bigg( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Bigg) \cdot (V_{\rm in1} - V_{\rm in2}) } \]
- 
-\textbf{Gain:} \quad $A = \frac{R_4}{R_3} \Big( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Big)$ \quad ($R_{f1} = R_{f2} = R_f$: $A = \frac{R_4}{R_3} \big( 1 + \frac{2 R_f}{R_g} \big)$)
-% \begin{itemize}
-% 	\item Gain mit \textbf{einem} Widerstand $R_g$ einstellbar
-% 	\item $Z_{\rm in} \approx \infty$ an beiden Eingängen
-% 	\item Gleichtakt: $I_{\rm Rg} = 0$ \textrightarrow\ 1. Stufe hat Gain 1 für Gleichtakt \textrightarrow\ hohe CMRR
-% \end{itemize}
+% Kap. 2 -- Neuaufbau 2026-11-05, Stil "luftig" 2026-11-06 (Backup: ../elektronik-1_backup_2026-11-05)
+\section{Operationsverstärker}\label{sec:opamp}
 
-\subsection{Mehrstufige Verstärker}
+\subsection{Idealer OpAmp und Arbeitsbereich}\label{sec:opamp-ideal}
 
-Für $\mathrm{AGND} \neq 0 \, \volt$ muss Superposition angewendet werden. \\
-\textrightarrow\ $\mathrm{AGND}$ als Quelle annehmen und anderen Eingang 'ausschalten'
+\begin{minipage}[c]{0.42\columnwidth}
+	\centering
+	\resizebox{\columnwidth}{!}{\input{circuits/opv_overview.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.56\columnwidth}
+	$$ \boxed{ V_{\rm out} = A_{\rm ol}\,(V_{\rm opp} + V_{\rm os} - V_{\rm opn}) } $$
+	\textbf{Ideal}: \; $A_{\rm ol}\to\infty$, \; $I_{\rm opp}=I_{\rm opn}=0$, \; $Z_{\rm out}=0$, \; $V_{\rm os}=0$
+\end{minipage}
+
+\vspace{4pt}
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+	\toprule
+	\textbf{Situation}        & \textbf{Was gilt} \\ \midrule
+	Gegenkopplung auf opn     & $V_{\rm opn} = V_{\rm opp}$ (virtueller Kurzschluss), \; $I_{R_{\rm in}} = I_{R_f}$ \\
+	Ohne Gegenkopplung        & Ausgang am Anschlag: $V_{\rm opp} > V_{\rm opn} \Rightarrow V_{\rm out,max}$, sonst $V_{\rm out,min}$ \\
+	$Z_{\rm out} = 0$         & Last $R_L$ ändert $V_{\rm out}$ nicht \\
+	Ausgangsbereich           & $V_{\rm out,min} \le V_{\rm out} \le V_{\rm out,max}$ \; (Rail-to-Rail: $V_{\rm SS}\dots V_{\rm DD}$) \\
+	Eingangsbereich           & P-Stufe: $V_{\rm SS}\dots V_{\rm DD}{-}1\,$V; \; N-Stufe: $1\,{\rm V}\dots V_{\rm DD}$ \\ \bottomrule
+\end{tabularx}}
+
+\warn{\textit{Se il risultato esce dai rail, l'uscita resta al rail: il calcolo lineare non vale più.}}
+
+\subsection{Rezept: $V_{\rm out} = \sum a_i V_i + b$}\label{sec:opamp-rezept}
+
+\begin{rezept}{Rezept: OpAmp-Schaltung mit mehreren Quellen}
+	\begin{steps}
+		\item $V_{\rm opp}$ bestimmen: Spannungsteiler / Superposition aller Quellen am $+$-Eingang
+		\item Jede Quelle $V_i$, die über $R_i$ an opn hängt (alle anderen Quellen $=0$):
+		      \; $a_i = -\dfrac{R_f}{R_i}$
+		\item \textbf{Noise Gain}: $R_\parallel$ = \textbf{alle} Widerstände von opn zu Quellen, AGND, GND parallel
+	\end{steps}
+	$$ G_N = \frac{1}{\beta} = 1 + \frac{R_f}{R_\parallel} \qquad\quad
+	   \beta = \frac{V_{\rm opn}}{V_{\rm out}}\bigg|_{\text{Quellen}=0} = \frac{R_\parallel}{R_\parallel + R_f} $$
+	$$ \boxed{ V_{\rm out} = G_N \,(V_{\rm opp} + V_{\rm os}) - \sum_i \frac{R_f}{R_i}\,V_i } $$
+	\textbf{Kontrolle}: alle Quellen $= V_{\rm AGND}$ \textrightarrow\ $V_{\rm out} = V_{\rm AGND}$ (bei symmetrischen Teilern)
+\end{rezept}
+
+\subsection{Grundschaltungen (ideal, mit $V_{\rm os}$)}\label{sec:opamp-grund}
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth} X@{}}
+	\includegraphics[width=\linewidth,align=c]{images/nicht-invertierender_verstaerker_offset.png} &
+	\textbf{Nicht-invertierend} \quad $Z_{\rm in}=\infty$, \; $G_N = 1+\frac{R_2}{R_1}$ \newline
+	$V_{\rm out} = \Big(1+\dfrac{R_2}{R_1}\Big)(V_{\rm in}+V_{\rm os}) - \dfrac{R_2}{R_1}V_{\rm AGND}$ \\
+	\includegraphics[width=0.8\linewidth,align=c]{images/buffer_offset.png} &
+	\textbf{Buffer} (Impedanzwandler) \quad $Z_{\rm in}=\infty$, \; $Z_{\rm out}=0$, \; $G_N=1$ \newline
+	$V_{\rm out} = V_{\rm in} + V_{\rm os}$ \\
+	\includegraphics[width=\linewidth,align=c]{images/invertierender_verstaerker_offset.png} &
+	\textbf{Invertierend} \quad $Z_{\rm in}=R_1$, \; $G_N = 1+\frac{R_2}{R_1} \neq |A|$ \newline
+	$V_{\rm out} = \Big(1+\dfrac{R_2}{R_1}\Big)(V_{\rm AGND}+V_{\rm os}) - \dfrac{R_2}{R_1}V_{\rm in}$ \\
+	\includegraphics[width=\linewidth,align=c]{images/invertierender_summierender_verstaerker.jpg} &
+	\textbf{Addierer} \quad opn = virtuelle Masse \textrightarrow\ Eingänge unabhängig, \; $Z_{\rm in,i}=R_i$ \newline
+	$V_{\rm out} = \Big(1+\dfrac{R_F}{R_0\parallel R_1}\Big)(V_{\rm COM}+V_{\rm os}) - R_F\Big(\dfrac{V_{\rm in0}}{R_0}+\dfrac{V_{\rm in1}}{R_1}\Big)$ \\
+	\includegraphics[width=\linewidth,align=c]{images/differenzverstärker.png} &
+	\textbf{Subtrahierer} \quad $Z_{\rm in}$ endlich \newline
+	$V_{\rm out} = \Big(1+\dfrac{R_4}{R_3}\Big)(V_{\rm opp}+V_{\rm os}) - \dfrac{R_4}{R_3}V_{\rm in2}$, \quad
+	$V_{\rm opp} = \dfrac{R_2 V_{\rm in1} + R_1 V_{\rm AGND}}{R_1+R_2}$ \newline
+	$R_1{=}R_3,\ R_2{=}R_4$: \; $\boxed{V_{\rm out} = V_{\rm AGND} + \dfrac{R_4}{R_3}(V_{\rm in1}-V_{\rm in2})}$ \; ($A_{\rm CM}=0$) \\
+	\includegraphics[width=\linewidth,align=c]{images/instrumentenverstaerker.png} &
+	\textbf{Instrumentenverstärker} \quad $Z_{\rm in}=\infty$ an beiden Eingängen \newline
+	$I_{Rg} = \dfrac{V_{\rm in2}-V_{\rm in1}}{R_g}$ \newline
+	$\boxed{V_{\rm out} = V_{\rm REF} + \dfrac{R_4}{R_3}\Big(1+\dfrac{R_{f1}+R_{f2}}{R_g}\Big)(V_{\rm in1}-V_{\rm in2})}$
+\end{tabularx}}
+
+\subsubsection*{Weitere Schaltungen}
+\vspace{2pt}
+{\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+	\toprule
+	\textbf{Schaltung} & \textbf{Formel} & \textbf{Wozu} \\ \midrule
+	Geschaltete $R$ & $A_{\rm inv} = -\dfrac{R_f}{R_{\rm var}}$, \; $A_{\rm n.inv} = 1+\dfrac{R_f}{R_{\rm var}}$
+	                & $R_{\rm var}$ = Parallelschaltung der \emph{geschlossenen} Zweige \\
+	T-Glied         & $A = -\dfrac{R_2R_3+R_2R_4+R_3R_4}{R_1R_4}$
+	                & grosse Verstärkung mit kleinen $R$ ($R_2$--$R_3$ zum Ausgang, $R_4$ nach GND) \\
+	NIC             & $R_{\rm EQ} = -R\,\dfrac{R_1}{R_2}$
+	                & kompensiert die Belastung durch $R_L$ \\ \bottomrule
+\end{tabularx}}
+
+\subsection{Nichtidealitäten}\label{sec:opamp-nonideal}
+
+\subsubsection*{Offset-Spannung $V_{\rm os}$}
+DC-Quelle in Serie am opp (bis $\pm5\,$mV, jedes IC anders): wird verstärkt wie ein Signal an opp.
+$$ \boxed{ \Delta V_{\rm out} = G_N \cdot V_{\rm os} = \Big(1+\frac{R_f}{R_\parallel}\Big) V_{\rm os} } $$
+\begin{warnbox}
+	\small
+	\warn{\textit{Invertente: il segnale ha $-\frac{R_2}{R_1}$, ma $V_{\rm os}$ va $\times\,(1+\frac{R_2}{R_1})$.}}
+	\warn{\textit{$R_\parallel$ comprende \textbf{tutte} le R su opn, anche un Poti verso la Speisung.}}
+	\warn{\textit{In cascata: $V_{\rm os}$ dello stadio $k$ $\times\, G_N$ dello stadio $k$ $\times$ gain degli stadi dopo.}}
+	\warn{\textit{C in serie su opn: in DC è aperto, quindi $G_N=1$ per $V_{\rm os}$.}}
+	\warn{\textit{Integratore (C in retroazione): DC-Gain $\infty$, $V_{\rm os}$ viene integrata fino al rail.}}
+\end{warnbox}
+Kompensation mit Poti an opn ändert auch die Verstärkung \textrightarrow\ besser kalibrieren.
+
+\subsubsection*{Endliche Verstärkung $A_{\rm ol}$}
+Schleifenverstärkung $\beta A_{\rm ol}$ mit $\beta = 1/G_N$:
+$$ \boxed{ A_{\rm cl} = A_{\rm ideal}\,\frac{\beta A_{\rm ol}}{1+\beta A_{\rm ol}} \approx A_{\rm ideal}\Big(1-\frac{G_N}{A_{\rm ol}}\Big) } $$
+$$ \text{nicht-inv.:} \quad V_{\rm out} = \frac{A_{\rm ol}}{1+\beta A_{\rm ol}}\,(V_{\rm in}+V_{\rm os}) $$
+\textbf{Exakt}: $V_{\rm opn}$ per Teiler aus $V_{\rm in}$ und $V_{\rm out}$, in die Grundgleichung einsetzen, nach $V_{\rm out}$ auflösen.
+
+\subsubsection*{Eingangsströme $I_B$, $I_{\rm OS}$}
+\begin{minipage}[c]{0.36\columnwidth}
+	\includegraphics[width=\columnwidth]{images/bias-strom_grafik.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.62\columnwidth}
+	$$ I_B = \frac{I_P+I_N}{2} \qquad I_{\rm OS} = I_P - I_N $$
+	$$ V_{\rm outE} = I_N R_F - I_P R_2 \Big(1+\frac{R_F}{R_1}\Big) $$
+	Kompensation: \; $\boxed{R_2 = R_F \parallel R_1}$ \; (Buffer: $R_2 = R_F$) \\[3pt]
+	Rest: \; $\boxed{V_{\rm outE} = R_F\, I_{\rm OS}}$ \; \textrightarrow\ kleines $R_F$ wählen
+\end{minipage}
+
+\subsubsection*{Dynamik: GBW, Slew-Rate, PSRR, CMRR}
+\begin{minipage}[c]{0.36\columnwidth}
+	\includegraphics[width=\columnwidth]{images/verstaerkungs-bandbreite-produkt.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.62\columnwidth}
+	$$ A_{\rm ol}(f) = \frac{A_0}{1 + j f A_0/{\rm GBW}} $$
+	$$ \boxed{ f_{\rm 3dB} = \beta\cdot{\rm GBW} = \frac{\rm GBW}{G_N} } $$
+	\warn{\textit{Conta il Noise Gain: invertente con $A=-10$ ha $G_N=11$ \textrightarrow\ $f_{\rm 3dB}={\rm GBW}/11$.}}
+\end{minipage}
+
+\vspace{4pt}
+{\renewcommand{\arraystretch}{1.7}
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+	\toprule
+	\textbf{Grösse} & \textbf{Definition} & \textbf{Bedeutung} \\ \midrule
+	Slew-Rate & ${\rm SR} = \left|\dfrac{\diff V_{\rm out}}{\diff t}\right|_{\max}$
+	          & Sinus unverzerrt nur bis $f_{\max} = \dfrac{\rm SR}{2\pi \hat V}$, darüber Dreieck \\
+	PSRR      & $\dfrac{\diff V_{\rm supply}}{\diff V_{\rm os}}$
+	          & Rippel auf der Speisung wirkt wie ein Offset \\
+	CMRR      & $\dfrac{\diff V_{\rm CM}}{\diff V_{\rm os}}$, \; $V_{\rm CM} = \dfrac{V_{\rm opp}+V_{\rm opn}}{2}$
+	          & beim invertierenden Verstärker irrelevant \\ \bottomrule
+\end{tabularx}}
+$$ \boxed{ V_{\rm outE} = G_N\Big(V_{\rm os} + \frac{\Delta V_{\rm CM}}{\rm CMRR} + \frac{\Delta V_{\rm supply}}{\rm PSRR}\Big) + I_{\rm OS} R_F } $$
+
+\subsection{Schaltungen mit Kondensatoren}\label{sec:opamp-C}
+
+\begin{rezept}{Rezept: OpAmp mit $C$ -- DC und AC getrennt}
+	\begin{steps}
+		\item \textbf{DC}: $C$ offen \textrightarrow\ $V_{\rm out,DC}$ (mit $V_{\rm os}$ und dem $G_N$ \emph{ohne} $C$-Zweige)
+		\item \textbf{AC}: $C$ Kurzschluss (prüfen: $f \gg f_g = \frac{1}{2\pi RC}$), DC-Quellen $=0$ \textrightarrow\ $A_{\rm AC}$
+		\item Zusammensetzen, dann prüfen: bleiben die Spitzen innerhalb der Rails?
+	\end{steps}
+	$$ v_{\rm out}(t) = V_{\rm out,DC} + A_{\rm AC}\,\hat v \sin(2\pi f t) $$
+\end{rezept}
+\textbf{Rippel auf der Speisung} über einen Teiler an opp: wirkt wie ein Eingang
+$$ v_{\rm out} = v_{\rm pos}\,\frac{R_3}{R_3+R_4}\,G_{N,\rm AC} $$
+
+\vspace{3pt}
+\begin{minipage}[t]{0.24\columnwidth}\centering
+	\includegraphics[width=\columnwidth]{images/integrator.png}\\[-1pt]{\scriptsize Integrator}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\columnwidth}\centering
+	\includegraphics[width=\columnwidth]{images/tiefpass.png}\\[-1pt]{\scriptsize Tiefpass}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\columnwidth}\centering
+	\includegraphics[width=\columnwidth]{images/bandpass.png}\\[-1pt]{\scriptsize Bandpass}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\columnwidth}\centering
+	\includegraphics[width=\columnwidth]{images/allpass.png}\\[-1pt]{\scriptsize Allpass}
+\end{minipage}
+
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\columnwidth}{@{}l l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+	\toprule
+	& $Z_1$ / $Z_f$ & \cbl{tiefe $f$} / \cgn{hohe $f$} & Formel \\ \midrule
+	Integrator     & $R_1$ / $C_f$                    & \cbl{Gain $\to\infty$ ($V_{\rm os}$!)} \newline \cgn{$-20\,$dB/Dek}
+	               & $V_{\rm out} = V_0 - \frac{1}{R_1C_f}\!\int\!(V_{\rm in}-V_{\rm COM})\,\diff t$ \\
+	Differenzierer & $C_1$ / $R_f$                    & \cbl{$0$} \newline \cgn{$+20\,$dB/Dek, Rauschen, schwingt}
+	               & $V_{\rm out} = -R_f C_1 \frac{\diff V_{\rm in}}{\diff t}$ \\
+	Tiefpass       & $R_1$ / $R_f\parallel C_f$       & \cbl{$-\frac{R_f}{R_1}$} \newline \cgn{wie Integrator}
+	               & $f_g = \frac{1}{2\pi R_f C_f}$ \\
+	Bandpass       & $R_1{+}C_1$ / $R_f\parallel C_f$ & \cbl{wie Differenzierer} \newline \cgn{wie Integrator}
+	               & $\omega_1 = \frac{1}{R_1C_1}$, $\omega_2 = \frac{1}{R_fC_f}$ \newline Mitte $-\frac{R_f}{R_1}$ \\
+	Allpass        & $R_x$ / $R_x$, $RC$ an opp       & \cbl{$-V_{\rm in}$} \newline \cgn{$+V_{\rm in}$}
+	               & $|H|=1$ \newline $\varphi = 180\degree - 2\arctan(\omega RC)$ \\ \bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1}
+}
+
+\vspace{4pt}
+\textbf{Integrator mit konstantem $V_{\rm in}$}: lineare Rampe (\textrightarrow\ Oszillator Kap.~3, Dual-Slope Kap.~5)
+$$ \boxed{ V_{\rm out}(t) = V_{\rm out}(0) - \frac{V_{\rm in}-V_{\rm COM}}{R_1 C_f}\; t } \qquad I_C = \frac{V_{\rm in}-V_{\rm COM}}{R_1} $$
+
+\subsection{Mehrstufige Verstärker}\label{sec:opamp-kaskade}
 
 \begin{center}
-	\includegraphics[width=0.85\columnwidth]{images/mehrstufige_verstaerker.png}
+	\includegraphics[width=0.8\columnwidth]{images/mehrstufige_verstaerker.png}
 \end{center}
 
+\begin{rezept}{Rezept: Kaskade mit Referenzen ($V_{\rm ref}$, AGND $\neq 0$)}
+	\begin{steps}
+		\item Jede Stufe als $V_{{\rm out},k} = a_k V_{{\rm in},k} + b_k$ schreiben (Rezept \ref{sec:opamp-rezept})
+		\item Von hinten einsetzen: die Gains multiplizieren sich, jede Referenz läuft durch alle \emph{folgenden} Stufen
+	\end{steps}
+	$$ V_{\rm out} = a_2(a_1 V_{\rm in} + b_1) + b_2 = a_1 a_2\, V_{\rm in} + a_2 b_1 + b_2 $$
+\end{rezept}
 
 \subsection{Gesteuerte Quellen}
 
-\subsubsection{Stromgesteuerte Stromquellen}
-
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/stromspiegel_OPV.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	$$ V_{R1} = V_{R2} \qquad R_1 \, I_1 = R_2 \, I_2 $$
-	$$ \boxed{ A_i = \frac{I_2}{I_1} = \frac{R_1}{R_2} }$$
-\end{minipage}
-
-
-\subsubsection{Spannungsgesteuerte Stromquellen}
-
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/spannungsgesteuerte_stromquelle_V1.png}
-	$$ I_L = \frac{V_{\rm in}}{R_1}$$
-	Nachteil: Last muss 'floating' sein
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
+\begin{minipage}[t]{0.3\columnwidth}\centering
+	\includegraphics[width=0.75\columnwidth]{images/spannungsgesteuerte_stromquelle_V1.png}
+	$I_L = \dfrac{V_{\rm in}}{R_1}$ \\ {\scriptsize Last «floating»}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.3\columnwidth}\centering
 	\includegraphics[width=0.6\columnwidth]{images/spannungsgesteuerte_stromquelle_V2.png}
-	$$ I_L = \frac{V_{\rm in}}{R_s}$$
+	$I_L = \dfrac{V_{\rm in}}{R_S}$ \\ {\scriptsize Last an $V_{\rm DD}$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.36\columnwidth}\centering
+	\includegraphics[width=0.85\columnwidth]{images/stromspiegel_OPV.png}
+	$A_i = \dfrac{I_2}{I_1} = \dfrac{R_1}{R_2}$ \\ {\scriptsize stromgesteuert}
 \end{minipage}
 
-
-\subsection{Einfache Filterschaltungen mit OpAmps}
-
-Invertierer, bei dem $R_1$ und/oder $R_f$ durch Kondensatoren ersetzt bzw. ergänzt werden \\
-\cbl{Tiefe $f$}: $C$ = Unterbruch \quad \cgn{Hohe $f$}: $C$ = Kurzschluss \quad \textrightarrow\ Gain jedes Bereichs
-
-\subsubsection{Integrator \quad {\small $Z_1 = R_1$, $Z_f = C_f$}}
-
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/integrator.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	$$ \boxed{ V_{\rm out}(t) = - \frac{1}{R_1 C_f} \int\limits_0^t V_{\rm in}(\tau) \, \diff \tau + V_{C_f}(0) } $$
-	$$ \boxed{ I_{C_f} = C_f \frac{\diff V_{C_f}}{\diff t} = -C_f \frac{\diff V_{\rm out}}{\diff t} = \frac{V_{\rm in}}{R_1} } $$
-\end{minipage}
-
-\begin{tabularx}{\columnwidth}{lX}
-	\textbf{Prinzip}	& $I = V_{\rm in}/R_1$ lädt $C_f$ \textrightarrow\ $V_{\rm out} = -V_{C_f}$ \quad (Rechteck \textrightarrow\ Dreieck) \\
-	\textbf{Bode}		& $-20 \, \deci \bel$/Dek, $0 \, \deci \bel$ bei $\omega = 1/(R_1 C_f)$ \\
-	\crd{\textbf{Problem}}	& $C_f$ offen bei DC \textrightarrow\ DC-Gain $\to \infty$ \\
-						& $V_{\rm os}$, $I_B$ werden aufintegriert \textrightarrow\ Rampe \textrightarrow\ Sättigung \\
-	\cgn{\textbf{Lösung}}	& $R_f \parallel C_f$ \textrightarrow\ DC-Gain endlich ($-R_f/R_1$), Tiefpass
-\end{tabularx}
-
-\subsubsection{Differenzierer \quad {\small $Z_1 = C_1$, $Z_f = R_f$}}
-
-\begin{minipage}[c]{0.4\columnwidth}
-\includegraphics[width=\columnwidth]{images/differenzierer.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	$$ \boxed{ V_{\rm out} = - R_f C_1 \frac{\diff V_{\rm in}}{\diff t} } $$
-	$$ \boxed{ I_{C_1} = C_1 \frac{\diff V_{\rm in}}{\diff t} = I_{R_f} = -\frac{V_{\rm out}}{R_f} } $$
-\end{minipage}
-
-\begin{tabularx}{\columnwidth}{lX}
-	\textbf{Prinzip}	& $I_{C_1}$ fliesst durch $R_f$ \quad (Dreieck \textrightarrow\ Rechteck) \\
-	\textbf{Bode}		& $+20 \, \deci \bel$/Dek, $0 \, \deci \bel$ bei $\omega = 1/(R_f C_1)$ \\
-	\crd{\textbf{Problem 1}}	& Gain steigt mit $f$ \textrightarrow\ HF-Rauschen stark verstärkt \\
-	\crd{\textbf{Problem 2}}	& $\beta$ = Tiefpass ($-90 \, \degree$) + realer OpAmp (GBWP, $-90 \, \degree$) \textrightarrow\ $180 \, \degree$ \\
-						& \textrightarrow\ Mitkopplung \textrightarrow\ Schwingung (falls Schleifenverstärkung $\geq 1$) \\
-	\cgn{\textbf{Lösung}}	& $R_1$ in Serie zu $C_1$: Gain bei hohen $f$ auf $-R_f/R_1$ begrenzt \\
-						& kleines $C_f \parallel R_f$: Gain noch tiefer \textrightarrow\ Bandpass, stabil
-\end{tabularx}
-
-\subsubsection{Tiefpass \quad {\small $Z_1 = R_1$, $Z_f = R_f \parallel C_f$}}
-
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/tiefpass.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	\begin{tabular}{ll}
-		\cbl{Tiefe $f$}: & $C_f$ offen \textrightarrow\ Inverter \\
-		\cgn{Hohe $f$}:	 & $C_f$ schliesst $R_f$ kurz \textrightarrow\ Integrator
-	\end{tabular}
-
-	$$ \cbl{ \boxed{ V_{\rm out} = - \frac{R_f}{R_1} \cdot V_{\rm in} } } \qquad \cgn{ \boxed{ f_g = \frac{1}{2 \, \pi \cdot R_f \cdot C_f} } } $$
-\end{minipage}
-
-\subsubsection{Bandpass \quad {\small $Z_1 = R_1 + Z_{C_1}$, $Z_f = R_f \parallel C_f$}}
-
-\begin{minipage}[c]{0.48\columnwidth}
-	\includegraphics[width=\columnwidth]{images/bandpass.png} 
-\end{minipage}
-\hfill
-\begin{minipage} [c]{0.48\columnwidth}
-	\includegraphics[width=\columnwidth]{images/bandpass_amplitudengang.png}
-\end{minipage}
-
-\begin{tabular}{ll}
-	$\omega < \omega_1 = 1/(R_1 C_1)$: 	& $C_1$ dominiert \textrightarrow\ Differenzierer ($+20 \, \deci \bel$/Dek) \\
-	$\omega_1 < \omega < \omega_2$: 	& $C_1$ kurz, $C_f$ offen \textrightarrow\ flach, $-R_f/R_1$ \\
-	$\omega > \omega_2 = 1/(R_f C_f)$: 	& $C_f$ schliesst $R_f$ kurz \textrightarrow\ Integrator ($-20 \, \deci \bel$/Dek)
-\end{tabular}
-
-\subsubsection{Allpass}
-
-$|H| = 1$ für alle $f$, Phase von $180 \, \degree$ auf $0 \, \degree$. \, $C$, $R$ am $+$-Eingang = Hochpass.
-
-\begin{minipage}[c]{0.4\columnwidth}
-	\includegraphics[width=\columnwidth]{images/allpass.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-	$$ \varphi = 180 \, \degree - 2 \arctan(\omega RC) $$
-	\begin{tabular}{ll}
-		\cbl{tiefe $f$}: & $C$ sperrt \textrightarrow\ $V_{\rm opp} = 0$ \textrightarrow\ Inverter \\
-		\cgn{hohe $f$}:  & $C$ Kurzschluss \textrightarrow\ $V_{\rm opp} = V_{\rm in}$
-	\end{tabular}
-
-	$$ \cbl{ \boxed{ V_{\rm out} = - V_{\rm in} } } \qquad 
-	   \cgn{ \boxed{ V_{\rm out} = V_{\rm in} } } $$
-\end{minipage}
-
-
-\subsection{Nichtidealitäten von OpAmps}
-
-\begin{tabular}{ll}
-	\tabitem Endliche Verstärkung:	& $V_d = V_{\rm opp} - V_{\rm opn} = \frac{V_{\rm out}}{A_{\rm ol}}$	\\
-	\tabitem Offset-Spannung:		& $V_{\rm os}$: Gleich verstärkt wie $V_{\rm opp}$ \\
-	\tabitem Rückkopplungsfaktor: $\beta = \dfrac{R_1}{R_1+R_2}$ & Schleifenverstärkung: $\beta A_\text{ol}$
-\end{tabular}
-	\[
-A_\text{cl} = \frac{A_\text{ol}}{1+\beta A_\text{ol}}
-\approx \frac{1}{\beta}\left(1-\frac{1}{\beta A_\text{ol}}\right)
-\qquad (\beta A_\text{ol} \gg 1)
-\]
-
-\subsubsection{Eingangsstromfehler - Bias-Strom $\rm{I_B}$}
-
-\begin{minipage}[c]{0.48\columnwidth}
-	\includegraphics[width=\columnwidth]{images/bias-strom_grafik.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	Modellierung durch Stromquellen \\
-	$I_P$, $I_N$  
-
-	\vspace{0.2cm}
-
-	$V_{\rm outE} =$ Fehlerspannung aufgrund von $I_B, \, I_N$
-
-	$$ I_B = \frac{I_P + I_N}{2} $$
-\end{minipage}
-
-\vspace{0.2cm}
-$$ \boxed{ V_{\rm outE} = V_{\rm outE(N)} +  V_{\rm outE(P)} = I_N \, R_F - R_2 \, I_P \Bigg( \frac{R_F + R_1}{R_1}  \Bigg) } $$
-
-$$ \text{Kompensation:} \quad I_B = \frac{I_P + I_N}{2}: \quad  V_{\rm outE} \overset{!}{=} 0 $$ 
-$$ I_N = I_P: \quad R_F = R_2 \, \Bigg( \frac{R_F + R_1}{R_1} \Bigg) \quad \boxed{ R_2 = \frac{R_F \cdot R_1}{R_F + R_1} = R_F || R_1 } $$
-
-\vspace{0.1cm}
-
-\myul{\textbf{Bias-Strom-Kompensation mittels $\bm{R_2}$}}
-
-\vspace{0.1cm}
-
-\begin{minipage}[b]{0.3\columnwidth}
-	\begin{center}
-		\includegraphics[width=\columnwidth]{images/kompensation_bias-strom_1.png}
-		$$ R_2 = R_F $$
-	\end{center}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.3\columnwidth}
-	\begin{center}
-		\includegraphics[width=\columnwidth]{images/kompensation_bias-strom_2.png}
-		$$ R_2 = R_F || R_1 $$
-	\end{center}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.3\columnwidth}
-	\begin{center}
-		\includegraphics[width=\columnwidth]{images/kompensation_bias-strom_3.png}
-		$$ R_2 = R_F || R_1 $$
-	\end{center}
-\end{minipage}
-
-
-\subsubsection{Eingangsstromfehler - Offset-Strom $\bm{I_{\rm OS}}$}
-
-Der Offset-Strom entsteht aufgrund von \textbf{Herstellungstoleranzen} und ist \textbf{nicht kompensierbar} 
-$$ \text{Offset-Strom:} \quad I_{\rm OS} = I_P - I_N  $$
-
-Wenn der Bias-Strom $I_B$ mittels $R_2$ kompensiert ist gilt: 
-
-$$ \boxed{  V_{\rm outE} = R_F \cdot (I_N - I_P) = R_F \cdot I_{\rm OS} } $$
-
-\textbf{ \textrightarrow\ Je kleiner $ \bm{R_F}$, desto kleiner die Fehlerspannung!}
-
-
-\subsection{Dynamisches Verhalten von OpAmps}
-
-\subsubsection{Verstärkungs-Bandbreite-Produkt (GB(W)P)}
-
-\begin{minipage}[c]{0.45\columnwidth}
-	\includegraphics[width=\columnwidth]{images/verstaerkungs-bandbreite-produkt.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	Verstärkung des OpAmps sinkt mit höherer Frequenz \\
-	Datenblatt anstelle von $A_{\rm ol}$ (da Frequnzabhängig)
-
-	$$ \boxed{ A_{\rm cl} \cdot f_{3 \deci \bel} = \mathrm{GBWP} = \const } $$
-\end{minipage}
-
-
-\subsubsection{Common Mode Rejection Ratio (CMRR)}
-
-\begin{minipage}[c]{0.48\columnwidth}
-	$$ \boxed{ \mathrm{CMRR} = \frac{\diff V_{\rm CM}}{\diff V_{\rm os}} }$$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	$$ \boxed{ V_{\rm CM} = \frac{V_{\rm opp} + V_{\rm opn}}{2} } $$
-\end{minipage}
-
-
-\subsubsection{Power Supply Noise Rejection Ratio (PSNRR)}
-
-$$ \boxed{ \mathrm{PSNRR} = \frac{\diff V_{\rm supply}}{\diff V_{\rm os}} } $$
-
-
-\subsection{Anstiegszeit (Slew-Rate)}
-
-\begin{minipage}[c]{0.48\columnwidth}
-	\includegraphics[width=\columnwidth]{images/slew_rate.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-	\raggedright
-	Maximal mögliche Änderungsgeschwindigkeit der Ausgangsspannung des OpAmps
-
-	$$ \boxed{ \mathrm{SR} = \Bigl| \frac{\diff V_{\rm out}}{\diff t} \Bigr|_{\rm max} } $$
-\end{minipage}
-
-Wenn der Ausgang schneller ändern soll als die Slew-Rate 'erlaubt', so wird das Ausgangssignal \textbf{begrenzt bzw. verformt} \\
-\textrightarrow\ Signal verformt / Amplitude reduziert \textrightarrow\ Dreieck statt Sinus 
+\vspace{4pt}
+\textbf{Stromquelle mit BJT} ($V_{\rm ref}$ an opp, Emitter an opn über $R_E$):
+$$ I = \frac{V_{\rm ref}}{R_E} \qquad V_{\rm opo} = V_{\rm ref} + V_{\rm BE} \qquad V_{\rm out} = V_0 - I Z_L $$

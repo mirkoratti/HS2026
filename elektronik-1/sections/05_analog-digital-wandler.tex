@@ -1,434 +1,160 @@
-\section{Analog-Digital-Wandler (ADC)}
+% Kap. 5 -- Neuaufbau 2026-11-06, Stil "luftig" (Backup: ../elektronik-1_backup_2026-11-05)
+\section{Analog-Digital-Wandler (ADC)}\label{sec:adc}
 
-\begin{minipage}[c]{0.48\columnwidth}
-    \begin{tabular}{ll}
-        $n$         & Anzahl Bits                       \\
-        $D$         & Digitaler Wert \quad $D < 2^n$    \\
-        $q$         & Quantisierungsschritt             \\
-        $B_0$       & Bitwert 0 (LSB)                   \\
-        $B_{n-1}$   & Bitwert $n-1$ (MSB)
-    \end{tabular}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    $$ \boxed{ q = \frac{V_{\rm refp} - V_{\rm refn}}{2^n} } $$
-    $$ \boxed{ D = \frac{V_{\rm in} - V_{\rm refn}}{V_{\rm refp} - V_{\rm refn}} \, 2^n } $$
-\end{minipage}
+\subsection{Grundbegriffe}\label{sec:adc-grund}
 
+$$ \boxed{ q = \frac{V_{\rm refp}-V_{\rm refn}}{2^n} } \qquad
+   \boxed{ D = \Big\lfloor \frac{V_{\rm in}-V_{\rm refn}}{q} \Big\rfloor } \;\;\text{(abgeschnitten)} $$
+Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LSB. \\[2pt]
 
-\subsection{Einführung}
+\textbf{Sample \& Hold}: hält $V_{\rm in}$ während der Wandlung fest; mit OpAmp-Buffer, sonst Belastung der Quelle. \\[2pt]
+\textbf{Settling} nach vollem Sprung: \; auf 1 LSB: $t = RC\ln 2^n$, \; auf $\pm\frac12$ LSB: $t = RC\ln 2^{n+1}$
 
-\begin{itemize}
-    \item Ein AD-Wandler ordnet einer analogen Spannung einen digitalen Wert zu
-    \item Der einfachste AD-Wandler ist ein Komparator (1 Bit)
-    \item \textbf{Absoluter Fehler} $E_q < \pm \frac{1}{2}$ LSB 
-\end{itemize}
+\vspace{3pt}
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\columnwidth}{@{}l X l l l@{}}
+	\toprule
+	\textbf{Prinzip}           & \textbf{Takte}                     & \textbf{Auflösung} & \textbf{Rate} & \textbf{Leistung} \\ \midrule
+	Flash / Pipeline           & 1 (Pipeline: 1 Wert pro Takt)      & 8--14 Bit          & sehr hoch     & hoch \\
+	SAR / Iterativ             & $n$                                & 8--20 Bit          & mittel--hoch  & mittel \\
+	Integrierend / Sigma-Delta & $\gg 2^n$                          & 16--24 Bit         & niedrig       & niedrig \\ \bottomrule
+\end{tabularx}}
 
+\subsection{Flash-ADC (Parallelverfahren)}\label{sec:flash}
 
-\subsubsection{Settling Time}
-
-\begin{minipage}[c]{0.35\columnwidth}
-    $$ \boxed{ N_{TC} = \ln(2^N)} $$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.62\columnwidth}
-    \begin{tabular}{ll}
-        $N_{TC}$    & \# $T$ für $N$ Bits Settling      \\
-        $T$         & Zeitkonstante $T = RC$            \\
-        $N$         & \# Bits Auflösung (Genauigkeit)
-    \end{tabular}
-\end{minipage}
-
-\subsubsection{Sample and Hold}
-
-Vor einer Wandlung muss Spannung gespeichert werden (meistens)
-
-\begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/sample_hold.png}
-\end{center}
-
-\begin{tabular}{ll}
-    links: & Belastung von Quelle und Senke \textrightarrow\ unbrauchbar! \\
-    rechts & Ohne Belastung von Quelle und Senke (Buffer)  
-\end{tabular}
-
-
-\subsection{Parallelverfahren (Flash-Wandler)}
-
-\subsubsection{3-Bit ADC nach Parallel-Verfahren (Flash-Wandler)}
-
-\begin{minipage}[c]{0.38\columnwidth}
-    \includegraphics[width=\columnwidth]{images/ADC_parallelverfahren.png}
+\begin{minipage}[c]{0.36\columnwidth}
+	\includegraphics[width=\columnwidth]{images/ADC_parallelverfahren.png}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.6\columnwidth}
-    \begin{itemize}
-        \item[+] ADC ist \textbf{sehr schnell}
-        \item[+] Nur 1 Takt
-        \item[-] $2^n$ Widerstände
-        \item[-] $2^n -1$ Komparatoren
-    \end{itemize}
-    
-    \vspace{0.2cm}
-
-    'Runden' ist möglich mit unterschiedlichen Widerständen ganz unten und ganz oben \cbl{(blau hinterlegt)} \\
-    \cbl{ \textrightarrow\ 'Sprung' ist hier bei $\frac{q}{2}$ statt bei $q$}
+	$2^n$ Widerstände, \; $2^n-1$ Komparatoren, \; 1 Takt \\[4pt]
+	{\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{@{}l l l@{}}
+		\toprule
+		                & \textbf{Alle $R$ gleich}  & \textbf{unten $\frac R2$, oben $\frac{3R}{2}$} \\ \midrule
+		Schwelle $i$    & $i\cdot q$                & $\big(i-\frac12\big)\,q$ \\
+		Code            & ${\rm floor}(V_{\rm in}/q)$ & ${\rm round}(V_{\rm in}/q)$ \\
+		Kaskade         & möglich                   & nicht möglich \\ \bottomrule
+	\end{tabular}}
 \end{minipage}
 
+\vspace{3pt}
+\textbf{Code} = Anzahl Schwellen unter $V_{\rm in}$ (bleibt bei $2^n-1$ stehen).
 
-\subsubsection{Pipeline- (Kaskaden-, Subranging-) ADC}
+\warn{\textit{«b[3:1] = 1» significa codice 1, non 111.}}
 
-Kaskadierung von \textbf{Flash-ADCs}
-\vspace{0.2cm} 
+\subsection{Pipeline und iterativer ADC: binäre Suche}\label{sec:pipeline}
 
-\begin{minipage}[c]{0.46\columnwidth}
-    \includegraphics[width=\columnwidth]{images/pipeline_ADC.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.5\columnwidth}
-    Zweistufig:
-
-    \vspace{0.1cm}
-
-    \begin{enumerate}
-        \item ADC mit $N_1$ Bits
-        \item ADC mit $N_2$ Bits
-    \end{enumerate}
-
-    \vspace{0.2cm}
-
-    \begin{itemize}
-        \item[+] Nur $2^{N_1} + 2^{N_2}$ Komparatoren
-        \item[-] Braucht zusätzlichen DAC mit $N_1$ Bits
-        \item[-] Braucht ev. Verstärker mit Gain $G$
-    \end{itemize}
-\end{minipage}
-
-\vspace{0.2cm}
-
-\myul{\textbf{Ablaufsteuerung Pipeline-ADC}}
-
-\vspace{0.1cm}
-
-\begin{minipage}[c]{0.33\columnwidth}
-    \includegraphics[width=\columnwidth]{images/ablauf_pipeline_ADC_2.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.63\columnwidth}
-    \begin{itemize}
-        \item Spannungswert der digitalierten Spannung wird von $V_{\rm in}$ abgezogen
-        \item Restspannung ($ < q$) wird mit $2^{N_1}$ multipliziert und digitalisiert mit $N_2$ Bits \\
-            (bei gleicher Referenzspannung von 2. ADC)
-    \end{itemize}
-\end{minipage}
-
-
-\subsubsection{Mehrstufiger Pipeline-Wandler}
-
-\begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/mehrstufiger_pipeline_wandler.png}
-\end{center}
-
-
-\begin{minipage}[c]{0.48\columnwidth}
-    \begin{itemize}
-        \item Flash-ADC mit $k \geq 1$ DAC mit $k$ Bits
-        \item Multiplikation mit $2^k$ (gleiche Referenz für jede Stufe)
-    \end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    \begin{itemize}
-        \item \textbf{Latenz bei $\bm{n}$ Stufen} \textrightarrow\ $n$ Zyklen
-        \item Update-Frequenz $n$-mal grösser \\
-            \textrightarrow\ In jedem Zyklus ein neuer Wert
-    \end{itemize}
-\end{minipage}
-
-\vspace{0.2cm}
-
-\textbf{Statt Multiplikation mit $\bm{2^k}$ kann auch die Referenzspannung der folgenden Stufe um $\bm{2^k}$ verkleinert werden!}
-
-
-\subsubsection{Iterative ADC}
-
-\begin{minipage}[c]{0.4\columnwidth}
-    \includegraphics[width=\columnwidth]{images/iterativer_ADC}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.58\columnwidth}
-    \raggedright
-    Reststpannung (Quantisierungsfehler) verdoppeln, damit gleiche Referenzspannung verwendet werden kann 
-\end{minipage}
-
-\vspace{0.2cm}
-
-\myul{\textbf{Ablauf einer Wandlung - Iterativer ADC} }
-
-\vspace{0.1cm}
-
-Mit \textbf{jedem Zyklus} (Loop) wird die \textbf{Auflösung um 1 Bit erhöht!}
-
-\begin{minipage}[c]{0.27\columnwidth}
-    \includegraphics[width=\columnwidth]{images/iterativer_ADC_flussdiagramm.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.72\columnwidth}
-    \begin{outline}
-        \1 Wenn $V_{\rm in} > \frac{V_{\rm ref}}{2}$
-            \2 MSB$=1$, $\frac{V_{\rm ref}}{2}$ von $V_{\rm in}$ subtrahieren
-            \2 $V_x = V_{\rm in} - \frac{V_{\rm ref}}{2}$
-        \1 Wenn $V_{\rm in} < \frac{V_{\rm ref}}{2}$ 
-            \2 MSB$=0$
-            \2 $V_x = V_{\rm in}$
-        \1 $V_x$ verdoppeln zur Bestimmung des nächsten Bits 
-    \end{outline}
-\end{minipage}
-
-
-\subsection{Wägeverfahren}
-
-\subsubsection{SAR: Sucessive Approximation Register}
-
-\begin{minipage}[c]{0.35\columnwidth}
-    \includegraphics[width=\columnwidth]{images/SAR_ADC.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.6\columnwidth}
-    \begin{itemize}
-        \item DAC-Ausgang nähert sich schrittweise dem Eingangssignal an
-        \item Bei $n$ Bit Auflösung dauert eine Wandlung $n$ Zyklen
-    \end{itemize}
-\end{minipage}
-
-
-\myul{\textbf{Beispiel Wandlung mit SAR-ADC}}
-
-\vspace{0.1cm}
-
-\begin{minipage}[c]{0.48\columnwidth}
-    \includegraphics[width=\columnwidth]{images/SAR_ADC_beispiel.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    \includegraphics[width=\columnwidth]{images/SAR_ADC_beispiel_2.png} 
-\end{minipage}
-
-
-\subsubsection{SAR mit Switched Capacitor DAC (4 Bit)}
-
-\begin{minipage}[c]{0.48\columnwidth}
-    \includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_sample_mode.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    \includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_hold_mode.png}
-\end{minipage}
-
-\begin{minipage}[c]{0.45\columnwidth}
-    \includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_redistribution_mode.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.5\columnwidth}
-    Komparator wird ausgewertet:
-
-    \vspace{0.1cm}
-
-    \begin{itemize}
-        \item Falls $V < 0 \,V$: Bit = 1 \\
-            \textrightarrow\ Schalter bleibt auf $V_{\rm ref}$
-        \item Falls $V > 0 \,V$: Bit = 0 \\
-            \textrightarrow\ Schalter  zurück auf GND
-    \end{itemize}
-
-    \vspace{0.1cm}
-
-    Nächsten Schalter umlegen
-\end{minipage}
-
-
-\subsection{Zählverfahren}
-
-\subsubsection{Grundprinzip: Zählverfahren}
-
-\begin{minipage}[c]{0.4\columnwidth}
-    \includegraphics[width=\columnwidth]{images/ADC_zaehlverfahren_grundprinzip.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.56\columnwidth}
-    \raggedright
-    \begin{itemize}
-        \item CTRL zählt von $0$ bis $2^n -1$
-        \item Zähler stoppt bei $\text{comp} = 0$
-        \item \textbf{Zählstand = ADC-Wert} \\
-            \textrightarrow\ 'aufgerundet', da DAC-Spannung grösser als $V_{\rm in}$
-    \end{itemize}
-
-\end{minipage}
-
-
-\subsubsection{Single-Slope Wandler}
-
-\begin{minipage}[c]{0.45\columnwidth}
-    \includegraphics[width=\columnwidth]{images/single_slope_ADC.png} 
+\begin{minipage}[c]{0.44\columnwidth}
+	\includegraphics[width=\columnwidth]{images/pipeline_ADC.png}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.52\columnwidth}
-    Integration bis $ V_{\rm int}(t) = V_{\rm ref}$ 
-    $$ \boxed{ V_{\rm int}(t) = - \frac{V_{\rm in} - A_{\rm GND} }{R \cdot C} \, t  + A_{\rm GND} } $$
-
-    \vspace{0.1cm}
-
-    Integrationszeit $T_{\rm int}$ 
-    $$ \boxed{ T_{\rm int} = - \frac{V_{\rm ref} \cdot R \cdot C}{V_{\rm in} - A_{GND}} }$$ 
-    $$ \boxed{ V_{\rm in} = - \frac{V_{\rm ref} \cdot R \cdot C}{ T_{\rm int}} } $$ 
+	\textbf{Subranging} (2 Stufen, $N_1 + N_2$ Bits):
+	$$ R = V_{\rm in} - D_1 q_1 \in [0,\,q_1) $$
+	$$ V_{\rm REF2} = q_1 \;\;\text{oder}\;\; G = 2^{N_1} $$
+	$$ q = \frac{V_{\rm REF}}{2^{N_1+N_2}} $$
+	nur $2^{N_1}+2^{N_2}$ Komparatoren
 \end{minipage}
 
+\vspace{4pt}
+{\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\columnwidth}{@{}l l X >{\raggedright\arraybackslash}p{0.14\columnwidth}@{}}
+	\toprule
+	\textbf{Variante}     & \textbf{Vergleich}                                 & \textbf{Rest}                                                         & \textbf{Zeit} \\ \midrule
+	Pipeline 1 Bit/Stufe  & Schwelle $\dfrac{V_{\rm REF}}{2^k}$ (halbiert)      & $E_k = E_{k-1} - B_k\,\dfrac{V_{\rm REF}}{2^k}$                       & Latenz $n$, \newline 1 Wert/Takt \\
+	Iterativ              & Schwelle immer $\dfrac{V_{\rm REF}}{2}$             & $V_x \leftarrow 2\Big(V_x - B\,\dfrac{V_{\rm REF}}{2}\Big)$           & $n$ Takte \\ \bottomrule
+\end{tabularx}}
 
-\subsubsection{Dual-Slope Wandler}
+\begin{warnbox}
+	\small
+	\warn{\textit{Ogni bit a 1 \textbf{aggiunge} il suo peso; a dimezzarsi da uno stadio all'altro è il peso, non la tensione.}}
+	\warn{\textit{G sbagliato \textrightarrow\ missing codes; nell'iterativo l'errore si moltiplica a ogni giro.}}
+\end{warnbox}
+
+\subsection{SAR mit Kondensator-DAC (Wägeverfahren)}\label{sec:sar}
 
 \begin{minipage}[c]{0.42\columnwidth}
-    \includegraphics[width=\columnwidth]{images/dual_slope_ADC.png}
+	\includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_redistribution_mode.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.27\columnwidth}
-    \includegraphics[width=0.83\columnwidth]{images/dual_slope_ADC_timing.png}
+\begin{minipage}[c]{0.54\columnwidth}
+	\textbf{Standardfall} (Sample: obere Platte an GND):
+	$$ \boxed{ V_X = -V_{\rm in} + V_{\rm ref}\,\frac{C_{\rm oben}}{C_{\rm tot}} } $$
+	$C_{\rm oben}$ = \textbf{alle} $C$, die jetzt an $V_{\rm ref}$ liegen
+\end{minipage}
+
+\begin{rezept}{Rezept: SAR (jede Variante)}
+	\begin{steps}
+		\item \textbf{Sample}: Ladung der Insel $Q = \sum_i C_i\,(V_X - V_{u,i})$ \; ($V_{u,i}$ = untere Platte); danach konstant
+		\item \textbf{Jeder Schritt}:
+		      \; $V_X = \dfrac{Q + \sum_i C_i\, V_{u,i}}{C_{\rm tot}}$
+		\item $V_X < 0$: Bit $=1$, Schalter bleibt auf $V_{\rm ref}$; \; $V_X > 0$: Bit $=0$, Schalter zurück auf GND
+		\item Nächsten Kondensator umschalten; nach $n$ Schritten fertig
+	\end{steps}
+\end{rezept}
+
+\begin{warnbox}
+	\small
+	\warn{\textit{In $C_{\rm oben}$ vanno \textbf{tutti} i C su $V_{\rm ref}$, non solo quello appena commutato.}}
+	\warn{\textit{Bit $=0$: l'interruttore torna su GND e $V_X$ torna al valore di prima.}}
+\end{warnbox}
+\textbf{Kopplungs-$C$} ($\frac{32}{31}C$ in Serie): kleinere Grössenverhältnisse der Kapazitäten.
+
+\subsection{Integrierende Wandler (Zählverfahren)}\label{sec:integrierend}
+
+{\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+	\toprule
+	\textbf{Wandler}  & \textbf{Formel} & \textbf{Merkmal} \\ \midrule
+	Zähl (DAC-Rampe)  & Zählerstand = Code
+	                  & aufgerundet, bis $2^n$ Takte \\
+	Single-Slope      & $T_{\rm int} = -\dfrac{V_{\rm ref}\,RC}{V_{\rm in}}$
+	                  & Zeit hängt vom Signal ab, Division nötig \\
+	Dual-Slope        & $\dfrac{V_{\rm in}-V_{\rm AGND}}{V_{\rm ref}-V_{\rm AGND}} = -\dfrac{T_{\rm abint}}{T_{\rm int}} = -\dfrac{n}{N}$
+	                  & $RC$ kürzt sich weg \\
+	Charge Balancing  & Portion $Q = \dfrac{T_{\rm clk}\,V_{\rm ref}}{R_i}$, \; gleiche Formel $\dfrac nN$
+	                  & integriert immer; grosses $N$: genau, aber langsam \\ \bottomrule
+\end{tabularx}}
+
+\vspace{3pt}
+\begin{minipage}[c]{0.4\columnwidth}
+	\includegraphics[width=\columnwidth]{images/dual_slope_ADC.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.29\columnwidth}
-    $$ \boxed{ V_{\rm int} = \frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i \cdot C_i} } $$
-    $$ \boxed{ V_{\rm abint} = \frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i \cdot C_i}  } $$
-\end{minipage}
-
-$$ \boxed{ \text{DC: } V_{\rm int} = A_{\rm GND}- \frac{1}{R_i \cdot C_i} \, (V_{\rm in1}- A_{\rm GND}) \cdot T_{\rm int} }  $$
-$$ \boxed{ \Delta V_{\rm abint} = A_{\rm GND} - V_{\rm int} = - \frac{1}{R_i \cdot C_i} \, (V_{\rm ref} - A_{\rm GND}) \cdot T_{\rm abint} } $$ 
-
-
-\begin{minipage}[c]{0.33\columnwidth}
-    $$ \boxed{ T_{\rm abint} = - \frac{V_{\rm in1} \cdot T_{\rm int}}{V_{\rm ref}} } $$ % mit V_AGND??
+\begin{minipage}[c]{0.24\columnwidth}
+	\includegraphics[width=\columnwidth]{images/dual_slope_ADC_timing.png}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.3\columnwidth}
-    $$ \boxed{ V_{\rm in1} = - V_{\rm ref} \frac{T_{\rm abint}}{T_{\rm int}} } $$ % mit V_AGND?
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.3\columnwidth}
-    $$ \boxed{ V_{\rm abint} = - V_{\rm int} } $$ %?
+	Netzbrumm: \\ $T_{\rm int} = 20\,$ms unterdrückt $50\,$Hz und Harmonische
 \end{minipage}
 
-\begin{minipage}[c]{0.45\columnwidth}
-    $$ \boxed{ -\frac{\overline{V_{\rm in}}}{V_{\rm ref}}= \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n \cdot T_{clk}}{N \cdot T_{clk} } } $$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.53\columnwidth}
-    $$ \boxed{ V_{\rm int} = \int\limits_0^{T_{\rm int}} - \frac{1}{R_i \cdot C_i} \, V_{\rm in1} + V_{\rm int,0} } $$
-\end{minipage}
+\begin{rezept}{Rezept: Dual-Slope}
+	\begin{steps}
+		\item \textbf{Aufintegration} während $T_{\rm int}$:
+		      \; $V_{\rm int} = V_{\rm AGND} - \dfrac{V_{\rm in}-V_{\rm AGND}}{R_iC_i}\,T_{\rm int}$
+		\item \textbf{Abintegration} mit $V_{\rm ref}$ bis $V_{\rm AGND}$:
+		      \; $T_{\rm abint} = T_{\rm int}\,\dfrac{V_{\rm AGND}-V_{\rm in}}{V_{\rm ref}-V_{\rm AGND}}$
+		\item \textbf{Auflösung}:
+		      \; $\Delta V_{\rm in} = |V_{\rm ref}-V_{\rm AGND}|\,\dfrac{T_{\rm clk}}{T_{\rm int}}$
+	\end{steps}
+\end{rezept}
 
-\vspace{0.2cm}
+\subsection{Fehler und Abtastung}\label{sec:adc-fehler}
 
-\myul{\textbf{Frequenzverhalten vom Dual-Slope-Wandler}}
+{\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+	\toprule
+	\textbf{Grösse}                 & \textbf{Formel / Bedeutung} \\ \midrule
+	Offset, Gain, INL, DNL          & wie beim DAC (\ref{sec:dac-fehler}) \\
+	DNL durch Komparator-Offset     & $|{\rm DNL}|_{\max} = \dfrac{2V_{\rm os}}{q}$; \;
+	                                  ${\rm DNL} < 1\,{\rm LSB} \Rightarrow \Delta V_{\rm REF} > 2^{n+1}\,V_{\rm os}$ \\
+	Aperturfehler (Sinus, voll)     & $T_A < \dfrac{1}{2\pi f\,2^n}$ \\
+	Abtasttheorem                   & $f_s > 2 f_{\max}$, sonst Aliasing \\
+	Sample-Hold                     & sinc-Tiefpass: dämpft alle $f > 0$ \\
+	SNR                             & $P_Q = \dfrac{q^2}{12}$, \; ${\rm SNR} = 6.02\,n + 1.76\,$dB, \;
+	                                  ${\rm ENOB} = \dfrac{{\rm SNR}-1.76}{6.02}$ \\ \bottomrule
+\end{tabularx}}
 
-\vspace{0.1cm}
-
-Frequenzen $f = \frac{1}{T}$ , wobei $T$ der Intergrationszeit entspricht, werden perfekt unterdrückt \\
-\textrightarrow\ Integrationszeit $T = 20 \, \milli \second$ unterdrückt Netzbrumm von $50 \, \hertz$
-
-
-\subsubsection{Charge Balancing ADC (Sigma-Delta-Wandler)}
-
-\begin{center}
-    \includegraphics[width=0.8\columnwidth]{images/charge_balancing_ADC.png}
-\end{center}
-
-
-\begin{itemize}
-    \item \textbf{Bei jedem Takt} während Aufintegration wird entschieden,
-        ob fixe 'Ladungsportion' $Q$ abintegriert wird \textbf{(Schaltschwelle)} \\
-        \textrightarrow\ Für CompOut $= 1$ wird für 1 CLK abintegriert
-    \item Anzahl 'Ladungsportionen' zählen während $N$ Taktzyklen
-    \item \textbf{Integration immer aktiv}
-    \item Integrator-Ausgang im Schnitt = Schaltschwelle \textrightarrow\ $\diff Q = 0$
-    \item Grosse $N$ \textrightarrow\ Lange Integrationszeit
-\end{itemize}
-
-$$ \boxed{ Q = \frac{T_{clk} \cdot V_{\rm ref}}{R_i} }  
-    \qquad \boxed{ Q_{\rm int} = \frac{V_{\rm in} \cdot T_{\rm int}}{R_i \cdot C_i} } 
-    \qquad \boxed{  \frac{\overline{V_{\rm in}}}{V_{\rm ref}} = \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n}{N} } $$ 
-$$ \boxed{ Q_{\rm abint} = \frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i \cdot C_i} = - Q_{\rm int} } $$ 
-
-
-\subsubsection{Fazit Integrierende Wandler}
-
-\begin{itemize}
-    \item In einem Messzyklus wird gleich viel Ladung vom Eingang wie von der Referenzspannung aufintegriert
-    \item Sigma-Delta-Wandler können in kürzerer Zeit hohe Auflösungen erreichen als Dual-Slope Wandler 
-\end{itemize}
-
-
-\subsection{Abtastung und Quantisierung}
-
-\begin{tabular}{ll}
-\textbf{Aliasing}       & Abgetastetes Signal kann sauber rekonstruiert werden, \\
-                        & aber auch schnellere Signale können gleiche Abtastwerte haben \\
-\textbf{Abtasttheorem}  & $\bm{f_{\rm abtast} > 2} \cdot \bm{f_{\rm signal,max}}$ \\
-\textbf{Sample-Hold}    & S-H-Glieder wirken wie Tiefpassfilter, indem das Spektrum mit \\
-                        & einer sinc-Funktion $(\sin(x)/x)$ gewichtet wird  \\
-                        & \textrightarrow\ ALLE Frequenzen $> 0 \, \hertz$ werden durch S-H gedämpft! \\
-                        & (gutes S-H = wenig Dämpfung)
-\end{tabular}
-
-
-\subsection{Lineares Modell der Quantisierung / SNR}
-
-\subsubsection{Voraussetungen für lineare Modellierung der Quantisierung}
-
-\begin{itemize}
-    \item Anzahl der Bits $N$ ist gross
-    \item ADC wird nicht übersteuert $(V_{\rm refn} < V_{\rm in} < V_{\rm refp})$
-    \item Alle Spannungen kommen in Eingangssignal gleich oft vor
-    \item Analoges Eingangssignal variiert sehr schnell
-\end{itemize}
-
-
-\subsubsection{Signal-Rausch-Abstand (SNR)}
-
-\begin{itemize}
-    \item \textbf{SNR:} Verhältnis Signalleistung zu Quantisierungsrauschen \textbf{in dB}
-    \item ENOB: Effevtive Number of Bits
-\end{itemize}
-
-\vspace{0.2cm}
-
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{ll}
-    Leistung Quantisierungsrauschen & $P_Q = \frac{q^2}{12}$                                            \\
-    Leistung Eingangssignal         & $P_S = 2^{2 \cdot n - 3} \cdot q^2$                               \\
-    SNR                             & $1.76 + n \cdot 6.02$ mit $n =$ \# Bits                           \\
-    ENOB                            & $\mathrm{ENOB} = \frac{\mathrm{SNR_{\deci \bel}} - 1.76}{6.02}$ 
-\end{tabular}
-\renewcommand{\arraystretch}{1}
-
-\vspace{0.2cm}
-
-\textbf{ \textrightarrow\ Pro Bit erhöht sich SNR um 6.02 dB}
- 
- 
-\subsection{Kennwerte von ADCs}
-
-\begin{center}
-    \begin{tabular}{lccc}
-        \toprule
-                                    & \textbf{Pipelined}    & \textbf{Wägeverfahren}    & \textbf{Sigma-Delta}      \\
-        \midrule
-        \textbf{Auflösung}          & niedrig               & mittel                    & hoch                      \\  
-                                    & 8 - 14 Bit            & 8 - 20 Bit                & 16 - 24 Bit               \\
-        \midrule
-        \textbf{Umsetzungsrate}     & sehr hoch             & mittel-hoch               & niedrig-mittel            \\
-                                    & bis zu 4 GSa          & bis zu 10 MHz             & 1 Hz - 100 kHz            \\
-        \midrule
-        \textbf{Leistungsaufnahme}  & sehr hoch             & mittel                    & niedrig                   \\
-                                    & bis zu 3 W            & 1 - 200 mW                & 0.2 - 10 mW               \\
-        \bottomrule
-    \end{tabular}
-\end{center}
-
+\warn{\textit{In $2^{n+1}V_{\rm os}$ il 2 di $2V_{\rm os}$ è già contato: non raddoppiare.}}

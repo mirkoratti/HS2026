@@ -4,6 +4,7 @@
 
 Eine Welle ist eine \textbf{Störung} eines \textbf{Gleichgewichtszustands}, die sich \textbf{im Raum ausbreitet}.
 
+\textbf{\color{orange}Welle transportiert sets Energie, aber nie Materie}
 
 \subsubsection{Bemerkungen zur Definition}
 
@@ -72,54 +73,27 @@ Man schaut bei der Beschreibung der Fortbewegung auf den Ort. Die Verschiebung d
 
 \subsubsection{Verschiedene Wellengeschwindigkeiten}
 
-\begin{minipage}{0.45\columnwidth}
-    Schallwellen in Fluiden
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\columnwidth}
-    $$\boxed{ u = \sqrt{\frac{1}{\rho \, \kappa}} }$$
-\end{minipage}
+\renewcommand{\arraystretch}{1.7}
+\begin{ctabular}{l c r}
+    \toprule
+    \textbf{Welle}                  & \textbf{L/T}  & \textbf{$u$} \\
+    \midrule
+    \textbf{Muster:}                &               & $\sqrt{\dfrac{\text{Rückstellgrösse}}{\text{Trägheit}}}$\\
+    Schall in Fluiden               & L             & $\sqrt{\dfrac{1}{\rho \, \kappa}}$ \\
+    Schall in Gasen                 & L             & $\sqrt{\dfrac{\varkappa \, p}{\rho}} = \sqrt{\dfrac{\varkappa \, R \, T}{M}}$ \\
+    \midrule
+    Stab (schlank), elastisch       & L             & $\sqrt{\dfrac{E}{\rho}}$ \\
+    Festkörper, elastisch           & T             & $\sqrt{\dfrac{G}{\rho}}$ \\
+    \midrule
+    Seil / Saite                    & T             & $\sqrt{\dfrac{F}{\rho \, A}}$ \\
+    \midrule
+    EM-Welle (z.B. Licht)           & T             & $\dfrac{c}{n}$ \\
+    \bottomrule
+\end{ctabular}
+\renewcommand{\arraystretch}{1}
 
-\begin{minipage}{0.45\columnwidth}
-    Schallwellen in Gasen
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\columnwidth}
-    $$\boxed{ u = \sqrt{\frac{\varkappa \, p}{\rho}} = \sqrt{\frac{\varkappa \, R \, T}{M}} }$$
-\end{minipage}
-
-\begin{minipage}{0.45\columnwidth}
-    Elastische Longitudinalwellen in einem schlanken Stab
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\columnwidth}
-    $$\boxed{ u = \sqrt{\frac{E}{\rho}} }$$
-\end{minipage}
-
-\begin{minipage}{0.45\columnwidth}
-    Elastische Transversalwellen
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\columnwidth}
-    $$\boxed{ u = \sqrt{\frac{G}{\rho}} }$$
-\end{minipage}
-
-\begin{minipage}{0.45\columnwidth}
-    Transversalwellen auf einem Seil oder einer Saite
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\columnwidth}
-    $$\boxed{ u = \sqrt{\frac{F}{\rho \, A}} }$$ 
-\end{minipage}
-
-\begin{minipage}{0.45\columnwidth}
-    Elektromagnetische Wellen (transversal) \\
-    (z.B. Lichtwellen)
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\columnwidth}
-    $$\boxed{ u = \frac{c}{n} }$$
-\end{minipage}
+\vspace{-0.5em}
+{\centering\footnotesize L = longitudinal, \ T = transversal\par}
 
 
 \renewcommand{\arraystretch}{1.15}
@@ -145,6 +119,8 @@ Man schaut bei der Beschreibung der Fortbewegung auf den Ort. Die Verschiebung d
 \subsection{Wellengleichungen}
 
 Die Wellengleichungen stellen eine \textbf{Verbindung zwischen Zeit und Ort} her.
+
+Se queste equazioni sono soddisfatte la funzione $\xi$ rappresenta un Onda (Welle)
 
 \medskip
 \begin{minipage}{0.45\columnwidth}
@@ -206,8 +182,8 @@ $$ \boxed{ \xi(x, t) = \xi_0 \cdot \sin( \omega \, t - k \, x + \varphi) }  $$
     $\xi_0$     & Amplitude             & $[\xi_0]$                         \\
     $\omega$    & Kreisfrequentz        & $[\omega] = \frac{\rad}{\second}$ \\
     $T$         & Periodendauer         & $[T] = \second$                   \\
-    $k$         & Wellenzahl            & $[k] = \frac{1}{\meter}$          \\
-    $\lambda$   & Wellenlänge           & $\lambda = \meter $               \\
+    $k$         & (Kreis)Wellenzahl            & $[k] = \frac{1}{\meter}$          \\
+    $\lambda$   & Wellenlänge (distanza fra creste)          & $\lambda = \meter $               \\
     $u$         & Wellengeschwindigkeit & $[u] = \frac{\meter}{\second}$    \\
     $\varphi$   & Phasenverschiebung    & $[\varphi] = \rad$ 
 \end{ctabular}

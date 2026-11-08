@@ -53,7 +53,7 @@ $$ \boxed{  y(t) = A \cdot \sin(\omega \, t + \varphi) } $$
     $\dot{y}(t)$    & Geschwindigkeit zum Zeitpunkt $t$ & $[\dot{y}(t)] = \frac{\meter}{\second}$       \\ 
     $\ddot{y}(t)$   & Beschleunigung  zum Zeitpunkt $t$ & $[\ddot{y}(t)] = \frac{\meter}{\second^2}$    \\ 
     $A$             & Amplitude                         & $[A] = \meter$                                \\
-    $\omega$        & Winkelgeschwindingkeit            & $[\omega] = \frac{\rad}{\second}$             \\
+    $\omega$        & Kreisfrequenz                     & $[\omega] = \frac{\rad}{\second}$             \\
     $\varphi$       & Phase                             & $[\varphi] = \rad$                            \\ 
     $T$             & Periodendauer                     & $[T] = \second$                               \\
     $f$             & Frequenz                          & $[f] = \frac{1}{\second}$
@@ -63,25 +63,31 @@ $$ \boxed{  y(t) = A \cdot \sin(\omega \, t + \varphi) } $$
 
 \example{Federpendel}
 
-\begin{minipage}{0.48\columnwidth}
-    $$F_{\rm res} = m \cdot a = m \cdot \ddot{x}$$ 
+\begin{minipage}[c]{0.37\columnwidth}
+    \centering
+    \input{tikz/federpendel_ruhelage.tex}
 \end{minipage}
 \hfill
-\begin{minipage}{0.48\columnwidth}
-    $$F_{\rm Feder} = -k \cdot x$$
+\begin{minipage}[c]{0.6\columnwidth}
+    \textbf{Ohne konstante Kraft}
+    \[ \boxed{ \begin{aligned} m\ddot{x} &= -k\,x \qquad \omega = \sqrt{\tfrac{k}{m}} \\ x(t) &= A \sin(\omega t + \varphi) \end{aligned} } \]
+    \textbf{Mit konstanter Kraft} ($mg$, Vorspannung)
+    \[ \boxed{ \begin{aligned} m\ddot{x} &= -k\,(x - \cor{x_0}) \\ x(t) &= \cor{x_0} + A \sin(\omega t + \varphi) \end{aligned} } \]
+    \cor{$x_0$}: dort ist $\sum F = 0$ \quad vertikal: $\cor{x_0} = \dfrac{mg}{k}$
 \end{minipage}
 
-$$ \text{Kräftegleichgewicht:} \quad m \cdot \ddot{x} = -k \cdot x $$
-\[ 
-    \boxed{ \text{DGL: } \ddot{x} = - \omega^2 \cdot x \quad \text{mit } \omega^2 = \frac{k}{m} } 
-    \qquad
-    \text{Allgemeine Lösung:} \quad  x(t) = A \cdot \sin(\omega \, t + \varphi) 
-\]
+\smallskip
+{\small \textrightarrow\ Konstante Kraft: $\omega$ bleibt gleich, nur das Zentrum verschiebt sich.\\
+\textrightarrow\ $A$, $\varphi$ aus $x(0)$, $\dot{x}(0)$ \,·\, $\sin$ oder $\cos$ egal: immer 2 Konstanten.\\
+\textrightarrow\ Vorzeichen beim Aufstellen der DGL: Anhang \ref{DGLVorzeichen}}
 
+\renewcommand{\arraystretch}{1.3}
 \begin{ctabular}{clc}
-    $x$     & Allungamento o posizione             & $[x] = \meter$                    \\
-    $k=c$   & Federkonstante    & $[k] = \frac{\newton}{\meter}$
+    $x$         & Auslenkung (ab entspannter Feder)     & $[x] = \meter$                    \\
+    $x_0$       & Ruhelage (Gleichgewichtslage)         & $[x_0] = \meter$                  \\
+    $k=c$       & Federkonstante                        & $[k] = \frac{\newton}{\meter}$
 \end{ctabular}
+\renewcommand{\arraystretch}{1}
 
 
 \subsubsection{Harmonische Schwingung -- Energiebetrachtung}

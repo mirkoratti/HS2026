@@ -1,0 +1,38 @@
+\begin{tikzpicture}[font=\scriptsize, >={Stealth}]
+  % Feder horizontal von #1 nach #2 auf Höhe #3
+  \def\hfeder#1#2#3{\draw[thick] (#1,#3) -- (#1+0.12,#3)
+      plot[domain=0:1, samples=21, variable=\t] ({#1+0.12+(#2-#1-0.24)*\t}, {#3+0.12*asin(sin(\t*1800))/90})
+      -- (#2,#3);}
+  % Wand
+  \fill[gray!35] (-0.2,-0.6) rectangle (0,0.6);
+  % k1
+  \hfeder{0}{1.4}{0}
+  \node[above] at (0.7,0.12) {$k_1$};
+  % m1
+  \draw[thick, fill=blue!15] (1.4,-0.4) rectangle (2.1,0.4);
+  \node at (1.75,0) {$m_1$};
+  % k zwischen m1 und m2
+  \hfeder{2.1}{3.9}{0.22}
+  \node[above] at (3.0,0.3) {$k$};
+  % Dämpfer b
+  \draw[thick] (2.1,-0.22) -- (2.85,-0.22);
+  \draw[thick] (2.7,-0.38) -- (3.15,-0.38) -- (3.15,-0.06) -- (2.7,-0.06);
+  \draw[thick] (2.85,-0.34) -- (2.85,-0.10);
+  \draw[thick] (3.15,-0.22) -- (3.9,-0.22);
+  \node[below] at (3.0,-0.38) {$b$};
+  % m2
+  \draw[thick, fill=blue!15] (3.9,-0.4) rectangle (4.6,0.4);
+  \node at (4.25,0) {$m_2$};
+  % externe Kraft
+  \draw[->, very thick, violet] (4.6,0) -- (5.4,0) node[right] {$F(t)$};
+  % Kräfte auf m1 (m1 um +x1 verschoben gedacht)
+  \draw[->, very thick, blue] (1.75,0.6) -- (1.05,0.6);
+  \node[blue, anchor=south east] at (1.4,0.62) {$-k_1 x_1$};
+  \draw[->, very thick, orange] (1.75,0.6) -- (2.45,0.6);
+  \node[orange, anchor=south west] at (2.0,0.62) {$+k\,(x_2-x_1)$};
+  \draw[->, very thick, orange] (1.75,-0.6) -- (2.45,-0.6);
+  \node[orange, anchor=north west] at (1.55,-0.68) {$+b\,(\dot x_2-\dot x_1)$};
+  % Achse
+  \draw[->, gray!60!black, thick] (0,-1.25) -- (5.6,-1.25) node[right] {$+x$};
+  \node[gray!60!black, anchor=west] at (0,-1.45) {\textbf{1.} Achse zuerst};
+\end{tikzpicture}

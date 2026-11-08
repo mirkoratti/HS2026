@@ -47,10 +47,11 @@ Es gibt zwei Modelle, um Nichtlinearität darzustellen:
 
 \vspace{0.2cm}
 
-\begin{tabular}{ll}
-	$f$ & Nichtlinearität (z.B. Totzeit) 						\\
-	$S$ & Stabiles (dynamisches) LZI-System mit Verstärkung 1
+\begin{tabular}{llll}
+	$f$ & Nichtlinear & Statisch & Kennlinie motore (Totzone per l'attrito, poi curva)				\\
+	$S$ & Linear & Dynamisch & $\text{PT}_1$ \textrightarrow inerzia del rotore, riscaldamento 
 \end{tabular}
+
 
 
 \subsection[Messung der statischen Kennlinie]{Messung der statischen Kennlinie von $\bm{f}$}{86}
@@ -63,27 +64,42 @@ $$ y_{\rm stat} = f(u_{\rm stat}) \qquad \text{(eingeschwungener Zustand)} $$
 
 \includegraphics[width=\columnwidth]{images/messung_statische_kennlinie.png}
 
-\begin{itemize}
-	\item Eingang $u(t)$ \textbf{schrittweise} ändern (auf neuen Wert $u_{\rm stat}$) Augang $y(t)$ verändert sich stetig und schwingt 
-		auf neuen Wert $y_{\rm stat}$ ein (überlagertes Rauschen)
-	\item $y_{\rm stat}$ messen (z.B. durch Mittelwertbildung)
-	\item Wertepaare $u_{\rm stat}, \, y_{\rm stat}$ ergeben Messpunkte $P_j = (u_j | y_j)$ der Kennlinie
-	\item Annahmen über Kennlinie (Totzone, symm. bzgl. Nullpunkt) mit zusätzlichen Messpunkte
-		(hier: $u_{\rm stat} > 5 \, V$ bzw. $u_{\rm stat} < 0 \, V$) absichern
-\end{itemize}
+\textbf{Idea}: misurare solo a regime (\textbf{eingeschwungener Zustand}): la dinamica di $S$ è finita, resta solo $f$.
+
+\begin{enumerate}
+	\item Eingang $u(t)$ \textbf{schrittweise} (a gradini) su un nuovo valore $u_{\rm stat}$
+	\item aspettare che $y(t)$ si assesti (\textbf{einschwingen}) su $y_{\rm stat}$
+	\item misurare $y_{\rm stat}$ con \textbf{Mittelwertbildung} \textrightarrow\ toglie il Rauschen sovrapposto
+	\item ogni coppia dà un \textbf{Messpunkt} $P_j = (u_j | y_j)$; ripetere su tutto il campo di $u$
+	\item verificare le ipotesi (\textbf{Totzone}, simmetria bzgl. Nullpunkt) con punti extra fuori dal campo
+		(qui: $u_{\rm stat} > 5 \, V$ bzw. $u_{\rm stat} < 0 \, V$)
+\end{enumerate}
+
+\textbf{+} ogni punto è davvero statico \textrightarrow\ misura precisa di $f$ \\
+\textbf{--} lenta: per ogni punto si aspetta che $S$ si assesti
 
 
 \subsubsection{Vorgehen dynamische Messung}
 
 \includegraphics[width=\columnwidth]{images/dynamische_messung_kennlinie.png}
 
+\textbf{Idea}: risparmiare tempo: Eingang $u(t)$ \textbf{kontinuierlich} (\textbf{rampenförmig}) e registrare $y(t)$ in una sola passata.
+
 \begin{itemize}
-	\item Eingang $u(t)$ \textbf{kontinuierlich} ändern (rampenförmig) \\
-		Ausgang $y(t)$ schwingt nicht ein, sondern läuft stationärem Wert stets hinterher \\
-		\textrightarrow\ Es entsteht eine \textbf{Pseudohysterese}
-	\item Pseudohystere erkennen: Messgeschwindigkeit variieren \\
-		\textrightarrow\ $N$ mal langsamere Messung \textrightarrow\ $N$ mal schmalere Hysterese
+	\item problema: $y(t)$ non si assesta mai, \textbf{läuft hinterher} (resta indietro) per la dinamica di $S$
+	\item salita e discesa danno due curve diverse \textrightarrow\ \textbf{Pseudohysterese}:
+		non è del sistema, è un errore di misura
+	\item riconoscerla: variare la \textbf{Messgeschwindigkeit} \\
+		$N$ volte più lenta \textrightarrow\ isteresi $N$ volte più stretta \textrightarrow\ Pseudohysterese \\
+		non cambia \textrightarrow\ \textbf{echte Hysterese} (p.es. attrito, magnetismo)
+	\item rampa infinitamente lenta = statische Messung
 \end{itemize}
+
+\textbf{+} veloce \qquad \textbf{--} se troppo veloce, Kennlinie falsata
+
+\vspace{0.1cm}
+
+\textbf{Risultato} (entrambi i metodi): Messpunkte $P_j$ \textrightarrow\ salvati come Tabelle (LUT) o come Funktion (sotto)
 
 
 \subsection{Erfassung der NL -- Tabelle}

@@ -1,0 +1,21 @@
+% ============ Makros Elo 1 (Neuaufbau ab 2026-11-05) ============
+% Palette "Ardesia" (2026-11-06): Orange bleibt die einzige Akzentfarbe
+\definecolor{rezeptcol}{HTML}{4A4D52}  % Schiefergrau: Rezept-Rahmen
+\definecolor{rezeptback}{HTML}{F6F5F1} % warmes Hellgrau: Rezept-Hintergrund
+\definecolor{warncol}{HTML}{A3341B}    % Ziegelrot: Warn-Rahmen
+\definecolor{warnback}{HTML}{FCEFEA}   % Ziegelrot hell: Warn-Hintergrund
+% Warnsymbol (gelbes Dreieck) und Warnzeile
+\newcommand{\warnsym}{\tikz[baseline=-0.1ex]{\draw[warncol,fill=yellow!80,line width=0.35pt,line join=round] (0,1.5ex)--(0.9ex,0)--(-0.9ex,0)--cycle; \node[inner sep=0pt,font=\fontsize{5}{5}\selectfont\bfseries] at (0,0.55ex) {!};}}
+\newcommand{\warn}[1]{\par\noindent\hangindent=1.6ex\warnsym\,#1\par}
+% Quellenhinweis (Prüfung / Übung) in grau
+\newcommand{\pr}[1]{{\scriptsize\color{gray!70!black}[#1]}}
+% Rezept-Box (Vorgehen Schritt für Schritt)
+\newtcolorbox{rezept}[1]{colback=rezeptback,colframe=rezeptcol,boxrule=0.5pt,arc=1pt,
+    left=2pt,right=2pt,top=1pt,bottom=1pt,toptitle=0.3pt,bottomtitle=0.3pt,
+    before skip=3pt,after skip=3pt,fonttitle=\bfseries,title={#1}}
+% Warn-Box (typische Fehler, Grenzfälle) -- Notizen auf Italienisch
+\newtcolorbox{warnbox}{colback=warnback,colframe=warncol,boxrule=0.5pt,arc=1pt,
+    left=2pt,right=2pt,top=1pt,bottom=1pt,before skip=3pt,after skip=3pt}
+% kompakte Aufzählung
+\newlist{steps}{enumerate}{1}
+\setlist[steps]{label=\textbf{\arabic*.},leftmargin=*,nosep}

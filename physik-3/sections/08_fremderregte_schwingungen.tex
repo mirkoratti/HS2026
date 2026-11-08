@@ -12,6 +12,7 @@ Erzwungene Schwingungen sind Schwingungen, die durch eine \textbf{periodische St
     \hline
     $\omega_0 = \sqrt{\dfrac{k}{m}}$     & & $\delta = \dfrac{\kappa}{2} = \dfrac{b}{2 \, m}$    & & $ D = \dfrac{\delta}{\omega_0} =  \dfrac{\kappa}{2 \, \omega_0}$            \\
     $\eta = \dfrac{\omega}{\omega_0}$    & & \multicolumn{3}{c|}{$\Omega_d = \sqrt{\omega_0^2 - \delta^2} =  \omega_0 \sqrt{1 - D^2}$}     \\
+    $\omega = \dfrac{2 \pi \, n}{60}$ & & \multicolumn{3}{c|}{$n$: Drehzahl in $\frac{1}{\mathrm{min}}$}     \\
     \hline
 \end{ctabular}
 
@@ -25,6 +26,7 @@ Erzwungene Schwingungen sind Schwingungen, die durch eine \textbf{periodische St
     $\delta = \frac{\kappa}{2}$ & Abklingkonstante                      & $[\kappa] = [\delta] = \frac{1}{\second}$ \\
     $D$                         & Dämpfungsgrad                         & $[D] = 1$                                 \\
     $\eta$                      & Dimensionslose Frequenz               & $[\eta] = 1$                              \\
+    $n$                         & Drehzahl                              & $[n] = \frac{1}{\mathrm{min}}$            \\
     $k = c$                     & Federkonstante                        & $[k] = \frac{\newton}{\meter}$
 \end{ctabular}
 \renewcommand{\arraystretch}{1}
@@ -89,6 +91,11 @@ $$ \boxed{ V_r = \frac{1}{\sqrt{ 1 - \eta_r^4} } \qquad \text{mit } \eta_r = \sq
     $\omega_0$  & Kreisfrequenz ungedämpfte Schwingung  & $[\omega_0] = \frac{\rad}{\second}$   \\
     $\omega$    & Kreisfrequenz der Störung (Erreger)   & $[\omega] = \frac{\rad}{\second}$     \\
 \end{ctabular}
+
+\smallskip
+\textbf{In parole:} $V$ è il \textit{fattore di amplificazione}: dice quante volte la risposta è più grande dell'eccitazione ($A = \frac{F_0}{c} \cdot V$).
+
+\textrightarrow\ Drehpendel mit Federerregung (Pohl): siehe Abschnitt \ref{PohlFedererregung}
 
 
 \subsection{Fremderregte Schwingungen -- Dämpfererregung}
@@ -323,6 +330,8 @@ Im Spezialfall gilt:
     Antisymm:   & $\ddot{\Phi_-} = - (\omega^2 + 2k) \Phi_-$    & & $\varphi_1(t) = -\varphi_2(t) = \dfrac{\Phi_0}{2} \cos \left( \omega_k t \right)$
 \end{ctabular}
 
+\centerline{\input{tikz/gekoppelte_pendel_moden.tex}}
+
 
 \subsubsection{Allgemeine Lösung des gekoppelten Systems}
 
@@ -339,7 +348,9 @@ Im Spezialfall gilt:
 
 
 \begin{ctabular}{c l c}
-    $k$ & Kopplungsfaktor           & $[k] = 1$                                 \\
+    $k$ & Kopplungsfaktor           & $[k] = \frac{1}{\second\squared}$         \\
+    $\omega$   & Kreisfrequenz symm. Mode (ohne Feder)  & $[\omega] = \frac{\rad}{\second}$     \\
+    $\omega_k$ & Kreisfrequenz antisymm. Mode           & $[\omega_k] = \frac{\rad}{\second}$   \\
     $h$ & Abstand zur Aufhängung    & $[h] = \meter$                            \\
     $J$ & Massenträgheitsmoment     & $[J] = \kilogram \cdot \meter\squared $   \\
     $c$ & Federkonstante            & $[c] = \frac{\newton}{\meter}$

@@ -14,21 +14,13 @@ Reale Systeme sind hingegen \textbf{nichtlinear und zeitvariant} \\
 Gegeben sei ein System 
 $$ \Phi: u(t) \rightarrow y(t) \qquad y(t) = \Phi(u(t))$$
 Wenn das System das \textbf{Superpositionsprinzip erfüllt}, so ist das System \textbf{linear} \\
-\textrightarrow\ 'Es kommt nich auf die Reihenfolge der Operationen an'
+\textrightarrow\ 'Es kommt nicht auf die Reihenfolge der Operationen an'
 
 $$ \boxed{ \cgn{ \Phi( \alpha_A \cdot u_A(t) + \alpha_B \cdot u_B(t)) } = \cbl{ \alpha_A \cdot \Phi(u_A(t)) + \alpha_B \cdot \Phi(u_B(t)) } } $$
 
 \begin{center}
 	\includegraphics[width=0.9\columnwidth]{images/pruefung_linearitaet.png} 
 \end{center}
-
-Ein guter Test ist, ein \textbf{'Gegenbeweis'} mit der Bedingung $u(t) = 0$ 
-$$ \Phi(0 \cdot u(t)) = 0 \cdot \Phi(u(t)) = 0 $$
-\begin{itemize}
-	\item Wenn dieser Test \textbf{fehlschlägt} ist das System \textbf{nichtlinear}!
-	\item se il sitema non passa da ($0,0$) il \textbf{sistema non è lineare, è affine}
-\end{itemize}
-
 
 
 \subsection{Lineare Systeme}
@@ -38,23 +30,6 @@ $$ \boxed{ a_n y(t)^{(n)} + ... + a_1 \dot{y}(t) + a_0 y(t) = b_m u(t)^{(m)} + .
 \cbl{\textrightarrow\ Zeitverschiebung ändert nichts an der Linearität des Systems!}
 
 
-\subsubsection{Beispiele linearer Systeme}
-
-\begin{minipage}[t]{0.4\columnwidth}
-	\begin{tabular}{lll}
-		\tabitem Verstärkung 			& $y(t) = K \cdot u(t)$ 					\\
-		\tabitem Integrator 			& $\dot{y}(t) = u(t)$ 						
-	\end{tabular}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.58\columnwidth}
-	\begin{tabular}{lll}
-		\tabitem Differenzierer 		& $y(t) = \dot{u}(t)$ 						\\
-		\tabitem $\text{PT}_1$-Glied 	& $T \, \dot{y}(t) + y(t) = K \cdot u(t)$ 
-	\end{tabular}
-\end{minipage}
-
-
 \subsection{Zeitinvarianz (Definition)}{79}
 
 Gegeben sei ein System 
@@ -62,7 +37,7 @@ $$\Phi: u(t) \rightarrow y(t) \qquad y(t) = \Phi(u(t))$$
 
 Ist das System zeitinvariant, so gilt
 $$ \boxed{ \Phi(u(t-T_t)) = y(t - T_t) \quad \forall \; T_t } $$
-\textrightarrow\ Die Antwort des Systems ist unabhängig davon, zu welchem Zeitpunkt der Eingang anliegt
+Die Antwort des Systems ist unabhängig davon, zu welchem Zeitpunkt der Eingang anliegt
 
 \vspace{0.2cm}
 
@@ -76,7 +51,7 @@ $$ \boxed{ \Phi(u(t-T_t)) = y(t - T_t) \quad \forall \; T_t } $$
 \end{tabular}
 
 \vspace{0.1cm}
-\textrightarrow\ Ungleich ($t \neq t - T_t$) $\Rightarrow$ \textbf{zeitvariant}
+\textrightarrow\ Eingang geschoben $\neq$ Ausgang geschoben $\Rightarrow$ \textbf{zeitvariant}
 
 
 \subsubsection{Eigenschaften zeitvarianter Systeme}
@@ -98,6 +73,52 @@ $$ \boxed{ \Phi(u(t-T_t)) = y(t - T_t) \quad \forall \; T_t } $$
 
 	\item Die Behandlung zeitvarianter Systeme ist manchmal einfacher als nichtlineare Systeme 
 \end{itemize}
+
+
+\subsection{Spickzettel: System klassifizieren}
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\columnwidth}{@{}lXX@{}}
+	\toprule
+	& \textbf{Test} & \textbf{Durchgefallen $\rightarrow$ typisch} \\
+	\midrule
+	\textbf{Linear?}
+		& 1) Nulltest: $u \equiv 0 \Rightarrow y \equiv 0$ \newline
+		  2) Superposition: $\Phi(\alpha_A u_A + \alpha_B u_B) = \alpha_A \Phi(u_A) + \alpha_B \Phi(u_B)$
+		& nichtlinear: $u^2,\ |u|,\ \ln u,\ \sin u$ \newline
+		  Nulltest nicht bestanden $\Rightarrow$ sicher nichtlinear; \textbf{affin} ($u + c$) nur, wenn sonst linear \\
+	\textbf{Zeitinv.?}
+		& $\Phi(u(t - T_t)) \overset{?}{=} y(t - T_t)$ \newline
+		  (Eingang schieben $\leftrightarrow$ Ausgang schieben)
+		& zeitvariant: \textbf{freies $t$} ($t \cdot u$, $\sin t$) \newline
+		  DGL mit konst. Koeff. $\rightarrow$ zeitinvariant \\
+	\textbf{Statisch?}
+		& $y(t)$ nur von $u(t)$ (gleicher Zeitpunkt)
+		& dynamisch: $\dot y,\ \ddot y,\ \int,\ u(t - T_t)$ \\
+	\bottomrule
+\end{tabularx}
+
+\vspace{0.2cm}
+
+\begin{tabularx}{\columnwidth}{@{}Xccc@{}}
+	\toprule
+	\textbf{System} & \textbf{linear} & \textbf{zeitinv.} & \textbf{statisch} \\
+	\midrule
+	$y = K \cdot u$ (Verstärkung)	& \checkmark & \checkmark & \checkmark \\
+	$y = u^2$ 						& $\times$ & \checkmark & \checkmark \\
+	$y = u + c$ 					& $\times$ (affin) & \checkmark & \checkmark \\
+	$y = t \cdot u$ 				& \checkmark & $\times$ & \checkmark \\
+	$y = \sin(t) \cdot u$ 			& \checkmark & $\times$ & \checkmark \\
+	$y = u(t - T_t)$ (Totzeit)		& \checkmark & \checkmark & $\times$ \\
+	$\dot y = u$ (Integrator)		& \checkmark & \checkmark & $\times$ \\
+	$y = \dot u$ (Differenzierer)	& \checkmark & \checkmark & $\times$ \\
+	$T \dot y + y = K u$ ($\text{PT}_1$)	& \checkmark & \checkmark & $\times$ \\
+	$y = t \cdot u(t - \beta)$ 		& \checkmark & $\times$ & $\times$ \\
+	\bottomrule
+\end{tabularx}
+\endgroup
 
 
 \subsection{Umgang mit LZI-Systemen}
@@ -136,51 +157,6 @@ Blöcke dürfen \textbf{verschoben werden}, müssen allerdings mit ihrer \textbf
 
 	\includegraphics[width=0.73\columnwidth]{images/bloecke_schieben_3.png}
 \end{center}
-
-
-\subsection{Spickzettel: System klassifizieren}
-
-\begingroup
-\small
-\renewcommand{\arraystretch}{1.25}
-\begin{tabularx}{\columnwidth}{@{}lXX@{}}
-	\toprule
-	& \textbf{Test} & \textbf{Durchgefallen $\rightarrow$ typisch} \\
-	\midrule
-	\textbf{Linear?}
-		& 1) Nulltest: $u \equiv 0 \Rightarrow y \equiv 0$ \newline
-		  2) Superposition: $\Phi(\alpha_A u_A + \alpha_B u_B) = \alpha_A \Phi(u_A) + \alpha_B \Phi(u_B)$
-		& nichtlinear: $u^2,\ |u|,\ \ln u,\ \sin u$ \newline
-		  Nulltest nicht bestanden: affin ($u + c$) \\
-	\textbf{Zeitinv.?}
-		& $\Phi(u(t - T_t)) \overset{?}{=} y(t - T_t)$ \newline
-		  (Eingang schieben $\leftrightarrow$ Ausgang schieben)
-		& zeitvariant: \textbf{freies $t$} ($t \cdot u$, $\sin t$) \newline
-		  DGL mit konst. Koeff. $\rightarrow$ zeitinvariant \\
-	\textbf{Statisch?}
-		& $y(t)$ nur von $u(t)$ (gleicher Zeitpunkt)
-		& dynamisch: $\dot y,\ \ddot y,\ \int,\ u(t - T_t)$ \\
-	\bottomrule
-\end{tabularx}
-
-\vspace{0.2cm}
-
-\begin{tabularx}{\columnwidth}{@{}Xccc@{}}
-	\toprule
-	\textbf{System} & \textbf{linear} & \textbf{zeitinv.} & \textbf{statisch} \\
-	\midrule
-	$y = K \cdot u$ 				& \checkmark & \checkmark & \checkmark \\
-	$y = t \cdot u$ 				& \checkmark & $\times$ & \checkmark \\
-	$y = u + c$ 					& $\times$ (affin) & \checkmark & \checkmark \\
-	$y = u(t - T_t)$ 				& \checkmark & \checkmark & $\times$ \\
-	$T \dot y + y = K u$ 			& \checkmark & \checkmark & $\times$ \\
-	$y = t \cdot u(t - \beta)$ 		& \checkmark & $\times$ & $\times$ \\
-	\bottomrule
-\end{tabularx}
-
-\vspace{0.1cm}
-
-\textbf{Blockschaltbild mit Rückkopplung:} DGL aufstellen (Eingang des Integrators $= u - $ Rückführung, $\dot x = \dots$) und in Standardform bringen \\
+DGL aufstellen (Eingang des Integrators $= u - $ Rückführung, $\dot x = \dots$) und in Standardform bringen \\
 \textrightarrow\ z.B. Integrator mit Rückführung 1: $\dot x + x = u$ $\Rightarrow$ $\text{PT}_1$ mit $T = 1$, $K = 1$
-\endgroup
 

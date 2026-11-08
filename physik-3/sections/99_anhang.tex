@@ -60,6 +60,67 @@ La linea rossa tratteggiata è l'asse di rotazione (\textit{Drehachse}).
 \end{align*}
 
 
+\subsubsection{Drehpendel mit Federerregung (Pohl)}\label{PohlFedererregung}
+
+\textrightarrow\ Motor dreht über Exzenter und Schubstange den \textbf{Hebel} (= äusseres Federende) um $\varphi_e(t) = \varphi_{e,0} \sin(\omega t)$
+
+\centerline{\input{tikz/pohl_federerregung.tex}}
+
+\smallskip
+
+Die Feder wirkt nur über ihre \textbf{Verdrillung} $\varphi_e - \varphi$: \quad $M = -c^*(\varphi - \varphi_e)$
+
+$$ \boxed{ J\ddot{\varphi} + b^*\dot{\varphi} + c^*\varphi = c^* \varphi_{e,0} \sin(\omega t) } \qquad \rightarrow \quad M_0 = c^* \varphi_{e,0} $$
+
+$$ \boxed{ \frac{A}{\varphi_{e,0}} = V } \qquad \text{Resonanz:} \quad \frac{A}{\varphi_{e,0}} = V_r \qquad (V,\ V_r \text{ siehe Abschnitt \ref{Vergrösserungsfunktion / Phasenverschiebung}}) $$
+
+\textrightarrow\ $J$, $c^*$ und $M_0$ kürzen sich weg: es braucht nur $D$ (aus $T$ und Abklingen)
+
+\begin{ctabular}{c l c}
+    $\varphi$         & Winkel des Rades                       & $[\varphi] = \rad$          \\
+    $\varphi_e$       & Winkel des Hebels (Erreger)            & $[\varphi_e] = \rad$        \\
+    $\varphi_{e,0}$   & Amplitude des Erregers                 & $[\varphi_{e,0}] = \rad$    \\
+    $A$               & Amplitude des Rades                    & $[A] = \rad$                \\
+    $c^*$             & Winkelrichtgrösse der Spiralfeder      & $[c^*] = \frac{\newton\meter}{\rad}$
+\end{ctabular}
+
+
+\subsubsection{DGL aufstellen: le regole dei segni}\label{DGLVorzeichen}
+
+\centerline{\input{tikz/dgl_vorzeichen.tex}}
+
+\smallskip
+{\small Idea: \textbf{sposta la massa di $+x$} (e dalle velocità $+\dot{x}$) e chiediti per ogni forza: \emph{la riporta indietro o la spinge avanti?}}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\columnwidth}>{\raggedright\arraybackslash}p{0.71\columnwidth}@{}}
+    \textbf{1. Asse} & disegna la freccia di $x$ (o il verso di $\varphi$): forza nel verso della freccia $= +$, contro $= -$ \\
+    \textbf{2. Molla verso il muro} & riporta indietro $\Rightarrow$ \cbl{$-k\,x$} \\
+    \textbf{3. Molla fra $i$ e $j$} & allungata tira verso l'altra estremità. \;Su $i$: \cor{$+k\,(x_j - x_i)$}, su $j$: \cor{$+k\,(x_i - x_j)$} \\
+    \textbf{4. Smorzatore fra $i$ e $j$} & come la molla, con le velocità. \;Su $i$: \cor{$+b\,(\dot{x}_j - \dot{x}_i)$} \;(verso il muro: $-b\,\dot{x}$) \\
+    \textbf{5. Forza costante} & $mg$, \ldots: $+$ se nel verso dell'asse. Sposta solo $x_0$, non cambia $\omega$ \\
+    \textbf{6. Eccitazione $u(t)$} & il supporto mobile è la ``massa $j$'' delle regole 3 e 4: \;$k\,(u - x)$, \;$b\,(\dot{u} - \dot{x})$ \\
+    \textbf{7. Rotazione} & stesse regole con $\varphi$, $M$, $J$: \;$M = F \cdot$ braccio, $+$ se fa ruotare nel verso di $\varphi$
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+\smallskip
+\noindent\fbox{\parbox{0.96\columnwidth}{%
+\textbf{Controlli finali} \quad porta tutto a sinistra: $\;m_i\ddot{x}_i + \ldots + (\ldots)\,x_i - (\ldots)\,x_j = F_i$
+\begin{itemize}
+    \item[\textbf{a}] coefficienti di $\ddot{x}_i$, $\dot{x}_i$, $x_i$ \textbf{tutti positivi} \;(altrimenti: segno sbagliato)
+    \item[\textbf{b}] coefficiente di $x_i$ $=$ \textbf{somma delle molle attaccate} a $i$ \;(es. $k_1 + k$)
+    \item[\textbf{c}] \textbf{accoppiamento simmetrico}: $-k\,x_j$ nell'eq.\ di $i$ $\Leftrightarrow$ $-k\,x_i$ nell'eq.\ di $j$
+\end{itemize}}}
+
+\smallskip
+\textbf{Esempio (figura):}
+\begin{align*}
+    m_1 \ddot{x}_1 + b\,\dot{x}_1 + (k_1 + k)\,x_1 - b\,\dot{x}_2 - k\,x_2 &= 0 \\
+    m_2 \ddot{x}_2 + b\,\dot{x}_2 + k\,x_2 - b\,\dot{x}_1 - k\,x_1 &= F(t)
+\end{align*}
+
+
 \subsection{Trigonometrie}
 
 \begingroup

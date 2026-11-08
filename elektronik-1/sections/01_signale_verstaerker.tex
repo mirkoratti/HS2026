@@ -1,94 +1,91 @@
-\section{Quellen}
+% Kap. 1 -- Neuaufbau 2026-11-05, Stil "luftig" 2026-11-06 (Backup: ../elektronik-1_backup_2026-11-05)
+\section{Grundlagen}\label{sec:grundlagen}
 
-\begin{tabular}{ll}
-    Thévenin    & Spannungsquelle mit Seriewiderstand \\
-    Norton      & Stromquelle mit Parallelwiderstand
-\end{tabular}
+\subsection{DC und AC getrennt}
 
-\vspace{0.1cm}
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+	\toprule
+	\textbf{Bauteil}   & \textbf{DC (Arbeitspunkt)} & \textbf{AC (Signal)} \\ \midrule
+	DC-Spannungsquelle & wirkt                      & Kurzschluss \\
+	DC-Stromquelle     & wirkt                      & offen \\
+	Kondensator $C$    & offen                      & Kurzschluss, wenn $X_C = \dfrac{1}{2\pi f C} \ll R$ im Pfad \\
+	Spule $L$          & Kurzschluss                & offen \\
+	Nichtlinear (Diode, BJT) & Kennlinie            & Kleinsignal-ESB ($r$ im AP) \\ \bottomrule
+\end{tabularx}}
 
-\textrightarrow\ \crd{\textbf{DC- und AC-Signale werden separat betrachtet!} }
+\begin{rezept}{Rezept: Schaltungsanalyse}
+	\begin{steps}
+		\item \textbf{DC}: Arbeitspunkt, DC-Spannung in jedem Knoten
+		\item \textbf{AC}: Signalpfad nach der Tabelle oben, Verstärkung $A_k$ jeder Quelle
+		\item \textbf{Störquellen} (z.B. Rippel auf $V_{\rm DD}$): eigener AC-Pfad wie ein Eingang
+		\item \textbf{Kontrolle}: Ausgang innerhalb der Speisung? Sonst Sättigung
+	\end{steps}
+	$$ v_{\rm out}(t) = V_{\rm out,DC} + \sum_k A_k\,\hat v_k \sin(2\pi f_k t) $$
+\end{rezept}
 
+\warn{\textit{La Superposition vale solo nel tratto lineare: con l'uscita al rail (Sättigung) non vale più.}}
+\warn{\textit{Anche AGND, VCOM, $V_{\rm ref}$ e $V_{\rm DD}$ sono sorgenti: ognuna ha il suo termine.}}
 
-\subsection{Superpositionsprinzip}
+\subsection{Gross- und Kleinsignal}
 
-Eingangssignale eines \textbf{linearen Netzwerks} dürfen separat betrachtet werden. \\
-(nur eine Quelle aktiv, die anderen Quellen werden ausgeschaltet)
-
-\vspace{0.1cm}
-
-\textbf{ \textrightarrow\ Superpositionsprinzip funktioniert nicht in der Sättigung!}
-
-\section{Grundlagen}
-
-
-\subsection{Kleinsignal-Ersatzschaltung (!)}
-\label{kleinsignal-ersatzschlatung}
-
-\textbf{Ziel:} Berechnung der \textbf{AC-Spannungen} an den verschiedenen Knoten der Schaltung sowie der Wechselströme in allen 
-Zweigen der Schaltung.
-
-\vspace{0.1cm}
-\begin{minipage}{0.75\columnwidth}
-    \begin{itemize}
-        \item DC-Spannungsquellen durch Kurzschlüsse ersetzen
-        \item DC-Stromquellen entfernen (Unterbrüche)
-        \item Nichtlineare Bauteile mit Kleinsignal-Ersatzschlatung ersetzen
-        \item Koppel- und Bypass-Kondensatoren kurzschliessen
-        \item Spulen entfernen
-    \end{itemize}
+\begin{minipage}[t]{0.48\columnwidth}
+	\textbf{Grosssignal} (Gerade durch Ursprung)
+	$$ R = \frac{V_{\rm AP}}{I_{\rm AP}} $$
 \end{minipage}
-\begin{minipage}{0.2\columnwidth}
-    \[\boxed{r = \frac{\diff V}{\diff I} \approx \frac{\Delta V}{\Delta I}}\]
-    % \[\boxed{X_c = \dfrac{1}{2 \pi f C}}\]
-
-    % \[\boxed{X_l = 2 \pi f L}\]
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+	\textbf{Kleinsignal} (Tangente im AP)
+	$$ r = \frac{\diff V}{\diff I} \approx \frac{\Delta V}{\Delta I} $$
 \end{minipage}
 
+\subsection{Verstärker}
 
-\subsection{Schaltungsanalyse - Vorgehen (!)}
-
-\textbf{DC-Arbeitspunkte und Verstärkungsfaktor bestimmen}
-
-\vspace{0.1cm}
-
-\begin{itemize}
-    \item Arbeitspunkte bestimmen (DC-Spannung in jedem Knoten)
-    \item Kleinsignalersatzschaltung gemäss Kapitel \ref{kleinsignal-ersatzschlatung} bilden
-    \item Schaltung ggf. umzeichnen und vereinfachen
-    \item Verstärkung $\frac{V_{\rm out}}{V_{\rm in}}$ berechnen 
-\end{itemize}
-
-
-\subsection{Dezibel}
-
-\vspace{-0.2cm}
-
-\begin{center}
-    \renewcommand{\arraystretch}{2}
-    \begin{tabular}{c c c}
-        \myul{\textbf{Dezibel}}                                                                                             &               & \myul{\textbf{Faktor}}                                \\
-        $A_{\deci \bel}  = 20 \log \Biggl( \Bigl|\underbrace{\frac{V_{\rm out}}{V_{\rm in}}}_{\substack{A}} \Bigr| \Biggr)$ & \textlrarrow\ & $A  = 10^{\frac{A_{\deci \bel}}{20 \, \deci \bel}}$   \\
-        $A_{\rm total} = A_{\deci \bel 1} + A_{\deci \bel 2}$                                                               &               & $A_{\rm total} = A_1 \cdot A_2$  (Serie-Verstärkern)                     
-    \end{tabular}
-    \renewcommand{\arraystretch}{1}
-\end{center}\vspace{-1em}
-
-
-\section{Verstärker}
-
-\subsection[Übertragungsfaktor (reale Verstärker)]{Übertragungsfaktor $\bm{k}$ (reale Verstärker)}
-il fattore $k$ considera il partitore di tensione fra Verstärker non ideali (su $R_{\rm q}, R_{\rm out1}, R_{\rm out2}$ 
-perdità di tensione)
-
-\begin{center}
-    \includegraphics[width=0.75\columnwidth]{images/kopplungsfaktor.jpg}
-\end{center}
-
-\resizebox{\columnwidth}{!}{
-\begin{tabular}{lll}
-    $ V_{\rm in1} = V_{\rm in} \cdot \cgn{ \underbrace{ \frac{R_{\rm in1}}{R_{\rm in1} + R_Q} }_{\substack{k_1}} } $            &
-    $ V_{\rm in2} = \crd{\underbrace{ \frac{R_{\rm in2}}{R_{\rm in2} + R_{\rm out1}} }_{\substack{k_2}} } \cdot V_{\rm out1} $  &
-    $ \boxed{V_{\rm out} = V_{\rm in} \cdot k_1 \cdot A_1 \cdot k_2 \cdot A_2 \cdot k_L} $
+{\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}l l@{\qquad}l l@{}}
+	Spannung:   & $v_{\rm out} = A_v\, v_{\rm in}$ & Strom:      & $i_{\rm out} = A_i\, i_{\rm in}$ \\
+	Transkond.: & $i_{\rm out} = g_m\, v_{\rm in}$ & Transimp.:  & $v_{\rm out} = R_m\, i_{\rm in}$
 \end{tabular}}
 
+\vspace{4pt}
+\textbf{Kette realer Verstärker}: $R_{\rm out}$ und das nächste $R_{\rm in}$ bilden einen Spannungsteiler.
+
+\begin{center}
+	\includegraphics[width=0.8\columnwidth]{images/kopplungsfaktor.jpg}
+\end{center}
+
+$$ \boxed{ v_{\rm out} = v_{\rm in}\, k_1 A_1\, k_2 A_2\, k_L } $$
+$$ k_1 = \frac{R_{\rm in1}}{R_{\rm in1}+R_Q} \qquad k_2 = \frac{R_{\rm in2}}{R_{\rm in2}+R_{\rm out1}} \qquad k_L = \frac{R_L}{R_L + R_{\rm out2}} $$
+
+\textbf{Dezibel} (in Serie: dB addieren)
+$$ A_{\rm dB} = 20 \log |A| \qquad\Longleftrightarrow\qquad A = 10^{A_{\rm dB}/20} $$
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}l|cccccc@{}}
+	$|A|$ & $0.5$ & $1/\sqrt2$ & $2$ & $10$ & $100$ & $1000$ \\ \hline
+	dB    & $-6$  & $-3$       & $6$ & $20$ & $40$  & $60$
+\end{tabular}
+\end{center}
+
+\subsection{Toleranzen und Worst-Case}\label{sec:worstcase}
+
+\begin{rezept}{Rezept: Worst-Case mit Toleranz $\pm t$}
+	\begin{steps}
+		\item Resultat $f(R_1, R_2, \dots)$ \textbf{symbolisch} aufstellen
+		\item Für jedes $R$ entscheiden: wird $f$ grösser, wenn $R$ grösser wird?
+		\item $f_{\max}$: jedes $R$ an die günstige Grenze $R(1\pm t)$; \; $f_{\min}$: alle umgekehrt
+	\end{steps}
+	\vspace{2pt}
+	{\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\linewidth}{@{}l X@{}}
+		$R$ nur im Zähler  & $R$ gross \textrightarrow\ $f$ gross \\
+		$R$ nur im Nenner  & $R$ gross \textrightarrow\ $f$ klein \\
+		$R$ in beiden      & umformen: \; $\dfrac{R_2}{R_1+R_2} = \dfrac{1}{1+R_1/R_2}$
+	\end{tabularx}}
+\end{rezept}
+
+\textbf{Spannungsteiler}, Maximum:
+$$ V_{\max} = V\, \frac{R_2(1+t)}{R_1(1-t) + R_2(1+t)} $$
+\textbf{Faustregel}: bei Produkt oder Quotient addieren sich die relativen Toleranzen ($\frac{R_2}{R_1}$ mit je $\pm1\,\%$ \textrightarrow\ $\pm 2\,\%$).
+
+\warn{\textit{Stesso valore nominale $\neq$ stesso valore reale: nel worst case ogni R va al suo estremo in modo indipendente (es. DAC, Kap.~4).}}

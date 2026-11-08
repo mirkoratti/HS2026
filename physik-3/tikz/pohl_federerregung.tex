@@ -1,0 +1,38 @@
+\begin{tikzpicture}[font=\footnotesize, >={Stealth}, scale=0.9]
+  % --- Ruhelage ---
+  \draw[gray, densely dashed] (0,0) -- (0,2.6);
+  \node[gray, above] at (0,2.6) {Ruhelage};
+  % --- Rad (J) mit Speichen, um phi = 15 Grad gedreht ---
+  \draw[blue!45, line width=3pt] (0,0) circle (1.3);
+  \foreach \a in {15,75,135,195,255,315}
+    \draw[blue!25, thick] (0,0) -- (\a:1.2);
+  \draw[blue, line width=2pt] (75:1.05) -- (75:1.6);
+  % --- Spiralfeder c*: innen am Rad, aussen am Hebel ---
+  \draw[gray!80!black, thick, domain=0:1, samples=160, smooth, variable=\x]
+    plot ({(0.15+0.55*\x)*cos(50-900*(1-\x))}, {(0.15+0.55*\x)*sin(50-900*(1-\x))});
+  % --- Hebel, um phi_e = 40 Grad gedreht ---
+  \draw[orange, line width=2.5pt, line cap=round] (230:2.0) -- (50:2.15);
+  \fill[orange] (50:0.7) circle (1.8pt);
+  \fill[gray!70!black] (0,0) circle (2pt);
+  % --- Winkel ab Ruhelage ---
+  \draw[blue, thick, ->] (90:1.85) arc (90:75:1.85);
+  \node[blue] at (82:2.12) {$\varphi$};
+  \draw[orange, thick, ->] (90:2.45) arc (90:50:2.45);
+  \node[orange] at (63:2.75) {$\varphi_e$};
+  % --- Federmoment auf das Rad ---
+  \draw[violet, very thick, ->] (72:1.48) arc (72:54:1.48);
+  \node[violet, anchor=west] at (25:1.55) {$M = c^*(\varphi_e - \varphi)$};
+  % --- Schubstange und Motor mit Exzenter ---
+  \draw[gray!70!black, line width=1.5pt] (230:2.0) -- (2.3,-1.532);
+  \draw[thick, fill=gray!15] (2.7,-1.532) circle (0.45);
+  \fill (2.3,-1.532) circle (1.8pt);
+  \fill[orange] (230:2.0) circle (1.8pt);
+  \draw[->] (3.27,-1.2) arc (35:-60:0.6);
+  \node at (3.7,-1.75) {$\omega$};
+  % --- Beschriftungen ---
+  \node[blue, anchor=west] at (1.2,-0.7) {Rad $J$};
+  \node[gray!70!black, anchor=east] at (-0.8,0.35) {Feder $c^*$};
+  \node[orange, anchor=east] at (-1.35,-1.55) {Hebel};
+  \node at (0.6,-1.85) {Schubstange};
+  \node at (2.7,-2.2) {Motor};
+\end{tikzpicture}

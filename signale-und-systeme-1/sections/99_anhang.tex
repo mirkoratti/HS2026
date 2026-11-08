@@ -40,11 +40,15 @@ Partielle Integration darf mehrfach angewendet werden. \\
     \hline
     $\bm{f'(t)}$                                                & $\bm{f(t)}$                           & $\bm{F(t) = \int f \,\diff t}$ &               \\
     \hline
-    $n \cdot \cos(n t)$                                      & $\sin(n t)$                        & $- \frac{\cos(n t)}{n}$    & $(n \neq 0)$  \\
+    $k \cdot \cos(k t)$                                      & $\sin(k t)$                        & $- \frac{\cos(k t)}{k}$    & $(k \neq 0)$  \\
     \hline     
-    $- n \cdot \sin(n t)$                                    & $\cos(n t)$                        & $ \frac{\sin(n t)}{n}$     & $(n \neq 0)$  \\
+    $- k \cdot \sin(k t)$                                    & $\cos(k t)$                        & $ \frac{\sin(k t)}{k}$     & $(k \neq 0)$  \\
     \hline
-    \cbl{$ - \jimg \omega \e^{- \jimg \omega t}$}   & \cbl{$\e^{- \jimg \, \omega \, t}$}   & \cbl{$\frac{\e^{- \jimg \, \omega \, t}}{- \jimg \, \omega} = \frac{\jimg}{\omega} \e^{-\jimg \, \omega \, t}$} & \cbl{ $(n \neq 0)$ } \\
+    $\cos(k t) - k \, t \cdot \sin(k t)$                     & $t \cdot \cos(k t)$                & $\frac{t \cdot \sin(k t)}{k} + \frac{\cos(k t)}{k^2}$   & $(k \neq 0)$  \\
+    \hline
+    $\sin(k t) + k \, t \cdot \cos(k t)$                     & $t \cdot \sin(k t)$                & $-\frac{t \cdot \cos(k t)}{k} + \frac{\sin(k t)}{k^2}$  & $(k \neq 0)$  \\
+    \hline
+    \cbl{$ - \jimg \omega \e^{- \jimg \omega t}$}   & \cbl{$\e^{- \jimg \, \omega \, t}$}   & \cbl{$\frac{\e^{- \jimg \, \omega \, t}}{- \jimg \, \omega} = \frac{\jimg}{\omega} \e^{-\jimg \, \omega \, t}$} & \cbl{ $(\omega \neq 0)$ } \\
     \hline
 \end{ctabular}
 }
@@ -183,6 +187,51 @@ $a \cos(\omega t) + b \sin(\omega t) = A \cos(\omega t - \varphi)$ mit $A = \sqr
 
 
 % ================================= 3. TRANSFORMATIONEN (KORRESPONDENZEN) =================================
+\subsubsection{Valori Notevoli per le Serie di Fourier}
+
+% --- Valori Notevoli per k Intero ---
+\noindent\textbf{Valori fondamentali ($k \in \mathbb{Z}$):}
+\begin{center}
+\begin{tabular}{lll}
+    $\cos(k\pi) = (-1)^k$ & $\sin(k\pi) = 0$ & $\e^{\pm\jimg k\pi} = (-1)^k$ \\
+    $\cos(2k\pi) = 1$     & $\sin(2k\pi) = 0$    & $\e^{\pm\jimg 2k\pi} = 1$
+\end{tabular}
+\end{center}
+
+% --- Casi con frazioni di Pi Greco (2 Colonne compatto) ---
+\noindent\textbf{Frazioni di $\pi$ ($k \in \mathbb{Z}$, con $m \in \mathbb{Z}$):}
+\begin{center}
+\begin{tabular}{ll}
+    $\cos\left(k\frac{\pi}{2}\right) = \begin{cases} 0 & k = 2m+1 \\ (-1)^m & k = 2m \end{cases}$ & 
+    $\sin\left(k\frac{\pi}{2}\right) = \begin{cases} (-1)^m & k = 2m+1 \\ 0 & k = 2m \end{cases}$ \\
+    \noalign{\vspace{0.15cm}}
+    $\e^{\pm\jimg k\frac{\pi}{2}} = (\pm\jimg)^k$ & 
+    $\e^{\pm\jimg k\frac{3}{2}\pi} = (\mp\jimg)^k$ \\
+    \noalign{\vspace{0.15cm}}
+    $\cos\left(k\frac{\pi}{3}\right) = \begin{cases} (-1)^m & k = 3m \\ \frac{1}{2} & k = 6m \pm 1 \\ -\frac{1}{2} & k = 6m \pm 2 \end{cases}$ &
+    $\sin\left(k\frac{\pi}{3}\right) = \begin{cases} 0 & k = 3m \\ \frac{\sqrt{3}}{2} & k = 6m+1, 6m+2 \\ -\frac{\sqrt{3}}{2} & k = 6m+4, 6m+5 \end{cases}$ \\
+    \noalign{\vspace{0.15cm}}
+    $\e^{\pm\jimg k\frac{\pi}{3}} = \cos\left(k\frac{\pi}{3}\right) \pm \jimg \sin\left(k\frac{\pi}{3}\right)$ & \\
+    \noalign{\vspace{0.15cm}}
+    $\cos\left(k\frac{\pi}{4}\right) = \begin{cases} 1 & k = 8m \\ -1 & k = 8m+4 \\ 0 & k = 8m+2, 8m+6 \\ \frac{\sqrt{2}}{2} & k = 8m+1, 8m+7 \\ -\frac{\sqrt{2}}{2} & k = 8m+3, 8m+5 \end{cases}$ &
+    $\sin\left(k\frac{\pi}{4}\right) = \begin{cases} 0 & k = 4m \\ 1 & k = 8m+2 \\ -1 & k = 8m+6 \\ \frac{\sqrt{2}}{2} & k = 8m+1, 8m+3 \\ -\frac{\sqrt{2}}{2} & k = 8m+5, 8m+7 \end{cases}$ \\
+    \noalign{\vspace{0.15cm}}
+    $\e^{\pm\jimg k\frac{\pi}{4}} = \left(\frac{\sqrt{2}}{2} \pm \jimg\frac{\sqrt{2}}{2}\right)^k$ & 
+\end{tabular}
+\end{center}
+
+% --- Casi con potenze di j e (-j) (2 Colonne compatto) ---
+\noindent\textbf{Potenze di $\jimg$ e $-\jimg$ ($k \in \mathbb{Z}$, con $m \in \mathbb{Z}$):}
+\begin{center}
+\begin{tabular}{ll}
+    $\jimg^k = \begin{cases} 1 & k = 4m \\ \jimg & k = 4m+1 \\ -1 & k = 4m+2 \\ -\jimg & k = 4m+3 \end{cases}$ & 
+    $(-\jimg)^k = \begin{cases} 1 & k = 4m \\ -\jimg & k = 4m+1 \\ -1 & k = 4m+2 \\ \jimg & k = 4m+3 \end{cases}$ \\
+    \noalign{\vspace{0.15cm}}
+    $\jimg^{-k} = (-\jimg)^k$ & 
+    $(-\jimg)^{-k} = \jimg^k$
+\end{tabular}
+\end{center}
+
 \subsection{Korrespondenzpaare}
 
 \subsubsection{Fourier-Transformation}
@@ -228,6 +277,43 @@ $$ u(t) = \text{Einheitssprung} $$
         \bottomrule
     \end{tabular}
 \end{center}
+
+
+\subsubsection{z-Transformation (zeitdiskrete SFD)}
+% Skript S. 57; nur was fuer SFD mit Verzoegerungselementen D gebraucht wird
+
+\begin{minipage}{0.40\columnwidth}
+    \resizebox{\columnwidth}{!}{\input{tikz/delay_z.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.56\columnwidth}
+    \textbf{Verschiebungssatz:}
+    $$ \boxed{ x[k-m] \;\laplace\; \cbl{z^{-m}} \, X(z) } $$
+    {\small \textrightarrow\ Zweig \cbl{D} im SFD = Transmittanz \cbl{$z^{-1}$}}
+\end{minipage}
+
+\vspace{0.2cm}
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l c l}
+        \toprule
+        \textbf{Zeitbereich}            &               & \textbf{Bildbereich}              \\
+        \midrule
+        $\delta[k]$                     & $\laplace$    & $1$                               \\
+        $x[k-1]$                        & $\laplace$    & $\cbl{z^{-1}} \, X(z)$            \\
+        $x[k-m]$                        & $\laplace$    & $\cbl{z^{-m}} \, X(z)$            \\
+        $a\,x[k] + b\,y[k]$             & $\laplace$    & $a\,X(z) + b\,Y(z)$               \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+\paragraph{Vorgehen Blockdiagramm $\to$ SFD}
+\begin{enumerate}
+    \item Differenzengleichung aufstellen ($x[k-1]$, $x[k-2]$, \ldots)
+    \item $x[k-m] \to \cbl{z^{-m}}\,X(z)$
+    \item SFD: Eingang = \textbf{Quelle} (keine einmündenden Zweige), Ausgang jedes Summierers = \textbf{eigener Knoten}
+\end{enumerate}
+{\small \textrightarrow\ $H(z)$ vereinfachen: Zähler und Nenner $\cdot\, z^n$ ($n$ = max.\ Potenz von $z^{-1}$)}
 
 
 \subsection{Begriffe: Harmonische und Oberwellen}

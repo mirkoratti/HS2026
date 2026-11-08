@@ -35,6 +35,49 @@ Closed-Loop Control (Regelung) statt Open-Loop Control (Steuerung)
 \end{itemize}
 
 
+\subsection{Bleibende Regelabweichung}
+
+\textbf{Regel:} $e_\infty = 0$ (bei Sprung) nur, wenn zwischen $e$ und dem Eingriffspunkt des Signals ein \textbf{Integrator} liegt. \\
+{\small \textrightarrow\ bei $r$: irgendwo im Kreis \quad \textrightarrow\ bei $z$: \textbf{vor} $z$, also im Regler}
+
+\vspace{0.15cm}
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\columnwidth}{@{}llXX@{}}
+	\toprule
+	\textbf{Regler} & \textbf{Strecke} & \textbf{Sprung $r$} ($z=0$) & \textbf{Störung $z$} (Eingang) \\
+	\midrule
+	P (PD) & P / $\text{PT}_1$ ($K_S$) & $\dfrac{r}{1+K_R K_S} \neq 0$ & $\dfrac{K_S\,z}{1+K_R K_S} \neq 0$ \\
+	P (PD) & I (Füllproz.) & $0$ & $\dfrac{Q_a}{K_P K_R} \neq 0$ \\
+	PI / I & P / $\text{PT}_1$ & $0$ & $0$ \\
+	PI     & I & $0$ & $0$ \\
+	\bottomrule
+\end{tabularx}
+\endgroup
+
+{\scriptsize Formeln P/$\text{PT}_1$: eigene Herleitung (Regime: $\dot y = 0$ einsetzen).}
+
+\vspace{0.15cm}
+\begin{minipage}[c]{0.5\columnwidth}
+	\input{tikz/bleibende_abweichung.tex}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.47\columnwidth}
+	\small
+	\textbf{Füllprozess, Ventil offen} (P04 A3) \\
+	Regime: $q_e = q_a \Rightarrow u_\infty = \frac{Q_a}{K_P}$ \\
+	P-Regler: $u = K_R\,e \Rightarrow$ \\
+	$\boxed{e_\infty = \frac{Q_a}{K_P K_R}}$ \\[2pt]
+	{\small \textrightarrow\ bei $y = r$: Pumpe aus, Ventil leert weiter}
+\end{minipage}
+
+\vspace{0.1cm}
+{\small \textrightarrow\ $K_R \uparrow$: $e_\infty$ kleiner, aber nie $0$ (Grenze: Sättigung $\pm 10\,\volt$, Stabilität) \\
+\textrightarrow\ Integrator in der Strecke hilft nur für $r$, nicht für $z$ davor \\
+\textrightarrow\ $e_\infty = 0$ auch bei $z$: I-Anteil im Regler (PI)}
+
+
 
 \section{Physik Formeln}
 

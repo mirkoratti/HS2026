@@ -1,345 +1,152 @@
-\section{Digital-Analog-Wandler (DAC)}
+% Kap. 4 -- Neuaufbau 2026-11-06, Stil "luftig" (Backup: ../elektronik-1_backup_2026-11-05)
+\section{Digital-Analog-Wandler (DAC)}\label{sec:dac}
 
-\begin{minipage}[c]{0.42\columnwidth}
-    \begin{tabular}{ll}
-        $n$ & Anzahl Bits               \\
-        $D$ & Digitaler Wert $D < 2^n$  \\
-        $q$ & Quantisierungsschritt
-  \end{tabular}
+\subsection{Grundbegriffe}\label{sec:dac-grund}
+
+$$ \boxed{ q = 1\,{\rm LSB} = \frac{V_{\rm refp}-V_{\rm refn}}{2^n} } \qquad
+   \boxed{ V_{\rm out} = V_{\rm refn} + D\cdot q } \qquad D = 0\dots 2^n-1 $$
+Höchster Wert: \; $V_{\rm out,max} = V_{\rm refp} - q$ \; (ein LSB unter der Referenz)
+
+\vspace{2pt}
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+	\toprule
+	\textbf{Prinzip}             & \textbf{Elemente}             & \textbf{Eigenschaft} \\ \midrule
+	Parallel (String)            & $2^n$ Widerstände und Schalter & garantiert monoton \\
+	Wäge (gewichtet, R-2R, $C$)  & $n$ Elemente                  & nicht garantiert monoton \\
+	Zähl (PWM, Sigma-Delta)      & 1 Schalter + $RC$             & sehr einfach, aber langsam \\ \bottomrule
+\end{tabularx}}
+\textrightarrow\ Parallel- und Wägeverfahren werden oft kombiniert.
+
+\subsection{Parallelverfahren: String-DAC}\label{sec:dac-string}
+
+\begin{minipage}[c]{0.14\columnwidth}
+	\includegraphics[width=\columnwidth]{images/string_DAC.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.54\columnwidth}
-    $$ \boxed{ q = \frac{V_{\rm refp} - V_{\rm refn}}{2^n} } $$
-    $$ \boxed{ V_{\rm out} =  \frac{D}{2^n} \, (V_{\rm refp} - V_{\rm refn}) + V_{\rm refn} } $$
-\end{minipage}
-
-\vspace{0.2cm}
-
-\textbf{Fehler mit Lastwiderstand $R_L$} (DAC = Thévenin-Quelle mit $V_{\rm id}$ und $R_{\rm th}$):
-$$ \boxed{ V_{\rm real} = V_{\rm id} \cdot \frac{R_L}{R_L + R_{\rm th}} } \qquad \boxed{ F = \frac{V_{\rm real} - V_{\rm id}}{V_{\rm id}} = - \frac{R_{\rm th}}{R_L + R_{\rm th}} \approx - \frac{R_{\rm th}}{R_L} } $$
-$R_{\rm th}$: Referenzen auf 0 V \textrightarrow\ alle Leitwerte parallel, z.B. Wägeverfahren: $R_{\rm th} = \frac{1}{2^n \cdot G_0}$.
-
-
-\subsection{Parallelverfahren}
-
-\subsubsection{Voltage Scaling - String DAC (3 Bit)}
-
-
-\begin{minipage}[c]{0.15\columnwidth}
-    \includegraphics[height=3cm]{images/string_DAC.png}	% naja...
+\begin{minipage}[c]{0.3\columnwidth}
+	\includegraphics[width=\columnwidth]{images/string_DAC_ersatzschaltung.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.8\columnwidth}
-    Jeweils nur \textbf{ein Schalter} geschlossen
-
-    \vspace{0.1cm}
-
-    \begin{minipage}[c]{0.48\columnwidth}
-        \includegraphics[width=0.95\columnwidth]{images/string_DAC_ersatzschaltung.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[c]{0.48\columnwidth}
-        $R_1$: 1R \ldots 8R                                 \\
-        $R_2$: 0R \ldots 7R                                 \\
-        $V_{\rm out_{min}} = V_{\rm refn}$                  \\
-        $V_{\rm out_{max}} = V_{\rm refp} - 1 \text{ LSB}$ 
-    \end{minipage}
-
-    \vspace{0.1cm}
-
-    \begin{itemize}
-        \item[+] Garantiert Stetigkeit
-        \item \cbl{$2^n$ = Anzahl \textbf{Widerstände}} = Anzahl Schalter \textrightarrow\ $n$-to-$2^n$ Decoder
-    \end{itemize}
+\begin{minipage}[c]{0.5\columnwidth}
+	Genau \textbf{ein} Schalter geschlossen \\[3pt]
+	oben: $(2^n - D)\,R$ \\[2pt]
+	unten: $D\cdot R$ \\[3pt]
+	$n$-to-$2^n$-Decoder nötig
 \end{minipage}
 
+\vspace{4pt}
+{\renewcommand{\arraystretch}{1.7}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+	\toprule
+	\textbf{Situation}             & \textbf{Formel} \\ \midrule
+	Innenwiderstand am Abgriff $D$ & $R_{\rm th} = \dfrac{D\,(2^n-D)}{2^n}\,R$ \quad (Maximum bei halbem Code) \\
+	Last $R_L$                     & $V_{\rm real} = V_{\rm id}\,\dfrac{R_L}{R_L + R_{\rm th}}$ \\
+	Buffer mit Offset              & $V_{\rm os} < \dfrac{q}{2} \;\Rightarrow\; V_{\rm refp}-V_{\rm refn} > 2^{n+1}\,V_{\rm os}$ \\ \bottomrule
+\end{tabularx}}
 
-\subsubsection{Voltage Scaling - String DAC (3 Bit)}
+\textbf{Varianten}: Strom-DAC parallel ($I_{\rm out} = D\cdot I$, Ströme nach $I_{\rm out}$ oder $\overline{I_{\rm out}}$); \;
+ohne Decoder mit zusätzlichen Schaltern (1-Bit-DACs in Serie).
 
-\begin{minipage}[c]{0.22\columnwidth}
-    \includegraphics[width=\columnwidth]{images/string_DAC_advanced.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.76\columnwidth}
-    Benötigt keinen Decoder aber zusätzliche Schalter
+\warn{\textit{Errore dovuto al carico: zero a $D=0$, il più grande a metà scala.}}
 
-    \vspace{0.2cm}
+\subsection{Wägeverfahren}\label{sec:dac-waege}
 
-    3-Bit DAC besteht aus: 
+{\renewcommand{\arraystretch}{1.75}
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+	\toprule
+	\textbf{Variante}        & \textbf{$V_{\rm out}$}                    & \textbf{Merkmal} \\ \midrule
+	Gewichtete $R$, Teiler   & $V_{\rm refn} + D\cdot q$
+	                         & Leitwerte $2^i G_0$ addieren; \; $R_{\rm th} = \dfrac{1}{2^n G_0}$ \\
+	Gewichtete $R$ + OpAmp   & $V_{\rm ref0} - (V_{\rm ref1}-V_{\rm ref0})\,R_{fb}\displaystyle\sum_i \frac{B_i}{R_i}$
+	                         & $q = \dfrac{R_{fb}}{R_{\rm LSB}}\,|\Delta V_{\rm ref}|$, \; belastbar \\
+	R-2R + OpAmp             & $V_{\rm refn} - (V_{\rm refp}-V_{\rm refn})\,\dfrac{D}{2^n}$
+	                         & nur $R$ und $2R$, jeder Knoten halbiert \\
+	Kapazitiv mit $C_{fb}$   & $V_{\rm ref0} - (V_{\rm ref1}-V_{\rm ref0})\,\dfrac{C_{\rm tot}}{C_{fb}}$
+	                         & PH0: Reset, PH1: gültig; S\&H nötig \\
+	Multiplizierend          & wie R-2R, $V_{\rm ref}$ = Eingangssignal
+	                         & auch AC und negativ: 2 Quadranten \\ \bottomrule
+\end{tabularx}}
 
-    \vspace{0.1cm}
-
-    \begin{itemize}
-        \item \cvt{4 mal 1-Bit DAC in Serie} 
-        \item \crd{2 mal 2-Bit DAC in Serie}
-    \end{itemize}
-
-    \vspace{0.1cm}
-
-    \textrightarrow\ Mit 2 mal 3-Bit DAC und Umschalter wird 4-Bit DAC gebaut
-\end{minipage}
-
-
-\subsubsection{Strom-DAC nach Parallelverfahren}
-
-\begin{minipage}[c]{0.48\columnwidth}
-    \includegraphics[width=\columnwidth]{images/strom_DAC_widerstaende.png} 
-    $$ \boxed{ I_{\rm out} = D \frac{V_{\rm ref}}{R} } $$
+\vspace{3pt}
+\begin{minipage}[c]{0.45\columnwidth}
+	\includegraphics[width=\columnwidth]{images/R2R_netzwerk.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    \includegraphics[width=\columnwidth]{images/strom_DAC_stromquellen.png}
-    $$ \boxed{ I_{\rm out} = D \cdot I } $$
+\begin{minipage}[c]{0.5\columnwidth}
+	\includegraphics[width=\columnwidth]{images/kapazitiver_DAC_ausgangsbuffer.png}
 \end{minipage}
 
-\vspace{0.2cm}
+\begin{rezept}{Rezept: R-2R ohne Ersatzwiderstand}
+	\begin{steps}
+		\item Von rechts schauen: jeder Knoten sieht $R_{\rm th} = R$
+		\item Das MSB trägt $\frac{\Delta V}{2}$ bei, das nächste Bit $\frac{\Delta V}{4}$, dann $\frac{\Delta V}{8}$ \dots
+		\item Superposition: Beiträge der geschalteten Bits addieren (beim OpAmp mit Vorzeichen $-$)
+	\end{steps}
+\end{rezept}
 
-Um eine Ausgangsspannung $V_{\rm out}$ zu erhalten, wird ein OPV nachgeschaltet gemäss Kapitel \ref{R2R}
+\begin{warnbox}
+	\small
+	\warn{\textit{R-2R e capacitivo con OpAmp invertono: segno meno!}}
+	\warn{\textit{$R_{\rm LSB}$ è la R \textbf{più grande} (passa la corrente più piccola).}}
+	\warn{\textit{Capacitivo: $C_{\rm tot}$ = somma dei C collegati a $V_{\rm ref1}$ (carica conservata, vedi Anhang).}}
+\end{warnbox}
 
+\subsection{Fehler und Toleranzen}\label{sec:dac-fehler}
 
-\subsection{Wägeverfahren}
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+	\toprule
+	\textbf{Fehler} & \textbf{Bedeutung} \\ \midrule
+	Offset          & ganze Kennlinie verschoben \\
+	Gain            & nach Offsetabgleich: Fehler beim maximalen Code \\
+	INL             & grösste Abweichung Ist--Soll (nach Offset- und Gainabgleich) \\
+	DNL             & Abweichung eines Sprungs von 1 LSB; \; ${\rm DNL} < -1$ \textrightarrow\ nicht monoton \\
+	Settling Time   & Zeit, bis $V_{\rm out}$ im Band $\pm\frac12 q$ bleibt \\ \bottomrule
+\end{tabularx}}
 
-\subsubsection{Wägeverfahren -- resistiv}
+\textbf{Worst-Case} (Rezept \ref{sec:worstcase}), String-DAC als Teiler:
+$$ V_{\min} = \Delta V\,\frac{R_{\rm unten}(1-t)}{R_{\rm unten}(1-t) + R_{\rm oben}(1+t)} \qquad V_{\max}\text{: Vorzeichen umgekehrt} $$
+\textbf{Kritischster Codewechsel} am MSB ($2^{n-1}-1 \to 2^{n-1}$): alle Bits schalten gleichzeitig \textrightarrow\ Glitch, Monotonie gefährdet.
+
+\warn{\textit{Offset dell'OpAmp nel DAC con OpAmp: offset \textbf{e} errore di gain, perché il $G_N$ cambia con il codice.}}
+
+\subsection{Zählverfahren: PWM-DAC}\label{sec:pwm}
 
 \begin{minipage}[c]{0.4\columnwidth}
-    \includegraphics[width=\columnwidth]{images/waegeverfahren.png}
+	\includegraphics[width=\columnwidth]{images/PWM_DAC}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.56\columnwidth}
-    \begin{itemize}
-        \item[+] $N$ Widerstände, $n$ Schalter (Bits)
-        \item[-] Nicht garantiert stetig
-        \item[-] Grosser Wertebereich der Widerstände nötig 
-    \end{itemize}
-
-    $$ \textbf{Leitwerte!} \qquad \bm{G_0 = \frac{1}{8R} } $$
+	\input{circuits/pwm_ansteuerung.tex}
 \end{minipage}
 
-Bit $B_i$ schaltet Leitwert $2^i \cdot G_0$ nach $V_{\rm refp}$ (sonst $V_{\rm refn}$), Gesamtleitwert $2^n \cdot G_0$ \textrightarrow\ $G_0$ kürzt sich:
-$$ \boxed{ V_{\rm out} = \frac{D}{2^n} (V_{\rm refp}- V_{\rm refn}) + V_{\rm refn} = D \cdot q + V_{\rm refn} } $$
+\vspace{2pt}
+Zähler bis $N = 2^{\rm Bits}$, Code $n$, Takt $T_{\rm clk} = 1/f_{\rm clk}$; \; $RC$ glättet zu «DC».
+$$ T = N\,T_{\rm clk} \qquad t_{\rm on} = n\,T_{\rm clk} \qquad
+   \boxed{ \overline{V_{\rm out}} = V_{\rm refn} + (V_{\rm refp}-V_{\rm refn})\,\frac{n}{N} } $$
 
+{\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+	\toprule
+	\textbf{Grösse}            & \textbf{Formel} \\ \midrule
+	Rippel ($RC \gg T$)        & $V_{\rm rip} \approx \Delta V\,\dfrac{t_{\rm on}\,t_{\rm off}}{RC\;T}$, \;
+	                             Maximum bei $n = \frac N2$: \; $\Delta V\,\dfrac{T}{4RC}$ \\
+	Rippel exakt ($n=\frac N2$) & $V_{\rm rip} = \Delta V\,\dfrac{1-\e^{-T/2RC}}{1+\e^{-T/2RC}}$ \\
+	Einschwingen               & $t = RC\,\ln\dfrac{|V_{\rm start}-V_{\rm end}|}{\text{Fehlerband}}$; \;
+	                             voller Sprung auf $\pm\frac12$ LSB: \; $t = RC\,\ln 2^{\,{\rm Bits}+1}$ \\ \bottomrule
+\end{tabularx}}
 
-\subsubsection{Kapazitiver DAC ohne Ausgangsbuffer (4 Bit)}
+\textbf{Rippel kleiner}: grösseres $RC$, Filter höherer Ordnung, kürzere Periode, oder \textbf{Sigma-Delta}:
+Akkumulator addiert $n$ bei jedem Takt, der Übertrag steuert den Schalter
+\textrightarrow\ gleicher Mittelwert, die «1» verteilt \textrightarrow\ weniger Rippel, mehr Schaltvorgänge.
 
-\begin{center}
-    \includegraphics[width=0.85\columnwidth]{images/kapazitiver_DAC_2.png}
-\end{center}
+\warn{\textit{«Kleiner als 1 LSB» e «entro ½ LSB» sono bande diverse: guarda cosa chiede.}}
 
-\textbf{Ladungserhaltung:} Ladung der Platten am Knoten $V_{\rm out}$ bleibt konstant, \mbox{$Q = C \cdot \Delta V$} \textrightarrow\ Teiler Kap.~\ref{cap-teiler} \\
-Wenn Kapazitäten entladen sind, bevor geschaltet wird: 
-$$ \boxed{ V_{\rm out} = \frac{C_1}{C_1 + C_2} (V_{\rm refp} - V_{\rm refn}) + V_{\rm refn}  \quad  \text{mit } C_1 + C_2 = 2^n \cdot C } $$
+\subsection{Kombinierte DACs}
 
-\textbf{Problem:} Lastkapazitäten an $V_{\rm out}$ \textrightarrow\ Schaltung so schlecht brauchbar  
-
-
-\subsubsection{Kapazitiver DAC mit Ausgangsbuffer}
-
-\begin{minipage}[c]{0.44\columnwidth}
-    \includegraphics[width=\columnwidth]{images/kapazitiver_DAC_ausgangsbuffer.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.55\columnwidth}
-    \raggedright
-    \cbl{Bit $B_i = 1$: Kondensator an $V_{\rm ref1}$, sonst an $V_{\rm ref0}$} \\
-    2 Phasen: PH0 und PH1
-
-    PH0: $V_{\rm out} = V_{\rm ref0}$ (Ladungen resettate)\\
-    PH1: Ausgang gültig (nach Einschwingen)
-
-    $$ \boxed{ V_{\rm out} = -(V_{\rm ref1} - V_{\rm ref0}) \cdot \frac{\cbl{C_{\rm tot}}}{C_{fb}} + V_{\rm ref0} } $$
-\end{minipage}\smallbreak
-
-\cbl{$C_{\rm tot}$} = Summe der an $V_{\rm ref1}$ geschalteten Kondensatoren $= \sum_i B_i\, 2^i C$ \\ \textbf{Ladungserhaltung} am $-$-Knoten: Kap.~\ref{cap-teiler}
-
-\vspace{0.2cm}
-
-\textbf{Nachteil:} Sample-Hold nötig für Ausgangsspannung in Phase PH0 (wenn Schalterstellung gewechselt wird)
-
-
-\subsubsection{Wägeverfahren mit Widerständen und Ausgangsverstärker}
-
-\begin{minipage}[c]{0.45\columnwidth}
-    \includegraphics[width=\columnwidth]{images/DAC_ausgangsverstaerker.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.53\columnwidth}
-    $$ \boxed{ I_{\rm dac_{max}} = \frac{V_{\rm refp} - V_{\rm refn}}{R_{\rm LSB}} (2^n -1) } $$
-    $$ \boxed{ I_{\rm dac} = \frac{V_{\rm refp} - V_{\rm refn}}{R_{\rm LSB}} \, D } $$
-    $$ \boxed{ V_{\rm out} = V_{\rm refn} - R_{fb} \cdot I_{\rm dac} } $$
-
-    \vspace{0.2cm}
-    \begin{itemize}
-        \item[+] differentiell ($I_{\rm dac_{inv}}$)
-        \item[-] Ausgang darf belastet werden
-    \end{itemize}
-\end{minipage}
-
-\textbf{Binär gewichtet:} $R_i = R_{\rm LSB}/2^i$ (Bit $B_i$), $R_{\rm LSB}$ = \textbf{grösster} $R_i$ \textrightarrow\ $\boxed{ |q| = \frac{R_{fb}}{R_{\rm LSB}} \cdot |\Delta V_{\rm ref}| }$ \\
-
-\subsubsection{DAC mit R2R-Netzwerk}
-\label{R2R}
-
-\begin{minipage}[c]{0.43\columnwidth}
-    \includegraphics[width=\columnwidth]{images/R2R_netzwerk}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.56\columnwidth}
-    Für Ersatzwiderstand \textbf{von rechts} her 'schauen'
-
-    {(\footnotesize R si combinano sempre creando Part. U con
-    \tikz[baseline=-0.5ex, line width=0.2pt]{
-        \draw (0,0) -- (0.2,0) node[draw, minimum width=0.4cm, minimum height=0.2cm, inner sep=0pt, anchor=west] (a) {\tiny R} (a.east) -- ++(0.2,0)
-        node[draw, minimum width=0.4cm, minimum height=0.2cm, inner sep=0pt, anchor=west] (b) {\tiny R} (b.east) -- ++(0.2,0);
-    })}
-
-    \vspace{0.2cm}
-    
-    \begin{itemize}
-        \item[+] Nur 2 Widerstandswerte: R, 2R
-        \item[+] Gute Alternative zu gewichteten R's bzw. C's
-        \item[+] Stromgewichtung über Spannungsteiler von $V_{\rm refp}$ zu $V_{\rm refn}$
-    \end{itemize}
-\end{minipage}
-
-\vspace{0.2cm}
-Variiert $V_{\rm refp}$, dann variiert auch $V_{\rm out}$
-
-\textbf{Jeder geschlossene Schalter trägt gewichtet zur Ausgangsspannung bei! \\
-\crd{Achtung: Invertierung!}}
-
-$$ \boxed{V_{\rm out} = V_{\rm refn} - (V_{\rm refp} - V_{\rm refn}) \cdot \frac{D}{2^n}}  $$\vspace{-0.5em}
-
-{\footnotesize $n$ = Anzahl Bits, \quad $D = \sum_i B_i\, 2^i$ = 
-Dezimalwert des Digitalworts (z.B.\ $1010_2 = 8 + 2 = 10$)\\
-\textbf{Mit Buffer statt Opamp (nicht invertierend):} $V_{\rm out} = V_{\rm refn} + (V_{\rm refp} - V_{\rm refn}) \frac{D}{2^n}$ \\
-Herleitung: Thévenin Knoten für Knoten, $R_{\rm th} = R$ konstant, $V_{\rm th}$ halbiert sich pro Knoten (Teiler \textbf{nicht} multiplizieren!)}\smallbreak
-
-
-% \cbl{\myul{\textbf{Beispiel:}}
-%
-% \renewcommand{\arraystretch}{1.8}
-% \begin{tabular}{lll}
-%     $B_3 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{2}$    & &
-%     $B_2 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{4}$    \\
-%     $B_1 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{8}$    & &
-%     $B_0 \text{ geschlossen: } V_{\rm out} = V_{\rm refn} - \frac{\Delta V_{\rm ref}}{16}$
-% \end{tabular}
-% }
-% \renewcommand{\arraystretch}{1}
-
-\textbf{Multiplizierender DAC} (R2R + OPV, z.B.\ DAC8811)
-
-$V_{\rm ref}$ ist ein \textbf{Eingangssignal} (auch AC) \textrightarrow\ Ausgang = Produkt aus analog und digital:
-
-$R_x$ = Kombination der ``eingeschalteten'' Beine. $V_{\rm ref}$ darf negativ sein \textrightarrow\ 2 Quadranten. Schalter an virtueller Masse \textrightarrow\ kaum Verzerrung.
-
-\subsection{Zählverfahren (PWM)}
-
-
-\begin{minipage}[c]{0.45\columnwidth}
-    \includegraphics[width=\columnwidth]{images/PWM_DAC}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.52\columnwidth}
-    \raggedright
-    $S$ schaltet zwischen $V_{\rm refp}$ und $V_{\rm refn}$ \\
-
-    \vspace{0.2cm}
-
-    \textbf{RC glättet und erzeugt 'DC'}
-\end{minipage}
-
-\vspace{0.2cm}
-
-\begin{minipage}[c]{0.48\columnwidth}
-    \begin{itemize}
-        \item[+] Sehr einfache Schaltung
-        \item[+] Ermöglicht hohe Auflösung 
-        \item[+] Funktioniert onchip digital (z.B. FPGA, $\mu$C) \textrightarrow\ analoge Schaltung extern
-    \end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    \raggedright
-    \begin{itemize}
-        \item[-] Sehr langsam
-        \item[-] Benötigt grosses $\tau$ für kleine Spannungsrippel (oder Tiefpass höherer Ordnung)
-    \end{itemize}
-\end{minipage}
-
-
-\begin{minipage}{0.4\columnwidth}
-    $$ \boxed{ \overline{V_{\rm out}} = V_{\rm refn} + (V_{\rm refp} - V_{\rm refn}) \cdot \frac{n}{N} }$$
-\end{minipage}
-\hfill
-\begin{minipage}{0.58\columnwidth}
-    \input{circuits/pwm_ansteuerung.tex}
-\end{minipage}
-
-
-\subsection{Kaskadierte Wandler und Mischformen}
-\subsubsection{Kaskadierte DACs}
-
-\begin{minipage}[c]{0.6\columnwidth}
-    \includegraphics[width=0.75\columnwidth]{images/kaskadierte_DAC_1.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.38\columnwidth}
-    \includegraphics[width=0.7\columnwidth]{images/kaskadierte_DAC_2.png}
-\end{minipage}
-
-\vspace{0.2cm}
-
-\begin{itemize}
-    \item MS-DAC: 2 Ausgangsspannungen (über / unter gewünschtem $V_{\rm out}$)
-    \item LS-DAC: folglich kleinere Eingangsspannungsdifferenz \\
-        \textrightarrow\ Kleinerer Quantisierungsschritt $q$ \\
-        \textrightarrow\ Höhere absolute Spannungsauflösung
+\begin{itemize}[nosep,leftmargin=*]
+	\item \textbf{Kaskadiert}: MS-DAC liefert 2 Spannungen (über und unter dem Ziel), LS-DAC teilt dieses Intervall \textrightarrow\ kleineres $q$
+	\item \textbf{Segmentiert}: hohe Bits als $2^k-1$ gleiche Elemente, Rest binär \textrightarrow\ kleiner Glitch am MSB
+	\item \textbf{Schnelle DACs}: Stromausgang + OpAmp, denn Ströme schalten schneller als Spannungen
 \end{itemize}
-
-
-\subsubsection{Segmentierter String DAC}
-
-\begin{minipage}[c]{0.3\columnwidth}
-    \includegraphics[width=\columnwidth]{images/segmented_string.png} 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.68\columnwidth}
-    \begin{itemize}
-        \item 2 'Strings' mit tiefer Auflösung ergeben doppelte\\
-            Auflösung \textrightarrow\ $2 \cdot 8$R \textrightarrow\ $2 \cdot 3$ Bit
-        
-        \vspace{0.2cm}
-
-        \item[+] Viel weniger Elemente
-        \item[-] Benötigt 2 Buffer (damit keine Belastung des linkes 'Strings')
-        \item[-] Buffer müsste offset-frei sein
-    \end{itemize}
-
-    \vspace{0.2cm}
-
-    Alternative: Viel grössere R in rechtem 'String' \\
-    \textrightarrow\ kleine Belastung links
-\end{minipage}
-
-
-\subsection{Zusammenfassung DACs}
-
-    \begin{tabular}{ll}
-    Parllelverfahren    & ... garantiert monotone Wandler           \\
-    Wägeverfahren       & ... Anzahl Elemente nicht allzu hoch      \\
-    Zählverfahren       & ... Wenn Zeit untergrodnete Rolle spielt
-\end{tabular}
-
-\vspace{0.2cm}
-
-\textrightarrow\ \textbf{Oft werden Parallel- und Wägeverfahren kombiniert!}
-
-\vspace{0.1cm}
-
-Schnelle DACs haben oft einen Stromausgang und benötigen daher einen Ausgangsverstärker
-\textrightarrow\ Ströme können schneller geschaltet werden als Spannungen!
-
-\vspace{0.1cm}
-
-\textbf{Schlechtester Schaltfall:} Übergang am \textbf{MSB} (Major Carry, z.B.\ $0111_2 \to 1000_2$), alle Bits schalten gleichzeitig \textrightarrow\ Glitch, bei Gewichtsfehlern ggf.\ nicht monoton (DNL).

@@ -6,32 +6,17 @@ Fourier-Transformation mit \textbf{nicht-periodischen Signalen!}
 
 \subsection{Existenz des Fourier-Integrals}{131}
 
-Die Fourier-Transformation von $f(t)$ und die inverse Fourier-Transformation existieren, wenn:
+$F(\jimg \omega)$ und $f(t)$ existieren, wenn \textbf{mindestens eine} Bedingung erfüllt ist
+(jede ist \textbf{hinreichend}, aber \textbf{nicht notwendig}):
 
-\subsubsection{Bedingung 1}
-
-\vspace{-0.2cm}
-
-$$ \boxed{ \int\limits_{- \infty}^{\infty} | f(t) | \, \diff t < \infty  \quad \text{ \textrightarrow\ \textbf{$\bm{f(t)}$ ist absolut integrierbar} }} $$
-
-Diese Bedingung ist \textbf{hinreichend}, aber \textbf{nicht notwendig}!
-
-
-\subsubsection{Bedingung 2}
-
-$f(t)$ ist fouriertransformierbar, wenn:
-$$ \boxed{ \int\limits_{- \infty}^{\infty} | F(\jimg \omega) | \, \diff \omega < \infty } $$
-
-\textrightarrow\ \textbf{Die Fourier-Transformation $F(\jimg \omega)$ ist absolut integrierbar} 
-
-
-\subsubsection{Bedingung 3}
-
-$f(t)$ ist fouriertransformierbar, wenn:
-\vspace{0.2cm}
-
-\textbf{$\bm{f(t)}$ eine Linearkombination absolut integrierbarer Funktionen $\bm{f_i(t)}$ und inverser Fourier-Transformationen 
-von $\bm{F_i(\jimg \omega)}$, die selber absolut integrierbar sind, ist.} 
+$$ \boxed{ \begin{array}{c l l}
+	\textbf{1} & \displaystyle\int\limits_{- \infty}^{\infty} | f(t) | \, \diff t < \infty
+		& \text{\textrightarrow\ $f(t)$ absolut integrierbar} \\[0.5cm]
+	\textbf{2} & \displaystyle\int\limits_{- \infty}^{\infty} | F(\jimg \omega) | \, \diff \omega < \infty
+		& \text{\textrightarrow\ $F(\jimg \omega)$ absolut integrierbar} \\[0.5cm]
+	\textbf{3} & f(t) = \displaystyle\sum_i c_i \, f_i(t)
+		& \text{\textrightarrow\ Linearkombination von $f_i$, die \textbf{1} oder \textbf{2} erfüllen}
+\end{array} } $$
 
 
 \subsection{Berechnung der Fouriertransformation}{121}
