@@ -73,12 +73,21 @@ Statt mit Sinus- und Cosinus-funktionen kann die Fourier-Reihe auch nach Betrag 
 
 $$  \boxed{ f(t) \rightsquigarrow \frac{a_0}{2} + \sum\limits_{k=1}^\infty \Big( d_k\, \cos \big(\frac{2 \, \pi \, k}{T} \, t + \phi_k \big) \Big) } $$
 
-\begin{minipage}[c]{0.48\columnwidth}
+\begin{minipage}[c]{0.62\columnwidth}
     $$ \text{Betrag:} \quad d_k = \sqrt{a_k^2 + b_k^2} $$
+    $$ \text{Phase:} \quad \phi_k = -\arctan \big( \tfrac{b_k}{a_k} \big) + n \, \pi $$
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    $$ \text{Phase:} \quad \phi_k = -\arctan \big( \frac{b_k}{a_k} \big) + n \, \pi $$ 
+\begin{minipage}[c]{0.3\columnwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \draw (0,0) -- (2.4,0) -- (2.4,1.3) -- cycle;
+        \node[below]      at (1.2,0)    {$a_k$};
+        \node[right]      at (2.4,0.65) {$b_k$};
+        \node[above left] at (1.2,0.65) {$d_k$};
+        \draw (0.8,0) arc[start angle=0, end angle=28, radius=0.8];
+        \node at (1.05,0.18) {\scriptsize $\phi_k$};
+    \end{tikzpicture}
 \end{minipage}
 
 
@@ -169,6 +178,47 @@ nur Glieder mit \textbf{ungeraden Argumenten}.
         rechts  & $a_{2k} = 0$      & $b_{2k} = 0$      & $a_0 = 0$
     \end{tabular}
 \end{center}
+
+
+\subsubsection{Rechtecksignal mit Tastverhältnis $D = t_1 / T$}
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.9]
+        \draw[->] (-0.3,0) -- (6.6,0) node[right] {$t$};
+        \draw[->] (0,-0.2) -- (0,1.8) node[above] {$x(t)$};
+        \draw[blue, very thick] (0,0) -- (0,1.2) -- (1,1.2) -- (1,0) -- (3,0) -- (3,1.2) -- (4,1.2) -- (4,0) -- (6,0);
+        \node[left] at (0,1.2) {$A$};
+        \draw[<->] (0,1.5) -- (1,1.5) node[midway, above] {$t_1$};
+        \draw[<->] (0,-0.5) -- (3,-0.5) node[midway, below] {$T$};
+    \end{tikzpicture}
+\end{center}\vspace{-1em}%
+
+$$ \frac{a_0}{2} = A \, D \qquad a_k = \frac{A}{\pi \, k} \, \sin(2 \, \pi \, k \, D) \qquad b_k = \frac{A}{\pi \, k} \, \big( 1 - \cos(2 \, \pi \, k \, D) \big) $$
+
+$$ \boxed{ d_k = \frac{2 \, A}{\pi \, k} \, \big| \sin(\pi \, k \, D) \big| } $$
+
+\textbf{Gerader Impuls} (symmetrisch um $t = 0$): $b_k = 0$ und $a_k = \frac{2 \, A}{\pi \, k} \sin(\pi \, k \, D)$
+
+\vspace{0.2cm}
+
+\textbf{Fehlende Harmonische:} $d_k = 0 \iff k \, D \in \mathbb{Z}$, also fällt jede $\frac{1}{D}$-te Harmonische weg.
+
+{\small
+\textrightarrow\ $D = \frac{1}{2}$: alle geraden $k$ \qquad $D = \frac{1}{3}$: $k = 3, 6, 9, \ldots$ \qquad $D = \frac{1}{4}$: $k = 4, 8, 12, \ldots$
+}
+
+\vspace{0.2cm}
+
+\textbf{Komplement} $D \to 1 - D$, also $x'(t) = A - x(t)$:
+
+{\small
+\textrightarrow\ Nullstellen und $d_k$ bleiben gleich: $\sin(\pi k (1-D)) = \pm \sin(\pi k D)$ \\
+\textrightarrow\ $a_k' = - a_k$ (Vorzeichen kehrt um) und $\frac{a_0'}{2} = A - \frac{a_0}{2}$
+}
+
+\vspace{0.2cm}
+
+\input{tikz/tastverhaeltnis.tex}
 
 
 \subsection{Fourier-Koeffizienten und Leistung}{119}

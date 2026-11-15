@@ -197,6 +197,38 @@ Rücktransf.     & $f(t) = \sigma(t)\left(-\frac{3}{2}\e^{-t} - \frac{1}{2}\,t\,
 \end{tabular}
 
 
+\subsubsection{Häufige Umformungen bei $F(s)$}
+
+\vspace{0.6em}
+\textbf{Zählergrad = Nennergrad:} Zähler so umschreiben, dass der Nenner darin steckt (``Zähler = Nenner $-$ Rest'').
+
+\vspace{0.8em}
+\renewcommand{\arraystretch}{2.6}
+\begin{tabular}{lll}
+    $\dfrac{s}{s+a}$ & $= 1 - \dfrac{a}{s+a}$ & \textrightarrow\ $\delta(t) - a\,\e^{-at}$ \\
+    $\dfrac{s^2}{s^2+\omega^2}$ & $= 1 - \dfrac{\omega^2}{s^2+\omega^2}$ & \textrightarrow\ $\delta(t) - \omega\sin(\omega t)$ \\
+    $\dfrac{s^2}{s^2-a^2}$ & $= 1 + \dfrac{a^2}{s^2-a^2}$ & \textrightarrow\ $\delta(t) + a\sinh(at)$ \\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+\vspace{1.2em}
+\textbf{Direkte Zerlegungen (ohne Ansatz):}
+
+\vspace{0.8em}
+\renewcommand{\arraystretch}{2.6}
+\begin{tabular}{ll}
+    $\dfrac{1}{s(s+a)}$ & $= \dfrac{1}{a}\left(\dfrac{1}{s} - \dfrac{1}{s+a}\right)$ \\
+    $\dfrac{1}{s(s^2+\omega^2)}$ & $= \dfrac{1}{\omega^2}\left(\dfrac{1}{s} - \dfrac{s}{s^2+\omega^2}\right)$ \\
+    $\dfrac{1}{s^2+\omega^2}$ & \textrightarrow\ $\dfrac{1}{\omega}\sin(\omega t)$ \quad ($\omega$ im Zähler ergänzen) \\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+\vspace{1.2em}
+\example{Übung Kap. 6, A8}
+
+\vspace{0.4em}
+$\dfrac{s^2}{s^2+1} = \dfrac{s^2+1}{s^2+1} - \dfrac{1}{s^2+1} = 1 - \dfrac{1}{s^2+1}$
+
 % \subsubsection{Spezielle Ansätze PBZ}
 
 % \renewcommand{\arraystretch}{2}

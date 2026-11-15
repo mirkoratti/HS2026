@@ -1,0 +1,59 @@
+% Bessel-Funktionen J_0..J_7 und Spektrum beta=0 / beta=1 rad (Slide 19)
+\resizebox{\linewidth}{!}{\begin{tikzpicture}
+\begin{axis}[
+  name=bes, width=9.6cm, height=6cm,
+  xmin=0, xmax=12, ymin=-0.5, ymax=1.05,
+  axis lines=middle, axis line style={-latex},
+  xlabel={$\beta$}, ylabel={$J_n(\beta)$},
+  every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+  every axis y label/.style={at={(current axis.above origin)},anchor=south},
+  xtick={0,2,4,6,8,10}, ytick={-0.4,-0.2,0,0.2,0.4,0.6,0.8,1},
+  tick label style={font=\scriptsize}, label style={font=\small},
+  grid=both, grid style={line width=.1pt, draw=gray!25},
+  major grid style={line width=.2pt, draw=gray!35},
+  clip=true, every axis plot/.append style={thick, no markers},
+]
+\addplot[black]  table[x=b,y=J0]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[brown!80!orange]  table[x=b,y=J1]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[red]  table[x=b,y=J2]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[orange]  table[x=b,y=J3]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[yellow!85!black]  table[x=b,y=J4]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[green!55!black]  table[x=b,y=J5]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[blue]  table[x=b,y=J6]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\addplot[violet]  table[x=b,y=J7]{chapters/06_amplitudenmodulation/figures/bessel.dat};
+\node[font=\scriptsize\bfseries,black,anchor=west] at (axis cs:0.25,0.88) {$J_0$};
+\node[font=\scriptsize\bfseries,brown!80!orange] at (axis cs:1.35,0.66) {$J_1$};
+\node[font=\scriptsize\bfseries,red] at (axis cs:2.8,0.53) {$J_2$};
+\node[font=\scriptsize\bfseries,orange] at (axis cs:4.0,0.47) {$J_3$};
+\node[font=\scriptsize\bfseries,yellow!70!black] at (axis cs:5.2,0.42) {$J_4$};
+\node[font=\scriptsize\bfseries,green!55!black] at (axis cs:6.4,0.40) {$J_5$};
+\node[font=\scriptsize\bfseries,blue] at (axis cs:7.6,0.38) {$J_6$};
+\node[font=\scriptsize\bfseries,violet] at (axis cs:8.8,0.36) {$J_7$};
+\end{axis}
+\begin{scope}[xshift=12.4cm, yshift=0.3cm]
+\tikzset{sp/.style={-latex,thick,brown!70!black},lab/.style={font=\tiny,brown!70!black,inner sep=1pt}}
+% beta = 0
+\begin{scope}[yshift=3.5cm]
+  \draw[-latex] (-3,0)--(4.6,0) node[right,font=\scriptsize]{$f$};
+  \draw[-latex] (0,0)--(0,1.9) node[above,font=\scriptsize]{$|X_{\varphi M}|$};
+  \node[font=\scriptsize,anchor=north east] at (-0.15,1.85) {$\beta=0$};
+  \foreach \x in {-2,2}{\draw[sp] (\x,0)--(\x,1.5); \node[lab,above] at (\x,1.5) {$\pi$};}
+  \node[font=\tiny,below] at (-2,0) {$-f_c$}; \node[font=\tiny,below] at (2,0) {$f_c$};
+\end{scope}
+% beta = 1
+\begin{scope}
+  \draw[-latex] (-3,0)--(4.6,0) node[right,font=\scriptsize]{$f$};
+  \draw[-latex] (0,0)--(0,1.9) node[above,font=\scriptsize]{$|X_{\varphi M}|$};
+  \node[font=\scriptsize,anchor=north east] at (-0.15,1.85) {$\beta=1\,$rad};
+  \foreach \c in {-2,2}{
+    \draw[sp] (\c,0)--(\c,1.15);
+    \foreach \n/\h in {1/0.66,2/0.17,3/0.03}{
+      \draw[sp] (\c+\n*0.28,0)--(\c+\n*0.28,\h);
+      \draw[sp] (\c-\n*0.28,0)--(\c-\n*0.28,\h);}}
+  \node[lab,above] at (2,1.15) {$0.765\pi$};
+  \foreach \n/\h/\ly/\t in {1/0.66/1.0/{0.440\pi},2/0.17/0.72/{0.115\pi},3/0.03/0.44/{0.020\pi}}{
+    \draw[brown!70!black,very thin] (2+\n*0.28,\h)--(3.25,\ly); \node[lab,anchor=west] at (3.25,\ly) {$\t$};}
+  \node[font=\tiny,below] at (-2,0) {$-f_c$}; \node[font=\tiny,below] at (2,0) {$f_c$};
+\end{scope}
+\end{scope}
+\end{tikzpicture}}

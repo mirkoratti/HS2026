@@ -77,6 +77,9 @@ ohne Decoder mit zusätzlichen Schaltern (1-Bit-DACs in Serie).
 	\includegraphics[width=\columnwidth]{images/kapazitiver_DAC_ausgangsbuffer.png}
 \end{minipage}
 
+\vspace{3pt}
+\noindent\resizebox{0.85\columnwidth}{!}{\input{circuits/r2r_knoten.tex}}
+
 \begin{rezept}{Rezept: R-2R ohne Ersatzwiderstand}
 	\begin{steps}
 		\item Von rechts schauen: jeder Knoten sieht $R_{\rm th} = R$
@@ -139,8 +142,13 @@ $$ T = N\,T_{\rm clk} \qquad t_{\rm on} = n\,T_{\rm clk} \qquad
 
 \textbf{Rippel kleiner}: grösseres $RC$, Filter höherer Ordnung, kürzere Periode, oder \textbf{Sigma-Delta}:
 Akkumulator addiert $n$ bei jedem Takt, der Übertrag steuert den Schalter
-\textrightarrow\ gleicher Mittelwert, die «1» verteilt \textrightarrow\ weniger Rippel, mehr Schaltvorgänge.
+\textrightarrow\ gleicher Mittelwert, die «1» verteilt \textrightarrow\ weniger Rippel, mehr Schaltvorgänge. \\
+\textbf{Name}: $\Sigma$ = im Addierer akkumulieren, $\Delta$ = quantisierten Wert (Übertrag) abziehen.
 
+\vspace{3pt}
+\noindent\resizebox{\columnwidth}{!}{\input{circuits/pwm_vs_sigmadelta.tex}}
+
+\warn{\textit{Stesso valore medio ($n/N=3/8$), ma Sigma-Delta distribuisce gli 1: l'accumulatore somma $n$ a ogni clock e ogni volta che «trabocca» ($\ge N$) esce un 1 e si toglie $N$. L'RC vede impulsi più ravvicinati, quindi meno oscillazione.}}
 \warn{\textit{«Kleiner als 1 LSB» e «entro ½ LSB» sono bande diverse: guarda cosa chiede.}}
 
 \subsection{Kombinierte DACs}

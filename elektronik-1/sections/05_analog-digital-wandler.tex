@@ -15,7 +15,7 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 \begin{tabularx}{\columnwidth}{@{}l X l l l@{}}
 	\toprule
 	\textbf{Prinzip}           & \textbf{Takte}                     & \textbf{Auflösung} & \textbf{Rate} & \textbf{Leistung} \\ \midrule
-	Flash / Pipeline           & 1 (Pipeline: 1 Wert pro Takt)      & 8--14 Bit          & sehr hoch     & hoch \\
+	Flash / Pipeline           & 1 (Pipeline: 1/Takt)               & 8--14 Bit         & sehr hoch     & hoch \\
 	SAR / Iterativ             & $n$                                & 8--20 Bit          & mittel--hoch  & mittel \\
 	Integrierend / Sigma-Delta & $\gg 2^n$                          & 16--24 Bit         & niedrig       & niedrig \\ \bottomrule
 \end{tabularx}}
@@ -41,6 +41,9 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 \vspace{3pt}
 \textbf{Code} = Anzahl Schwellen unter $V_{\rm in}$ (bleibt bei $2^n-1$ stehen).
 
+{\centering\resizebox{0.62\columnwidth}{!}{\input{circuits/flash_thermo.tex}}\par}
+
+\warn{\textit{Come un termometro: i comparatori sotto $V_{\rm in}$ danno 1, quelli sopra 0; il codice è \textbf{quanti} 1 ci sono.}}
 \warn{\textit{«b[3:1] = 1» significa codice 1, non 111.}}
 
 \subsection{Pipeline und iterativer ADC: binäre Suche}\label{sec:pipeline}
@@ -59,12 +62,30 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 
 \vspace{4pt}
 {\renewcommand{\arraystretch}{1.8}
-\begin{tabularx}{\columnwidth}{@{}l l X >{\raggedright\arraybackslash}p{0.14\columnwidth}@{}}
+\begin{tabularx}{\columnwidth}{@{}l l l >{\raggedright\arraybackslash}X@{}}
 	\toprule
-	\textbf{Variante}     & \textbf{Vergleich}                                 & \textbf{Rest}                                                         & \textbf{Zeit} \\ \midrule
-	Pipeline 1 Bit/Stufe  & Schwelle $\dfrac{V_{\rm REF}}{2^k}$ (halbiert)      & $E_k = E_{k-1} - B_k\,\dfrac{V_{\rm REF}}{2^k}$                       & Latenz $n$, \newline 1 Wert/Takt \\
-	Iterativ              & Schwelle immer $\dfrac{V_{\rm REF}}{2}$             & $V_x \leftarrow 2\Big(V_x - B\,\dfrac{V_{\rm REF}}{2}\Big)$           & $n$ Takte \\ \bottomrule
+	\textbf{Variante} & \textbf{Schwelle} & \textbf{Rest} & \textbf{Zeit} \\ \midrule
+	Pipeline & $V_{\rm REF}/2^k$ & $E_k = E_{k-1} - B_k\,\dfrac{V_{\rm REF}}{2^k}$ & Latenz $n$, \newline 1 Wert/Takt \\
+	Iterativ & $V_{\rm REF}/2$ & $V_x \leftarrow 2\Big(V_x - B\,\dfrac{V_{\rm REF}}{2}\Big)$ & $n$ Takte \\ \bottomrule
 \end{tabularx}}
+
+\vspace{2pt}
+{\small $B_k$ = Bit der Stufe $k$ ($=1$, wenn $E_{k-1} > V_{\rm REF}/2^k$); $E_k$ = Rest nach Stufe $k$, Start $E_0 = V_{\rm in}$. Iterativ: $B$ = aktuelles Bit, $V_x$ = Rest, Start $V_x = V_{\rm in}$.}
+
+\vspace{3pt}
+\textbf{Ablauf, 4 Bit} ($V_{\rm REF}=1.6\,$V, $V_{\rm in}=1.35\,$V)
+\par\vspace{2pt}
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\columnwidth}{@{}C C C C C@{}}
+	\toprule
+	$k$ & Schwelle & $E_{k-1}$ & $B_k$ & $E_k$ \\ \midrule
+	1 & 0.8 V & 1.35 V & 1 & 0.55 V \\
+	2 & 0.4 V & 0.55 V & 1 & 0.15 V \\
+	3 & 0.2 V & 0.15 V & 0 & 0.15 V \\
+	4 & 0.1 V & 0.15 V & 1 & 0.05 V \\ \bottomrule
+\end{tabularx}}
+\vspace{1pt}
+\textrightarrow\ Code $B_1B_2B_3B_4 = 1101 = 13$, \; $q = 0.1\,$V, Rest $0.05\,$V $< q$ (Quantisierungsfehler).
 
 \begin{warnbox}
 	\small
@@ -72,17 +93,45 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 	\warn{\textit{G sbagliato \textrightarrow\ missing codes; nell'iterativo l'errore si moltiplica a ogni giro.}}
 \end{warnbox}
 
-\subsection{SAR mit Kondensator-DAC (Wägeverfahren)}\label{sec:sar}
-
-\begin{minipage}[c]{0.42\columnwidth}
-	\includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_redistribution_mode.png}
+\vspace{4pt}
+\begin{minipage}[c]{0.4\columnwidth}
+	\includegraphics[width=\columnwidth]{images/iterativer_ADC.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.54\columnwidth}
-	\textbf{Standardfall} (Sample: obere Platte an GND):
+\begin{minipage}[c]{0.56\columnwidth}
+	\textbf{Iterativ}: S\&H, 1-Bit-ADC, 1-Bit-DAC, Subtrahierer, $\times 2$ zurück zum S\&H; pro Loop 1 Bit
+\end{minipage}
+
+\subsection{SAR mit Kondensator-DAC (Wägeverfahren)}\label{sec:sar}
+
+\begin{minipage}[c]{0.4\columnwidth}
+	\includegraphics[width=\columnwidth]{images/SAR_ADC.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.56\columnwidth}
+	S\&H, Komparator, $n$-Bit-DAC, Logik: der DAC-Ausgang nähert sich schrittweise $V_{\rm in}$; $n$ Bit = $n$ Zyklen
+\end{minipage}
+
+\vspace{4pt}
+\begin{minipage}[c]{0.32\columnwidth}
+	\centering Sample\\
+	\includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_sample_mode.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.32\columnwidth}
+	\centering Hold\\
+	\includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_hold_mode.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.32\columnwidth}
+	\centering Redistribution\\
+	\includegraphics[width=\columnwidth]{images/SAR_switched_capacitor_redistribution_mode.png}
+\end{minipage}
+
+\vspace{4pt}
+\textbf{Standardfall} (Sample: obere Platte an GND):
 	$$ \boxed{ V_X = -V_{\rm in} + V_{\rm ref}\,\frac{C_{\rm oben}}{C_{\rm tot}} } $$
 	$C_{\rm oben}$ = \textbf{alle} $C$, die jetzt an $V_{\rm ref}$ liegen
-\end{minipage}
 
 \begin{rezept}{Rezept: SAR (jede Variante)}
 	\begin{steps}
@@ -99,43 +148,69 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 	\warn{\textit{In $C_{\rm oben}$ vanno \textbf{tutti} i C su $V_{\rm ref}$, non solo quello appena commutato.}}
 	\warn{\textit{Bit $=0$: l'interruttore torna su GND e $V_X$ torna al valore di prima.}}
 \end{warnbox}
-\textbf{Kopplungs-$C$} ($\frac{32}{31}C$ in Serie): kleinere Grössenverhältnisse der Kapazitäten.
+\vspace{2pt}
+{\centering\resizebox{0.9\columnwidth}{!}{\input{circuits/sar_vx_schritte.tex}}\par}\vspace{2pt}
+\noindent{\small $V_X$ springt bei jedem Schritt um $V_{\rm ref}\,\frac{C_i}{C_{\rm tot}}$ (halb so viel wie zuvor): $V_X$ nähert sich von unten der Null.}
+
+\warn{\textit{È una ricerca binaria: ogni passo prova «ci sto dentro?». Se $V_X$ supera 0 (troppo), il passo viene annullato (bit 0).}}
+
+\noindent\textbf{Kopplungs-$C$} ($\frac{32}{31}C$ in Serie): kleinere Grössenverhältnisse der Kapazitäten.
 
 \subsection{Integrierende Wandler (Zählverfahren)}\label{sec:integrierend}
 
-{\renewcommand{\arraystretch}{1.8}
-\begin{tabularx}{\columnwidth}{@{}l l X@{}}
+{\renewcommand{\arraystretch}{2}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
 	\toprule
-	\textbf{Wandler}  & \textbf{Formel} & \textbf{Merkmal} \\ \midrule
-	Zähl (DAC-Rampe)  & Zählerstand = Code
-	                  & aufgerundet, bis $2^n$ Takte \\
-	Single-Slope      & $T_{\rm int} = -\dfrac{V_{\rm ref}\,RC}{V_{\rm in}}$
-	                  & Zeit hängt vom Signal ab, Division nötig \\
-	Dual-Slope        & $\dfrac{V_{\rm in}-V_{\rm AGND}}{V_{\rm ref}-V_{\rm AGND}} = -\dfrac{T_{\rm abint}}{T_{\rm int}} = -\dfrac{n}{N}$
-	                  & $RC$ kürzt sich weg \\
-	Charge Balancing  & Portion $Q = \dfrac{T_{\rm clk}\,V_{\rm ref}}{R_i}$, \; gleiche Formel $\dfrac nN$
-	                  & integriert immer; grosses $N$: genau, aber langsam \\ \bottomrule
+	\textbf{Wandler} & \textbf{Formel \; / \; Merkmal} \\ \midrule
+	Zähl (DAC-Rampe) & Zählerstand = Code \; / \; aufgerundet, bis $2^n$ Takte \\
+	Single-Slope     & $T_{\rm int} = -\dfrac{V_{\rm ref}\,RC}{V_{\rm in}}$ \; / \; Zeit hängt vom Signal ab, Division nötig \\
+	Dual-Slope       & $-\dfrac{\overline{V_{\rm in}}}{V_{\rm ref}} = \dfrac{T_{\rm abint}}{T_{\rm int}} = \dfrac{n}{N}$ \;(AGND $=0$) \qquad $RC$ kürzt sich weg \\
+	                 & mit AGND: $\dfrac{V_{\rm in}-V_{\rm AGND}}{V_{\rm ref}-V_{\rm AGND}} = -\dfrac{n}{N}$ \\
+	Charge Balancing & gleiche Formel $-\dfrac{\overline{V_{\rm in}}}{V_{\rm ref}} = \dfrac nN$, Portion $Q = \dfrac{T_{\rm clk}\,V_{\rm ref}}{R_i}$ \; / \; integriert immer; grosses $N$: genau, aber langsam \\ \bottomrule
 \end{tabularx}}
 
+\vspace{2pt}
+{\small $N$ = Takte der Signalintegration ($T_{\rm int} = N\,T_{\rm clk}$); $n$ = Takte der Abintegration ($T_{\rm abint} = n\,T_{\rm clk}$). \textbf{Charge Balancing}: der Integrator läuft immer; in jedem Takt, in dem er über der Schwelle liegt, wird 1 feste Ladungsportion $Q$ abgezogen. $n$ = Anzahl Portionen in $N$ Takten; Fehler max.\ $V_{\rm ref}/N$.}
+
 \vspace{3pt}
-\begin{minipage}[c]{0.4\columnwidth}
+\begin{minipage}[c]{0.5\columnwidth}
+	\includegraphics[width=\columnwidth]{images/charge_balancing_ADC.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.46\columnwidth}
+	\textbf{Fazit} (alle integrierenden Wandler): pro Messzyklus wird gleich viel Ladung vom Eingang wie von $V_{\rm ref}$ aufintegriert, $-\dfrac{\overline{V_{\rm in}}}{V_{\rm ref}} = \dfrac nN$ \\[3pt]
+	\textbf{Sigma-Delta-ADC} = Charge Balancing + aufwändigeres Digitalfilter statt Zähler \textrightarrow\ höhere Auflösung in kürzerer Zeit als Dual-Slope
+\end{minipage}
+
+\begin{warnbox}
+	\small
+	\warn{\textit{Idea in parole semplici: il comparatore decide a ogni clock se togliere un «secchio» di carica; più il segnale è grande, più secchi servono. Il contatore dei secchi ($n$) è il risultato.}}
+\end{warnbox}
+
+\vspace{3pt}
+\begin{minipage}[c]{0.38\columnwidth}
 	\includegraphics[width=\columnwidth]{images/dual_slope_ADC.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.24\columnwidth}
-	\includegraphics[width=\columnwidth]{images/dual_slope_ADC_timing.png}
+\begin{minipage}[c]{0.58\columnwidth}
+	\resizebox{\linewidth}{!}{\input{circuits/dual_slope_3fasen.tex}}
 \end{minipage}
-\hfill
-\begin{minipage}[c]{0.3\columnwidth}
-	Netzbrumm: \\ $T_{\rm int} = 20\,$ms unterdrückt $50\,$Hz und Harmonische
-\end{minipage}
+
+{\small Netzbrumm: $T_{\rm int} = 20\,$ms unterdrückt $50\,$Hz und Harmonische.}
+
+\begin{warnbox}
+	\small
+	\warn{\textit{Idea in parole semplici: riempio un secchio con $V_{\rm in}$ per un tempo fisso ($T_{\rm int}$), poi lo svuoto con $V_{\rm ref}$ a ritmo fisso. Più $V_{\rm in}$ è grande, più tempo serve a svuotarlo: quel tempo ($n$ clock) è il risultato. $R_iC_i$ è uguale nelle due fasi e si semplifica.}}
+	\warn{\textit{S1 e S2 non sono mai chiusi insieme; S0 scarica $C_i$ solo all'inizio (Reset).}}
+\end{warnbox}
 
 \begin{rezept}{Rezept: Dual-Slope}
 	\begin{steps}
 		\item \textbf{Aufintegration} während $T_{\rm int}$:
 		      \; $V_{\rm int} = V_{\rm AGND} - \dfrac{V_{\rm in}-V_{\rm AGND}}{R_iC_i}\,T_{\rm int}$
-		\item \textbf{Abintegration} mit $V_{\rm ref}$ bis $V_{\rm AGND}$:
-		      \; $T_{\rm abint} = T_{\rm int}\,\dfrac{V_{\rm AGND}-V_{\rm in}}{V_{\rm ref}-V_{\rm AGND}}$
+		      \; (AGND $=0$: $-\dfrac{\overline{V_{\rm in}}\,T_{\rm int}}{R_iC_i}$)
+		\item \textbf{Abintegration} mit $V_{\rm ref}$ bis $V_{\rm AGND}$: Abfall $V_{\rm abint} = \dfrac{V_{\rm ref}-V_{\rm AGND}}{R_iC_i}\,T_{\rm abint} = -(V_{\rm int}-V_{\rm AGND})$, \;
+		      daraus \; $T_{\rm abint} = T_{\rm int}\,\dfrac{V_{\rm AGND}-V_{\rm in}}{V_{\rm ref}-V_{\rm AGND}}$
 		\item \textbf{Auflösung}:
 		      \; $\Delta V_{\rm in} = |V_{\rm ref}-V_{\rm AGND}|\,\dfrac{T_{\rm clk}}{T_{\rm int}}$
 	\end{steps}
@@ -150,7 +225,6 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 	Offset, Gain, INL, DNL          & wie beim DAC (\ref{sec:dac-fehler}) \\
 	DNL durch Komparator-Offset     & $|{\rm DNL}|_{\max} = \dfrac{2V_{\rm os}}{q}$; \;
 	                                  ${\rm DNL} < 1\,{\rm LSB} \Rightarrow \Delta V_{\rm REF} > 2^{n+1}\,V_{\rm os}$ \\
-	Aperturfehler (Sinus, voll)     & $T_A < \dfrac{1}{2\pi f\,2^n}$ \\
 	Abtasttheorem                   & $f_s > 2 f_{\max}$, sonst Aliasing \\
 	Sample-Hold                     & sinc-Tiefpass: dämpft alle $f > 0$ \\
 	SNR                             & $P_Q = \dfrac{q^2}{12}$, \; ${\rm SNR} = 6.02\,n + 1.76\,$dB, \;

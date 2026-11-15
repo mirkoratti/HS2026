@@ -1,17 +1,6 @@
 \section{Anhang}
-\begin{ctabular}{l|cccccc}
-    \textbf{Hex} & A & B & C & D & E & F \\
-    \textbf{Dec} & 10 & 11 & 12 & 13 & 14 & 15 \\
-    \textbf{Bin} & 1010 & 1011 & 1100 & 1101 & 1110 & 1111
-\end{ctabular}
-
-\textbf{Parallel:}
-Baudrate: $f_{\rm Baud} = \frac{1}{100\mu s} = 10'000 \text{ Baud}$ \\
-Bitrate: $f_{\rm Bit} = \frac{8}{100\mu s} = 80'000 \text{ Bit/s}$
-
-\textbf{Seriell:}
-Baudrate: $f_{\rm Baud} = \frac{1}{100\mu s} = 10'000 \text{ Baud}$ \\
-Bitrate: $f_{\rm Bit} = \frac{1}{100\mu s} = 10'000 \text{ Bit/s}$
+\textbf{Baudrate:} $f_{\rm Baud} = \frac{1}{100\mu s} = 10'000$ Baud. \quad
+\textbf{Bitrate:} parallel (8 Bit) $80'000$ Bit/s, seriell $10'000$ Bit/s.
 
 \vspace{0.5em}
 \noindent\textbf{Frequenzabweichung:} \\
@@ -28,7 +17,7 @@ Die Mittelung von $M$ Samples bringt nur dann mehr Auflösung, wenn der ADC-Code
 \end{itemize}
 \vspace{-0.6em}
 \begin{center}
-\begin{tikzpicture}[x=0.4cm,y=0.42cm,font=\scriptsize]
+\begin{tikzpicture}[x=0.4cm,y=0.26cm,font=\scriptsize]
     % ohne Rauschen
   \begin{scope}
     \draw[gray] (0,0)--(10.4,0);
@@ -38,8 +27,8 @@ Die Mittelung von $M$ Samples bringt nur dann mehr Auflösung, wenn der ADC-Code
     \node[orange!80!black,anchor=south] at ({1.2+3.4*0.763},5.3) {vero 460.763};
     \draw[blue!80!black,thick] (3.4,-0.1)--(3.4,4.2);
     \node[blue!80!black,anchor=west] at (4.6,3.2) {$\bar x=461$};
-    \node[anchor=west,font=\small\bfseries] at (0,7.3) {ohne Rauschen};
-    \node[anchor=west] at (0,6.4) {Code immer 461};
+    \node[anchor=west,font=\small\bfseries] at (0,8.45) {ohne Rauschen};
+    \node[anchor=west] at (0,7.15) {Code immer 461};
   \end{scope}
   % mit Rauschen
   \begin{scope}[shift={(12.2,0)}]
@@ -51,8 +40,8 @@ Die Mittelung von $M$ Samples bringt nur dann mehr Auflösung, wenn der ADC-Code
     \draw[orange,thick,densely dashed] ({1.2+3.4*0.763},-0.1)--({1.2+3.4*0.763},5.3);
     \node[orange!80!black,anchor=south] at ({1.2+3.4*0.763},5.3) {vero 460.763};
     \node[blue!80!black,anchor=west] at (6.8,3.2) {$\bar x\approx460.76$};
-    \node[anchor=west,font=\small\bfseries] at (0,7.3) {mit Rauschen};
-    \node[anchor=west] at (0,6.4) {Code streut um den Wert};
+    \node[anchor=west,font=\small\bfseries] at (0,8.45) {mit Rauschen};
+    \node[anchor=west] at (0,7.15) {Code streut um den Wert};
   \end{scope}
 \end{tikzpicture}
 \end{center}

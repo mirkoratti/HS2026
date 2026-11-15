@@ -89,6 +89,8 @@ Ansatz des Skripts, so dass in beiden Fällen $\varphi(t) = \beta\sin(\omega_m t
 }
 $\beta$ ist nur für Eintonsignale definiert und ist \textbf{gleich dem Phasenhub} $\Delta\varphi$.
 
+\textbf{Perché sin e cos?} La scelta è solo di comodo: in FM l'integrale del coseno dà un seno, quindi in entrambi i casi vale $\varphi(t)=\beta\sin(\omega_m t)$ e si usa un'unica formula. Un messaggio con un'altra fase iniziale (es. $\sin$ in FM $\Rightarrow$ $\varphi=-\beta\cos(\omega_m t)$) cambia solo segno e fase delle righe: $\beta$, $|J_n(\beta)|$ e la banda restano uguali.
+
 \subsubsection{Kochrezept für Aufgaben}
 \begin{enumerate}
 	\setlength{\itemsep}{1pt}
@@ -101,22 +103,26 @@ $\beta$ ist nur für Eintonsignale definiert und ist \textbf{gleich dem Phasenhu
 	\item \textbf{Bandbreite:} Carson $B = 2(\Delta f + f_m) = 2(\beta + 1) f_m$ (siehe unten).
 \end{enumerate}
 
-\paragraph{Beispiel} $x(t) = 5\cos\big(2\pi\cdot 10^6 t + 3\sin(2\pi\cdot 200\, t)\big)$
-\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\item $f_c = \qty{1}{\MHz}$, \; $\varphi(t) = 3\sin(2\pi\cdot 200\,t)$ $\Rightarrow$ $\Delta\varphi = \beta = 3$ rad, \; $f_m = \qty{200}{\Hz}$
-	\item $f_i(t) = \frac{1}{2\pi}\frac{\diff\theta}{\diff t} = 10^6 + 3\cdot 200\cos(2\pi\cdot 200\,t)$ Hz $\Rightarrow$ $\Delta f = \qty{600}{\Hz}$ (schwankt zwischen $f_c \pm \qty{600}{\Hz}$)
-	\item als PM mit $k_P = 2$: $m(t) = \varphi/k_P = 1.5\sin(2\pi\cdot 200\,t)$
-	\item als FM mit $k_F = 2\pi\cdot 300$: $m(t) = \varphi'/k_F = \frac{3\cdot 2\pi\cdot 200}{2\pi\cdot 300}\cos(2\pi\cdot 200\,t) = 2\cos(2\pi\cdot 200\,t)$
-	\item Carson: $B = 2(600 + 200) = \qty{1.6}{\kHz}$
-\end{itemize}
+% \paragraph{Beispiel} $x(t) = 5\cos\big(2\pi\cdot 10^6 t + 3\sin(2\pi\cdot 200\, t)\big)$
+% \begin{itemize}
+% 	\setlength{\itemsep}{0pt}
+% 	\item $f_c = \qty{1}{\MHz}$, \; $\varphi(t) = 3\sin(2\pi\cdot 200\,t)$ $\Rightarrow$ $\Delta\varphi = \beta = 3$ rad, \; $f_m = \qty{200}{\Hz}$
+% 	\item $f_i(t) = \frac{1}{2\pi}\frac{\diff\theta}{\diff t} = 10^6 + 3\cdot 200\cos(2\pi\cdot 200\,t)$ Hz $\Rightarrow$ $\Delta f = \qty{600}{\Hz}$ (schwankt zwischen $f_c \pm \qty{600}{\Hz}$)
+% 	\item als PM mit $k_P = 2$: $m(t) = \varphi/k_P = 1.5\sin(2\pi\cdot 200\,t)$
+% 	\item als FM mit $k_F = 2\pi\cdot 300$: $m(t) = \varphi'/k_F = \frac{3\cdot 2\pi\cdot 200}{2\pi\cdot 300}\cos(2\pi\cdot 200\,t) = 2\cos(2\pi\cdot 200\,t)$
+% 	\item Carson: $B = 2(600 + 200) = \qty{1.6}{\kHz}$
+% \end{itemize}
 
-\subsubsection{Winkelmodulation ist nicht linear}
+\subsubsection{Winkelmodulation ist nicht linear und ihr Spektrum S. 70}
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{.18\linewidth} >{\raggedright\arraybackslash}X}
 	\textbf{DSB-SC (linear):} & $A_c\,(m_1 + m_2)\cos(\omega_c t) = x_{DSB1}(t) + x_{DSB2}(t)$ \quad $\checkmark$ \\
 	\textbf{PM (nicht linear):} & $A_c\cos\big(\omega_c t + k_P(m_1 + m_2)\big) \neq A_c\cos(\omega_c t + k_P m_1) + A_c\cos(\omega_c t + k_P m_2)$ \\
 \end{tabularx}\\
-Die Summe der Nachrichten steckt im \emph{Argument} des Cosinus, nicht davor. Deshalb gilt der Überlagerungssatz nicht, und das Spektrum ist nicht einfach das verschobene $M(\omega)$.
+Die Nachricht steckt im \emph{Argument} des Cosinus, nicht davor; entwickelt man $e^{j\varphi(t)}=1+j\varphi-\frac{\varphi^2}{2!}-j\frac{\varphi^3}{3!}+\dots$, treten alle Potenzen von $\varphi(t)$ auf (gerade im Cosinus-, ungerade im Sinusanteil). Nur der Term $-A_c\,\varphi(t)\sin(\omega_c t)$ ist linear in $\varphi$; alle höheren Potenzen sind nicht linear, erzeugen neue Frequenzen, und der Überlagerungssatz gilt nicht. Für $|\varphi(t)|\ll 1$ bleiben nur Träger und linearer Term übrig (Kleinhub), je grösser $\varphi(t)$, desto mehr Potenzen und desto breiter das Spektrum.
+
+\textbf{PM und FM sind nicht-lineare bzw. exponentielle Modulationen}
+
+\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/spektrumWinkelmodulation.pdf}
 
 \subsubsection{Äquivalente Basisbanddarstellung}
 \begin{minipage}{.45\linewidth}
@@ -132,15 +138,14 @@ Die Summe der Nachrichten steckt im \emph{Argument} des Cosinus, nicht davor. De
 	\includegraphics[width=.6\linewidth]{chapters/06_amplitudenmodulation/figures/abbildung5_26.pdf}
 \end{minipage}
 
-\subsubsection{Spektrum der Winkelmodulation S. 70}
-\includegraphics[width=\linewidth]{chapters/06_amplitudenmodulation/figures/spektrumWinkelmodulation.pdf}
-
 \subsubsection{Kleinhub Winkelmodulation S. 70}
 \begin{table}[H]
 	\begin{tabularx}{\linewidth}{m{.65\linewidth} m{.35\linewidth}}
 		\begin{minipage}{\linewidth}
 				Kleinhubmodulation funktioniert in der Praxis bei ca: \efbox[linecolor=red]{$|\varphi(t)| < 0.2 \text{ rad}$} bzw. 10 bis 12 Grad. \\
 				Dann gilt: \efbox[linecolor=red]{$x_{NB\varphi M}(t) \approx A_c \cdot \cos(\omega_c t) - A_c \cdot \varphi(t)\cdot \sin(\omega_ct)$} \\
+				\textbf{Kleinhub-PM:} $x_{NBPM}(t) \approx A_c \cdot \big[\cos(\omega_c t) - \sin(\omega_c t)\cdot k_P\cdot m(t)\big]$ \\
+				\textbf{Kleinhub-FM:} $x_{NBFM}(t) \approx A_c \cdot \big[\cos(\omega_c t) - \sin(\omega_c t)\cdot k_F\cdot \textstyle\int m(\tau)\,\diff\tau\big]$ \\
 				\textbf{Demodulation:} mit kohärentem Produktdetektor\\ $\rightarrow x_{NB-PM/FM}(t)\cdot (-\sin(\omega_c t))$ \\
 				Bild rechts: äquivalente Basisbanddarstellung des Signals\\ $x_{NB-PM}(t) = 0.05 \cdot \sin(2\pi \cdot 200 t) + 1\cdot \sin(2\pi \cdot 1000 t)$\\
 				Wichtig ist nur, dass die Signalamplitude im Vergleich zur Trägeramplitude sehr klein ist (siehe Formeln zu Beginn des Kapitels)
@@ -163,54 +168,89 @@ WideBand Angle Modulation, siehe auch Skript Seite 67 \hspace{.3cm} \efbox[linec
 	\item $x_{FM/PM}$ ist zu $m(t)$ stark nicht linear
 	\item im Spektrum treten Faltungen $M * M * \dots$ auf: das Spektrum wird breiter als $2B_m$
 \end{list}
-\begin{table}[H]
-	\begin{tabularx}{\linewidth}{m{.7\linewidth} m{.3\linewidth}}
-		\includegraphics{chapters/06_amplitudenmodulation/figures/WB_PM.pdf}
-		&
-		\begin{minipage}{.9\linewidth}
-			\begin{center}
-				Modulationsindex:\\
-				\efbox[linecolor=red]{$\beta = \frac{\Delta \omega}{\omega_m} = \Delta\varphi$}\\
-				Ist nur für Eintonsignale definiert!\\
-				\efbox[linecolor=red]{$\Delta T=\frac{1}{f_c}\cdot \frac{\beta}{2\pi}$} \\
-				max. Zeitverschiebung des Trägers
-			\end{center}
-		\end{minipage}
-	\end{tabularx}
-\end{table}
+\begin{center}
+	\includegraphics[width=.55\linewidth]{chapters/06_amplitudenmodulation/figures/WB_PM.pdf}
+\end{center}
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.2\linewidth}|>{\centering\arraybackslash}p{.27\linewidth}|>{\raggedright\arraybackslash}X|}
+	\hline
+	\textbf{Grösse} & \textbf{Formel} & \textbf{Significato} \\ \hline
+	Modulationsindex $\beta$ & \efbox[linecolor=red]{$\beta = \dfrac{\Delta \omega}{\omega_m} = \Delta\varphi$} & Oscillazione massima della fase (rad), \textbf{solo per un tono}. In FM $\beta\sim 1/f_m$. \\ \hline
+	Zeitverschiebung $\Delta T$ & \efbox[linecolor=red]{$\Delta T=\dfrac{1}{f_c}\cdot \dfrac{\beta}{2\pi}$} & Spostamento massimo nel tempo della portante: fase $\beta$ $\leftrightarrow$ tempo $\beta/\omega_c$. \textbf{Attenzione:} $\Delta T\neq 1/\Delta f$. $\Delta f$ è una deviazione di frequenza, non un periodo: $\Delta T=\dfrac{\Delta f}{2\pi\,f_m\,f_c}$. Per banda e $\beta$ si lavora con $\Delta f$ e $f_m$ ($\beta=\Delta f/f_m$). \\ \hline
+\end{tabularx}}
 
 \subsubsection{Spektrum Einton-Winkelmodulation S. 72}
 \vspace{.1cm}
 \efbox[linecolor=red]{$x_{ST} = A_c \cdot \Re (e^{j(\omega_c t + \varphi (t))}) = A_c \cdot \cos(\omega_c t + \beta \cdot \sin(\omega_mt)) = A_c \cdot \sum_{n=-\infty}^{\infty}J_n(\beta) \cdot \cos((\omega_c + n\cdot \omega_m)t)$} \\
 mit $\varphi(t) = \beta\sin(\omega_m t)$ als Phasenabweichung (PM oder FM, siehe Einton-Tabelle oben) und \\$J_n(\beta)$: Bessel Funktion erster Art und n-ter Ordnung. Spektrallinien bei $f_c \pm n f_m$ mit Amplitude $A_c\,|J_n(\beta)|$.
 
-\begin{minipage}{.7\linewidth}
-	\includegraphics{chapters/06_amplitudenmodulation/figures/besselfunktionen.pdf}
-\end{minipage}
-\begin{minipage}{.3\linewidth}
-	\textbf{Eigenschaften:}\\
+\begin{center}
+	\input{chapters/06_amplitudenmodulation/figures/bessel_spektrum.tex}
+\end{center}
+\vspace{-.3cm}
+\textbf{Eigenschaften der Bessel-Funktionen:}
 
-	\efbox[linecolor=red]{$J_{-n}(\beta) = (-1)^n\cdot J_n(\beta)$} \\
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.2\linewidth}|>{\centering\arraybackslash}p{.34\linewidth}|>{\raggedright\arraybackslash}X|}
+	\hline
+	\textbf{Eigenschaft} & \textbf{Formel} & \textbf{Significato} \\ \hline
+	Simmetria & \efbox[linecolor=red]{$J_{-n}(\beta) = (-1)^n\cdot J_n(\beta)$} & Righe a $f_c \pm n f_m$ di pari ampiezza; segno opposto solo per $n$ dispari. \\ \hline
+	Ricorrenza & \efbox[linecolor=red]{$J_{n-1}(\beta) + J_{n+1}(\beta) = \dfrac{2n}{\beta} \cdot J_n(\beta)$} & Da $J_0$ e $J_1$ ricavi tutte le altre. \\ \hline
+	Potenza costante & \efbox[linecolor=red]{$\displaystyle \sum_{n=-\infty}^{\infty} J^2_n (\beta) = 1$} & Potenza totale fissa: passa dalla portante ($J_0^2$) alle righe. \\ \hline
+	Fase dell'armonica & \efbox[linecolor=red]{$\beta_n = \Delta T \cdot 2\pi \cdot n \cdot f_c$} & Stesso ritardo $\Delta T$: fase più grande per l'$n$-esima armonica. \\ \hline
+\end{tabularx}}
 
-	\efbox[linecolor=red]{$J_{n-1}(\beta) + J_{n+1}(\beta) = \frac{2n}{\beta} \cdot J_n(\beta)$} \\
-
-	\efbox[linecolor=red]{$ \sum_{n=-\infty}^{\infty} J^2_n (\beta) = 1$} \\
-
-	\efbox[linecolor=red]{$ \beta_n = \Delta T \cdot 2\pi \cdot n \cdot f_c $} \\
-
-	$\Delta T$: Zeitverzögerung bezogen auf Grundschwingung ($f_c$) \\
-	$n$: n-te Harmonische \\
-
-	Tabelle Skript S. 74 bzw. 274 ff.
-\end{minipage}
+{\small $\Delta T$: Zeitverzögerung bezogen auf Grundschwingung ($f_c$) \quad $n$: $n$-te Harmonische \quad Tabelle Skript S. 74 bzw. 274 ff.}\\[4pt]
+\textbf{Potenza del segnale:} $P=\overline{x^2(t)}$ (media del quadrato, non del segnale). Con $\cos^2\theta=\frac12+\frac12\cos 2\theta$ il secondo termine ha media nulla anche se la fase $\theta$ varia nel tempo, quindi $P=\frac{A_c^2}{2}$ per ogni $\beta$.
 
 \subsubsection{Bandbreite Einton-Winkelmodulation S. 75}
 Theoretisch unendliche Bandbreite \\
-Praktisch approximation nach Carson: \efbox[linecolor=red]{$B_{ST} = 2 \cdot (\Delta f+f_m) = 2 \cdot (\beta + 1) \cdot \frac{\omega_m}{2\pi}$} (min. \qty{98}{\%} der Signalleistung)\\
-\includegraphics{chapters/06_amplitudenmodulation/figures/Bandbreite.pdf}
+Praktisch approximation nach Carson: $J_n(\beta)\approx 0$ für $n>\beta+1$, es zählen nur die Linien bis dort. \\[2pt]
+\efbox[linecolor=red]{$B_{ST\varphi M} = 2 \cdot (\Delta f+f_m) = 2 \cdot (\beta + 1) \cdot \frac{\omega_m}{2\pi}$} (min. \qty{98}{\%} der Signalleistung)\\[4pt]
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.2\linewidth}|>{\centering\arraybackslash}p{.12\linewidth}|>{\centering\arraybackslash}p{.26\linewidth}|>{\raggedright\arraybackslash}X|}
+	\hline
+	\textbf{Fall} & $\beta$ & $B_{ST\varphi M}$ & \textbf{Righe dentro $B$} \\ \hline
+	Kleinhub-$\varphi$M & $\beta \ll 1$ & $2\cdot f_m$ & Träger + 2 Seitenlinien ($n=\pm 1$) \\ \hline
+	Grosshub-$\varphi$M & $\beta \ge 1$ & $2\cdot \mathrm{round}(\beta+1)\cdot f_m$ & Träger + $\mathrm{round}(\beta+1)$ Linien per lato \\ \hline
+	Höhere Marge & $\beta \ge 1$ & $2\cdot \mathrm{round}(\beta+2)\cdot f_m$ \newline $2\cdot \mathrm{round}(\beta+3)\cdot f_m$ & Una o due righe in più per lato: meno diafonia (Frequenzmultiplex, Übersprechen) \\ \hline
+\end{tabularx}}
+{\small $\mathrm{round}$: le righe hanno indice $n$ intero, quindi si arrotonda. Kleinhub = caso $\beta\to 0$ di Carson: $2\,(0+1)\,f_m$.}\\[4pt]
+\textbf{Cos'è $W$:} la banda $B$ misurata in rad/s invece che in Hz, cioè $W = 2\pi B$ (come $\omega=2\pi f$), con $[W]=\mathrm{rad/s}$ e $[B]=\mathrm{Hz}$. Serve perché $\omega_m$, $\Delta\omega$ e $k_FA_m$ sono già in rad/s: così Carson perde i fattori $2\pi$, $W = 2(\beta+1)\,\omega_m \Leftrightarrow B = 2(\beta+1)\,f_m$ (stessa formula). Basta mettere $\beta$ dentro Carson:
 
-\subsubsection[Bandbreite für beliebige m(t)]{Bandbreite für beliebige $m(t)$ S. 75}
-\includegraphics{chapters/06_amplitudenmodulation/figures/bandbreiteBeliebigem.pdf}
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.16\linewidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+	\hline
+	& \textbf{Eintonphasenmodulation} & \textbf{Eintonfrequenzmodulation} \\ \hline
+	Formel & \efbox[linecolor=red]{$W_{PM}=2\,(k_P A_m+1)\,\omega_m$} & \efbox[linecolor=red]{$W_{FM}=2\,(k_F A_m+\omega_m)$} \\ \hline
+	Da dove viene & $\beta=k_P A_m$ & $\beta=\dfrac{k_F A_m}{\omega_m}$: $\omega_m$ si semplifica e resta \emph{sommato} \\ \hline
+	Da cosa dipende & $B_{PM}\sim k_P$, \; $B_{PM}\sim A_m$, \; $B_{PM}\sim\omega_m$: più forte o più veloce il messaggio, più banda & $B_{FM}\sim k_F$, \; $B_{FM}\sim A_m$ \newline
+	Kleinhub ($\Delta\omega=k_F A_m\ll\omega_m$): $W\approx 2\omega_m$, quindi $W\sim\omega_m$ \newline
+	Grosshub ($\Delta\omega\gg\omega_m$): $W\approx 2\Delta\omega$, \textbf{non dipende da} $\omega_m$ \\ \hline
+\end{tabularx}}
+{\small In PM l'Hub in frequenza è $\Delta\omega=\beta\,\omega_m$ e cresce con $\omega_m$; in FM è $k_F A_m$, già fisso.}
+
+\subsubsection{Bandbreite für beliebige $m(t)$ S. 75}
+Con un messaggio qualsiasi (es. voce) non esiste un solo $\beta$: si usano il \textbf{Hubverhältnis} $D$ (\emph{Deviation Ratio}) e la banda del messaggio.
+
+\efbox[linecolor=red]{$B_{\varphi M} = 2\,(\Delta f+B_m) = 2\,(D+1)\,B_m$}
+
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.22\linewidth}|>{\centering\arraybackslash}p{.24\linewidth}|>{\raggedright\arraybackslash}X|}
+	\hline
+	\textbf{Grösse} & \textbf{Formel} & \textbf{Significato} \\ \hline
+	Hubverhältnis $D$ & $D=\dfrac{\Delta f}{B_m}$ & Hub massimo in frequenza diviso la banda del messaggio: fa da $\beta$ per un segnale qualsiasi \\ \hline
+	Hub max.\ $\Delta f$ & $[\mathrm{Hz}]$ & Spostamento massimo di frequenza, causato dal picco di $m(t)$ \\ \hline
+	Banda di $m(t)$ & $B_m$ \quad $[\mathrm{Hz}]$ & Frequenza più alta presente nel messaggio \\ \hline
+\end{tabularx}}
+
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.22\linewidth}|>{\centering\arraybackslash}p{.24\linewidth}|>{\raggedright\arraybackslash}X|}
+	\hline
+	\textbf{Fall} & \textbf{Banda} & \textbf{Significato} \\ \hline
+	Kleinhub ($D\ll1$, $\Delta f\ll B_m$) & $B_{\varphi M}\approx 2\,B_m$ & L'Hub è trascurabile: conta solo la banda del messaggio, come in AM-DSB \\ \hline
+	Grosshub ($D>1$, $\Delta f>B_m$) & $B_{\varphi M}\approx 2\,\Delta f$ & Conta solo l'Hub. FM: $\Delta f$ costante, banda fissa. PM: $\Delta f\sim B_m$, la banda cresce con $B_m$ \\ \hline
+\end{tabularx}}
 
 \subsubsection{Realisierung}
 \includegraphics{chapters/06_amplitudenmodulation/figures/realisierungGrosshubWinkelmod.pdf}
@@ -224,5 +264,8 @@ Die Amplitude des Ausgangssignals eines Frequenz-Diskriminators ist proportional
 \textbf{PM:} $y_d(t)=k_d\cdot k_P \cdot m'(t)$ \\
 \textbf{FM:} $y_d(t) = k_d \cdot k_F \cdot m(t)$
 
-\subsubsection{FM Empfänger S. 77}
-\includegraphics{chapters/06_amplitudenmodulation/figures/FMreceiver.pdf}
+\paragraph{FM-Empfänger mit Frequenz-Diskriminator S. 77}
+\begin{center}
+	\input{chapters/06_amplitudenmodulation/figures/fm_empfaenger.tex}
+\end{center}
+\textbf{Begrenzer:} elimina i disturbi in ampiezza ($m(t)$ sta solo nella frequenza). \textbf{Bandpass:} toglie le armoniche create dal clipping e rigenera la sinusoide. \textbf{Differenzierer:} l'RC-Hochpass ($\omega\ll\frac{1}{RC}$, $H\approx j\omega RC$) deriva, e la frequenza istantanea $\omega_c+k_f\,m(t)$ finisce come fattore davanti al seno. \textbf{Hüllkurvendetektor:} legge quel fattore come ampiezza. Condizione $k_f\,|m(t)|<\omega_c$, così il fattore resta positivo.

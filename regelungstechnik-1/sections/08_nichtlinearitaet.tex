@@ -339,3 +339,26 @@ Ist ein System im 'Steady State', so gilt:
 		$$ \Delta F_W \approx K \cdot \Delta v $$
 \end{minipage}
 
+
+\subsubsection{Linearisierung mit mehreren Variablen}
+
+Hängt ein Signal von \textbf{mehreren Grössen} ab, $y = f(x_1, x_2)$, so gibt es \textbf{einen Term pro Variable}:
+
+\vspace{0.2cm}
+
+$$ \Delta y \approx \frac{\partial f}{\partial x_1}\bigg|_{AP} \cdot \Delta x_1 \; + \; \frac{\partial f}{\partial x_2}\bigg|_{AP} \cdot \Delta x_2 \qquad \text{mit } \Delta x_i = x_i - x_{i0} \text{ und } AP = (x_{10},\, x_{20}) $$
+
+\vspace{0.2cm}
+
+$$ \boxed{ y_{\rm lin} = f(x_{10}, x_{20}) + \frac{\partial f}{\partial x_1}\bigg|_{AP} (x_1 - x_{10}) + \frac{\partial f}{\partial x_2}\bigg|_{AP} (x_2 - x_{20}) } $$
+
+\vspace{0.2cm}
+
+{\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l}
+	1 & Nach \textbf{jeder} Variablen ableiten (die anderen sind Konstanten) \\
+	2 & \textbf{Alle} Variablen im $AP$ einsetzen, auch die 'fremden' \\
+	3 & Jede Ableitung mit ihrem $\Delta x_i$ multiplizieren und summieren \\
+\end{tabular}
+}

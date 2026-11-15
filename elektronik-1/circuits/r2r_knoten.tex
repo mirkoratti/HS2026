@@ -1,0 +1,20 @@
+% LTeX: enabled=false
+% R-2R-Leiter: von rechts gesehen R_th = R an jedem Knoten, Strom/Spannung halbiert sich
+\begin{tikzpicture}[x=1cm,y=1cm,font=\scriptsize,>=Stealth,
+  res/.style={draw,minimum width=0.7cm,minimum height=0.28cm,inner sep=0pt}]
+  \definecolor{cin}{HTML}{f7730e}\definecolor{cref}{HTML}{4A4D52}
+  % Längsleiter
+  \foreach \i in {0,1,2} {
+    \node[res] (r\i) at (\i*2.2+1.1,0){$R$};
+    \node[res,rotate=90] (q\i) at (\i*2.2+2.2,-0.8){$2R$};
+    \draw (\i*2.2+2.2,0)--(q\i.east);
+    \draw (q\i.west)--(\i*2.2+2.2,-1.55) node[below,cin]{Bit};
+  }
+  \draw (0,0)--(r0.west) (r0.east)--(2.2,0)--(r1.west) (r1.east)--(4.4,0)--(r2.west) (r2.east)--(6.6,0);
+  \draw (0,0)--(0,-0.2); \node[res,rotate=90] at (0,-0.55){$2R$}; \draw (0,-0.7)--(0,-1.55) node[below]{GND};
+  \draw (6.6,0)--(7.1,0) node[right,cref]{$\to$ OpAmp};
+  % Halbierung
+  \foreach \x/\t in {2.2/{$\frac{\Delta V}{8}$ (LSB)},4.4/{$\frac{\Delta V}{4}$},6.6/{$\frac{\Delta V}{2}$ (MSB)}}
+    \node[cin,above] at (\x,0.15){\t};
+  \node[cref,below] at (3.3,-1.9){von jedem Knoten nach rechts: $R_{\rm th}=2R\parallel 2R=R$};
+\end{tikzpicture}

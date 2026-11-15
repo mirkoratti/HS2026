@@ -121,6 +121,23 @@ $$ \boxed{ \frac{A}{\varphi_{e,0}} = V } \qquad \text{Resonanz:} \quad \frac{A}{
 \end{align*}
 
 
+\subsection{FMCW-Radar}\label{FMCW}
+
+\textbf{Idee:} Das Radar sendet eine Frequenzrampe (\emph{Chirp}) mit Steigung $k$ (Chirp-Rate). Das Echo kommt um $\Delta t = \frac{2s}{c}$ verspätet zurück. Die Differenz zwischen Gesendetem und Empfangenem ist die \textbf{Schwebefrequenz}: sie enthält die Distanz.
+
+\medskip
+
+Bewegt sich das Ziel, ist das Echo zusätzlich um $\Delta f = \frac{2v}{\lambda}$ nach oben verschoben:
+$$ f^{-} = k\,\Delta t - \Delta f \quad (\text{Anstieg}) \qquad\qquad f^{+} = k\,\Delta t + \Delta f \quad (\text{Abstieg}) $$
+
+\centerline{\resizebox{0.95\columnwidth}{!}{\input{tikz/fmcw.tex}}}
+
+\medskip
+
+Summe $\rightarrow$ Doppler fällt weg, Differenz $\rightarrow$ Distanz fällt weg:
+$$ \boxed{ s = \frac{c}{4}\,\frac{f^{+} + f^{-}}{k} } \qquad\qquad \boxed{ v = \frac{\lambda\,(f^{+} - f^{-})}{4} } $$
+
+
 \subsection{Trigonometrie}
 
 \begingroup

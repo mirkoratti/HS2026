@@ -165,6 +165,11 @@ $$ \underbrace{- k^2 \, A \, \sin(\omega \, t - k \, x)}_{\substack{\frac{\parti
 
 $$ \boxed{ \text{mit Lösung} \quad  u^2 = \frac{\omega^2}{k^2} } $$
 
+{\small
+\textrightarrow\ $u$ muss \textbf{konstant} sein: das Medium legt $u$ fest, also sind $\omega$ und $k$ nicht unabhängig ($\omega = u \, k$) \\
+\textrightarrow\ Die Frequenz wählst du, $\lambda = u \, T$ bestimmt das Medium
+}
+
 
 \subsection{Harmonische Wellen}
 
@@ -232,6 +237,14 @@ Eine Welle kann sich in 3 Dimensionen ausbreiten und dabei \textbf{verschiedene 
 
 mit Wellenvektor $\vec{k} = \begin{pmatrix} k_x \\ k_y \\ k_z  \end{pmatrix}$ und Ortsvektor $ \vec{r} = \begin{pmatrix} r_x \\ r_y \\ r_z  \end{pmatrix}$
 
+\medskip
+
+{\small
+\textbf{Skalarprodukt} $\vec{k} \bullet \vec{r} = \|\vec{k}\| \cdot (\text{Strecke von } \vec{r} \text{ entlang } \vec{k})$ \\
+\textrightarrow\ misura quanto ti sei spostato \textbf{lungo} $\vec{k}$: di lato (${\perp}\ \vec{k}$) la fase non cambia \\
+\textrightarrow\ fase costante $\Leftrightarrow$ $\vec{k} \bullet \vec{r} = \text{cost.}$ $\Leftrightarrow$ piano ${\perp}\ \vec{k}$ (= Wellenfront)
+}
+
 
 \subsubsection{Ebene Wellen}
 
@@ -279,11 +292,7 @@ $$ \boxed{ \text{Lösungsansatz:} \quad \xi(t, r) = \frac{1}{r} \xi_0 \, e^{ \ji
 
 \subsection{Bewegte Quellen}
 
-\begin{minipage}[t]{0.46\columnwidth}
-    \includegraphics[width=\columnwidth, align=t]{images/Bewegte_Quellen.png}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\columnwidth}
+\begin{minipage}[t]{\columnwidth}
     Die Quelle bewegt sich mit der \cbl{Geschwindigkeit $v_Q$} in eingezeichneter Richtung fort
 
     \medskip
@@ -291,6 +300,10 @@ $$ \boxed{ \text{Lösungsansatz:} \quad \xi(t, r) = \frac{1}{r} \xi_0 \, e^{ \ji
     Die Quelle verschiebt sich in der Zeit $T$ um 
     $$ \boxed{ \Delta x = v_Q \cdot T }$$
 \end{minipage}
+
+\medskip
+
+\centerline{\scalebox{0.6}{\input{tikz/bewegte_quellen.tex}}}
 
 
 \subsubsection{Frequenzverschiebung durch Bewegung der Quelle}
@@ -311,9 +324,9 @@ $$ \boxed{ \text{Lösungsansatz:} \quad \xi(t, r) = \frac{1}{r} \xi_0 \, e^{ \ji
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.42\columnwidth}
-    \paragraph{Herleitung}
+    \textbf{Herleitung}
 
-    \vspace{-0.5cm}
+    \vspace{-0.4cm}
 
     \begin{align*}
         \lambda'    &= \lambda -v_Q \cdot T                         \\
@@ -358,7 +371,7 @@ Die Quelle bewegt sich nicht direkt auf den Beobachter zu, sondern sie bewegt si
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\columnwidth}
-    $$ \boxed{ f' =  \frac{1}{1 - \frac{v_Q}{u} \cdot \cos(v_Q)}  \, f} $$
+    $$ \boxed{ f' =  \frac{1}{1 - \frac{v_Q}{u} \cdot \cos(\vartheta_Q)}  \, f} $$
 \end{minipage}
 
 \begin{ctabular}{clc}
@@ -378,7 +391,7 @@ Die Quelle bewegt sich nicht direkt auf den Beobachter zu, sondern sie bewegt si
 \begin{minipage}[t]{0.58\columnwidth}
     \textbf{Gegeben:} $v_Q, \, \theta, \,u, \,d, \,l$ \qquad 
     \textbf{Gesucht:} $\frac{f'}{f}$
-    $$f' =  \frac{1}{1 - \frac{v_Q}{u} \cdot \cos(v_Q)}$$
+    $$f' =  \frac{1}{1 - \frac{v_Q}{u} \cdot \cos(\vartheta_Q)}$$
     \[
         \tan(\theta) = \frac{d}{l} =  \frac{\sin(\theta)}{\cos(\theta)} \qquad
         \sin^2(\theta) = 1 - \cos^2(\theta)
@@ -448,7 +461,7 @@ $$ \boxed{ \Rightarrow\ \frac{f'}{f} = \frac{1}{1 - \frac{v_Q}{u} \cdot \sqrt{\f
 
 \subsubsection{Optischer Doppler Effekt}
 
-\textbf{Wird verwendet, wenn die Wellengeschwindigkeit $\boldsymbol{u}$ gleich der Lichtgeschwindigkeit $\boldsymbol{c}$ ist!}
+\textbf{Wird verwendet, wenn die Wellengeschwindigkeit $\boldsymbol{u}$ gleich der Lichtgeschwindigkeit $\boldsymbol{c}$ ist!} \quad $c = 300 \cdot 10^6 \, \frac{\meter}{\second}$
 
 Es spielt nur die \textbf{relative} Bewegung von Beobachter und Quellen eine Rolle
 
@@ -458,8 +471,21 @@ $$ \boxed{f' = \frac{\sqrt{1-\beta^2}}{1 - \beta \cos(\vartheta)}f \qquad  \text
 
 \begin{align*}
     \text{für } \beta \ll 1 \qquad f'                                            &\simeq \frac{1}{1- \beta \cdot \cos(\theta)} \cdot f \\
-    \text{für } \beta \ll 1 \text{ und } \theta \approx \frac{\pi}{2} \qquad f'  &\simeq \frac{1}{1- \beta } \cdot f
+    \text{für } \beta \ll 1 \text{ und } \theta \approx 0 \qquad f'  &\simeq \frac{1}{1- \beta } \cdot f
 \end{align*}
+
+\medskip
+
+\textbf{Frequenzverschiebung} für $\beta \ll 1$:
+$$ \Delta f = f' - f \simeq \beta \, \cos(\vartheta) \cdot f $$
+
+\textbf{Reflexion (Radar, Hin + Zurück):} Doppler-Effekt tritt zweimal auf
+$$ \boxed{\Delta f \simeq 2 \, \beta \, \cos(\vartheta) \cdot f = \frac{2 \, v \, \cos(\vartheta)}{c} \, f} \qquad \Rightarrow \qquad v = \frac{c \, |\Delta f|}{2 \, f \, |\cos(\vartheta)|} $$
+
+$\vartheta$ = Winkel zwischen $\vec{v}$ und Verbindungslinie.
+$\vartheta < 90^\circ$: Annäherung, $\Delta f > 0$ \quad $\vartheta > 90^\circ$: Entfernung, $\Delta f < 0$
+
+\textrightarrow\ Distanz und Geschwindigkeit zugleich messen: FMCW-Radar (Abschnitt \ref{FMCW})
 
 
 

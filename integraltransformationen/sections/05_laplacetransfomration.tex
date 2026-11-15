@@ -159,7 +159,7 @@ Wenn die Konvergenzhalbebene einer Übertragungsfunktion $G(s)$ eines LTI-System
 $$ H(\omega) = G(j \omega) = G(s) \biggr|_{s = j \omega} \qquad \text{\textrightarrow\ in $G(s)$ alle $s$ durch $\jimg \omega$ ersetzen} $$
 
 
-\subsection{BIBO-Stabilität}
+\subsection{BIBO-Stabilität}\label{sec:bibo}
 
 Ein LTI-System ist BIBO-stabil, wenn ein \textbf{beschränktes Eingangssignal} $x(t)$ zu einem \textbf{beschränkten Ausgangssignal} $y(t)$
 mit $\mathrm{max}( \vert y(t) \vert) < \infty$ führt.
@@ -175,7 +175,7 @@ $$ \int \limits_{- \infty}^{\infty} \vert y_{\delta} (t) \vert \, \diff t = \int
 
 Ein LTI-System ist BIBO-stabil, wenn  die \textbf{Konvergenzhalbebene} der Übertragungsfuntion $G(s)$ die \textbf{imaginäre Achse enthält}
 
-\textrightarrow\ $\Re(s_p) < 0$ bzw. Realteil der Polstelle $< 0$
+\textrightarrow\ $\Re(s_p) < 0$ bzw. Realteil der Polstelle $< 0$ \qquad \qquad {\small (Pollstelle \textrightarrow Denominatore)}
 
 
 \subsection{Pol-Nullstellen Plan (PN-Plan)}
@@ -185,9 +185,49 @@ Der PN-Plan stellt die Polstellen und Nullstellen einer Übertragungsfunktion $G
 \vspace{0.2cm}
 
 \begin{tabular}{ll}
-    Nullstellen:    & als Kreise dargestellt    \\
-    Polstellen:     & als Kreuzchen dargestellt 
+    Nullstellen:    & Zähler $= 0$, als Kreise $\circ$ dargestellt    \\
+    Polstellen:     & Nenner $= 0$, als Kreuzchen $\times$ dargestellt
 \end{tabular}
+
+\vspace{0.2cm}
+
+Komplexe Stellen treten immer als konjugiertes Paar $a \pm \jimg b$ auf.
+
+
+\subsubsection{Quadratische Formel}
+
+\noindent
+\begin{minipage}[c]{0.5\linewidth}
+    \small $s^2 + p\,s + q = 0$
+    $$ \boxed{ s = \frac{-p \pm \sqrt{p^2 - 4q}}{2} } $$
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}
+    \small
+    $p^2-4q > 0$: zwei reelle Pole\\
+    $p^2-4q = 0$: ein doppelter Pol\\
+    $p^2-4q < 0$: $a \pm \jimg b$, $a = -\tfrac{p}{2}$
+\end{minipage}
+
+\vspace{0.3cm}
+
+\noindent \textbf{Beispiel}\smallskip
+
+\noindent
+\begin{minipage}[c]{0.56\linewidth}
+    \small
+    $G(s) = \dfrac{s+1}{s^2+2s+17}$\smallskip
+
+    \cor{Nullstelle:} $s=-1$\smallskip
+
+    Pole: $p^2-4q = -64$\\
+    $s = \dfrac{-2 \pm \jimg 8}{2} = \cbl{-1 \pm \jimg 4}$\smallskip
+
+    \textrightarrow\ $\Re(s_p) < 0$: BIBO-stabil (\ref{sec:bibo})
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}
+    \centering
+    \input{tikz/pn_plan_beispiel.tex}
+\end{minipage}
 
 
 \subsection{Zusammengesetzte LTI-Systeme}

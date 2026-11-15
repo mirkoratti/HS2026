@@ -4,6 +4,47 @@
 
 \includegraphics[width=\columnwidth]{images/wrstat_uebungen_loesen.png}
 
+\subsection{Vom Text zur Formel}
+
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|}
+	\hline
+	\rowcolor{subsectioncolor!30}\multicolumn{3}{|l|}{\textbf{1) Grenzen} ($\leq$ oder $<$?)} \\ \hline
+	\glqq höchstens $k$\grqq, \glqq bis $k$\grqq		& $X \leq k$				& $P(X \leq k) = F(k)$ \\
+	\glqq mehr als $k$\grqq (diskret)					& $X \geq k+1$				& $1 - P(X \leq k)$ \\
+	\glqq mindestens $k$\grqq							& $X \geq k$				& $1 - P(X \leq k-1)$ \\
+	\glqq mindestens einmal\grqq						& nicht keiner				& $1 - P(\text{keiner})$ \\
+	\glqq zwischen $a$ und $b$\grqq (Normal)			& $a < X \leq b$			& $\Phi(z_b) - \Phi(z_a)$ \\
+	\glqq symmetrisch, 99\,\% drin\grqq					& $\pm z$, $\Phi(z) = 0.995$	& Fläche $= 2\,\Phi(z) - 1$ \\ \hline
+	\rowcolor{subsectioncolor!30}\multicolumn{3}{|l|}{\textbf{2) Zeit:} kaputt / intakt} \\ \hline
+	\glqq kaputt nach / bis $x$\grqq					& $T \leq x$				& $F(x)$ \\
+	\glqq hält $x$\grqq, \glqq intakt\grqq				& $T > x$					& $G(x) = 1 - F(x)$ \\ \hline
+	\rowcolor{subsectioncolor!30}\multicolumn{3}{|l|}{\textbf{3) Welche Verteilung?}} \\ \hline
+	Zeit fix, \textbf{Anzahl} gesucht					& Poisson					& $\lambda = $ Ø Anzahl im Intervall \\
+	Anzahl fix, \textbf{Zeit} gesucht					& Erlang					& \\
+	\crd{\glqq selten\grqq}								& Poisson					& $\lambda = n \, p$ \\
+	Summe von $n$ gleichen Teilen						& Normal					& $N(n\mu, \, n\sigma^2)$, $\sigma_S = \sqrt{n}\,\sigma$ \\ \hline
+	\rowcolor{subsectioncolor!30}\multicolumn{3}{|l|}{\textbf{4) Bedingt / Verknüpfung}} \\ \hline
+	\glqq gegeben $B$\grqq, \glqq unter der Bedingung $B$\grqq	& bedingt					& $P(A|B) = \dfrac{P(A \cap B)}{P(B)}$ \\
+	\glqq $A$ und $B$\grqq (beide)						& Schnitt					& $P(A \cap B)$ \\
+	\glqq $A$ oder $B$\grqq (mindestens eines)			& Vereinigung				& $P(A) + P(B) - P(A \cap B)$ \\
+	\glqq nur $A$\grqq, \glqq $A$ aber nicht $B$\grqq	& $A \cap \overline{B}$		& $P(A \cap \overline{B})$ \\
+	\glqq unabhängig\grqq								& 							& $P(A \cap B) = P(A) \, P(B)$ \\
+	Ursache aus Wirkung gesucht							& Bayes						& $P(A|B) = \dfrac{P(B|A) \, P(A)}{P(B)}$ \\[0.8em] \hline
+\end{tabular}}
+\renewcommand{\arraystretch}{1}
+\setlength{\tabcolsep}{6pt}
+
+\smallskip
+{\small
+\textrightarrow\ \crd{Einheit prüfen:} eine Wahrscheinlichkeit hat keine Einheit, kommt z.B. $1/\text{min}$ heraus, ist es eine Dichte \\
+\textrightarrow\ Vor dem Teilen in $Z$: $\sigma = \sqrt{\var}$ hinschreiben \\
+\textrightarrow\ \crd{$P(A|B) \neq P(B|A)$:} die Frage sagt, welches Ereignis die Bedingung ist \\
+\textrightarrow\ \textbf{Unabhängig} $\neq$ \textbf{disjunkt}: unabhängig $\Rightarrow P(A \cap B) = P(A) \, P(B)$, disjunkt $\Rightarrow P(A \cap B) = 0$
+}
+
 \subsection{Berechnungsformular}
 
 \renewcommand{\arraystretch}{1.5}
@@ -82,3 +123,132 @@ $$ \boxed{ G = \omega \, H + (1-\omega) \, \frac{1}{N} A } \qquad A = \begin{pma
 
 \textbf{PageRank} = autovettore $p$ di $G$ con autovalore $1$:
 $$ \boxed{ G \, p = p } \qquad p = \lim_{n \to \infty} G^n p_0 $$
+
+
+\subsection{Warteschlange M/M/1}
+
+\subsubsection{Das Bild}
+
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize, >=Stealth]
+	\node[left] at (-0.2,0) {Ankünfte};
+	\draw[->, thick, orange] (0,0) -- (0.9,0) node[midway, above] {$\lambda$};
+	\foreach \i in {0,1,2,3} { \draw[fill=gray!15] (1+0.45*\i,-0.25) rectangle (1.4+0.45*\i,0.25); }
+	\node[font=\scriptsize] at (1.9,-0.5) {Warteschlange};
+	\draw[->, thick] (2.9,0) -- (3.3,0);
+	\node[draw, circle, fill=blue!10, minimum size=0.8cm] (S) at (3.8,0) {S};
+	\draw[->, thick, blue] (4.2,0) -- (5.1,0) node[midway, above] {$\mu$};
+	\node[right] at (5.1,0) {fertig};
+\end{tikzpicture}}
+
+\smallskip
+\textbf{Kendall:} \; $\underbrace{M}_{\text{Ankünfte}}/\underbrace{M}_{\text{Service}}/\underbrace{1}_{\text{Server}}$ \quad
+$M$ = exponentialverteilt, $D$ = konstant, $G$ = allgemein. \\
+Fehlt der Rest: Kapazität $\infty$, Population $\infty$, FIFO.
+
+\subsubsection{Legenda}
+
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{4pt}
+{\small
+\begin{tabular}{@{}cl@{\hspace{1.2em}}cl@{}}
+	$\lambda$ & arrivi al secondo & $k$ & richieste nel sistema \\
+	$\mu$ & servizi al secondo (\crd{non} $E(X)$) & $p_k$ & prob. di avere $k$ richieste \\
+	$1/\mu$ & tempo medio di servizio & $L$ & richieste in media, sistema \\
+	$\varrho$ & $\lambda/\mu$ = quanto lavora il server & $L_Q$ & richieste in media, solo coda \\
+	$w$ & attesa media + servizio & $w_Q$ & attesa media solo in coda \\
+\end{tabular}}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1}
+
+\subsubsection{Zustände}
+
+$k$ = Anzahl Kunden im System (in Bedienung \textbf{und} Warteschlange).
+
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize, >=Stealth,
+	st/.style={draw, circle, minimum size=0.8cm, fill=gray!10}]
+	\foreach \i/\t in {0/{0 idle}, 1/{1 busy}, 2/{2 wait}, 3/{3}} {
+		\node[st] (s\i) at (1.8*\i,0) {\i};
+	}
+	\node (dots) at (7.2,0) {$\cdots$};
+	\foreach \i/\j in {0/1, 1/2, 2/3} {
+		\draw[->, orange, thick] (s\i) to[bend left=30] node[above] {$\lambda$} (s\j);
+		\draw[->, blue, thick] (s\j) to[bend left=30] node[below] {$\mu$} (s\i);
+	}
+	\draw[->, orange, thick] (s3) to[bend left=30] node[above] {$\lambda$} (dots);
+	\draw[->, blue, thick] (dots) to[bend left=30] node[below] {$\mu$} (s3);
+	\node[font=\scriptsize, gray] at (0,-0.8) {leer};
+\end{tikzpicture}}
+
+\smallskip
+{\small $\lambda$ und $\mu$ sind \textbf{in jedem Zustand gleich} (nur bei $k=0$ gibt es kein $\mu$).}
+
+\subsubsection{Auslastung $\varrho = \lambda/\mu$ \textrightarrow\ alles}
+
+\begin{minipage}[t]{0.48\columnwidth}
+\centering
+\begin{tikzpicture}[x=0.27cm, y=2.4cm, >=Stealth]
+	\foreach \k in {0,...,8} {
+		\pgfmathsetmacro{\h}{(0.5^\k)*0.5}
+		\fill[blue!50] (\k-0.35,0) rectangle (\k+0.35,\h);
+	}
+	\draw[->, gray] (-0.6,0) -- (8.8,0) node[right, font=\tiny] {$k$};
+	\node[font=\scriptsize, blue] at (4.5,0.4) {$\varrho = 0.5$};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+\centering
+\begin{tikzpicture}[x=0.27cm, y=2.4cm, >=Stealth]
+	\foreach \k in {0,...,8} {
+		\pgfmathsetmacro{\h}{(0.9^\k)*0.1}
+		\fill[red!50] (\k-0.35,0) rectangle (\k+0.35,\h);
+	}
+	\draw[->, gray] (-0.6,0) -- (8.8,0) node[right, font=\tiny] {$k$};
+	\node[font=\scriptsize, red] at (4.5,0.4) {$\varrho = 0.9$};
+\end{tikzpicture}
+\end{minipage}
+
+\smallskip
+$$ \boxed{ p_k = \varrho^k\,(1-\varrho) } \qquad p_0 = 1-\varrho \;\text{(leer)} \qquad P(\text{busy}) = \varrho $$
+\textbf{Bedingung:} $\varrho < 1$ (also $\lambda < \mu$), sonst wächst die Schlange ins Unendliche. Hohes $\varrho$ \textrightarrow\ Balken flach, lange Schlange.
+
+\subsubsection{Formeln}
+
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{lll}
+	$L$ & $= \dfrac{\varrho}{1-\varrho}$ & im System \\
+	$L_Q$ & $= \dfrac{\varrho^2}{1-\varrho}$ & nur in der Schlange \\
+	$w$ & $= \dfrac{1}{\mu-\lambda}$ & Zeit im System \\
+	$w_Q$ & $= \dfrac{\varrho}{\mu-\lambda}$ & Wartezeit in der Schlange \\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+\smallskip
+\textbf{Little:} \; $\boxed{L = \lambda \cdot w}$ \quad (durch $\lambda$ teilen, \textbf{nicht} durch $\mu$) \\
+Kontrolle: $w - w_Q = \frac{1}{\mu}$ (= Servicezeit).
+
+\medskip
+\resizebox{0.55\columnwidth}{!}{%
+\begin{tikzpicture}[x=5cm, y=0.28cm, >=Stealth]
+	\draw[->, gray] (0,0) -- (1.05,0) node[right, font=\scriptsize] {$\varrho$};
+	\draw[->, gray] (0,0) -- (0,9.5) node[above, font=\scriptsize] {$\mu\, w_Q$};
+	\draw[thick, blue, domain=0:0.7, samples=30] plot (\x,{\x/(1-\x)});
+	\draw[thick, red, domain=0.7:0.9, samples=20] plot (\x,{\x/(1-\x)});
+	\draw[dashed, gray] (1,0) -- (1,9.5);
+	\node[font=\tiny, gray] at (1,-0.9) {$1$};
+	\node[font=\scriptsize, red, anchor=east] at (0.88,8) {Explosion};
+	\node[font=\scriptsize, blue, anchor=west] at (0.05,3) {flach};
+\end{tikzpicture}}
+
+\subsubsection{Fallen und Beispiel}
+
+\begin{itemize}
+	\item \crd{$L \neq L_Q$:} sie unterscheiden sich um $\varrho$ ($L = L_Q + \varrho$).
+	\item \crd{$\mu$ ist hier eine Rate} (pro Sekunde), nicht der Erwartungswert wie bei der Normalverteilung.
+	\item \crd{80\,\% \textrightarrow\ 90\,\%} Auslastung: $L_Q$ springt von $3.2$ auf $8.1$.
+\end{itemize}
+
+\textbf{Beispiel Router:} $\lambda = 800/\text{s}$, $\mu = 1000/\text{s}$ \textrightarrow\ $\varrho = 0.8$, $L = 4$, \\
+$w = \frac{1}{\mu-\lambda} = 5\,\text{ms}$ \quad Little: $\lambda\, w = 800 \cdot 0.005 = 4 = L$ $\checkmark$

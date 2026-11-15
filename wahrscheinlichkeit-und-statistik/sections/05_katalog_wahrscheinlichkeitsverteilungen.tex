@@ -446,16 +446,15 @@ $X$ normalverteilt, mit $E(X) = \mu$, $\var(X) = \sigma^2$, dann ist $Z$ normalv
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.57\columnwidth}
-	\myul{\textbf{TI-nspire Befehle (Scratchpad)}}
+	\myul{\textbf{HP Prime Befehle (Home / CAS)}}
 
 	\vspace{0.2cm}
 
 	\begin{tabular}{ll}
-		$\Phi(x)$ 		& normCdf($\cbl{a}$, $\cor{b}$, $\mu$, $\sigma$)	\\
-						& menu-6-5-2										\\
+		$\Phi(x)$ 		& \hp{NORMALD\_CDF($\mu$, $\sigma$, $\cbl{a}$, $\cor{b}$)}	\\
+						& einseitig: $\mp 10^{99}$	\\
 		\\
-		$\Phi^{-1}(p)$ 	& invNorm($p$)										\\
-						& menu-6-5-3
+		$\Phi^{-1}(p)$ 	& \hp{NORMALD\_ICDF($p$)}
 	\end{tabular}
 
 	\vspace{0.3cm}
@@ -666,8 +665,8 @@ $X =$ Anzahl Eintreten von $A$ in $n$ \textbf{unabhängigen} Durchführungen
 $$ \boxed{ P( X = k ) = \begin{pmatrix} n \\ k \end{pmatrix} p^k (1-p)^{n-k} } $$
 
 \textbf{Notation: } $X \sim \Bi(n, p)$ \\
-Taschenrechner Binomialkoeffizient: nCr($n, \, k$) \\
-Taschenrechner Binomialverteilung: binomPdf($n, \, p, \,k$)
+Taschenrechner Binomialkoeffizient: \hp{COMB($n, \, k$)} \\
+Taschenrechner Binomialverteilung: \hp{BINOMIAL($n, \, k, \, p$)}
 
 
 \subsubsection{Eigenschaften der Binomialverteilung}
@@ -950,6 +949,3 @@ $$ F(x) =  \begin{cases}
 
 \vspace{0.15cm}
 \textbf{Anwendungen:} Verteilung von Zufallszahlen, keine bevorzugten Werte
-
-\columnbreak
-

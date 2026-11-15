@@ -13,9 +13,18 @@
     RTC & WWDG (eigenen Code überwachen)
 \end{tabularx}
 
+\subsubsection{Timer: PWM messen (Input-Capture)}
+\begin{itemize}
+    \item \textbf{Ch1} (steigende Flanke, Reset-Capture): Counter wird gespeichert und auf $0$ gesetzt $\Rightarrow$ \textcolor{orange!80!black}{CCR1} = Periode.
+    \item \textbf{Ch2} (fallende Flanke, Capture): \textcolor{blue!70!black}{CCR2} = Pulsdauer. Duty $\approx (\mathrm{CCR2}+1)/(\mathrm{CCR1}+1)$.
+    % \item $\mathrm{CCR}=\dfrac{t}{T_{\rm tick}}-1$\quad $T_{\rm tick}=\dfrac{\mathrm{CKD}\,(\mathrm{PSC}+1)}{f_{in}}$ (CKD = Internal Clock Division: 1, 2, 4).
+\end{itemize}
+\begin{center}\input{tikz/pwm_messen.tex}\end{center}
+\vspace{-1.2em}
+
 \subsection{M4 vs M0}
 \begin{itemize}
-    \item \textbf{M4:} schnellere Taktung als M0 \textrightarrow High Performance / neuere Technologie
+    \item \textbf{M4:} High Performance / neuere Technologie, schnellere Taktung und Codeausführung (Thumb-2). Zusätzlich: FPU, erweiterte Debug-Unit, Harvard-Architektur, Bit-Banding, SIMD, DSP-Funktionen, ALU, Barrel Shifter, MAC.
     \item \textbf{M0:} Low Power / Low Cost (alte Technologie)
 \end{itemize}
 
@@ -42,15 +51,6 @@
 \begin{minipage}{0.49\columnwidth}
     \includegraphics[width=\linewidth]{images/busses.png}
 \end{minipage}
-
-\subsubsection{Vorteile Cortex-M4 gegenüber Cortex-M0}
-\begin{itemize}
-    \item Floating Point Unit, erweiterte Debug-Unit
-    \item Harvard-Architektur
-    \item Bit-Banding, SIMD-Befehle, erweiterter Befehlssatz, DSP-Funktionen.
-    \item Schnellere Ausführung von Code, unterstützt Thumb-2.
-    \item ALU und Barrel Shifter und Multiply \& Accumulate Unit (MAC)
-\end{itemize}
 
 \subsection{Wichtigkeit Standardisierung von ARM-Cortex}
 \begin{itemize}
