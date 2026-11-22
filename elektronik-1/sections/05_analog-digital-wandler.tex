@@ -102,7 +102,7 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 	\textbf{Iterativ}: S\&H, 1-Bit-ADC, 1-Bit-DAC, Subtrahierer, $\times 2$ zurück zum S\&H; pro Loop 1 Bit
 \end{minipage}
 
-\subsection{SAR mit Kondensator-DAC (Wägeverfahren)}\label{sec:sar}
+\subsection{SAR-ADC (Wägeverfahren, Kondensator-DAC)}\label{sec:sar}
 
 \begin{minipage}[c]{0.4\columnwidth}
 	\includegraphics[width=\columnwidth]{images/SAR_ADC.png}
@@ -158,14 +158,13 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 
 \subsection{Integrierende Wandler (Zählverfahren)}\label{sec:integrierend}
 
-{\renewcommand{\arraystretch}{2}
+{\renewcommand{\arraystretch}{2.3}
 \begin{tabularx}{\columnwidth}{@{}l X@{}}
 	\toprule
 	\textbf{Wandler} & \textbf{Formel \; / \; Merkmal} \\ \midrule
 	Zähl (DAC-Rampe) & Zählerstand = Code \; / \; aufgerundet, bis $2^n$ Takte \\
 	Single-Slope     & $T_{\rm int} = -\dfrac{V_{\rm ref}\,RC}{V_{\rm in}}$ \; / \; Zeit hängt vom Signal ab, Division nötig \\
-	Dual-Slope       & $-\dfrac{\overline{V_{\rm in}}}{V_{\rm ref}} = \dfrac{T_{\rm abint}}{T_{\rm int}} = \dfrac{n}{N}$ \;(AGND $=0$) \qquad $RC$ kürzt sich weg \\
-	                 & mit AGND: $\dfrac{V_{\rm in}-V_{\rm AGND}}{V_{\rm ref}-V_{\rm AGND}} = -\dfrac{n}{N}$ \\
+	Dual-Slope       & $-\dfrac{\overline{V_{\rm in}}}{V_{\rm ref}} = \dfrac{T_{\rm abint}}{T_{\rm int}} = \dfrac{n}{N}$  \quad mit AGND: $\dfrac{V_{\rm in}-V_{\rm AGND}}{V_{\rm ref}-V_{\rm AGND}} = -\dfrac{n}{N}$ \\
 	Charge Balancing & gleiche Formel $-\dfrac{\overline{V_{\rm in}}}{V_{\rm ref}} = \dfrac nN$, Portion $Q = \dfrac{T_{\rm clk}\,V_{\rm ref}}{R_i}$ \; / \; integriert immer; grosses $N$: genau, aber langsam \\ \bottomrule
 \end{tabularx}}
 
@@ -208,7 +207,6 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 	\begin{steps}
 		\item \textbf{Aufintegration} während $T_{\rm int}$:
 		      \; $V_{\rm int} = V_{\rm AGND} - \dfrac{V_{\rm in}-V_{\rm AGND}}{R_iC_i}\,T_{\rm int}$
-		      \; (AGND $=0$: $-\dfrac{\overline{V_{\rm in}}\,T_{\rm int}}{R_iC_i}$)
 		\item \textbf{Abintegration} mit $V_{\rm ref}$ bis $V_{\rm AGND}$: Abfall $V_{\rm abint} = \dfrac{V_{\rm ref}-V_{\rm AGND}}{R_iC_i}\,T_{\rm abint} = -(V_{\rm int}-V_{\rm AGND})$, \;
 		      daraus \; $T_{\rm abint} = T_{\rm int}\,\dfrac{V_{\rm AGND}-V_{\rm in}}{V_{\rm ref}-V_{\rm AGND}}$
 		\item \textbf{Auflösung}:
@@ -227,8 +225,15 @@ Quantisierungsfehler $|E_q| < \frac12\,$LSB nur mit Runden, sonst $0\dots 1\,$LS
 	                                  ${\rm DNL} < 1\,{\rm LSB} \Rightarrow \Delta V_{\rm REF} > 2^{n+1}\,V_{\rm os}$ \\
 	Abtasttheorem                   & $f_s > 2 f_{\max}$, sonst Aliasing \\
 	Sample-Hold                     & sinc-Tiefpass: dämpft alle $f > 0$ \\
-	SNR                             & $P_Q = \dfrac{q^2}{12}$, \; ${\rm SNR} = 6.02\,n + 1.76\,$dB, \;
-	                                  ${\rm ENOB} = \dfrac{{\rm SNR}-1.76}{6.02}$ \\ \bottomrule
+	Signalleistung $P_S$            & $V_{\rm Amp} = 2^{n-1}\,q$ (Vollaussteuerung, $-q$ vernachlässigt), \;
+	                                  $V_{\rm eff} = \dfrac{V_{\rm Amp}}{\sqrt{2}}$\newline
+	                                  $P_S = V_{\rm eff}^{2} = 2^{2n-3}\,q^2$ \\
+	Rauschleistung $P_Q$            & $P_Q = \dfrac{q^2}{12}$ (Fehler gleichverteilt in $\pm q/2$) \\
+	SNR                             & ${\rm SNR} = 10\log_{10}\dfrac{P_S}{P_Q} = 10\log_{10}\!\left(1.5\cdot 2^{2n}\right) = 6.02\,n + 1.76\,$dB \;
+	                                  (\textbf{pro Bit $+6.02\,$dB}) \\
+	ENOB                            & ${\rm ENOB} = \dfrac{{\rm SNR}-1.76}{6.02}$ \\ \bottomrule
 \end{tabularx}}
 
 \warn{\textit{In $2^{n+1}V_{\rm os}$ il 2 di $2V_{\rm os}$ è già contato: non raddoppiare.}}
+
+\warn{\textit{$P_S$ vale solo a piena scala: con un segnale più piccolo il SNR scende dello stesso numero di dB.}}

@@ -255,7 +255,20 @@ $a \cos(\omega t) + b \sin(\omega t) = A \cos(\omega t - \varphi)$ mit $A = \sqr
         \midrule
         $\delta(t)$                                           & $\laplace$ & $1$                                                                                       \\
         Rechteck ($1$ für $|t| \le a$, sonst $0$)             & $\laplace$ & $2a \cdot \mathrm{sinc}(a\,\omega)$                                                       \\
+        $\mathrm{sinc}(a\,t)$                                 & $\laplace$ & Rechteck ($\frac{\pi}{a}$ für $|\omega| \le a$, sonst $0$)                               \\
+        Dreieck ($1 - |t|/a$ für $|t| \le a$, sonst $0$)      & $\laplace$ & $a \cdot \mathrm{sinc}^2\!\left(\frac{a\,\omega}{2}\right)$                               \\
         Dirac-Kamm $\sum_{n \in \mathbb{Z}} \delta(t - nT)$   & $\laplace$ & $\frac{2\pi}{T} \sum_{k \in \mathbb{Z}} \delta\!\left(\omega - k\,\frac{2\pi}{T}\right)$ \\
+        \addlinespace
+        $\delta(t - t_0)$                                     & $\laplace$ & $e^{-\jimg \omega t_0}$                                                                   \\
+        $1$                                                   & $\laplace$ & $2\pi\,\delta(\omega)$                                                                    \\
+        $e^{\jimg \omega_0 t}$                                & $\laplace$ & $2\pi\,\delta(\omega - \omega_0)$                                                         \\
+        $\mathrm{sgn}(t)$                                     & $\laplace$ & $\frac{2}{\jimg\omega}$                                                                   \\
+        $u(t)$                                                & $\laplace$ & $\pi\,\delta(\omega) + \frac{1}{\jimg\omega}$                                             \\
+        \addlinespace
+        $e^{-a t}\,u(t)$ \quad ($a > 0$)                      & $\laplace$ & $\frac{1}{a + \jimg\omega}$                                                               \\
+        $e^{-a |t|}$ \quad ($a > 0$)                          & $\laplace$ & $\frac{2a}{a^2 + \omega^2}$                                                               \\
+        $\frac{1}{a^2 + t^2}$                                 & $\laplace$ & $\frac{\pi}{a}\,e^{-a |\omega|}$                                                          \\
+        $e^{-a t^2}$ \quad ($a > 0$)                          & $\laplace$ & $\sqrt{\frac{\pi}{a}}\,e^{-\omega^2 / (4a)}$                                              \\
         \addlinespace
         $\cos(\omega_0\, t)$                                  & $\laplace$ & $\pi\bigl(\delta(\omega + \omega_0) + \delta(\omega - \omega_0)\bigr)$                    \\
         $\sin(\omega_0\, t)$                                  & $\laplace$ & $\jimg\pi\bigl(\delta(\omega + \omega_0) - \delta(\omega - \omega_0)\bigr)$               \\

@@ -1,0 +1,17 @@
+\begin{tikzpicture}[>=Latex, font=\footnotesize]
+  \draw[->] (-0.1,0) -- (5.4,0) node[below] {$\omega t - k x$};
+  \draw[->] (0,-1.15) -- (0,1.75);
+
+  \draw[orange, very thick, domain=0:720, samples=90, smooth, variable=\t]
+    plot ({\t/144},{cos(\t)});
+  \draw[black!55, thick, domain=0:720, samples=90, smooth, variable=\t]
+    plot ({\t/144},{sin(\t)});
+
+  \draw[dashed, black!40] (0,1) -- (0,1.45);
+  \draw[dashed, black!40] (0.625,1) -- (0.625,1.45);
+  \draw[<->] (0,1.35) -- (0.625,1.35);
+  \node[above] at (0.31,1.35) {$90^\circ$};
+
+  \node[orange, anchor=west] at (3.3,1.45) {\textbf{$p,\ v$}};
+  \node[black!55, anchor=west] at (3.9,-1.0) {\textbf{$\xi$}};
+\end{tikzpicture}

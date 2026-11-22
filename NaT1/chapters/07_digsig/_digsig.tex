@@ -4,7 +4,7 @@
 	\begin{tabularx}{\linewidth}{X|X}
 		\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
 				\setlength{\topsep}{0cm}} 
-				\item Zeitdikretisierung, endliche Anzahl von Werten pro Zeit
+				\item Zeitdiskretisierung, endliche Anzahl von Werten pro Zeit
 				\item störungsfreie Übertragung
 				\item Codierung (z.B. Fehlerkorrektur oder Verschlüsselung)
 		\end{list}
@@ -12,7 +12,7 @@
 		\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
 		\setlength{\topsep}{0cm}} 
 			\item Quantisierung, endliche Anzahl an Amplitudenwerten (Bits)
-			\item neue möglichkeiten für Signalverarbeitung
+			\item neue Möglichkeiten für Signalverarbeitung
 			\item Speicherung auf einheitlichen Medien
 	\end{list}
 	\end{tabularx}
@@ -26,12 +26,41 @@
 \includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/rekonstruktionTP.pdf}
 
 \subsubsection{Natural Sampling S. 81}
-\includegraphics{chapters/07_digsig/figures/naturalSampling.pdf}\\
-\textbf{Rekonstruktion:} Bei der Rekonstruktion muss das Signal nach dem Tiefpass noch mit dem Faktor $\frac{T_s}{\tau}$ multipliziert werden, um die Dämpfung wieder aufzuheben.
+$m(t)$ wird mit einer Folge von Rechteckpulsen (Breite $\tau$, Periode $T_s$) multipliziert; innerhalb des Pulses folgt $m_{NS}$ dem Signal.\\[.3em]
+\efbox[linecolor=red]{$m_{NS}(t) = m(t) \cdot \displaystyle\sum_{n=-\infty}^{\infty} \mathrm{rect}_{\tau/2}(t - nT_s)$}
+\quad $\Rightarrow$ \quad
+\efbox[linecolor=red]{$M_{NS}(\omega) = \displaystyle\sum_{n=-\infty}^{\infty} c_n \cdot M(\omega - n\omega_s)$}
+\quad $c_n = \dfrac{\tau}{T_s} \cdot \dfrac{\sin\left(n\,\omega_s\,\tau/2\right)}{n\,\omega_s\,\tau/2}$, \qquad $c_0 = \dfrac{\tau}{T_s}$
+\\[.4em]
+\textrightarrow\ Kopien von $M$ bei $n\,\omega_s$, jede nur mit der Konstante $c_n$ skaliert: die \textbf{Form bleibt} $\Rightarrow$ unverzerrt\\
+\input{chapters/07_digsig/figures/naturalSampling.tex}
+\definecolor{ardesia}{HTML}{4A4D52}\definecolor{papier}{HTML}{F6F5F1}
+\efbox[linecolor=ardesia,backgroundcolor=papier]{\begin{minipage}{.96\linewidth}
+\textbf{Rekonstruktion}\\[.1em]
+{\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{l X}
+	1. & Tiefpass bis $\omega_s/2$ mit Verstärkung $\dfrac{T_s}{\tau} = \dfrac{1}{c_0}$ (hebt die Dämpfung $c_0$ wieder auf) \\
+	2. & es passt nur die Kopie $n = 0$ \; $\Leftrightarrow$ \; $\omega_s > 2\,\omega_{max}$ \\
+	3. & $m_r(t) = m(t)$ \\
+\end{tabularx}}
+\end{minipage}}\\[.3em]
+{\small \textrightarrow\ ZOH: die $\mathrm{sinc}$ multipliziert das \textbf{ganze} Spektrum $\Rightarrow$ Verzerrung}\\
+{\small \textrightarrow\ kleineres $\tau$: kleineres $c_0$, flachere Hüllkurve; $\tau \to 0$ ist die ideale Abtastung}
 
 \subsubsection{Sample {\&} Hold (ZOH), Flat-Top Sampling S. 90}
 ZOH $\rightarrow$ Zero Order Hold. $H_{ZOH}(\omega) = \tau \cdot \frac{sin(\frac{\tau \omega}{2})}{\frac{\tau \omega}{2 }} \;\;\; , \;\;\; \tau \leq T_s$\\
 \includegraphics{chapters/07_digsig/figures/flattopsampling.pdf}
+
+\paragraph{Rekonstruktion im Vergleich}
+{\renewcommand{\arraystretch}{1.7}
+\begin{tabularx}{\linewidth}{l l l X}
+	\textbf{Methode} & \textbf{Impuls ersetzt $\delta(t - kT_s)$} & \textbf{Filter} & \textbf{$|H(f_s/2)|/|H(0)|$} \\ \hline
+	sinc (ideal) & $\dfrac{\sin\left(\pi \frac{t-kT_s}{T_s}\right)}{\pi \frac{t-kT_s}{T_s}}$ & Rechteck bis $f_s/2$ & $1$ \\
+	linear & $x_{tri}\left(\dfrac{t-kT_s}{2T_s}\right)$ & $T_s \cdot \left(\dfrac{\sin(\omega T_s/2)}{\omega T_s/2}\right)^2$ & $0.41$ ($-7.8$ dB) \\
+	ZOH & $x_{rect}\left(\dfrac{t-kT_s}{\tau_p}\right)$ & $\tau_p \cdot \dfrac{\sin(\omega \tau_p/2)}{\omega \tau_p/2}$ & $0.64$ ($-3.9$ dB), bei $\tau_p = T_s$ \\
+\end{tabularx}}\\
+{\small \textrightarrow\ ZOH: Kopien bei $\pm n f_s$ nur gedämpft $\Rightarrow$ analoges Rekonstruktionsfilter nötig}\\
+{\small \textrightarrow\ kürzere $\tau_p$: weniger Dämpfung im Basisband, Filter bleibt gleich anspruchsvoll}
 
 \subsubsection{Nyquist-Shannon Abtasttheorem S. 85}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
@@ -41,26 +70,47 @@ ZOH $\rightarrow$ Zero Order Hold. $H_{ZOH}(\omega) = \tau \cdot \frac{sin(\frac
 	\end{list}
 
 \begin{minipage}{.3\linewidth}
-	\textbf{Abtasttheorem für Basisbandsignale:} \efbox[linecolor=red]{$f_s > 2 \cdot B_m$}
+	\textbf{Abtasttheorem für Basisbandsignale:} \efbox[linecolor=red]{$f_s > 2 \cdot B_m$}\\[.3em]
+	{\small Einheiten: $[f_s] = [f_m] = [B_m] = \si{\hertz}$}
 \end{minipage}
 \begin{minipage}{.7\linewidth}
-	\begin{table}[H]
-		\begin{tabularx}{\linewidth}{|m{.4\linewidth} m{.6\linewidth}}
-			Nyquistrate: $f_{sN} = 2B_m$	&	Samplingfrequenz: $[f_s] = Hz$	\\
-			Nyquistfrequenz: $f_N = \frac{f_s}{2}$	&	Nachrichtenfrequenz: $[f_m] = Hz$ \\
-			Nyquistintervall: $T_N = \frac{1}{2B_m}$	&	Nachrichtenbandbreite: $[B_m] = Hz$\\
-		\end{tabularx}
-	\end{table}
+	{\renewcommand{\arraystretch}{1.6}
+	\begin{tabularx}{\linewidth}{l l X}
+		\textbf{Grösse} & \textbf{Formel} & \textbf{Bedeutung} \\ \hline
+		Nyquist-Rate      & $f_s > f_{s_N} = 2 B_m$ & minimale Samplerate \\
+		Nyquist-Frequenz  & $f_N = \dfrac{f_s}{2}$ & max. Frequenz bei gegebenem $f_s$ \\
+		Nyquist-Intervall & $T_s < T_{s_N} = \dfrac{1}{2 B_m}$ & max. Abstand der Samples \\
+		Nyquist-Zonen     & $0\ldots\tfrac{f_s}{2} \;|\; \tfrac{f_s}{2}\ldots f_s \;|\; \ldots$ & gerade Zonen: Spektrum gespiegelt \\
+	\end{tabularx}}
 \end{minipage}
 
-\paragraph{Abtasttheroem für Bandpasssignale S. 85 (Subsampling)}
-\includegraphics{chapters/07_digsig/figures/subsampling.pdf}
-\newpage
+\paragraph{Aliasing}
+Antialiasing-TP \textbf{vor} dem A/D-Wandler (auch gegen Störsignale).\\
+{\small \textrightarrow\ Alias-Frequenz: $f_a = |f - k \cdot f_s|$, $k$ = nächste ganze Zahl zu $f/f_s$}\\
+{\small \textrightarrow\ nach der Abtastung nicht mehr vom Nutzsignal trennbar}
+
+\paragraph{Abtasttheorem für Bandpasssignale S. 85 (Subsampling)}
+Nach dem Sampling wiederholt sich das Spektrum bei jedem $k \cdot f_s$; Band $[f_l, f_u]$ \textbf{und} Spiegelband $[-f_u, -f_l]$ wandern mit. Die Kopien müssen in die Lücken passen, ein Basisband ist nicht nötig. \textbf{Nur möglich}, wenn das Band \textbf{nicht im Basisband} liegt ($f_l > 0$, es berührt nicht $f = 0$); sonst bleibt $f_s > 2 f_u$.\\[.2em]
+\input{chapters/07_digsig/figures/subsampling.tex}
+{\small \textbf{Warum?} Kopie $n-1$ des Spiegelbands endet vor $f_l$ $\Rightarrow$ $f_s \le \frac{2 f_l}{n-1}$; Kopie $n$ beginnt nach $f_u$ $\Rightarrow$ $f_s \ge \frac{2 f_u}{n}$}\\[.4em]
+\definecolor{ardesia}{HTML}{4A4D52}\definecolor{papier}{HTML}{F6F5F1}
+\efbox[linecolor=ardesia,backgroundcolor=papier]{\begin{minipage}{.96\linewidth}
+\textbf{Rezept}\\[.1em]
+{\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{l X}
+	1. & $B = f_u - f_l$, \quad $n_{sub} = \left\lfloor \dfrac{f_u}{B} \right\rfloor$ \\
+	2. & \textbf{für jedes} $n = 1, 2, \ldots, n_{sub}$: \; \efbox[linecolor=red]{$\dfrac{2 f_u}{n} < f_s < \dfrac{2 f_l}{n-1}$} \quad ($n=1$: nur $f_s > 2 f_u$) \\
+	3. & $f_s$ in einem Fenster $\Rightarrow$ kein Aliasing, sonst Aliasing. \quad $f_{s,min} \approx \dfrac{2 f_u}{n_{sub}}$ \\
+\end{tabularx}}
+\end{minipage}}\\[.3em]
+{\small \textrightarrow\ zwischen den Fenstern liegt Aliasing: nicht jedes $f_s \ge f_{s,min}$ geht! Rückgewinnung mit \textbf{Bandpass}}\\
+{\small \textrightarrow\ Folien: strikte Ungleichungen (bei Gleichheit schliesst sich das Fenster; ist $f_u/B$ ganzzahlig, dann $n_{sub} = \frac{f_u}{B} - 1$)}
 \paragraph{Interpolation im digitalen Bereich S. 92 (Oversampling)}
 Bei Oversampling werden auf \textbf{digitaler Seite Zwischenwerte berechnet} (Interpolation) um mehr Samples zu generieren vor der D/A Wandlung. Das führt dazu, dass das \textbf{Basisband erweitert} wird (also die Blöcke im Amplitudendichtespektrum auseinandergeschoben werden, vgl Abbildung unten und "ideale Abtastung").\\
 \vspace{.3cm}
-Berechnung der Zwischenwerte: \efbox[linecolor=red]{$m(t)=\sum_{n=-\infty}^{\infty} m(nT_0) \frac{sin(\omega_c(t-nT_0))}{\omega_c(t-T_0)} \text{  mit  } \omega_c = \frac{\omega_s}{2}$}\\
-\textbf{Vorteile:} TP-Filter kann einfacher realisiert werden (\textbf{weniger Steilheit} erforderlich), Signal wird originalgetreuer rekonstruiert; Amplitudengang des ZOH kann digital kompensiert werden.
+Berechnung der Zwischenwerte: \efbox[linecolor=red]{$m(t)=\sum_{n=-\infty}^{\infty} m(nT_0) \frac{sin(\omega_c(t-nT_0))}{\omega_c(t-nT_0)} \text{  mit  } \omega_c = \frac{\omega_s}{2}$}\\
+\textbf{Vorteile:} TP-Filter kann einfacher realisiert werden (\textbf{weniger Steilheit} erforderlich), Signal wird originalgetreuer rekonstruiert; Amplitudengang des ZOH kann digital kompensiert werden.\\
+{\small \textrightarrow\ $n$-fache Interpolation: analoges Filter mit Durchlass $0\ldots f_s/2$ sperrt erst ab $\left(n - \tfrac{1}{2}\right) \cdot f_s$}
 
 \begin{center}
 	\includegraphics[width=.75\linewidth]{chapters/07_digsig/figures/abbildung6_6.pdf}\\
@@ -74,7 +124,7 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 \subsubsection{Gleichförmige Quantisierung S.93}
 
 \begin{tabularx}{\linewidth}{p{.25\linewidth} p{.2\linewidth} p{.25\linewidth} p{.2\linewidth}}
-	Skalierung von $m(t)$:    & $|m_n(t) < 1$ & Wortlänge der Samples: & n Bits \\
+	Skalierung von $m(t)$:    & $|m_n(t)| \le 1$ & Wortlänge der Samples: & n Bits \\
 	Quantisierungsintervalle: & $L = 2^n$     & Intervallbreite:       & $\Delta = 2/L = 2^{-(n-1)}$
 \end{tabularx}\\
 
@@ -83,6 +133,7 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 	Fehlersignal $q_e(nT)$:	& Abweichung vom effektiven Wert zum quantisierten Wert. Char. von weissem Rauschen $->$ gleichverteilt im Intervall $-\Delta/2 ... \Delta/2$\\
 	Maximaler Fehler:		&  $-\Delta/2 < q_e(nT_s) < \Delta/2$ \hspace{2cm} \efbox[linecolor=red]{$P_{qe}=N=\frac{1}{\Delta} \int_{-\Delta/2}^{\Delta/2} q_e^2dq_e = \frac{\Delta^2}{12}$}
 \end{tabularx}\\
+{\small \textrightarrow\ $m_d = m_s + q_e$; $q_e$ wirkt als weisses Rauschen nur bei $n \ge 8$ bit und stochastischem Signal}\\
 
 \paragraph{SNR Signal-Rausch Verhältnis S. 93}
 \begin{tabularx}{\linewidth}{p{.45\linewidth} p{.5\linewidth}}
@@ -98,15 +149,38 @@ Nach dem Sampling liegen die zeitdiskreten Abtastwerte noch immer \textbf{amplit
 	\boxedeq{\begin{split} SNR_q=\frac{S}{N_q}=\frac{m^2_{RMS}}{\frac{\Delta^2}{12}} = \frac{P_m}{P_{qe}}= \frac{(\frac{1}{C})^2}{\frac{(\frac{1}{2^{n-1}})^2}{12}} = \frac{3}{C^2} \cdot 2^{2n} \\
 	SNR_{q,dB} = n \cdot \qty{6.02}{\dB} + 10 \cdot log_{10} (\frac{3}{C^2}) \qty{ }{\dB} \end{split}}
 \end{minipage}
-\end{tabularx}
+\end{tabularx}\\
+{\small \textrightarrow\ Sinus: $C = \sqrt{2} \Rightarrow +1.76$ dB \quad · \quad gleichverteilt: $C = \sqrt{3} \Rightarrow 0$ dB, also $SNR_q \approx n \cdot 6$ dB}
 
 \subsubsection{Ungleichförmige Quantisierung S. 94}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm}
 		\setlength{\topsep}{0cm}} 
 		\item Bei gleichförmiger Quantisierung ist N konstant $\rightarrow$ Verschlechterung der SNR bei tiefen Signalpegeln
 		\item bei \textbf{Sprachsignalen vorwiegend kleine Pegel} (nicht gleichverteilt!)
-		\item Quanatisierungsintervalle $\Delta$ sind für kleine Signalpegel klein und für grosse Signalpegel grösser $\rightarrow$ SNR wird verbessert
+		\item Quantisierungsintervalle $\Delta$ sind für kleine Signalpegel klein und für grosse Signalpegel grösser $\rightarrow$ SNR wird verbessert
 	\end{list}
+
+\paragraph{A-Law nach G.711 (diskret)}
+$f_s = 8$ kHz $\cdot$ 8 bit = 1 Vorzeichen + 7 Amplitude $\cdot$ Band $300\ldots3400$ Hz; intern 12 bit linear\\
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l l l l}
+	\textbf{Bereich} & \textbf{$\Delta$} & \textbf{Intervalle} & \textbf{$\approx$ Auflösung} \\ \hline
+	$0 \ldots \tfrac{1}{64}$ & $\tfrac{1}{2048}$ & 32 & 12 bit \\
+	$\tfrac{1}{64} \ldots \tfrac{1}{32}$ & $\tfrac{1}{1024}$ & 16 & 11 bit \\
+	$\ldots$ & $\Delta$ verdoppelt sich & je 16 & $-1$ bit pro Segment \\
+	$\tfrac{1}{2} \ldots 1$ & $\tfrac{1}{32}$ & 16 & 6 bit \\
+\end{tabular}}\\
+{\small \textrightarrow\ $SNR \approx 40$ dB konstant für $\bar{S}/S_{max} \approx -36\ldots-6$ dB}\\
+{\small \textrightarrow\ u-Law (USA): gleiche Kennwerte, andere Intervalle und Codes}
+
+\subsection{Codierung}
+{\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{l l}
+	linear: & \texttt{0x0000}\ldots\texttt{0xFFFF} vom tiefsten zum höchsten Intervall \\
+	Zweierkomplement: & positiv \texttt{0x0000}\ldots\texttt{0x7FFF}, negativ \texttt{0x8000}\ldots\texttt{0xFFFF} \\
+\end{tabular}}\\
+{\small \textrightarrow\ Zweierkomplement = linear mit invertiertem MSB}
+\vfill
 
 \subsection{Deltamodulator S. 99}
 \includegraphics[width=.95\linewidth]{chapters/07_digsig/figures/deltamodulator.pdf}\\

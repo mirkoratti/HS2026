@@ -29,8 +29,8 @@ Unterschied: \textbf{wo} $m(t)$ hineingesteckt wird. PM: $m(t)$ ist proportional
 	Phasenabweichung $\varphi(t)$ & $\varphi(t) = k_P \cdot m(t)$ & $\displaystyle \varphi(t) = k_F \int_{-\infty}^{t} m(\tau)\diff\tau$ \\ \hline
 	Frequenzabweichung $\frac{\diff\varphi}{\diff t}$ & $\displaystyle \frac{\diff\varphi}{\diff t} = k_P \cdot \frac{\diff m(t)}{\diff t}$ & $\displaystyle \frac{\diff\varphi}{\diff t} = k_F \cdot m(t)$ \\ \hline
 	Momentankreisfrequenz & $\displaystyle \omega_i(t) = \omega_c + k_P \cdot \frac{\diff m(t)}{\diff t}$ & $\omega_i(t) = \omega_c + k_F \cdot m(t)$ \\ \hline
-	Phasenhub $\Delta\varphi$ & $k_P \cdot \max|m(t)|$ & $\displaystyle k_F \cdot \max\Big|\int m(\tau)\diff\tau\Big|$ \\ \hline
-	Frequenzhub $\Delta\omega$ & $\displaystyle k_P \cdot \max\left|\frac{\diff m(t)}{\diff t}\right|$ & $k_F \cdot \max|m(t)|$ \\ \hline
+	Phasenhub $\Delta\varphi$ [rad] & $k_P \cdot \max|m(t)|$ & $\displaystyle k_F \cdot \max\Big|\int m(\tau)\diff\tau\Big|$ \\ \hline
+	Frequenzhub $\Delta\omega$ [rad/s] & $\displaystyle k_P \cdot \max\left|\frac{\diff m(t)}{\diff t}\right|$ & $k_F \cdot \max|m(t)|$ \\ \hline
 	Konstante & $k_P$ = Phasenhubkonstante [rad] (pro Einheit von $m$) & $k_F$ = Frequenzhubkonstante [rad/s] (pro Einheit von $m$) \\ \hline
 	\textbf{Rückwärts:} $m(t)$ aus $\varphi(t)$ & \efbox[linecolor=red]{$\displaystyle m(t) = \frac{\varphi(t)}{k_P}$} & \efbox[linecolor=red]{$\displaystyle m(t) = \frac{1}{k_F}\cdot\frac{\diff\varphi(t)}{\diff t}$} \\ \hline
 \end{tabularx}}
@@ -71,26 +71,6 @@ Am Signal allein sieht man \textbf{nicht}, ob PM oder FM vorliegt: beide haben d
 	\textbf{PM mit FM-Modulator:} $m(t)$ zuerst differenzieren, dann FM.
 \end{minipage}
 
-\subsubsection{Einton-Winkelmodulation (sinusförmiges $m(t)$)}
-Ansatz des Skripts, so dass in beiden Fällen $\varphi(t) = \beta\sin(\omega_m t)$ herauskommt:
-
-{\renewcommand{\arraystretch}{2.1}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.24\linewidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-	\hline
-	& \textbf{PM:} $m(t) = A_m\sin(\omega_m t)$ & \textbf{FM:} $m(t) = A_m\cos(\omega_m t)$ \\ \hline
-	$\varphi(t)$ & $k_P A_m \sin(\omega_m t)$ & $\displaystyle \frac{k_F A_m}{\omega_m}\sin(\omega_m t)$ \\ \hline
-	Modulationsindex $\beta$ & $\beta_{PM} = k_P A_m$ \quad (unabhängig von $f_m$) & $\displaystyle \beta_{FM} = \frac{k_F A_m}{\omega_m}$ \quad ($\sim 1/f_m$) \\ \hline
-	Frequenzhub $\Delta f$ & $\displaystyle \frac{k_P A_m \omega_m}{2\pi} = \beta f_m$ \quad ($\sim f_m$) & $\displaystyle \frac{k_F A_m}{2\pi}$ \quad (unabhängig von $f_m$) \\ \hline
-\end{tabularx}}
-
-\vspace{.2cm}
-\boxedeq{
-	\varphi(t) = \beta\sin(\omega_m t) \quad\Longrightarrow\quad \Delta\varphi = \beta \qquad \Delta\omega = \beta\,\omega_m \qquad \beta = \frac{\Delta\omega}{\omega_m} = \frac{\Delta f}{f_m}
-}
-$\beta$ ist nur für Eintonsignale definiert und ist \textbf{gleich dem Phasenhub} $\Delta\varphi$.
-
-\textbf{Perché sin e cos?} La scelta è solo di comodo: in FM l'integrale del coseno dà un seno, quindi in entrambi i casi vale $\varphi(t)=\beta\sin(\omega_m t)$ e si usa un'unica formula. Un messaggio con un'altra fase iniziale (es. $\sin$ in FM $\Rightarrow$ $\varphi=-\beta\cos(\omega_m t)$) cambia solo segno e fase delle righe: $\beta$, $|J_n(\beta)|$ e la banda restano uguali.
-
 \subsubsection{Kochrezept für Aufgaben}
 \begin{enumerate}
 	\setlength{\itemsep}{1pt}
@@ -98,9 +78,9 @@ $\beta$ ist nur für Eintonsignale definiert und ist \textbf{gleich dem Phasenhu
 	$\cos\alpha\cos\beta + \sin\alpha\sin\beta = \cos(\alpha-\beta)$ \qquad $\cos\alpha\cos\beta - \sin\alpha\sin\beta = \cos(\alpha+\beta)$
 	\item \textbf{Träger abtrennen:} den Term $\sim t$ als $\omega_c t$ nehmen, Rest ist $\varphi(t)$. Achtung: $f_c = \omega_c / 2\pi$, z.B. $\cos(10^8\pi t)$ $\Rightarrow$ $f_c = \qty{50}{\MHz}$.
 	\item \textbf{Momentanfrequenz:} $\omega_i(t) = \frac{\diff\theta}{\diff t}$, \; $f_i(t) = \frac{\omega_i}{2\pi}$. Konstant, linear oder sinusförmig um $f_c$?
-	\item \textbf{Hübe:} $\Delta\varphi = \max|\varphi|$, \; $\Delta\omega = \max|\varphi'|$, \; $\Delta f = \Delta\omega/2\pi$. Bei $\varphi = \beta\sin(\omega_m t)$: $\Delta\varphi = \beta$, \; $\Delta f = \beta f_m$.
+	\item \textbf{Hübe:} $\Delta\varphi = \max|\varphi|$, \; $\Delta\omega = \max|\varphi'|$, \; $\Delta f = \Delta\omega/2\pi$. Eintonsignal: siehe \emph{Einton-Winkelmodulation, Grössen}.
 	\item \textbf{Nachricht:} PM $\Rightarrow m = \varphi/k_P$, \; FM $\Rightarrow m = \varphi'/k_F$ (Tabelle oben).
-	\item \textbf{Bandbreite:} Carson $B = 2(\Delta f + f_m) = 2(\beta + 1) f_m$ (siehe unten).
+	\item \textbf{Bandbreite:} Carson, siehe \emph{Einton-Winkelmodulation, Bandbreite} (Eintonsignal) bzw.\ \emph{Bandbreite für beliebige $m(t)$}.
 \end{enumerate}
 
 % \paragraph{Beispiel} $x(t) = 5\cos\big(2\pi\cdot 10^6 t + 3\sin(2\pi\cdot 200\, t)\big)$
@@ -168,9 +148,6 @@ WideBand Angle Modulation, siehe auch Skript Seite 67 \hspace{.3cm} \efbox[linec
 	\item $x_{FM/PM}$ ist zu $m(t)$ stark nicht linear
 	\item im Spektrum treten Faltungen $M * M * \dots$ auf: das Spektrum wird breiter als $2B_m$
 \end{list}
-\begin{center}
-	\includegraphics[width=.55\linewidth]{chapters/06_amplitudenmodulation/figures/WB_PM.pdf}
-\end{center}
 {\renewcommand{\arraystretch}{1.3}
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.2\linewidth}|>{\centering\arraybackslash}p{.27\linewidth}|>{\raggedright\arraybackslash}X|}
 	\hline
@@ -179,10 +156,36 @@ WideBand Angle Modulation, siehe auch Skript Seite 67 \hspace{.3cm} \efbox[linec
 	Zeitverschiebung $\Delta T$ & \efbox[linecolor=red]{$\Delta T=\dfrac{1}{f_c}\cdot \dfrac{\beta}{2\pi}$} & Spostamento massimo nel tempo della portante: fase $\beta$ $\leftrightarrow$ tempo $\beta/\omega_c$. \textbf{Attenzione:} $\Delta T\neq 1/\Delta f$. $\Delta f$ è una deviazione di frequenza, non un periodo: $\Delta T=\dfrac{\Delta f}{2\pi\,f_m\,f_c}$. Per banda e $\beta$ si lavora con $\Delta f$ e $f_m$ ($\beta=\Delta f/f_m$). \\ \hline
 \end{tabularx}}
 
-\subsubsection{Spektrum Einton-Winkelmodulation S. 72}
+\subsubsection{Einton-Winkelmodulation (sinusförmiges $m(t)$)}
+\paragraph{Grössen: PM und FM beim Eintonsignal}
+Ansatz des Skripts, so dass in beiden Fällen $\varphi(t) = \beta\sin(\omega_m t)$ herauskommt:
+
+{\renewcommand{\arraystretch}{2.1}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.24\linewidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+	\hline
+	& \textbf{PM:} $m(t) = A_m\sin(\omega_m t)$ & \textbf{FM:} $m(t) = A_m\cos(\omega_m t)$ \\ \hline
+	$\varphi(t)$ & $k_P A_m \sin(\omega_m t)$ & $\displaystyle \frac{k_F A_m}{\omega_m}\sin(\omega_m t)$ \\ \hline
+	Modulationsindex $\beta$ & $\beta_{PM} = k_P A_m$ \quad (unabhängig von $f_m$) & $\displaystyle \beta_{FM} = \frac{k_F A_m}{\omega_m}$ \quad ($\sim 1/f_m$) \\ \hline
+	Frequenzhub $\Delta f$ & $\displaystyle \frac{k_P A_m \omega_m}{2\pi} = \beta f_m$ \quad ($\sim f_m$) & $\displaystyle \frac{k_F A_m}{2\pi}$ \quad (unabhängig von $f_m$) \\ \hline
+	Einheiten & $[\beta]=\mathrm{rad}$, \; $[k_P]=\mathrm{rad}/[m]$, \; $[\Delta f]=\mathrm{Hz}$, \; $[\Delta\omega]=\mathrm{rad/s}$ & $[\beta]=\mathrm{rad}$, \; $[k_F]=\mathrm{rad/s}/[m]$, \; $[\Delta f]=\mathrm{Hz}$, \; $[\Delta\omega]=\mathrm{rad/s}$ \\ \hline
+\end{tabularx}}
+
+\vspace{.2cm}
+\boxedeq{
+	\varphi(t) = \beta\sin(\omega_m t) \quad\Longrightarrow\quad \Delta\varphi = \beta \qquad \Delta\omega = \beta\,\omega_m \qquad \beta = \frac{\Delta\omega}{\omega_m} = \frac{\Delta f}{f_m}
+}
+$\beta$ ist nur für Eintonsignale definiert und ist \textbf{gleich dem Phasenhub} $\Delta\varphi$.
+
+\textbf{Einheiten:} $[m]$ = Einheit von $m(t)$ (z.B.\ V). $\beta=\Delta\omega/\omega_m$ (rad/s $\div$ rad/s) $=\Delta f/f_m$ (Hz $\div$ Hz), also adimensionale Zahl (rad). Nie $\Delta f$ mit $\omega_m$ mischen.
+
+\textbf{Se $k_F$ è dato in Hz/V (o kHz/V):} $\Delta f = k_F A_m$ e $\beta_{FM}=\dfrac{k_F A_m}{f_m}$ (il $2\pi$ si semplifica; $k_F[\mathrm{rad/s/V}]=2\pi\,k_F[\mathrm{Hz/V}]$). $f_m$ e $\Delta f$ con lo stesso prefisso (kHz con kHz).
+
+\textbf{Perché sin e cos?} La scelta è solo di comodo: in FM l'integrale del coseno dà un seno, quindi in entrambi i casi vale $\varphi(t)=\beta\sin(\omega_m t)$ e si usa un'unica formula. Un messaggio con un'altra fase iniziale (es. $\sin$ in FM $\Rightarrow$ $\varphi=-\beta\cos(\omega_m t)$) cambia solo segno e fase delle righe: $\beta$, $|J_n(\beta)|$ e la banda restano uguali.
+
+\paragraph{Spektrum S. 72}
 \vspace{.1cm}
 \efbox[linecolor=red]{$x_{ST} = A_c \cdot \Re (e^{j(\omega_c t + \varphi (t))}) = A_c \cdot \cos(\omega_c t + \beta \cdot \sin(\omega_mt)) = A_c \cdot \sum_{n=-\infty}^{\infty}J_n(\beta) \cdot \cos((\omega_c + n\cdot \omega_m)t)$} \\
-mit $\varphi(t) = \beta\sin(\omega_m t)$ als Phasenabweichung (PM oder FM, siehe Einton-Tabelle oben) und \\$J_n(\beta)$: Bessel Funktion erster Art und n-ter Ordnung. Spektrallinien bei $f_c \pm n f_m$ mit Amplitude $A_c\,|J_n(\beta)|$.
+mit $\varphi(t) = \beta\sin(\omega_m t)$ als Phasenabweichung (PM oder FM, siehe \emph{Grössen} oben) und \\$J_n(\beta)$: Bessel Funktion erster Art und n-ter Ordnung. Spektrallinien bei $f_c \pm n f_m$ mit Amplitude $A_c\,|J_n(\beta)|$.
 
 \begin{center}
 	\input{chapters/06_amplitudenmodulation/figures/bessel_spektrum.tex}
@@ -203,7 +206,7 @@ mit $\varphi(t) = \beta\sin(\omega_m t)$ als Phasenabweichung (PM oder FM, siehe
 {\small $\Delta T$: Zeitverzögerung bezogen auf Grundschwingung ($f_c$) \quad $n$: $n$-te Harmonische \quad Tabelle Skript S. 74 bzw. 274 ff.}\\[4pt]
 \textbf{Potenza del segnale:} $P=\overline{x^2(t)}$ (media del quadrato, non del segnale). Con $\cos^2\theta=\frac12+\frac12\cos 2\theta$ il secondo termine ha media nulla anche se la fase $\theta$ varia nel tempo, quindi $P=\frac{A_c^2}{2}$ per ogni $\beta$.
 
-\subsubsection{Bandbreite Einton-Winkelmodulation S. 75}
+\paragraph{Bandbreite S. 75}
 Theoretisch unendliche Bandbreite \\
 Praktisch approximation nach Carson: $J_n(\beta)\approx 0$ für $n>\beta+1$, es zählen nur die Linien bis dort. \\[2pt]
 \efbox[linecolor=red]{$B_{ST\varphi M} = 2 \cdot (\Delta f+f_m) = 2 \cdot (\beta + 1) \cdot \frac{\omega_m}{2\pi}$} (min. \qty{98}{\%} der Signalleistung)\\[4pt]
@@ -216,19 +219,12 @@ Praktisch approximation nach Carson: $J_n(\beta)\approx 0$ für $n>\beta+1$, es 
 	Höhere Marge & $\beta \ge 1$ & $2\cdot \mathrm{round}(\beta+2)\cdot f_m$ \newline $2\cdot \mathrm{round}(\beta+3)\cdot f_m$ & Una o due righe in più per lato: meno diafonia (Frequenzmultiplex, Übersprechen) \\ \hline
 \end{tabularx}}
 {\small $\mathrm{round}$: le righe hanno indice $n$ intero, quindi si arrotonda. Kleinhub = caso $\beta\to 0$ di Carson: $2\,(0+1)\,f_m$.}\\[4pt]
-\textbf{Cos'è $W$:} la banda $B$ misurata in rad/s invece che in Hz, cioè $W = 2\pi B$ (come $\omega=2\pi f$), con $[W]=\mathrm{rad/s}$ e $[B]=\mathrm{Hz}$. Serve perché $\omega_m$, $\Delta\omega$ e $k_FA_m$ sono già in rad/s: così Carson perde i fattori $2\pi$, $W = 2(\beta+1)\,\omega_m \Leftrightarrow B = 2(\beta+1)\,f_m$ (stessa formula). Basta mettere $\beta$ dentro Carson:
-
-{\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.16\linewidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
-	\hline
-	& \textbf{Eintonphasenmodulation} & \textbf{Eintonfrequenzmodulation} \\ \hline
-	Formel & \efbox[linecolor=red]{$W_{PM}=2\,(k_P A_m+1)\,\omega_m$} & \efbox[linecolor=red]{$W_{FM}=2\,(k_F A_m+\omega_m)$} \\ \hline
-	Da dove viene & $\beta=k_P A_m$ & $\beta=\dfrac{k_F A_m}{\omega_m}$: $\omega_m$ si semplifica e resta \emph{sommato} \\ \hline
-	Da cosa dipende & $B_{PM}\sim k_P$, \; $B_{PM}\sim A_m$, \; $B_{PM}\sim\omega_m$: più forte o più veloce il messaggio, più banda & $B_{FM}\sim k_F$, \; $B_{FM}\sim A_m$ \newline
-	Kleinhub ($\Delta\omega=k_F A_m\ll\omega_m$): $W\approx 2\omega_m$, quindi $W\sim\omega_m$ \newline
-	Grosshub ($\Delta\omega\gg\omega_m$): $W\approx 2\Delta\omega$, \textbf{non dipende da} $\omega_m$ \\ \hline
-\end{tabularx}}
-{\small In PM l'Hub in frequenza è $\Delta\omega=\beta\,\omega_m$ e cresce con $\omega_m$; in FM è $k_F A_m$, già fisso.}
+\textbf{Da cosa dipende $B$:}
+\begin{itemize}
+	\setlength{\itemsep}{0pt}
+	\item PM: $B_{PM}=2(k_PA_m+1)f_m\sim f_m$. Più veloce il messaggio, più banda ($\beta$ fisso, $\Delta f=\beta f_m$ cresce).
+	\item FM: $B_{FM}=2(\Delta f+f_m)$ con $\Delta f=\dfrac{k_FA_m}{2\pi}$ fisso. Grosshub ($\Delta f\gg f_m$): $B\approx 2\Delta f$, quasi indipendente da $f_m$. Kleinhub: $B\approx 2f_m$.
+\end{itemize}
 
 \subsubsection{Bandbreite für beliebige $m(t)$ S. 75}
 Con un messaggio qualsiasi (es. voce) non esiste un solo $\beta$: si usano il \textbf{Hubverhältnis} $D$ (\emph{Deviation Ratio}) e la banda del messaggio.
@@ -253,11 +249,62 @@ Con un messaggio qualsiasi (es. voce) non esiste un solo $\beta$: si usano il \t
 \end{tabularx}}
 
 \subsubsection{Realisierung}
-\includegraphics{chapters/06_amplitudenmodulation/figures/realisierungGrosshubWinkelmod.pdf}
+Ziel: ein Grosshubsignal $x(t)=A_c\cos(\omega_c t+\varphi(t))$ mit $|\varphi|>1$ rad erzeugen. Drei Wege:
+
+\paragraph{Direkt mit VCO (Folie 26)}
+Ein Oszillator, dessen Frequenz von einer Spannung abhängt: \efbox[linecolor=red]{Steuerspannung $\sim m(t)$ $\Rightarrow$ $\omega_i(t)=\omega_c+k_F\,m(t)$}. Das ist direkt \textbf{FM}. \\
+Typen: VCO, VCXO (mit Quarz, stabiler). Im Schwingkreis ändert eine spannungsabhängige Kapazität (Varicap, Dioden- oder MOS-Varaktor) die Frequenz.
+
+\paragraph{Indirekt in 3 Stufen (Folie 24)}
+Idee: ein Kleinhubmodulator ist einfach, aber der Hub ist zu klein. Man \textbf{vergrössert die Phase} durch Frequenzmultiplikation und schiebt das Ergebnis dann zurück auf die gewünschte Trägerfrequenz.
+
+\begin{center}
+\begin{tikzpicture}[blk/.style={draw,rounded corners=2pt,minimum width=2.7cm,minimum height=1.1cm,align=center,font=\small},lab/.style={font=\small,align=center}]
+\node[blk] (a) at (0,0) {1. Kleinhub-\\ modulator};
+\node[blk] (b) at (4.1,0) {2. Frequenz-\\ multiplikation $\times n$};
+\node[blk] (c) at (8.2,0) {3. Mixer};
+\draw[-latex] (-2.3,0) -- node[above,font=\small]{$m_n(t)$} (a.west);
+\draw[-latex] (a) -- (b);
+\draw[-latex] (b) -- (c);
+\draw[-latex] (c.east) -- ++(1,0) node[right,font=\small]{$x_{WBPM}$};
+\node[lab] at (2.05,-1.2) {$\varphi=k_P m_n$};
+\node[lab] at (6.15,-1.2) {$\varphi=n\,k_P m_n$};
+\draw[-latex,gray] (8.2,-1.55) node[below,font=\small,black]{Oszillator ($\omega_c$)} -- (c.south);
+\end{tikzpicture}
+\end{center}
+
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{.2\linewidth}|>{\centering\arraybackslash}p{.38\linewidth}|>{\raggedright\arraybackslash}X|}
+	\hline
+	\textbf{Stufe} & \textbf{Signal} & \textbf{Was passiert} \\ \hline
+	1. Kleinhub & $x_{NBPM}=\cos(\omega_c t+k_P m_n(t))$, \; $k_P m_n\ll 1$ & Einfacher Modulator (Folie 23), Phase noch klein. \\ \hline
+	2. $\times n$ & \efbox[linecolor=red]{$x_{WBPM}=\cos(n\,\omega_c t+n\,k_P\,m_n(t))$}, \; $n\,k_P m_n>1$ rad & Trägerfrequenz \textbf{und} Phase werden mit $n$ multipliziert. Realisierung: nicht lineare Kennlinie + Bandpass (filtert die $n$-te Harmonische), oder PLL. \\ \hline
+	3. Mixer & Träger wieder bei $\omega_c$ (oder beliebig), $\varphi(t)=n\,k_P\,m_n(t)$ & Mischen verschiebt nur die Frequenz, die Phasenabweichung bleibt erhalten. \\ \hline
+\end{tabularx}}
+
+{\small Falls ein $\times n$ nicht reicht, Stufen 1--2 wiederholen (Verstärkung $n,\,n^2,\,n^3,\dots$). Merke: $\times n$ multipliziert auch $\beta$ und $\Delta f$ mit $n$, die Modulationsfrequenz $f_m$ bleibt gleich.}
+
+\paragraph{Mit IQ-Modulator (Folie 27)}
+Der IQ-Modulator mischt einen Cosinus- und einen Sinusträger mit beliebigen Signalen $i(t)$ und $q(t)$, also jede Ortskurve in der äquivalenten Basisbandebene. Für Winkelmodulation: \efbox[linecolor=red]{Ortskurve = Kreis um den Ursprung} ($i=\cos\varphi$, $q=\sin\varphi$). $i(t)$ und $q(t)$ müssen sehr genau sein, sonst schwankt die Amplitude des Trägers.
 
 \subsubsection{Demodulation}
 \paragraph{Phase Locked Loop (PLL)}
-\includegraphics{chapters/06_amplitudenmodulation/figures/PLLdemod.pdf}
+\begin{minipage}[t]{.44\linewidth}
+	\vspace{0pt}
+	\includegraphics[trim=0 0 320bp 0,clip,width=\linewidth]{chapters/06_amplitudenmodulation/figures/PLLdemod.pdf}
+\end{minipage}\hfill
+\begin{minipage}[t]{.53\linewidth}
+	\vspace{0pt}
+	\textbf{In parole semplici:} il PLL è un oscillatore (VCO) che si corregge da solo finché \emph{gira insieme al segnale}.
+	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} \setlength{\topsep}{2pt}\setlength{\leftmargin}{1.2em}}
+	\item \textbf{Phase-Detector:} confronta la fase del segnale con quella del VCO. VCO indietro $\to$ spinta in avanti, VCO avanti $\to$ freno.
+	\item \textbf{Loop Filter:} ammorbidisce la spinta.
+	\item \textbf{VCO:} la spinta ne cambia la frequenza, finché coincide con il segnale (\emph{locked}).
+	\end{list}
+	\textbf{Perché demodula:} se $\omega_i(t)$ sale, il VCO resta indietro e la spinta cresce. Da agganciato, la spinta è proporzionale a $\varphi'(t)$, quindi l'uscita $x_f(t)$ \emph{è il messaggio}:\\[3pt]
+	\efbox[linecolor=red]{\textbf{FM:}\; $x_f(t)\sim m(t)$} \quad \efbox[linecolor=red]{\textbf{PM:}\; $x_f(t)\sim m'(t)$}\\[3pt]
+	Se $\omega_i$ si allontana troppo da $\omega_c$ il VCO non segue più (Fangbereich).
+\end{minipage}
 
 \paragraph{Frequenz-Diskriminator}
 Die Amplitude des Ausgangssignals eines Frequenz-Diskriminators ist proportional zur Momentanfrequenz des Eingangssignals. $\rightarrow y_d(t) = k_d \cdot \varphi'(t)$ \\

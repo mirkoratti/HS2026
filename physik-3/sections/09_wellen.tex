@@ -470,8 +470,8 @@ $$ \boxed{f' = \frac{\sqrt{1-\beta^2}}{1 - \beta \cos(\vartheta)}f \qquad  \text
 \vspace{-0.2cm}
 
 \begin{align*}
-    \text{für } \beta \ll 1 \qquad f'                                            &\simeq \frac{1}{1- \beta \cdot \cos(\theta)} \cdot f \\
-    \text{für } \beta \ll 1 \text{ und } \theta \approx 0 \qquad f'  &\simeq \frac{1}{1- \beta } \cdot f
+    \text{für } \beta \ll 1 \qquad f'                                            &\simeq \frac{1}{1- \beta \cdot \cos(\theta)} \cdot f \simeq \left(1 + \beta \cdot \cos(\theta)\right) \cdot f \\
+    \text{für } \beta \ll 1 \text{ und } \theta \approx 0 \qquad f'  &\simeq \frac{1}{1- \beta } \cdot f \simeq \left(1 + \beta\right) \cdot f
 \end{align*}
 
 \medskip
@@ -515,73 +515,76 @@ Wenn sich die Quelle schneller fortbewegt als die Wellengeschwindigkeit, dann en
 
 \subsection{Wellenwiderstand, Energietransport -- Schallwellen}
 
-\subsubsection{Terminologie Wellenwiderstand}
-Der \textbf{Wellenwiderstand $Z$} (auch \textbf{Impedanz} genannt) beschreibt, wie ein Medium den Fluss von Energie beeinflusst.
+\begin{minipage}[c]{0.50\columnwidth}
+    \textbf{Wellenwiderstand $Z$} (= Impedanz, Schallkennimpedanz): \textbf{Eigenschaft des Mediums}: beschreibt, wie ein Medium den Fluss von Energie beeinflusst (Schall- und em-Wellen)
 
-\smallskip
+    \textrightarrow\ \textquotesingle Wie gut breitet sich die Welle aus?\textquotesingle
 
-\textrightarrow\ \textquotesingle Wie gut können sich Wellen in einem Medium ausbreiten?\textquotesingle
+    $$ \boxed{ Z = \rho \cdot u = \frac{\Delta p_0}{v_0} } $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.46\columnwidth}
+    \resizebox{\linewidth}{!}{\input{tikz/wellen_schallfeld.tex}}
 
-$$ \boxed{ Z = \rho \cdot u = \frac{\Delta p_0}{v_0} } $$
+    {\scriptsize \textrightarrow\ $p$ und $v$ in Phase, $\xi$ um $90^\circ$ verzögert}
+\end{minipage}
 
+
+\subsubsection{Schallfeldgrössen}
 
 \renewcommand{\arraystretch}{1.4}
-\begin{ctabular}{clc}
-    $Z$             & Wellenwiderstand bzw. Impedanz    & $[Z] = \ohm = \frac{\pascal}{\meter\per\second} = \frac{\newton \, \second}{\meter\cubed}$    \\
-    $\rho$          & Dichte des Mediums                & $[\rho] = \frac{\kilogram}{\meter\cubed}$                                                     \\
-    $u$             & Wellengeschwindigkeit             & $[u] = \frac{\meter}{\second}$                                                                \\
-    $\Delta p_0$    & Druckamplitude                    & $[\Delta p_0] = \pascal$                                                                      \\
-    $v_0$           & Schnellenamplitude                & $[v_0] = \frac{\meter}{\second}$
-\end{ctabular}
-\renewcommand{\arraystretch}{1}
-
-
-\subsubsection{Weitere Terminologien}
-
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{lll}
-    Schalldruck                 & $p = \Delta p_0 \, \cos(\omega \, t - k \, x)$    & $[p] = \pascal$                   \\
-    Druckamplitude              & $  \Delta p_0 = \rho \, u \, v_0 $                &                                   \\
-    \\
-    Schallschnelle (Schnelle)   & $v = v_0 \,  \cos(\omega \, t - k \, x)$          & $[v] = \frac{\meter}{\second}$    \\
-    Schnellenamplitude          & $v_0 = \omega \, \xi_0$ 
+\begin{tabular}{lcc}
+    Schalldruck         & $\cor{p = \Delta p_0 \, \cos(\omega \, t - k \, x)}$                              & $[p] = \pascal$                                                                               \\
+    Druckamplitude      & $\Delta p_0 = \rho \, u \, v_0$                                               & $[\Delta p_0] = \pascal$                                                                      \\
+    Schallschnelle      & $v = \frac{\partial \xi}{\partial t} = \cor{v_0 \, \cos(\omega \, t - k \, x)}$   & $[v] = \frac{\meter}{\second}$                                                                \\
+    Auslenkungsamplitude & $\xi_0$                                                                           & $[\xi_0] = \meter$                                                                            \\
+    Schnellenamplitude  & $v_0 = \omega \, \xi_0$                                                     & $[v_0] = \frac{\meter}{\second}$                                                              \\
+    Beschleunigungsamplitude & $a_0 = \omega \, v_0 = \omega^2 \, \xi_0$                                    & $[a_0] = \frac{\meter}{\second\squared}$                                                      \\
+    Wellenwiderstand    & $Z = \rho \, u$                                                            & $[Z] = \ohm = \frac{\pascal}{\meter\per\second} = \frac{\newton \, \second}{\meter\cubed}$    \\
+    Schallintensität    & $I$ \textrightarrow\   \ref{chap:intesitaet_schalwelle}                       & $[I] = \frac{\watt}{\meter\squared}$
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
 
-\subsubsection{Intensität der Schallwelle}
+\subsubsection{Intensität der Schallwelle}\label{chap:intesitaet_schalwelle}
 
-\textbf{Intensität = gemittelte Energieflussdichte}
+\textbf{Intensität = gemittelte Energieflussdichte} \qquad $I = u \cdot \overline{w}$
 
 \begin{minipage}{0.48\columnwidth}
-    $$ E_{\rm kin} = \frac{\rho \cdot v^2}{4} = \frac{\rho \cdot v_0^2}{4} $$
+    $$ E_{\rm kin} = \frac{\rho \, v^2}{2} \;\overset{\text{Mittel}}{\longrightarrow}\; \frac{\rho \, v_0^2}{4} $$
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\columnwidth}
-    $$ E_{\rm pot} = \frac{p^2 - p_0^2}{2 \, \rho \, u^2} = \frac{\rho \cdot v_0^2}{4} $$
+    $$ E_{\rm pot} = \frac{p^2 - p_0^2}{2 \, \rho \, u^2} \;\overset{\text{Mittel}}{\longrightarrow}\; \frac{\rho \, v_0^2}{4} $$
 \end{minipage}
 
-$$ E_{\rm tot} = E_{\rm kin} + E_{\rm pot} = \frac{\rho \cdot v_0^2}{2} $$
+{\small \textrightarrow\ $E_{\rm kin}$: \textquotesingle Geschwindigkeit der Teilchen\textquotesingle \qquad $E_{\rm pot}$: \textquotesingle Kompression des Gases\textquotesingle \qquad $p_0$ = Ruhedruck}
 
-$$ \boxed{ I = u \cdot \overline{w} = \frac{1}{2} \rho \, v_0^2 \, u  =  \frac{1}{2} \rho \, (\omega \, \xi_0)^2  \, u = \frac{( \Delta p_0)^2}{2 \, Z} = \frac{P}{A} } $$
+$$ E_{\rm tot} = E_{\rm kin} + E_{\rm pot} = \frac{\rho \, v_0^2}{2} $$
 
+$$ \boxed{ I = u \cdot \overline{w} = \frac{1}{2} \rho \, v_0^2 \, u = \frac{1}{2} Z \, v_0^2 = \frac{(\Delta p_0)^2}{2 \, Z} = \frac{P}{A} } $$
 
-\renewcommand{\arraystretch}{1.2}
-\begin{ctabular}{clc}
-    $I$             &  Schallintensität                                 & $[I] = \frac{\watt}{\meter\squared}$                                                          \\
-    $\overline{w}$  & Energieflussdichte                                & $[\overline{w}] = \frac{\watt \, \second}{\meter\cubed}$                                      \\
-                    & Pot. Energie \textrightarrow\ 'Kompression Gas'   &                                                                                               \\
-                    & Kin. Energie \textrightarrow\ 'Geschw. Teilchen'  &                                                                                               \\
-    $\rho$          & Dichte                                            & $[\rho] = \frac{\kilogram}{\meter\cubed}$                                                     \\
-    $v_0$ &         Schnellenamplitude                                  & $[v_0] = \frac{\meter}{\second}$                                                              \\
-    $\xi_0$         & Amplitude                                         & $[\xi_0]$                                                                                     \\
-    $u$             & Wellengeschwindigkeit                             & $[u] = \frac{\meter}{\second}$                                                                \\
-    $\Delta p_0$    & Druckamplitude                                    & $[\Delta p_0] = \pascal$                                                                      \\
-    $Z$             & Wellenwiderstand bzw. Impedanz                    & $[Z] = \ohm = \frac{\pascal}{\meter\per\second} = \frac{\newton \, \second}{\meter\cubed}$    \\
-    $P$             & Leistung                                          & $[P] = \watt$                                                                                 \\
-    $A$             & (Abstrahl-) Fläche                                & $[A] = \meter\squared$ 
-\end{ctabular}
+\textbf{Regel:} $I \propto (\text{Amplitude})^2$ \quad \textrightarrow\ Amplitude $\times 2$ $\Rightarrow$ $I \times 4$ \quad \cor{Attenzione per calcoli con decibel!}
+
+{\small $\overline{w}$ Energieflussdichte $[\frac{\watt \, \second}{\meter\cubed}]$ \quad $\rho$ Dichte $[\frac{\kilogram}{\meter\cubed}]$ \quad $u$ Wellengeschwindigkeit $[\frac{\meter}{\second}]$ \quad $P$ Leistung $[\watt]$ \quad $A$ (Abstrahl-) Fläche $[\meter\squared]$}
+
+\subsubsection{Analogie Akustik -- Elektrotechnik}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{l|c|c}
+                & \textbf{Akustik}                          & \textbf{Elektrizität}                     \\ \hline
+    Spannung    & Schalldruck $\Delta p_0$                  & Spannung $U$                              \\
+    Strom       & Schallschnelle $v$                        & Strom $i$                                 \\
+    Impedanz    & $Z = \frac{\Delta p_0}{v_0}$              & $R = \frac{U}{i}$                         \\
+    Intensität  & $I = p_{\rm eff} \cdot v_{\rm eff}$       & $I = U_{\rm eff} \cdot i_{\rm eff}$       \\
+                & $\phantom{I} = Z \cdot v_{\rm eff}^2$     & $\phantom{I} = R \cdot i_{\rm eff}^2$     \\
+                & $\phantom{I} = \frac{p_{\rm eff}^2}{Z}$   & $\phantom{I} = \frac{U_{\rm eff}^2}{R}$
+\end{tabular}
 \renewcommand{\arraystretch}{1}
+
+\smallskip
+
+$ x_{\rm eff} = \frac{x_0}{\sqrt{2}} $
 
 
 \subsection{Dispersion}

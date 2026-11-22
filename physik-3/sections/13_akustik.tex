@@ -76,17 +76,18 @@ $$ \boxed{ p_{\rm eff} = \frac{\Delta p_0}{\sqrt{2}} } $$
 
 \subsection{Intensität bei Kugelwellen}
 
-\vspace{-0.4cm}
+Nur für \textbf{Kugelwellen} ($A = 4 \pi r^2$). \textcolor{red}{Rot} = Zusatz \textbf{mit Dämpfung} (ohne Dämpfung weglassen).
 
-\renewcommand{\arraystretch}{3}
-\begin{tabular}{@{}lll@{}}
-					 & \textbf{ohne Dämpfung}                                               & \textbf{mit Dämpfung} \\
-	Energieerhaltung & $\boxed{ I(r) = \frac{P}{4 \, \pi \, r^2} }$                         & $\boxed{ I(r) = \frac{P}{4 \, \pi \, r^2} \, \e^{- \alpha r}}$                       \\ 
+\paragraph{Energieerhaltung}
+$$ \boxed{ I(r) = \frac{P}{4 \, \pi \, r^2} \, \textcolor{red}{\e^{- \alpha r}} } $$
 
-	Verhältnis 		 & $\boxed{ \frac{I_2}{I_1} = \frac{r_1^2}{r_2^2} }$                    & $\boxed{ \frac{I_2}{I_1} = \frac{r_1^2}{r_2^2} \, \e^{- \alpha (r_2 - r_1)} }$        \\
+\paragraph{Verhältnis}
+$$ \boxed{ \frac{I_2}{I_1} = \frac{r_1^2}{r_2^2} \, \textcolor{red}{\e^{- \alpha (r_2 - r_1)}} } $$
 
-	Pegel 			 & $\boxed{ L_2 = L_1 - 20 \cdot \log \left( \frac{r_2}{r_1} \right)}$  & $\boxed{ L_2 = L_1 - 20 \cdot \log \left( \frac{r_2}{r_1} \right) - K (r_2 - r_1)  }$ \\
-\end{tabular}
+\paragraph{Pegel}
+$$ \boxed{ L_2 = L_1 - 20 \cdot \log \left( \frac{r_2}{r_1} \right) \textcolor{red}{- K (r_2 - r_1)} } $$
+
+\medskip
 
 
 

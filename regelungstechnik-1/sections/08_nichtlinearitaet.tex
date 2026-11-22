@@ -24,6 +24,15 @@
 	\end{outline}
 \end{minipage}
 
+\vspace{0.2cm}
+\textbf{Zeitvarianz linearisieren}
+\begin{itemize}
+	\item Techniken gelten sinngemäss: Arbeitspunkt \textrightarrow\ Zeitpunkt, $f(x) \to f(t)$
+	\item Unterlagerte Regelung: Regler unterscheidet NL und Zeitvarianz \textbf{nicht}
+	\item Exakte Linearisierung: Modell mit Zeitvarianz ggf. exakt linearisierbar
+	\item Oft unklar (und egal), ob etwas nichtlinear oder zeitvariant ist
+\end{itemize}
+
 
 \subsection{Modelle von Nichtlinearitäten (NL)}
 
@@ -249,6 +258,50 @@ Ein Regler hält den Fehler $e$ bei $0$. Schafft er das, dann ist $y(t) \approx 
 
 \vspace{0.2cm}
 \includegraphics[width=\columnwidth]{images/kaskadenregelung}
+
+
+\subsubsection{Exakte Linearisierung}
+
+Eine Nichtlinearität $n(x)$ \textbf{im Innern} der Strecke wird mit einem \textbf{Kompensationsterm} $\hat n(x)$ aus gemessenen Grössen aufgehoben (statt $f^{-1}$ in Serie).
+
+\vspace{0.2cm}
+\begin{center}
+\begin{tikzpicture}[x=0.8cm,y=0.75cm,font=\scriptsize,>=latex,
+	blk/.style={draw,minimum width=0.9cm,minimum height=0.55cm,inner sep=2pt},
+	sm/.style={draw,circle,inner sep=0pt,minimum size=0.32cm}]
+	\node[sm] (s1) at (1.3,0) {};
+	\node[sm] (s2) at (3.0,0) {};
+	\node[blk] (L) at (4.7,0) {$G_{\mathrm{lin}}$};
+	\node[blk,draw=red!80!black,text=red!80!black] (n) at (4.7,-1.3) {$n(x)$};
+	\node[blk,draw=orange,text=orange] (nh) at (4.7,1.3) {$\hat n(x)$};
+	\draw[->] (-0.4,0) node[left] {$\tilde u$} -- (s1);
+	\draw[->] (s1) -- (s2);
+	\draw[->] (s2) -- (L) node[pos=0.5,above=-1pt] {$z$};
+	\draw[->] (L) -- (6.5,0) node[right] {$y$};
+	\fill (5.8,0) circle (1pt);
+	\draw[->] (5.8,0) |- (nh.east);
+	\draw[->] (5.8,0) |- (n.east);
+	\draw[->,orange] (nh.west) -| (s1.north);
+	\draw[->,red!80!black] (n.west) -| (s2.south);
+	\node[font=\tiny] at (0.85,0.28) {$+$};
+	\node[font=\tiny] at (1.6,0.65) {$+$};
+	\node[font=\tiny] at (2.5,0.28) {$+$};
+	\node[font=\tiny] at (3.3,-0.65) {$-$};
+	\draw[dashed,gray] (2.3,-1.9) rectangle (5.4,0.85);
+	\node[gray,anchor=north west] at (2.3,-1.9) {Strecke};
+\end{tikzpicture}
+\end{center}
+
+$$ u = \tilde u + \hat n(x) \;\Rightarrow\; z = u - n(x) = \tilde u + \underbrace{\hat n(x) - n(x)}_{\approx\, 0} \;\Rightarrow\; \text{Strecke linear in } \tilde u $$
+
+\begin{itemize}
+	\item Regel: \textbf{Eingang Prozess = Kompensation + Reglerausgang}
+	\item \crd{Nur so gut wie Modell \& Messung:} $\hat n \neq n$ \textrightarrow\ Restfehler ('Wer misst, misst Mist')
+	\item \cor{Beide Stellgrössen} ($\tilde u$ und $u$) überwachen: Sättigung, Rauschen
+	\item Nicht alles ist messbar (z.B. Störungen)
+	\item Messung verzögert (Anti-Aliasing) \textrightarrow\ Kompensation müsste akausal sein
+	\item Einfluss der Ungenauigkeiten in der Simulation prüfen
+\end{itemize}
 
 
 \subsection{Linearisierung durch Vereinfachung}{94}

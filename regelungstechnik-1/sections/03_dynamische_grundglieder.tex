@@ -188,7 +188,7 @@ L'ordine dei blocchi è indifferente (prima derivatore o prima $\text{PT}_1$)
 
 \textbf{Zusammensetzen der Grundglieder: Parallelschaltung!} \\
 Gilt auch für P, PI, PD, $\text{PDT}_1$ und $\text{PIDT}_1$ Glieder 
-$$ \boxed{  y(t) = A \cdot \big[ K_P + K_I \cdot t + \frac{K_D}{T_C} e^{-\frac{t}{T_c}} \big]  }$$
+$$ \boxed{  y(t) = A \cdot \left(K_P + K_I \cdot t + \frac{K_D}{T_C} e^{-\frac{t}{T_c}}\right)}$$
 
 \begin{minipage}{0.48\columnwidth}
     \includegraphics[width=0.9\columnwidth]{images/PID-glied.png}
@@ -197,6 +197,82 @@ $$ \boxed{  y(t) = A \cdot \big[ K_P + K_I \cdot t + \frac{K_D}{T_C} e^{-\frac{t
 \begin{minipage}{0.5\columnwidth}
     \includegraphics[width=\columnwidth]{images/PID_sprungantwort.png}
 \end{minipage}
+
+
+\subsubsection{PID als Regler (S. 196--200)}
+\textbf{Stetiger} Regler (kein Schwanken um den Sollwert, jeder stationäre Wert möglich), LZI, wenige Parameter, weit verbreitet.
+
+\vspace{0.15cm}
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\columnwidth}{@{}l l l X@{}}
+	\toprule
+	& $u(t)$ & Blick & $G(\jimg\omega)$ \\
+	\midrule
+	\cbl{P} & $K_P\,e$ & Gegenwart & $K_P$ \\
+	\cgn{I} & $K_I\!\int e\,\diff t$ & Vergangenheit & $\dfrac{K_I}{\jimg\omega}$ \\
+	\cor{D} & $K_D\,\dot e$ & Trend & $K_D\dfrac{\jimg\omega}{1+\jimg\omega T_C}$ \\
+	\bottomrule
+\end{tabularx}
+\endgroup
+
+\vspace{0.15cm}
+\begin{minipage}[c]{0.42\columnwidth}
+\begin{tikzpicture}[x=0.85cm,y=0.5cm,font=\scriptsize]
+	\draw[-latex,gray!70!black] (0,0) -- (3.4,0) node[below left] {$\omega$};
+	\draw[-latex,gray!70!black] (0,0) -- (0,3.4) node[left] {$|G|$};
+	\draw[blue!80!black,thick] (0.1,1.6) -- (3.2,1.6) node[above left] {P};
+	\draw[green!60!black,thick] (0.2,3.0) -- (3.0,0.2) node[below left] {I};
+	\draw[orange,thick] (0.2,0.2) -- (2.3,2.3) -- (3.2,2.3) node[above left] {D};
+	\draw[gray,densely dotted] (2.3,2.3) -- (2.3,0) node[below] {$\frac{1}{T_C}$};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.55\columnwidth}
+	\small
+	\cbl{P} \textrightarrow\ Allpass \\
+	\cgn{I} \textrightarrow\ Tiefpass: langsame Änderungen \\
+	\cor{D} \textrightarrow\ Hochpass: schnelle Änderungen \\[0.1cm]
+	{\footnotesize Bild: P = Feder, D = Dämpfer, I = Federanker, der wandert, bis $e = 0$ (lernt die Last)}
+\end{minipage}
+
+\vspace{0.1cm}
+\begin{minipage}[t]{0.49\columnwidth}
+	\textbf{Parallel} {\tiny\texttt{pid(Kp,Ki,Kd,Tf)}} \\
+	\includegraphics[width=\columnwidth]{images/pid_parallel.png}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.49\columnwidth}
+	\textbf{Standard} {\tiny\texttt{pidstd(Kp,Ti,Td,N)}} \\
+	\includegraphics[width=\columnwidth]{images/pid_standard.png}
+\end{minipage}
+
+\vspace{-0.1cm}
+{\small
+$$ G_{\text{par}} = K_P + \frac{K_I}{\jimg\omega} + K_D\frac{\jimg\omega}{1+\jimg\omega T_C} \qquad\quad G_{\text{std}} = K_R\left[1 + \frac{1}{\jimg\omega T_N} + \frac{\jimg\omega T_V}{1+\jimg\omega T_C}\right] $$
+}
+{\scriptsize $T_N = T_i$, $T_V = T_d$ (Matlab)}
+
+\vspace{0.1cm}
+\textbf{Serie} (PD $\cdot$ PI) \\
+\includegraphics[width=0.85\columnwidth]{images/pid_serie.png}
+{\small
+$$ G_{\text{ser}} = \tilde K_R\left[1 + \frac{1}{\jimg\omega \tilde T_N}\right]\left[1 + \frac{\jimg\omega \tilde T_V}{1+\jimg\omega T_C}\right] $$
+}
+
+\vspace{-0.1cm}
+{\small
+$$ \boxed{ K_R = K_P, \quad T_N = \frac{K_P}{K_I}, \quad T_V = \frac{K_D}{K_P} \qquad K_I = \frac{K_R}{T_N}, \quad K_D = K_R \cdot T_V } $$
+}
+
+{\small
+$$ \text{Serie} \to \text{Std:} \quad K_R = \tilde K_R\!\left(1 + \frac{\tilde T_V}{\tilde T_N}\right), \quad T_N = \tilde T_N + \tilde T_V, \quad T_V = \frac{\tilde T_V\,\tilde T_N}{\tilde T_N + \tilde T_V} $$
+}
+{\scriptsize eigene Herleitung, $T_C$ vernachlässigt}
+
+\vspace{0.1cm}
+\crd{Vorsicht:} Parameterformen werden oft verwechselt, $K_I = K_R/T_N$ und \textbf{nicht} $1/T_N$
 
 
 \subsection{Lead-Glied / Lag-Glied / Lead-Lag-Glied (S.40-41)}{40-41}

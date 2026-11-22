@@ -518,6 +518,7 @@ $X$ normalverteilt mit $E(X) = \mu$ und $\var(X) = \sigma^2$, dann ist $a \, X +
 
 
 \subsection[Bestimmung der Parameter]{Bestimmung der Parameter $\bm{\mu}$, $\bm{\sigma^2}$}
+\label{sec:parameter-schaetzen}
 
 \subsubsection{Schätzen}
 
@@ -527,6 +528,14 @@ $$\hat{\mu} = E(X) = \frac{1}{n} \sum\limits_{i=1}^n x_i \text{  (Mittelwert)}$$
 $$\hat{\sigma}^2 = \cor{\frac{n}{n-1}} \, (  E(X^2) - E(X)^2 ) = \cor{\frac{n}{n-1}} \, \left( \frac{1}{n} \sum\limits_{i=1}^n x_i^2 - \Big( \frac{1}{n} \sum\limits_{i=1}^n x_i  \Big)^2  \right) $$
 
 \cor{Korrektur, damit erwartungstreu}
+
+\vspace{0.1cm}
+
+{\small
+\textrightarrow\ $Y =$ \glqq$E(X^2) - E(X)^2$\grqq\ mit Datenmittelwerten $= \dfrac{1}{n} \sum (x_i - \bar{x})^2$ \\
+\textrightarrow\ $\bar{x}$ sitzt mitten in den Daten \textrightarrow\ Abstände zu kurz \textrightarrow\ $E(Y) = \dfrac{n-1}{n}\, \sigma^2$ \\
+\textrightarrow\ daher $\times \dfrac{n}{n-1}$: \quad $\hat{\sigma}^2 = \dfrac{1}{n-1} \sum (x_i - \bar{x})^2$ \qquad HP Prime: \textbf{sX}
+\par}
 
 
 \subsubsection{Wahrscheinlichkeit (Standardnormalverteilung)}
@@ -816,7 +825,7 @@ Faktor $g(b):$ Renormierung
 
 \vspace{-0.2cm}
 
-$$ \boxed{ \varphi(x) = C \, e^{- \alpha} \quad \text{mit } \alpha = -g'(1) }$$
+$$ \boxed{ \varphi(x) = C \, x^{- \alpha} \quad \text{mit } \alpha = -g'(1) }$$
 Beschränke auf $x > x_{\rm min}$ und wähle $C$ für korrekte Normierung
 
 \vspace{0.2cm}
@@ -908,6 +917,14 @@ $$ F(x) =  \begin{cases}
 \begin{minipage}{0.48\columnwidth}
 	$$ \boxed{ \lambda = \frac{\log(W)}{\log(P)} } $$
 \end{minipage}
+
+\vspace{0.2cm}
+
+{\small
+\textbf{$\bm{\alpha}$}: quanto in fretta scende la coda ($\varphi \propto x^{-\alpha}$). $\alpha$ piccolo \textrightarrow\ coda grassa, valori enormi frequenti.
+
+\textbf{$\bm{\lambda}$}: concentrazione del valore. $P$ = quota dei più grandi, $W$ = quota del totale che possiedono. $\lambda$ piccolo \textrightarrow\ pochi hanno quasi tutto (80/20: $\lambda \approx 0{,}14$, $\alpha \approx 2{,}16$).
+}
 
 
 \subsection{Gleichverteilung}
